@@ -1,13 +1,14 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import Padrao from './estilo/Padrao.js';
+import { Text, SafeAreaView, Button, Alert } from "react-native";
+import Padrao from './style/Padrao.js';
+import Botao from "./components/Botao.js";
 
 export default function App() {
   return (
-    <View style={Padrao.container}>
-      <Text>Controle de Produção</Text>
+    <SafeAreaView style={Padrao.container}>
+      <Botao></Botao>
       <StatusBar style="auto" />
-    </View>
+    </SafeAreaView>
   );
 }

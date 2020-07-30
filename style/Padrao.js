@@ -3,10 +3,13 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 export default StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
+  container: {
+    flex: 1,
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  botao: {
+    color: '#000'
+  },
 });
