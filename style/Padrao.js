@@ -10,6 +10,8 @@ export default StyleSheet.create({
   },
   botao: {
     // alignItems: "center",
+    paddingTop: 10,
+    paddingLeft: 1
   },
   grupobutoes: {
     padding: 10
