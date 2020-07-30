@@ -1,16 +1,18 @@
 import { StyleSheet} from 'react-native';
 
 export default StyleSheet.create({
-  container: {
+  barra: {
+    backgroundColor: "#FF4500",
     flex: 1,
+  },
+  container: {
+    flex: 2,
     backgroundColor: "#F5F5F5",
   },
   botao: {
     alignItems: "center",
     justifyContent: "center",
-    padding: 40
-  },
-  barra: {
-    backgroundColor: "#FF4500",
+    padding: 10,
+    flex: 3
   },
 });

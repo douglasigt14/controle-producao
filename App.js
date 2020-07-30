@@ -15,7 +15,7 @@ export default function App() {
           onPress={() => Alert.alert("Simple Button pressed")}
         />
       </Appbar.Header>
-      <Botao texto="Click Aqui" cor='#fff' />
+      <Botao texto="Click Aqui" cor='#000' />
       <StatusBar style="auto" />
     </SafeAreaView>
   );
