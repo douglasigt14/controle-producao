@@ -2,17 +2,16 @@ import { StyleSheet} from 'react-native';
 
 export default StyleSheet.create({
   barra: {
-    backgroundColor: "#FF4500",
-    flex: 1,
+    backgroundColor: "#000",
   },
   container: {
-    flex: 2,
+    flex: 1,
     backgroundColor: "#F5F5F5",
   },
   botao: {
-    alignItems: "center",
-    justifyContent: "center",
-    padding: 10,
-    flex: 3
+    // alignItems: "center",
+  },
+  grupobutoes: {
+    padding: 10
   },
 });

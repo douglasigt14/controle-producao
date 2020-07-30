@@ -1,13 +1,13 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { Text, SafeAreaView, Button, Alert } from "react-native";
+import { View ,Text, SafeAreaView, Button, Alert } from "react-native";
 import Padrao from './style/Padrao';
-import Botao from "./components/Botao";
+import GrupoButoes from "./components/GrupoButoes";
 import { Appbar } from "react-native-paper";
 
 export default function App() {
   return (
-    <SafeAreaView style={Padrao.container}>
+    <View style={Padrao.container}>
       <Appbar.Header style={Padrao.barra}>
         <Appbar.Content title="Controle de Produção" />
         <Appbar.Action
@@ -15,8 +15,8 @@ export default function App() {
           onPress={() => Alert.alert("Simple Button pressed")}
         />
       </Appbar.Header>
-      <Botao texto="Click Aqui" cor='#000' />
+      <GrupoButoes></GrupoButoes>
       <StatusBar style="auto" />
-    </SafeAreaView>
+    </View>
   );
 }
