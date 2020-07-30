@@ -7,7 +7,10 @@ import Botao from "./components/Botao.js";
 export default function App() {
   return (
     <SafeAreaView style={Padrao.container}>
-      <Botao></Botao>
+      <Botao 
+        texto='Click Aqui' 
+        cor='#000'
+      />
       <StatusBar style="auto" />
     </SafeAreaView>
   );
