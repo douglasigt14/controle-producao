@@ -3,11 +3,14 @@ import { StyleSheet} from 'react-native';
 export default StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
+    backgroundColor: "#F5F5F5",
   },
   botao: {
-    color: '#000'
+    alignItems: "center",
+    justifyContent: "center",
+    padding: 40
+  },
+  barra: {
+    backgroundColor: "#FF4500",
   },
 });
