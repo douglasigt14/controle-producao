@@ -9,11 +9,10 @@ export default StyleSheet.create({
     backgroundColor: "#F5F5F5",
   },
   botao: {
-    // alignItems: "center",
-    paddingTop: 10,
-    paddingLeft: 1
+    marginVertical: 3,
+    marginHorizontal: 10
   },
   grupobutoes: {
-    padding: 10
+    padding: 10,
   },
 });
