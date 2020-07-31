@@ -5,15 +5,17 @@ export default StyleSheet.create({
     backgroundColor: "#000",
   },
   container: {
-    flex: 1,
+    flexGrow: 1,
     backgroundColor: "#F5F5F5",
   },
   viewButton: {
-    padding: 10,
+    padding: 3,
   },
   grupobutoes: {
     padding: 10,
     marginVertical: 3,
-    marginHorizontal: 100
+    flexDirection: "row",
+    justifyContent: "center"
+    
   },
 });
