@@ -8,11 +8,12 @@ export default StyleSheet.create({
     flex: 1,
     backgroundColor: "#F5F5F5",
   },
-  view: {
-    marginVertical: 3,
-    marginHorizontal: 100,
+  viewButton: {
+    padding: 10,
   },
   grupobutoes: {
     padding: 10,
+    marginVertical: 3,
+    marginHorizontal: 100
   },
 });
