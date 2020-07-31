@@ -4,7 +4,7 @@ import Padrao from '../style/Padrao';
 
 export default (props) => {
   return (
-    <View style={Padrao.botao}>
+    <View style={Padrao.view}>
       <Button
         onPress={() => Alert.alert("Simple Button pressed")}
         title={props.texto}

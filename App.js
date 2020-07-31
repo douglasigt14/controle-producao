@@ -1,8 +1,9 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { View ,Text, SafeAreaView, Button, Alert } from "react-native";
+import { View , Alert } from "react-native";
 import Padrao from './style/Padrao';
 import GrupoButoes from "./components/GrupoButoes";
+import Contador from "./components/Contador";
 import { Appbar } from "react-native-paper";
 
 export default function App() {

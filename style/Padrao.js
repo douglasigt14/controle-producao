@@ -8,9 +8,9 @@ export default StyleSheet.create({
     flex: 1,
     backgroundColor: "#F5F5F5",
   },
-  botao: {
+  view: {
     marginVertical: 3,
-    marginHorizontal: 10
+    marginHorizontal: 100,
   },
   grupobutoes: {
     padding: 10,
