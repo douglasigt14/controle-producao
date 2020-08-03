@@ -1,59 +1,59 @@
 import React, {useState} from "react";
 import { Alert, View, Text } from "react-native";
-import Padrao from "../style/Padrao";
 import styled from "styled-components";
 import { Button } from 'react-native-paper';
 
 const Texto = styled.Text`
-    font-size: 23px;
+    font-size: 15px;
   `;
+
+const But = styled.Button`
+    font-size: 15px;
+  `;
+
+const Div = styled.View`
+    display: flex;    
+    flex-direction: row;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 10px;
+    justify-content: space-around;
+`;
 
 export default () => {
   const [msg, setMsg] = useState('Douglas');
   let finalizado = true;
   return (
-    <View style={Padrao.grupobutoes}>
-      <View style={Padrao.viewButton}>
-        <Button color="#dc3545"  mode="contained" onPress={() => console.log('Pressed')}>
+    <Div>
+      <Div>
+        <Button color="#dc3545" title='Paradas'  mode="contained" onPress={() => console.log('Pressed')}>
           <Texto>Paradas </Texto>
         </Button>
-      </View>
-      <View style={Padrao.viewButton}>
+      </Div>
+      <Div>
         <Button color="#28a745" mode="contained" onPress={() => console.log('Pressed')}>
           <Texto>Operações </Texto>
         </Button>
-      </View>
-      <View style={Padrao.viewButton}>
-        <Button
-          style={Padrao.view}
-          onPress={() => Alert.alert("Simple Button pressed")}
-          title="Controles Diarios"
-          accessibilityLabel="Learn more about this purple button"
-          color="#007bff"
-        />
-      </View>
-      <View style={Padrao.viewButton}>
-        <Button
-          style={Padrao.view}
-          onPress={() => Alert.alert("Simple Button pressed")}
-          title="Tipos de Paradas"
-          accessibilityLabel="Learn more about this purple button"
-          color="#ffc107"
-        />
-      </View>
+      </Div>
+      <Div>
+        <Button color="#007bff" mode="contained" onPress={() => console.log('Pressed')}>
+          <Texto>Controles Diarios </Texto>
+        </Button>
+      </Div>
+      <Div>
+        <Button color="#ffc107" mode="contained" onPress={() => console.log('Pressed')}>
+          <Texto>Tipos de Paradas</Texto>
+        </Button>
+      </Div>
       {finalizado == false ? (
-        <View style={Padrao.viewButton}>
-          <Button
-            style={Padrao.view}
-            onPress={() => Alert.alert("Simple Button pressed")}
-            title="Finalizar"
-            accessibilityLabel="Learn more about this purple button"
-            color="#6c757d"
-          />
-        </View>
+        <Div>
+          <Button color="#6c757d" mode="contained" onPress={() => console.log('Pressed')}>
+            <Texto>Finalizar</Texto>
+          </Button>
+        </Div>
       ) : (
         false
       )}
-    </View>
+    </Div>
   );
 };
