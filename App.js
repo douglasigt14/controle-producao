@@ -8,6 +8,7 @@ import Login from "./components/Login";
 import { Appbar } from "react-native-paper";
 
 export default function App() {
+  let logado = true;
   return (
     <View style={Padrao.container}>
       <Appbar.Header style={Padrao.barra}>

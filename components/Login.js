@@ -15,8 +15,18 @@ const Div_Card = styled.View`
 const Div_input = styled.View`
     padding-left: 15px;
     padding-right: 15px;
-    margin-top: 50px;
-    margin-bottom: 50px;
+    margin-top: 45px;
+    margin-bottom: 15px;
+`;
+
+const Div_Button = styled.View`
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 `;
 
 
@@ -43,7 +53,9 @@ export default (props) => {
                     </Div_input>
                 </Card.Content>
                 <Card.Actions>
-                    <Button>Entrar</Button>
+                    <Div_Button>
+                        <Button color="#dc3545" title='Paradas' mode="contained">Entrar</Button>
+                    </Div_Button>
                 </Card.Actions>
             </Card>
         </Div_Card>
