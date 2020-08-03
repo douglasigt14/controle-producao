@@ -1,9 +1,7 @@
 import React, { Component, useState }  from "react";
 import styled from "styled-components";
-import { View, Text, Platform, Alert ,TextInput  } from "react-native";
-import { Avatar, Button, Card, Title, Paragraph } from 'react-native-paper';
-
-const LeftContent = props => <Avatar.Icon {...props} icon="folder" />
+import { Alert ,TextInput  } from "react-native";
+import {Button, Card, Title} from 'react-native-paper';
 
 
 const Div_Card = styled.View`
@@ -31,19 +29,21 @@ const Div_Button = styled.View`
 
 
 export default (props) => {
-    const [value_login, onChangeText_login] = React.useState('');
-    const [value_senha, onChangeText_senha] = React.useState('');
+    const [value_login, onChangeText_login] = useState('');
+    const [value_senha, onChangeText_senha] = useState('');
 
     return (
         <Div_Card>
            < Card>
                 <Card.Content>
-                    <Title>Login</Title>
+                    <Title>Login {value_login}</Title>
                     <Div_input>
+                        
                         <TextInput
                             style={{ height: 40, borderColor: 'gray', borderWidth: 1, marginVertical: 10}}
                             onChangeText={text => onChangeText_login(text)}
                             value={value_login}
+                            autoCorrect={false}
                         />
                         <TextInput
                             style={{ height: 40, borderColor: 'gray', borderWidth: 1, marginVertical: 10 }}
@@ -51,6 +51,7 @@ export default (props) => {
                             secureTextEntry={true}
                             visible-password={true}  
                             value={value_senha}
+                            autoCorrect={false}
                         />
                     </Div_input>
                 </Card.Content>

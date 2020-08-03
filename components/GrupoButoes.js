@@ -1,8 +1,7 @@
 import React, {useState} from "react";
 import { Alert, View, Text, StyleSheet } from "react-native";
 import styled from "styled-components";
-import { Button } from 'react-native-paper';
-import { Avatar, Card, Title, Paragraph } from 'react-native-paper';
+import { Button, Card } from 'react-native-paper';
 
 const Texto = styled.Text`
     font-size: 18px;

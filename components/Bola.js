@@ -9,7 +9,7 @@ import { View , Text, Platform } from "react-native";
 
 export default (props) => {
   
-  const Corpo = styled.View`
+  const Bola = styled.View`
     width: 500px;
     height: 500px;
     margin: 40px auto;
@@ -32,9 +32,9 @@ export default (props) => {
   
   return (
     <View>
-      <Corpo>
+      <Bola>
           <Texto>{props.status_texto}</Texto>
-      </Corpo>
+      </Bola>
       
     </View>
   );
