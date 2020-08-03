@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import { Alert, View, Text } from "react-native";
+import { Alert, View, Text, StyleSheet } from "react-native";
 import styled from "styled-components";
 import { Button } from 'react-native-paper';
 
@@ -14,7 +14,6 @@ const Div = styled.View`
     padding-right: 20px;
     padding-top: 10px;
     justify-content: space-around;
-    height: 80px;
 `;
 
 
@@ -25,34 +24,34 @@ export default () => {
   return (
     <Div>
       <Div>
-        <Button color="#dc3545" title='Paradas'  mode="contained" onPress={() => console.log('Pressed')}>
+        <Button style={{ height: 60 }} mode='outlined' title='Paradas' color="#dc3545" title='Paradas' mode="contained" onPress={() => Alert.alert("Paradas")}>
           <Texto>Paradas </Texto>
         </Button>
       </Div>
       <Div>
-        <Button color="#28a745" mode="contained" onPress={() => console.log('Pressed')}>
+        <Button color="#28a745" title='Operações'  mode="contained" onPress={() => console.log('Pressed')}>
           <Texto>Operações </Texto>
         </Button>
       </Div>
       <Div>
-        <Button color="#007bff" mode="contained" onPress={() => console.log('Pressed')}>
+        <Button color="#007bff" title='C. Diarios'  mode="contained" onPress={() => console.log('Pressed')}>
           <Texto>C. Diarios </Texto>
         </Button>
       </Div>
       <Div>
-        <Button color="#ffc107" mode="contained" onPress={() => console.log('Pressed')}>
+        <Button color="#ffc107" title='T. de Paradas'  mode="contained" onPress={() => console.log('Pressed')}>
           <Texto>T. de Paradas</Texto>
         </Button>
       </Div>
       {finalizado == false ? (
         <Div>
-          <Button color="#6c757d" mode="contained" onPress={() => console.log('Pressed')}>
+          <Button color="#6c757d" title='Finalizar'  mode="contained" onPress={() => console.log('Pressed')}>
             <Texto>Finalizar</Texto>
           </Button>
         </Div>
       ) : (
           <Div>
-            <Button color="#6c757d" mode="contained" disabled='true' onPress={() => console.log('Pressed')}>
+            <Button color="#6c757d" title='Finalizar' mode="contained" disabled='true' onPress={() => console.log('Pressed')}>
               <Texto>Finalizar</Texto>
             </Button>
           </Div>
