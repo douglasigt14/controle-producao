@@ -7,7 +7,7 @@ import { View , Text, Platform } from "react-native";
 
 
 
-export default () => {
+export default (props) => {
   
   const Corpo = styled.View`
     width: 500px;
@@ -19,18 +19,18 @@ export default () => {
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    background-color: #d3d3d3;
+    background-color: ${props.cor};
   `;
 
   const Texto = styled.Text`
     font-size: 40px;
-    color: black;
+    color: ${props.cor_texto};
   `;
   
   return (
     <View>
       <Corpo>
-        <Texto>PARADO</Texto>
+          <Texto>{props.status_texto}</Texto>
       </Corpo>
     </View>
   );
