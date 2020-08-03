@@ -3,7 +3,7 @@ import React from 'react';
 import { View , Alert, Text } from "react-native";
 import Padrao from './style/Padrao';
 import GrupoButoes from "./components/GrupoButoes";
-import Contador from "./components/Contador";
+import Bola from "./components/Bola";
 import { Appbar } from "react-native-paper";
 
 export default function App() {
@@ -16,9 +16,9 @@ export default function App() {
           onPress={() => Alert.alert("Simple Button pressed")}
         />
       </Appbar.Header>
-      
-          <GrupoButoes></GrupoButoes>
-    
+
+      <GrupoButoes></GrupoButoes>
+      <Bola></Bola>
       <StatusBar style="auto" />
     </View>
   );
