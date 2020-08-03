@@ -1,14 +1,15 @@
 
 import React, { useState } from "react";
 import styled from "styled-components";
-import { View , Text } from "react-native";
+import { View , Text, Platform } from "react-native";
 
 
 
 
 
 export default () => {
-  const Bola = styled.View`
+  
+  const Corpo = styled.View`
     width: 500px;
     height: 500px;
     margin: 40px auto;
@@ -28,9 +29,9 @@ export default () => {
   
   return (
     <View>
-      <Bola>
+      <Corpo>
         <Texto>PARADO</Texto>
-      </Bola>
+      </Corpo>
     </View>
   );
 };

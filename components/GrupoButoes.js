@@ -1,8 +1,12 @@
 import React, {useState} from "react";
-import { Button, Alert, View, Text } from "react-native";
+import { Alert, View, Text } from "react-native";
 import Padrao from "../style/Padrao";
-import Teste from "./Bola";
+import styled from "styled-components";
+import { Button } from 'react-native-paper';
 
+const Texto = styled.Text`
+    font-size: 23px;
+  `;
 
 export default () => {
   const [msg, setMsg] = useState('Douglas');
@@ -10,21 +14,14 @@ export default () => {
   return (
     <View style={Padrao.grupobutoes}>
       <View style={Padrao.viewButton}>
-        <Button
-          onPress={() => Alert.alert("Paradas")}
-          title="Paradas"
-          accessibilityLabel="Learn more about this purple button"
-          color="#dc3545"
-        />
+        <Button color="#dc3545"  mode="contained" onPress={() => console.log('Pressed')}>
+          <Texto>Paradas </Texto>
+        </Button>
       </View>
       <View style={Padrao.viewButton}>
-        <Button
-          style={Padrao.view}
-          onPress={() => Alert.alert("Operações")}
-          title="Operações"
-          accessibilityLabel="Learn more about this purple button"
-          color="#28a745"
-        />
+        <Button color="#28a745" mode="contained" onPress={() => console.log('Pressed')}>
+          <Texto>Operações </Texto>
+        </Button>
       </View>
       <View style={Padrao.viewButton}>
         <Button
