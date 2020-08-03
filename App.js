@@ -4,6 +4,7 @@ import { View , Alert, Text } from "react-native";
 import Padrao from './style/Padrao';
 import GrupoButoes from "./components/GrupoButoes";
 import Principal from "./components/Principal";
+import Login from "./components/Login";
 import { Appbar } from "react-native-paper";
 
 export default function App() {
@@ -16,7 +17,8 @@ export default function App() {
           onPress={() => Alert.alert("Simple Button pressed")}
         />
       </Appbar.Header>
-      <Principal cor='green' cor_texto='white' status_texto='OPERANDO' ></Principal>
+      {/* <Principal cor='green' cor_texto='white' status_texto='OPERANDO' ></Principal> */}
+      <Login></Login>
       <StatusBar style="auto" />
     </View>
   );
