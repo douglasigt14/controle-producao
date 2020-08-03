@@ -1,6 +1,6 @@
 import React, { Component, useState }  from "react";
 import styled from "styled-components";
-import { View, Text, Platform, TextInput  } from "react-native";
+import { View, Text, Platform, Alert ,TextInput  } from "react-native";
 import { Avatar, Button, Card, Title, Paragraph } from 'react-native-paper';
 
 const LeftContent = props => <Avatar.Icon {...props} icon="folder" />
@@ -48,15 +48,22 @@ export default (props) => {
                         <TextInput
                             style={{ height: 40, borderColor: 'gray', borderWidth: 1, marginVertical: 10 }}
                             onChangeText={text => onChangeText_senha(text)}
+                            secureTextEntry={true}
+                            visible-password={true}  
                             value={value_senha}
                         />
                     </Div_input>
                 </Card.Content>
-                <Card.Actions>
-                    <Div_Button>
-                        <Button color="#dc3545" title='Paradas' mode="contained">Entrar</Button>
-                    </Div_Button>
-                </Card.Actions>
+                <Div_Button>
+                    <Button 
+                        onPress={() => Alert.alert("Login")} 
+                        contentStyle={{ height: 60 , width: 300 }} 
+                        color="#dc3545" 
+                        title='Login' 
+                        mode="contained">
+                            Entrar
+                    </Button>
+                </Div_Button>
             </Card>
         </Div_Card>
     );
