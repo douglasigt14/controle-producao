@@ -26,12 +26,16 @@ export default (props) => {
     font-size: 40px;
     color: ${props.cor_texto};
   `;
+
+  const LeftContent = props => <Avatar.Icon {...props} icon="folder" />
+
   
   return (
     <View>
       <Corpo>
           <Texto>{props.status_texto}</Texto>
       </Corpo>
+      
     </View>
   );
 };
