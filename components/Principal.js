@@ -25,6 +25,7 @@ export default (props) => {
                 cor={props.cor}
                 cor_texto={props.cor_texto} 
                 status_texto={props.status_texto} 
+                descricao={props.descricao} 
             >
             </Bola>
         </View>

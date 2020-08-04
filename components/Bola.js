@@ -27,15 +27,27 @@ export default (props) => {
     color: ${props.cor_texto};
   `;
 
-  const LeftContent = props => <Avatar.Icon {...props} icon="folder" />
+  const Descricao = styled.Text`
+    font-size: 23px;
+  `;
+
+  const Div_Descricao = styled.View`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+  `;
 
   
   return (
     <View>
+      <Div_Descricao>
+        <Descricao>{props.descricao}</Descricao>
+      </Div_Descricao>
       <Bola>
           <Texto>{props.status_texto}</Texto>
       </Bola>
-      
     </View>
   );
 };

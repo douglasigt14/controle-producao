@@ -10,11 +10,12 @@ export default function App() {
   let logado = true;
   let cor = 'red';
   let status_texto = 'PARADO';
+  let descricao = 'P - 01 MANUTENÇÃO MECANICA';
   return (
     <View style={Padrao.container}>
       {
         logado == true
-          ? <Principal cor={cor} cor_texto='white' status_texto={status_texto} ></Principal>
+          ? <Principal cor={cor} cor_texto='white' status_texto={status_texto} descricao={descricao} ></Principal>
           : <Login> </Login>
       }
       <StatusBar style="auto" />
