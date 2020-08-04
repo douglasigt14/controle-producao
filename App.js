@@ -4,6 +4,7 @@ import { View } from "react-native";
 import Padrao from './style/Padrao';
 import Principal from "./components/Principal";
 import Login from "./components/Login";
+import ParadasFrequentesNew from "./components/ParadasFrequentesNew";
 
 
 export default function App() {

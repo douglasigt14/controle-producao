@@ -18,4 +18,9 @@ export default StyleSheet.create({
     justifyContent: "center"
     
   },
+  FlatList: {
+    flexDirection: 'row',
+    paddingHorizontal: 30,
+    paddingVertical: 10
+  }
 });
