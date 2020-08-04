@@ -20,7 +20,7 @@ export default StyleSheet.create({
   },
   FlatList: {
     flexDirection: 'row',
-    paddingHorizontal: 30,
-    paddingVertical: 10
+    paddingHorizontal: 40,
+    paddingVertical: 10,
   }
 });

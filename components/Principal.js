@@ -11,10 +11,10 @@ import Padrao from '../style/Padrao';
 
 export default (props) => {
    
-    let cor = 'red';
-    let status_texto = 'PARADO';
-    let descricao = 'P - 01 MANUTENÇÃO MECANICA';
-    let cor_texto = 'white';
+    let cor = '#d3d3d3';
+    let status_texto = 'INICIAR';
+    let descricao = '';//P - 01 MANUTENÇÃO MECANICA
+    let cor_texto = 'black';
     let finalizado = false;
     return (
         <View>

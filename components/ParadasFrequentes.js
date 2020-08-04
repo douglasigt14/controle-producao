@@ -53,7 +53,7 @@ export default () => {
                                     keyExtractor={({ id }, index) => id}
                                     renderItem={({ item }) => (
                                         <Div>
-                                            <Button contentStyle={{ height: 90, width: 180, paddingLeft: 10 }} title='Paradas' color="#ffc107" title='Paradas' mode="contained" onPress={() => Alert.alert("Paradas")}>
+                                            <Button contentStyle={{ height: 90, width: 180 }} title='Paradas' color="#ffc107" title='Paradas' mode="contained" onPress={() => Alert.alert("Paradas")}>
                                                 <Texto>{item.rotulo} </Texto>
                                             </Button>
                                         </Div>
