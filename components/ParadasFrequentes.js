@@ -32,9 +32,10 @@ const Fl = styled.FlatList`
 export default () => {    
     const [isLoading, setLoading] = useState(true);
     const [data, setData] = useState([]);
+    let id_posto = 2;
 
     useEffect(() => {
-        fetch('http://controleproducao.tuboarte.com/paradas-frequencia/2')
+        fetch('http://controleproducao.tuboarte.com/paradas-frequencia/' + id_posto)
             .then((response) => response.json())
             .then((json) => setData(json))
             .catch((error) => console.error(error))

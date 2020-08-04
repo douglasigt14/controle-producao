@@ -8,7 +8,7 @@ import ParadasFrequentesNew from "./components/ParadasFrequentesNew";
 
 
 export default function App() {
-  let logado = true;
+  let logado = false;
   return (
     <View style={Padrao.container}>
       {

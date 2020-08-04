@@ -29,28 +29,28 @@ const Div_Button = styled.View`
 
 
 export default (props) => {
-    const [value_login, onChangeText_login] = useState('');
-    const [value_senha, onChangeText_senha] = useState('');
+    const [login, setLogin] = useState('');
+    const [senha, setSenha] = useState('');
 
     return (
         <Div_Card>
            < Card>
                 <Card.Content>
-                    <Title>Login  {value_login}</Title>
+                    <Title>Login  {senha}</Title>
                     <Div_input>
                         
                         <TextInput
                             style={{ height: 40, borderColor: 'gray', borderWidth: 1, marginVertical: 10}}
-                            onChangeText={text => onChangeText_login(text)}
-                            value={value_login}
+                            onChangeText={text => setLogin(text)}
+                            value={login}
                             autoCorrect={false}
                         />
                         <TextInput
                             style={{ height: 40, borderColor: 'gray', borderWidth: 1, marginVertical: 10 }}
-                            onChangeText={text => onChangeText_senha(text)}
+                            onChangeText={text => setSenha(text)}
                             secureTextEntry={true}
                             visible-password={true}  
-                            value={value_senha}
+                            value={senha}
                             autoCorrect={false}
                         />
                     </Div_input>
