@@ -12,7 +12,7 @@ export default (props) => {
   const Bola = styled.View`
     width: 500px;
     height: 500px;
-    margin: 40px auto;
+    margin: 20px auto;
     border-radius: 500px;
     color: white;
     display: flex;

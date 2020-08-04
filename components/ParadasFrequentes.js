@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Alert, View, Text, StyleSheet } from "react-native";
 import styled from "styled-components";
 import { Button, Card } from 'react-native-paper';
+import paradas_frequentes from '../api/paradas_frequentes';
 
 const Texto = styled.Text`
     font-size: 18px;
@@ -31,6 +32,11 @@ export default () => {
 
             <Div_Card>
                 <Card>
+                    {paradas_frequentes.map( p => {
+                        return (
+                            <Text key={p.id}>{p.rotulo}</Text>
+                        )  
+                    })}
                     <Card.Content>
                         <Div>
                             <Div>
