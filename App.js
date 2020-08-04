@@ -8,11 +8,13 @@ import Login from "./components/Login";
 
 export default function App() {
   let logado = true;
+  let cor = 'red';
+  let status_texto = 'PARADO';
   return (
     <View style={Padrao.container}>
       {
         logado == true
-          ? <Principal cor='green' cor_texto='white' status_texto='OPERANDO' ></Principal>
+          ? <Principal cor={cor} cor_texto='white' status_texto={status_texto} ></Principal>
           : <Login> </Login>
       }
       <StatusBar style="auto" />
