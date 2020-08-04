@@ -23,9 +23,9 @@ const Div_Card = styled.View`
     justify-content: space-around;
 `;
 
-export default () => {
+export default (props) => {
   const [msg, setMsg] = useState('Douglas');
-  let finalizado = false;
+  let finalizado = props.finalizado;
   return (
     <>
     

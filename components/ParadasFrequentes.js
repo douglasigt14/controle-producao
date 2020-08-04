@@ -32,11 +32,7 @@ export default () => {
 
             <Div_Card>
                 <Card>
-                    {paradas_frequentes.map( p => {
-                        return (
-                            <Text key={p.id}>{p.rotulo}</Text>
-                        )  
-                    })}
+                   
                     <Card.Content>
                         <Div>
                             <Div>

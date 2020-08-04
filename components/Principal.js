@@ -10,6 +10,12 @@ import Padrao from '../style/Padrao';
 
 
 export default (props) => {
+   
+    let cor = 'red';
+    let status_texto = 'PARADO';
+    let descricao = 'P - 01 MANUTENÇÃO MECANICA';
+    let cor_texto = 'white';
+    let finalizado = false;
     return (
         <View>
             <Appbar.Header style={Padrao.barra}>
@@ -19,13 +25,13 @@ export default (props) => {
                     onPress={() => Alert.alert("Opções")}
                 />
             </Appbar.Header>
-            <GrupoButoes></GrupoButoes>
+            <GrupoButoes finalizado={finalizado}></GrupoButoes>
             <ParadasFrequentes></ParadasFrequentes>
             <Bola 
-                cor={props.cor}
-                cor_texto={props.cor_texto} 
-                status_texto={props.status_texto} 
-                descricao={props.descricao} 
+                cor={cor}
+                cor_texto={cor_texto} 
+                status_texto={status_texto} 
+                descricao={descricao} 
             >
             </Bola>
         </View>
