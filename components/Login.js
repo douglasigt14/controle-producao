@@ -36,7 +36,7 @@ export default (props) => {
         <Div_Card>
            < Card>
                 <Card.Content>
-                    <Title>Login {value_login}</Title>
+                    <Title>Login  {value_login}</Title>
                     <Div_input>
                         
                         <TextInput

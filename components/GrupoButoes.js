@@ -35,7 +35,7 @@ export default () => {
             <Div>
               <Div>
                 <Button contentStyle={{ height: 90 }} title='Paradas' color="#dc3545" title='Paradas' mode="contained" onPress={() => Alert.alert("Paradas")}>
-                  <Texto>Paradas </Texto>
+                  <Texto>Paradas</Texto>
                 </Button>
               </Div>
               <Div>

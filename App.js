@@ -7,7 +7,7 @@ import Login from "./components/Login";
 
 
 export default function App() {
-  let logado = false;
+  let logado = true;
   return (
     <View style={Padrao.container}>
       {
