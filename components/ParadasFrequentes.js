@@ -16,7 +16,7 @@ const Div = styled.View`
     padding-right: 15px;
     padding-top: 10px;
     padding-bottom: 15px;
-    justify-content: space-around;
+    justify-content: space-evenly;
 `;
 
 const Div_Card = styled.View`
@@ -24,20 +24,19 @@ const Div_Card = styled.View`
     padding-right: 5px;
     padding-top: 10px;
     padding-bottom: 10px;
-    justify-content: space-around;
+    justify-content: space-evenly;
 `;
 
-const Fl = styled.FlatList`
-    display: flex;    
-    flex-direction: row;
-`;
 export default (props) => {    
     const [isLoading, setLoading] = useState(true);
     const [data, setData] = useState([]);
+
+    const [id_posto, setId_posto] = useState(props.id_posto);
+
     
 
     useEffect(() => {
-        fetch('http://controleproducao.tuboarte.com/paradas-frequencia/'+props.id_posto)
+        fetch('http://controleproducao.tuboarte.com/paradas-frequencia/'+id_posto)
             .then((response) => response.json())
             .then((json) => setData(json))
             .catch((error) => console.error(error))

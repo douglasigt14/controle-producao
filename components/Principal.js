@@ -11,12 +11,12 @@ import Padrao from '../style/Padrao';
 
 export default (props) => {
    
-    let cor = '#d3d3d3';
-    let status_texto = 'INICIAR';
-    let descricao = '';//P - 01 MANUTENÇÃO MECANICA
-    let cor_texto = 'black';
-    let finalizado = false;
-    let id_posto = 3;
+    const [cor, setCor] = useState('#d3d3d3');
+    const [status_texto, setStatus_texto] = useState('INICIAR');
+    const [descricao, setDescricao] = useState(''); //P - 01 MANUTENÇÃO MECANICA
+    const [cor_texto, setCor_texto] = useState('black');
+    const [finalizado, setFinalizado] = useState(false);
+    const [id_posto, setId_posto] = useState(2);
     return (
         <View>
             <Appbar.Header style={Padrao.barra}>
