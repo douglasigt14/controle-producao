@@ -1,7 +1,7 @@
 
 import React, { useState } from "react";
 import styled from "styled-components";
-import { View , Text, Platform } from "react-native";
+import { View, Text, Alert, TouchableWithoutFeedback } from "react-native";
 
 
 
@@ -45,9 +45,11 @@ export default (props) => {
       <Div_Descricao>
         <Descricao>{props.descricao}</Descricao>
       </Div_Descricao>
-      <Bola>
+      <TouchableWithoutFeedback onPress={() => Alert.alert("Bola")}>
+        <Bola>
           <Texto>{props.status_texto}</Texto>
-      </Bola>
+        </Bola>
+      </TouchableWithoutFeedback>
     </View>
   );
 };
