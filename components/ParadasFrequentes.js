@@ -30,9 +30,8 @@ const Div_Card = styled.View`
 export default (props) => {    
     const [isLoading, setLoading] = useState(true);
     const [data, setData] = useState([]);
-
     const [id_posto, setId_posto] = useState(props.id_posto);
-
+    const [cor, setCor] = useState('#d3d3d3');
     
 
     useEffect(() => {
@@ -55,7 +54,9 @@ export default (props) => {
                                     keyExtractor={({ id }, index) => id}
                                     renderItem={({ item }) => (
                                         <Div>
-                                            <Button contentStyle={{ height: 90, width: 180 }} title='Paradas' color="#ffc107" title='Paradas' mode="contained" onPress={() => Alert.alert("Paradas")}>
+                                            <Button contentStyle={{ height: 90, width: 180 }} title='Paradas' color="#ffc107" title='Paradas' mode="contained" onPress={() => {
+                                                props.funcao_parar(item.rotulo,item.descricao)
+                                            }}>
                                                 <Texto>{item.rotulo} </Texto>
                                             </Button>
                                         </Div>
