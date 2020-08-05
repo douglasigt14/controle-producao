@@ -16,6 +16,7 @@ export default (props) => {
     let descricao = '';//P - 01 MANUTENÇÃO MECANICA
     let cor_texto = 'black';
     let finalizado = false;
+    let id_posto = 3;
     return (
         <View>
             <Appbar.Header style={Padrao.barra}>
@@ -26,7 +27,7 @@ export default (props) => {
                 />
             </Appbar.Header>
             <GrupoButoes finalizado={finalizado}></GrupoButoes>
-            <ParadasFrequentes></ParadasFrequentes>
+            <ParadasFrequentes id_posto={id_posto}></ParadasFrequentes>
             <Bola 
                 cor={cor}
                 cor_texto={cor_texto} 

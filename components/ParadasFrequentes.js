@@ -31,13 +31,13 @@ const Fl = styled.FlatList`
     display: flex;    
     flex-direction: row;
 `;
-export default () => {    
+export default (props) => {    
     const [isLoading, setLoading] = useState(true);
     const [data, setData] = useState([]);
-    let id_posto = 2;
+    
 
     useEffect(() => {
-        fetch('http://controleproducao.tuboarte.com/paradas-frequencia/' + id_posto)
+        fetch('http://controleproducao.tuboarte.com/paradas-frequencia/'+props.id_posto)
             .then((response) => response.json())
             .then((json) => setData(json))
             .catch((error) => console.error(error))
