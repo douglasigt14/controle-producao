@@ -15,7 +15,7 @@ export default (props) => {
     const [status_texto, setStatus_texto] = useState('INICIAR');
     const [descricao, setDescricao] = useState(''); //P - 01 MANUTENÇÃO MECANICA
     const [cor_texto, setCor_texto] = useState('black');
-    const [finalizado, setFinalizado] = useState(false);
+    const [finalizado, setFinalizado] = useState(true);
     const [id_posto, setId_posto] = useState(2);
 
     const parar = (rotulo, descricao) =>{

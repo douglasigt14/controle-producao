@@ -2,7 +2,7 @@ import { StyleSheet} from 'react-native';
 
 export default StyleSheet.create({
   barra: {
-    backgroundColor: "#000",
+    backgroundColor: "black",
   },
   container: {
     flexGrow: 1,
