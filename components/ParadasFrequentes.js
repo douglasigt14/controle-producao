@@ -15,6 +15,7 @@ const Div = styled.View`
     padding-left: 15px;
     padding-right: 15px;
     padding-top: 10px;
+    padding-bottom: 15px;
     justify-content: space-around;
 `;
 
@@ -22,6 +23,7 @@ const Div_Card = styled.View`
     padding-left: 5px;
     padding-right: 5px;
     padding-top: 10px;
+    padding-bottom: 10px;
     justify-content: space-around;
 `;
 

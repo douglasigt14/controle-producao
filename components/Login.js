@@ -57,9 +57,9 @@ export default (props) => {
                 </Card.Content>
                 <Div_Button>
                     <Button 
-                        onPress={() => Alert.alert("Login")} 
+                        onPress={() => Alert.alert(login)} 
                         contentStyle={{ height: 60 , width: 300 }} 
-                        color="#dc3545" 
+                        color="#007bff" 
                         title='Login' 
                         mode="contained">
                             Entrar
