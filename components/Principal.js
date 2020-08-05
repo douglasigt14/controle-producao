@@ -30,13 +30,15 @@ export default (props) => {
         setStatus_texto('OPERANDO');
         setCor_texto('white');
         setDescricao('ITEM DESC');
+        setFinalizado(false);
     } 
     
-    const inatividade = () => {
+    const finalizar = () => {
         setCor('#d3d3d3');
         setStatus_texto('INICIAR');
         setCor_texto('black');
         setDescricao('');
+        setFinalizado(true);
     }
 
     return (
@@ -48,7 +50,11 @@ export default (props) => {
                     onPress={() => Alert.alert("Opções")}
                 />
             </Appbar.Header>
-            <GrupoButoes finalizado={finalizado}></GrupoButoes>
+            <GrupoButoes 
+                finalizado={finalizado}
+                funcao_finalizar={finalizar}
+            >
+            </GrupoButoes>
             <ParadasFrequentes 
                     id_posto={id_posto} 
                     funcao_parar={parar}>
@@ -61,15 +67,10 @@ export default (props) => {
                 
             >
             </Bola>
-            <View style={{ flexDirection: "row", justifyContent: "space-around"}}>
+            <View style={{ flexDirection: "row", justifyContent: "flex-end"}}>
                 <View style={{ justifyContent: "center", alignItems: "flex-start", paddingRight: 40 }}>
                     <Button contentStyle={{ height: 90, width: 180 }} title='Paradas' color="green" title='Paradas' mode="contained" onPress={operar}>
                         Operar
-                    </Button>
-                </View>
-                <View style={{justifyContent: "center", alignItems: "flex-end", paddingRight: 40}}>
-                    <Button contentStyle={{ height: 90, width: 180 }} title='Paradas' color="#d3d3d3" title='Paradas' mode="contained" onPress={inatividade}>
-                            Zerar
                     </Button>
                 </View>
             </View>
