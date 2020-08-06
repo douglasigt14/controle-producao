@@ -118,6 +118,24 @@ const ViewModalParadas = styled.View`
 
   return (
     <>
+      <View>
+        <Div_Descricao>
+          <Descricao>{props.descricao}</Descricao>
+        </Div_Descricao>
+        <TouchableWithoutFeedback
+          onPress={() => {
+            setModalVisible(true);
+          }}
+        >
+          <Bola>
+            <Texto>{props.status_texto}</Texto>
+          </Bola>
+        </TouchableWithoutFeedback>
+      </View>
+
+
+      {/* Modais*/}
+
       {/* Modal Selecionar */}
       <Modal
         animationType="slide"
@@ -164,6 +182,9 @@ const ViewModalParadas = styled.View`
       </Modal>
       {/* Modal Selecionar */}
 
+
+      
+
       {/* Modal Paradas */}
       <Modal
         animationType="fade"
@@ -177,7 +198,7 @@ const ViewModalParadas = styled.View`
           <ViewModalParadas style={Padrao.modalView}>
             <Div_Fechar>
               <TouchModal
-                style={{ ...Padrao.closeButton}}
+                style={{ ...Padrao.closeButton }}
                 onPress={() => {
                   setModalParadasVisible(!modalParadasVisible);
                 }}
@@ -223,21 +244,6 @@ const ViewModalParadas = styled.View`
         </View>
       </Modal>
       {/* Modal Paradas */}
-
-      <View>
-        <Div_Descricao>
-          <Descricao>{props.descricao}</Descricao>
-        </Div_Descricao>
-        <TouchableWithoutFeedback
-          onPress={() => {
-            setModalVisible(true);
-          }}
-        >
-          <Bola>
-            <Texto>{props.status_texto}</Texto>
-          </Bola>
-        </TouchableWithoutFeedback>
-      </View>
     </>
   );
 };
