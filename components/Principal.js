@@ -6,7 +6,7 @@ import GrupoButoes from "./GrupoButoes";
 import ParadasFrequentes from "./ParadasFrequentes";
 import { Appbar ,Button } from "react-native-paper";
 import Padrao from '../style/Padrao';
-
+import Modal from "./Modal";
 
 
 export default (props) => {
@@ -43,38 +43,52 @@ export default (props) => {
     }
 
     return (
-        <View>
-            <Appbar.Header style={Padrao.barra}>
-                <Appbar.Content title="Controle de Produção" />
-                <Appbar.Action
-                    icon="dots-vertical" 
-                    onPress={() => Alert.alert("Opções")}
-                />
-            </Appbar.Header>
-            <GrupoButoes 
-                finalizado={finalizado}
-                funcao_finalizar={finalizar}
+      <View>
+        <Appbar.Header style={Padrao.barra}>
+          <Appbar.Content title="Controle de Produção" />
+          <Appbar.Action
+            icon="dots-vertical"
+            onPress={() => Alert.alert("Opções")}
+          />
+        </Appbar.Header>
+        <GrupoButoes
+          finalizado={finalizado}
+          funcao_finalizar={finalizar}
+        ></GrupoButoes>
+        {/* <Modal></Modal> */}
+        <ParadasFrequentes
+          id_posto={id_posto}
+          funcao_parar={parar}
+        ></ParadasFrequentes>
+
+        <Bola
+          cor={cor}
+          cor_texto={cor_texto}
+          status_texto={status_texto}
+          descricao={descricao}
+        ></Bola>
+        <View style={{ flexDirection: "row", justifyContent: "flex-end" }}>
+          <View
+            style={{
+              justifyContent: "center",
+              alignItems: "flex-start",
+              paddingRight: 40,
+            }}
+          >
+            <Button
+              contentStyle={{ height: 90, width: 180 }}
+              title="Paradas"
+              color="green"
+              title="Paradas"
+              mode="contained"
+              onPress={() => {
+                operar("ITEM DESC");
+              }}
             >
-            </GrupoButoes>
-            <ParadasFrequentes 
-                    id_posto={id_posto} 
-                    funcao_parar={parar}>
-            </ParadasFrequentes>
-            <Bola 
-                cor={cor}
-                cor_texto={cor_texto} 
-                status_texto={status_texto} 
-                descricao={descricao} 
-                
-            >
-            </Bola>
-            <View style={{ flexDirection: "row", justifyContent: "flex-end"}}>
-                <View style={{ justifyContent: "center", alignItems: "flex-start", paddingRight: 40 }}>
-                    <Button contentStyle={{ height: 90, width: 180 }} title='Paradas' color="green" title='Paradas' mode="contained" onPress={() => { operar("ITEM DESC") } }>
-                        Operar
-                    </Button>
-                </View>
-            </View>
+              Operar
+            </Button>
+          </View>
         </View>
+      </View>
     );
 };

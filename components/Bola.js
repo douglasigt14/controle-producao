@@ -1,8 +1,15 @@
 
 import React, { useState } from "react";
 import styled from "styled-components";
-import { View, Text, Alert, TouchableWithoutFeedback } from "react-native";
-
+import {
+  View,
+  Text,
+  Alert,
+  TouchableWithoutFeedback,
+  Modal,
+  TouchableHighlight,
+} from "react-native";
+import Padrao from "../style/Padrao";
 
 
 
@@ -42,19 +49,51 @@ export default (props) => {
   const msg = (texto) => {
     Alert.alert(texto);
   } 
-  
+   const [modalVisible, setModalVisible] = useState(false);
+
   return (
-    <View>
-      <Div_Descricao>
-        <Descricao>{props.descricao}</Descricao>
-      </Div_Descricao>
-      <TouchableWithoutFeedback onPress={() => {
-          msg('Bola');
-      }}>
-        <Bola>
-          <Texto>{props.status_texto}</Texto>
-        </Bola>
-      </TouchableWithoutFeedback>
-    </View>
+    <>
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          Alert.alert("Modal has been closed.");
+        }}
+      >
+       
+       
+        <View style={Padrao.centeredView}>
+          <View style={Padrao.modalView}>
+            <Text style={Padrao.modalText}>Selecione</Text>
+
+            <TouchableHighlight
+              style={{ ...Padrao.openButton, backgroundColor: "gray" }}
+              onPress={() => {
+                setModalVisible(!modalVisible);
+              }}
+            >
+              <Text style={Padrao.textStyle}>Cancelar</Text>
+            </TouchableHighlight>
+          </View>
+        </View>
+      </Modal>
+
+
+      <View>
+        <Div_Descricao>
+          <Descricao>{props.descricao}</Descricao>
+        </Div_Descricao>
+        <TouchableWithoutFeedback
+          onPress={() => {
+            setModalVisible(true);
+          }}
+        >
+          <Bola>
+            <Texto>{props.status_texto}</Texto>
+          </Bola>
+        </TouchableWithoutFeedback>
+      </View>
+    </>
   );
 };
