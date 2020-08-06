@@ -32,9 +32,9 @@ export default StyleSheet.create({
   modalView: {
     margin: 20,
     backgroundColor: "white",
-    borderRadius: 20,
+    borderRadius: 10,
     padding: 35,
-    alignItems: "center",
+    alignItems: "stretch",
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -46,7 +46,8 @@ export default StyleSheet.create({
   },
   openButton: {
     backgroundColor: "#000",
-    borderRadius: 20,
+    borderRadius: 5,
+    height: 70,
     padding: 10,
     elevation: 2,
   },

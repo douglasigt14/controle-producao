@@ -66,29 +66,9 @@ export default (props) => {
           cor_texto={cor_texto}
           status_texto={status_texto}
           descricao={descricao}
+          funcao_operar={operar}
         ></Bola>
-        <View style={{ flexDirection: "row", justifyContent: "flex-end" }}>
-          <View
-            style={{
-              justifyContent: "center",
-              alignItems: "flex-start",
-              paddingRight: 40,
-            }}
-          >
-            <Button
-              contentStyle={{ height: 90, width: 180 }}
-              title="Paradas"
-              color="green"
-              title="Paradas"
-              mode="contained"
-              onPress={() => {
-                operar("ITEM DESC");
-              }}
-            >
-              Operar
-            </Button>
-          </View>
-        </View>
+        
       </View>
     );
 };

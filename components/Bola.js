@@ -29,6 +29,18 @@ export default (props) => {
     background-color: ${props.cor};
   `;
 
+
+  const ViewModalSelecionar = styled.View`
+      width: 400px;
+      height: 300px;
+      display: flex;
+  `;
+
+  const TouchModal = styled.TouchableHighlight`
+    margin-top: 10px;
+  `;
+  
+
   const Texto = styled.Text`
     font-size: 40px;
     color: ${props.cor_texto};
@@ -61,24 +73,38 @@ export default (props) => {
           Alert.alert("Modal has been closed.");
         }}
       >
-       
-       
         <View style={Padrao.centeredView}>
-          <View style={Padrao.modalView}>
-            <Text style={Padrao.modalText}>Selecione</Text>
+          <ViewModalSelecionar style={Padrao.modalView}>
+            <TouchModal
+              style={{ ...Padrao.openButton, backgroundColor: "#28a745" }}
+              onPress={() => {
+                setModalVisible(!modalVisible);
+                props.funcao_operar();
+              }}
+            >
+              <Text style={Padrao.textStyle}>Operar</Text>
+            </TouchModal>
 
-            <TouchableHighlight
+            <TouchModal
+              style={{ ...Padrao.openButton, backgroundColor: "#dc3545" }}
+              onPress={() => {
+                setModalVisible(!modalVisible);
+              }}
+            >
+              <Text style={Padrao.textStyle}>Selecionar Parada</Text>
+            </TouchModal>
+
+            <TouchModal
               style={{ ...Padrao.openButton, backgroundColor: "gray" }}
               onPress={() => {
                 setModalVisible(!modalVisible);
               }}
             >
               <Text style={Padrao.textStyle}>Cancelar</Text>
-            </TouchableHighlight>
-          </View>
+            </TouchModal>
+          </ViewModalSelecionar>
         </View>
       </Modal>
-
 
       <View>
         <Div_Descricao>
