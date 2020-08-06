@@ -36,7 +36,7 @@ export default (props) => {
 const Div = styled.View`
   display: flex;
   flex-direction: row;
-  padding-left: 10px;
+  padding-left: 15px;
   padding-right: 15px;
   padding-top: 10px;
   padding-bottom: 15px;
@@ -85,6 +85,14 @@ const ViewModalParadas = styled.View`
     align-items: center;
     justify-content: center;
     margin-top: 20px;
+  `;
+
+  const Div_Fechar = styled.View`
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: flex-end;
+    margin-top: 0px;
   `;
 
   const msg = (texto) => {
@@ -167,8 +175,28 @@ const ViewModalParadas = styled.View`
       >
         <View style={Padrao.centeredView}>
           <ViewModalParadas style={Padrao.modalView}>
+            <Div_Fechar>
+              <TouchModal
+                style={{ ...Padrao.closeButton}}
+                onPress={() => {
+                  setModalParadasVisible(!modalParadasVisible);
+                }}
+              >
+                <TextoModal style={Padrao.textStyle}>X</TextoModal>
+              </TouchModal>
+            </Div_Fechar>
             <ScrollView>
               <FlatList
+                LisHeaderComponent={
+                  <TouchModal
+                    style={{ ...Padrao.openButton, backgroundColor: "gray" }}
+                    onPress={() => {
+                      setModalParadasVisible(!modalParadasVisible);
+                    }}
+                  >
+                    <TextoModal style={Padrao.textStyle}>Fechar</TextoModal>
+                  </TouchModal>
+                }
                 style={Padrao.FlatList}
                 numColumns={3}
                 data={paradas}
@@ -188,16 +216,9 @@ const ViewModalParadas = styled.View`
                     </Button>
                   </Div>
                 )}
+                ListFooterComponent={<></>}
               />
             </ScrollView>
-            <TouchModal
-              style={{ ...Padrao.openButton, backgroundColor: "gray" }}
-              onPress={() => {
-                setModalParadasVisible(!modalParadasVisible);
-              }}
-            >
-              <TextoModal style={Padrao.textStyle}>Fechar</TextoModal>
-            </TouchModal>
           </ViewModalParadas>
         </View>
       </Modal>

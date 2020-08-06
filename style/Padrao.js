@@ -27,10 +27,8 @@ export default StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 22,
   },
   modalView: {
-    margin: 20,
     backgroundColor: "white",
     borderRadius: 10,
     padding: 35,
@@ -50,6 +48,13 @@ export default StyleSheet.create({
     height: 90,
     padding: 10,
     elevation: 2,
+  },
+  closeButton: {
+    backgroundColor: "red",
+    borderRadius: 50,
+    height: 60,
+    width: 60,
+    padding: 10,
   },
   textStyle: {
     color: "white",
