@@ -16,7 +16,7 @@ export default (props) => {
     const [descricao, setDescricao] = useState(''); //P - 01 MANUTENÇÃO MECANICA
     const [cor_texto, setCor_texto] = useState('black');
     const [finalizado, setFinalizado] = useState(true);
-    const [id_posto, setId_posto] = useState(2);
+    const [id_posto, setId_posto] = useState(3);
 
     const parar = (rotulo, descricao) =>{
         setCor('red');
@@ -69,8 +69,9 @@ export default (props) => {
           status_texto={status_texto}
           descricao={descricao}
           funcao_operar={operar}
+          funcao_parar={parar}
+          id_posto={id_posto}
         ></Bola>
-        
       </View>
     );
 };

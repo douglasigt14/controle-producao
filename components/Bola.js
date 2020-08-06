@@ -1,5 +1,5 @@
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import {
   View,
@@ -9,8 +9,10 @@ import {
   Modal,
   TouchableHighlight,
   ScrollView,
+  FlatList,
 } from "react-native";
 import Padrao from "../style/Padrao";
+import { Button, Card } from "react-native-paper";
 
 
 
@@ -31,6 +33,17 @@ export default (props) => {
   `;
 
 
+const Div = styled.View`
+  display: flex;
+  flex-direction: row;
+  padding-left: 10px;
+  padding-right: 15px;
+  padding-top: 10px;
+  padding-bottom: 15px;
+  justify-content: space-evenly;
+`;
+
+
   const ViewModalSelecionar = styled.View`
       width: 450px;
       height: 380px;
@@ -39,8 +52,8 @@ export default (props) => {
 
 
 const ViewModalParadas = styled.View`
-  width: 80%;
-  height: 80%;
+  width: 100%;
+  height: 90%;
   display: flex;
 `;
 
@@ -48,6 +61,10 @@ const ViewModalParadas = styled.View`
     margin-top: 10px;
   `;
   
+
+  const TextoParadas = styled.Text`
+    font-size: 18px;
+  `;
 
   const Texto = styled.Text`
     font-size: 40px;
@@ -75,6 +92,21 @@ const ViewModalParadas = styled.View`
   } 
    const [modalVisible, setModalVisible] = useState(false);
    const [modalParadasVisible, setModalParadasVisible] = useState(false);
+
+    const [isLoading, setLoading] = useState(true);
+    const [paradas, setParadas] = useState([]);
+    const [id_posto, setId_posto] = useState(props.id_posto);
+
+     useEffect(() => {
+       fetch(
+         "http://controleproducao.tuboarte.com/paradas/codigos_restrito/" +
+           id_posto
+       )
+         .then((response) => response.json())
+         .then((json) => setParadas(json))
+         .catch((error) => console.error(error))
+         .finally(() => setLoading(false));
+     }, []);
 
   return (
     <>
@@ -135,7 +167,29 @@ const ViewModalParadas = styled.View`
       >
         <View style={Padrao.centeredView}>
           <ViewModalParadas style={Padrao.modalView}>
-            <ScrollView></ScrollView>
+            <ScrollView>
+              <FlatList
+                style={Padrao.FlatList}
+                numColumns={3}
+                data={paradas}
+                keyExtractor={({ id }, index) => id}
+                renderItem={({ item }) => (
+                  <Div>
+                    <Button
+                      contentStyle={{ height: 90, width: 180 }}
+                      color="#ffc107"
+                      mode="contained"
+                      onPress={() => {
+                        props.funcao_parar(item.rotulo, item.descricao);
+                        setModalParadasVisible(!modalParadasVisible);
+                      }}
+                    >
+                      <TextoParadas>{item.rotulo} </TextoParadas>
+                    </Button>
+                  </Div>
+                )}
+              />
+            </ScrollView>
             <TouchModal
               style={{ ...Padrao.openButton, backgroundColor: "gray" }}
               onPress={() => {

@@ -33,14 +33,16 @@ export default (props) => {
     const [id_posto, setId_posto] = useState(props.id_posto);
     const [cor, setCor] = useState('#d3d3d3');
     
-
-    useEffect(() => {
-        fetch('http://controleproducao.tuboarte.com/paradas-frequencia/'+id_posto)
-            .then((response) => response.json())
-            .then((json) => setData(json))
-            .catch((error) => console.error(error))
-            .finally(() => setLoading(false));
-    }, []);
+    let paradas_frequentes = () => {
+            useEffect(() => {
+                fetch('http://controleproducao.tuboarte.com/paradas-frequencia/'+id_posto)
+                    .then((response) => response.json())
+                    .then((json) => setData(json))
+                    .catch((error) => console.error(error))
+                    .finally(() => setLoading(false));
+            }, []);
+    }
+    paradas_frequentes();
     return (
         <>
             <Div_Card>
