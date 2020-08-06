@@ -39,13 +39,18 @@ export default (props) => {
     margin-top: 20px;
   `;
 
+  const msg = (texto) => {
+    Alert.alert(texto);
+  } 
   
   return (
     <View>
       <Div_Descricao>
         <Descricao>{props.descricao}</Descricao>
       </Div_Descricao>
-      <TouchableWithoutFeedback onPress={() => Alert.alert("Bola")}>
+      <TouchableWithoutFeedback onPress={() => {
+          msg('Bola');
+      }}>
         <Bola>
           <Texto>{props.status_texto}</Texto>
         </Bola>

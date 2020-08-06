@@ -23,13 +23,14 @@ export default (props) => {
         setStatus_texto('PARADO');
         setCor_texto('white');
         setDescricao(rotulo+' '+descricao);
+        setFinalizado(false);
     } 
     
     const operar = (descricao) => {
         setCor('green');
         setStatus_texto('OPERANDO');
         setCor_texto('white');
-        setDescricao('ITEM DESC');
+        setDescricao(descricao);
         setFinalizado(false);
     } 
     
@@ -69,7 +70,7 @@ export default (props) => {
             </Bola>
             <View style={{ flexDirection: "row", justifyContent: "flex-end"}}>
                 <View style={{ justifyContent: "center", alignItems: "flex-start", paddingRight: 40 }}>
-                    <Button contentStyle={{ height: 90, width: 180 }} title='Paradas' color="green" title='Paradas' mode="contained" onPress={operar}>
+                    <Button contentStyle={{ height: 90, width: 180 }} title='Paradas' color="green" title='Paradas' mode="contained" onPress={() => { operar("ITEM DESC") } }>
                         Operar
                     </Button>
                 </View>
