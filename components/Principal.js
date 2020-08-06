@@ -24,6 +24,8 @@ export default (props) => {
         setCor_texto('white');
         setDescricao(rotulo+' '+descricao);
         setFinalizado(false);
+         Alert.alert(rotulo +" : Parada Iniciada com Sucesso"
+         );
     } 
     
     const operar = (descricao) => {

@@ -56,7 +56,6 @@ export default (props) => {
                                         <Div>
                                             <Button contentStyle={{ height: 90, width: 180 }} title='Paradas' color="#ffc107" title='Paradas' mode="contained" onPress={() => {
                                                 props.funcao_parar(item.rotulo,item.descricao)
-                                                Alert.alert(item.rotulo + " : Parada Iniciada com Sucesso")
                                             }}>
                                                 <Texto>{item.rotulo} </Texto>
                                             </Button>

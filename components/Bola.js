@@ -8,6 +8,7 @@ import {
   TouchableWithoutFeedback,
   Modal,
   TouchableHighlight,
+  ScrollView,
 } from "react-native";
 import Padrao from "../style/Padrao";
 
@@ -31,10 +32,17 @@ export default (props) => {
 
 
   const ViewModalSelecionar = styled.View`
-      width: 400px;
-      height: 300px;
+      width: 450px;
+      height: 380px;
       display: flex;
   `;
+
+
+const ViewModalParadas = styled.View`
+  width: 80%;
+  height: 80%;
+  display: flex;
+`;
 
   const TouchModal = styled.TouchableHighlight`
     margin-top: 10px;
@@ -44,6 +52,10 @@ export default (props) => {
   const Texto = styled.Text`
     font-size: 40px;
     color: ${props.cor_texto};
+  `;
+
+  const TextoModal = styled.Text`
+    font-size: 25px;
   `;
 
   const Descricao = styled.Text`
@@ -62,9 +74,11 @@ export default (props) => {
     Alert.alert(texto);
   } 
    const [modalVisible, setModalVisible] = useState(false);
+   const [modalParadasVisible, setModalParadasVisible] = useState(false);
 
   return (
     <>
+      {/* Modal Selecionar */}
       <Modal
         animationType="slide"
         transparent={true}
@@ -79,19 +93,22 @@ export default (props) => {
               style={{ ...Padrao.openButton, backgroundColor: "#28a745" }}
               onPress={() => {
                 setModalVisible(!modalVisible);
-                props.funcao_operar();
+                props.funcao_operar("ITEM DESCRIÇÃO");
               }}
             >
-              <Text style={Padrao.textStyle}>Operar</Text>
+              <TextoModal style={Padrao.textStyle}>Operar</TextoModal>
             </TouchModal>
 
             <TouchModal
               style={{ ...Padrao.openButton, backgroundColor: "#dc3545" }}
               onPress={() => {
                 setModalVisible(!modalVisible);
+                setModalParadasVisible(true);
               }}
             >
-              <Text style={Padrao.textStyle}>Selecionar Parada</Text>
+              <TextoModal style={Padrao.textStyle}>
+                Selecionar Parada
+              </TextoModal>
             </TouchModal>
 
             <TouchModal
@@ -100,11 +117,37 @@ export default (props) => {
                 setModalVisible(!modalVisible);
               }}
             >
-              <Text style={Padrao.textStyle}>Cancelar</Text>
+              <TextoModal style={Padrao.textStyle}>Fechar</TextoModal>
             </TouchModal>
           </ViewModalSelecionar>
         </View>
       </Modal>
+      {/* Modal Selecionar */}
+
+      {/* Modal Paradas */}
+      <Modal
+        animationType="fade"
+        transparent={true}
+        visible={modalParadasVisible}
+        onRequestClose={() => {
+          Alert.alert("Modal has been closed.");
+        }}
+      >
+        <View style={Padrao.centeredView}>
+          <ViewModalParadas style={Padrao.modalView}>
+            <ScrollView></ScrollView>
+            <TouchModal
+              style={{ ...Padrao.openButton, backgroundColor: "gray" }}
+              onPress={() => {
+                setModalParadasVisible(!modalParadasVisible);
+              }}
+            >
+              <TextoModal style={Padrao.textStyle}>Fechar</TextoModal>
+            </TouchModal>
+          </ViewModalParadas>
+        </View>
+      </Modal>
+      {/* Modal Paradas */}
 
       <View>
         <Div_Descricao>

@@ -47,7 +47,7 @@ export default StyleSheet.create({
   openButton: {
     backgroundColor: "#000",
     borderRadius: 5,
-    height: 70,
+    height: 90,
     padding: 10,
     elevation: 2,
   },
