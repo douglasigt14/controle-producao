@@ -43,15 +43,26 @@ export default (props) => {
                 .finally(() => setLoading(false));
             }, [id_posto]);
 
-    const atualizar_paradas_frequentes = () => {
-        console.warn('APF')
+    const atualizar_paradas_frequentes = function (id_parada){
       fetch(
         "http://controleproducao.tuboarte.com/paradas-frequencia/" + id_posto
       )
         .then((response) => response.json())
-        .then((json) => setData(json))
+        .then((json) => {
+            setData(json)
+
+            data.forEach((dados) => {
+              id_parada == dados.id
+                ? (dados.habilitado = true)
+                : (dados.habilitado = false);
+            });
+
+             setData(data);
+        } )
         .catch((error) => console.error(error))
         .finally(() => setLoading(false));
+        
+        
     }; 
     return (
         <>
@@ -66,9 +77,9 @@ export default (props) => {
                                     keyExtractor={({ id }, index) => id}
                                     renderItem={({ item }) => (
                                         <Div>
-                                            <Button contentStyle={{ height: 90, width: 180 }} title='Paradas' color="#ffc107" title='Paradas' mode="contained" onPress={() => {
+                                            <Button contentStyle={{ height: 90, width: 180 }} title='Paradas' color="#ffc107" title='Paradas' mode="contained" disabled={item.habilitado} onPress={() => {
                                                 props.funcao_parar(item.rotulo,item.descricao)
-                                                atualizar_paradas_frequentes();
+                                                atualizar_paradas_frequentes(item.id);
                                             }}>
                                                 <Texto>{item.rotulo} </Texto>
                                             </Button>
