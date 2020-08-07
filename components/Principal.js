@@ -17,7 +17,7 @@ export default (props) => {
     const [descricao, setDescricao] = useState(''); //P - 01 MANUTENÇÃO MECANICA
     const [cor_texto, setCor_texto] = useState('black');
     const [finalizado, setFinalizado] = useState(true);
-    const [id_posto, setId_posto] = useState(storageGetMaquina() || 0);  
+    
 
     const parar = (rotulo, descricao) =>{
         setCor('red');
@@ -58,9 +58,11 @@ export default (props) => {
           finalizado={finalizado}
           funcao_finalizar={finalizar}
         ></GrupoButoes>
-         <Text style={{fontSize: 80}}>{id_posto}</Text>
+        <Text style={{ fontSize: 80 }}>
+              {props.id_posto}
+        </Text>
         <ParadasFrequentes
-          id_posto={id_posto}
+          id_posto={props.id_posto}
           funcao_parar={parar}
         ></ParadasFrequentes>
 
@@ -71,7 +73,7 @@ export default (props) => {
           descricao={descricao}
           funcao_operar={operar}
           funcao_parar={parar}
-          id_posto={id_posto}
+          id_posto={props.id_posto}
         ></Bola>
       </View>
     );

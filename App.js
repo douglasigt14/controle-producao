@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import React, { useEffect, useState } from "react";
+import React, {useState} from 'react';
 import { View } from "react-native";
 import Padrao from './style/Padrao';
 import Principal from "./components/Principal";
@@ -9,13 +9,13 @@ import { storageGetMaquina, storageSetMaquina } from "./storage/localstorage";
 
 export default function App() {
   let logado = true;
-  // storageSetMaquina(2);
- 
+  const [id_posto, setId_posto] = useState("2");
+
   return (
     <View style={Padrao.container}>
       {
         logado == true
-          ? <Principal></Principal>
+          ? <Principal id_posto={id_posto}></Principal>
           : <Login> </Login>
       }
       <StatusBar style="auto" />
