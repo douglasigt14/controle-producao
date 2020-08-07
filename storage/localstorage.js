@@ -10,8 +10,7 @@ export const storageGetMaquina = async () => {
          try {
            const value = await AsyncStorage.getItem(maquina);
            if (value !== null) {
-             // We have data!!
-             console.log(value);
+             value = 0;  
            }
          } catch (error) {
            // Error retrieving data

@@ -8,8 +8,11 @@ import ParadasFrequentesNew from "./components/ParadasFrequentesNew";
 import { storageGetMaquina, storageSetMaquina } from "./storage/localstorage";
 
 export default function App() {
-  let logado = true;
+  const p = storageGetMaquina();
+  console.log(p);
+
   const [id_posto, setId_posto] = useState("2");
+  const [logado, setLogado] = useState(true);
 
   return (
     <View style={Padrao.container}>

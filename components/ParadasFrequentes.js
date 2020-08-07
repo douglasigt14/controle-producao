@@ -42,6 +42,17 @@ export default (props) => {
                 .catch((error) => console.error(error))
                 .finally(() => setLoading(false));
             }, [id_posto]);
+
+    const atualizar_paradas_frequentes = () => {
+        console.warn('APF')
+      fetch(
+        "http://controleproducao.tuboarte.com/paradas-frequencia/" + id_posto
+      )
+        .then((response) => response.json())
+        .then((json) => setData(json))
+        .catch((error) => console.error(error))
+        .finally(() => setLoading(false));
+    }; 
     return (
         <>
             <Div_Card>
@@ -57,7 +68,7 @@ export default (props) => {
                                         <Div>
                                             <Button contentStyle={{ height: 90, width: 180 }} title='Paradas' color="#ffc107" title='Paradas' mode="contained" onPress={() => {
                                                 props.funcao_parar(item.rotulo,item.descricao)
-                                                setId_posto(2);
+                                                atualizar_paradas_frequentes();
                                             }}>
                                                 <Texto>{item.rotulo} </Texto>
                                             </Button>

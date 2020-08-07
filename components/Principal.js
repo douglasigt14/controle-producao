@@ -58,7 +58,7 @@ export default (props) => {
           finalizado={finalizado}
           funcao_finalizar={finalizar}
         ></GrupoButoes>
-        <Text style={{ fontSize: 80 }}>
+        <Text style={{ fontSize: 40 }}>
               {props.id_posto}
         </Text>
         <ParadasFrequentes
