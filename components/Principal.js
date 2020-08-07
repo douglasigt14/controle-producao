@@ -1,22 +1,23 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { View ,Alert} from "react-native";
+import { View, Text, Alert } from "react-native";
 import Bola from "./Bola";
 import GrupoButoes from "./GrupoButoes";
 import ParadasFrequentes from "./ParadasFrequentes";
 import { Appbar ,Button } from "react-native-paper";
 import Padrao from '../style/Padrao';
-import Modal from "./Modal";
-
+import { storageGetMaquina,storageSetMaquina } from "../storage/localstorage";
 
 export default (props) => {
-   
+  
+    
+
     const [cor, setCor] = useState('#d3d3d3');
     const [status_texto, setStatus_texto] = useState('INICIAR');
     const [descricao, setDescricao] = useState(''); //P - 01 MANUTENÇÃO MECANICA
     const [cor_texto, setCor_texto] = useState('black');
     const [finalizado, setFinalizado] = useState(true);
-    const [id_posto, setId_posto] = useState(3);
+    const [id_posto, setId_posto] = useState(storageGetMaquina() || 0);  
 
     const parar = (rotulo, descricao) =>{
         setCor('red');
@@ -57,7 +58,7 @@ export default (props) => {
           finalizado={finalizado}
           funcao_finalizar={finalizar}
         ></GrupoButoes>
-        {/* <Modal></Modal> */}
+         <Text style={{fontSize: 80}}>{id_posto}</Text>
         <ParadasFrequentes
           id_posto={id_posto}
           funcao_parar={parar}
