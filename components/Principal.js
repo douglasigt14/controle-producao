@@ -25,8 +25,6 @@ export default (props) => {
         setCor_texto('white');
         setDescricao(rotulo+' '+descricao);
         setFinalizado(false);
-         Alert.alert(rotulo +" : Parada Iniciada com Sucesso"
-         );
     } 
     
     const operar = (descricao) => {
@@ -54,13 +52,12 @@ export default (props) => {
             onPress={() => Alert.alert("Opções")}
           />
         </Appbar.Header>
+        
         <GrupoButoes
           finalizado={finalizado}
           funcao_finalizar={finalizar}
         ></GrupoButoes>
-        <Text style={{ fontSize: 40 }}>
-              {props.id_posto}
-        </Text>
+
         <ParadasFrequentes
           id_posto={props.id_posto}
           funcao_parar={parar}
