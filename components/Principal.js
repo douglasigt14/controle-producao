@@ -34,6 +34,7 @@ export default (props) => {
         setDescricao(descricao);
         setFinalizado(false);
     } 
+
     
     const finalizar = () => {
         setCor('#d3d3d3');

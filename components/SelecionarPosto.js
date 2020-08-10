@@ -30,9 +30,7 @@ const Div_Button = styled.View`
 
 
 export default (props) => {
-   const [selectedValue, setSelectedValue] = useState("");
-   // 
-
+   const [selectedValue, setSelectedValue] = useState(""); 
    const [isLoading, setLoading] = useState(true);
    const [postos, setPostos] = useState([]);
 
@@ -50,25 +48,35 @@ export default (props) => {
           <Card.Content>
             <Title>Selecionar Posto </Title>
             <Div_input>
-              <Picker>
-                {postos.map((l, i) => {
+              <Picker
+                selectedValue={selectedValue}
+                onValueChange={(itemValue, itemIndex) =>
+                  setSelectedValue(itemValue)
+                }
+              >
+                {postos.map((posto, i) => {
                   return (
-                    <Picker.Item value={l} label={l.nome} key={i} />
+                    <Picker.Item
+                      value={posto.id}
+                      label={posto.nome}
+                      key={posto.id}
+                    />
                   );
                 })}
               </Picker>
-              
             </Div_input>
           </Card.Content>
           <Div_Button>
             <Button
-              onPress={() => Alert.alert(login)}
+              onPress={() => {
+                  props.funcao_selecionar(selectedValue);
+              }}
               contentStyle={{ height: 60, width: 300 }}
               color="#007bff"
               title="Login"
               mode="contained"
             >
-              Entrar
+              Selecionar
             </Button>
           </Div_Button>
         </Card>

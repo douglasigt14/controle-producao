@@ -5,25 +5,25 @@ import Padrao from './style/Padrao';
 import Principal from "./components/Principal";
 import Login from "./components/Login";
 import SelecionarPosto from "./components/SelecionarPosto";
-import ParadasFrequentesNew from "./components/ParadasFrequentesNew";
 import { storageGetMaquina, storageSetMaquina } from "./storage/localstorage";
 
 export default function App() {
-  const p = storageGetMaquina();
-  console.log(p);
-
-  const [id_posto, setId_posto] = useState("2");
+  
+  const [id_posto, setId_posto] = useState(null);
   const [logado, setLogado] = useState(false);
-  const [selecionar_posto, setSelecionar_posto] = useState(false);
   let comp_rederizado = null;
 
-  if (selecionar_posto == false) {
-    comp_rederizado = <SelecionarPosto></SelecionarPosto>;
-  }
-  else if (logado == false) {
+  const selecionar_posto = (id_postoP) => {
+    setId_posto(id_postoP);
+  };
+
+  if (!id_posto) {
+    comp_rederizado = (
+      <SelecionarPosto funcao_selecionar={selecionar_posto}></SelecionarPosto>
+    );
+  } else if (logado == false) {
     comp_rederizado = <Login id_posto={id_posto}> </Login>;
-  }
-  else {
+  } else {
     comp_rederizado = <Principal id_posto={id_posto}></Principal>;
   }
 
