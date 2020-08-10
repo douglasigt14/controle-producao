@@ -1,7 +1,7 @@
-import React, { Component, useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { Alert, Picker } from "react-native";
-import { Button, Card, Title } from 'react-native-paper';
+import { Alert, Picker, FlatList, Text } from "react-native";
+import { Button, Card, Title } from "react-native-paper";
 
 const Div_Card = styled.View`
     margin-left: 150px;
@@ -31,6 +31,18 @@ const Div_Button = styled.View`
 
 export default (props) => {
    const [selectedValue, setSelectedValue] = useState("");
+   // 
+
+   const [isLoading, setLoading] = useState(true);
+   const [postos, setPostos] = useState([]);
+
+   useEffect(() => {
+     fetch("http://controleproducao.tuboarte.com/postos")
+       .then((response) => response.json())
+       .then((json) => setPostos(json))
+       .catch((error) => console.error(error))
+       .finally(() => setLoading(false));
+   }, []);
 
     return (
       <Div_Card>
@@ -38,20 +50,20 @@ export default (props) => {
           <Card.Content>
             <Title>Selecionar Posto </Title>
             <Div_input>
-               <Picker
-                    selectedValue={selectedValue}
-                    style={{ height: 50,width: 3000 }}
-                    onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
-                >
-                    <Picker.Item label="Furadeira 1" value="01" />
-                    <Picker.Item label="Furadeira 2" value="02" />
-                </Picker>
+              <Picker>
+                {postos.map((l, i) => {
+                  return (
+                    <Picker.Item value={l} label={l.nome} key={i} />
+                  );
+                })}
+              </Picker>
+              
             </Div_input>
           </Card.Content>
           <Div_Button>
             <Button
               onPress={() => Alert.alert(login)}
-              contentStyle={{ height: 60, width: 300}}
+              contentStyle={{ height: 60, width: 300 }}
               color="#007bff"
               title="Login"
               mode="contained"
