@@ -57,7 +57,9 @@ export default (props) => {
                 </Card.Content>
                 <Div_Button>
                     <Button 
-                        onPress={() => Alert.alert(login)} 
+                        onPress={() => {
+                            props.funcao_logar(login,senha);
+                        }} 
                         contentStyle={{ height: 60 , width: 300 }} 
                         color="#007bff" 
                         title='Login' 

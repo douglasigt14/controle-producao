@@ -17,12 +17,18 @@ export default function App() {
     setId_posto(id_postoP);
   };
 
+  const logar = (login,senha) => {
+    console.warn(login);
+    console.warn(senha);
+    setLogado(true);
+  };
+
   if (!id_posto) {
     comp_rederizado = (
       <SelecionarPosto funcao_selecionar={selecionar_posto}></SelecionarPosto>
     );
   } else if (logado == false) {
-    comp_rederizado = <Login id_posto={id_posto}> </Login>;
+    comp_rederizado = <Login funcao_logar={logar} id_posto={id_posto}> </Login>;
   } else {
     comp_rederizado = <Principal id_posto={id_posto}></Principal>;
   }
