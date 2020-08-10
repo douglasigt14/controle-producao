@@ -18,19 +18,49 @@ export default function App() {
   };
 
   const logar = (login,senha) => {
-    console.warn(login);
-    console.warn(senha);
-    setLogado(true);
+    const formDataL = new FormData();
+    
+    formDataL.append("usuario", login);
+    formDataL.append("senha", senha);
+    formDataL.append("posto_id", id_posto);
+
+    const URL_LOGIN = "http://controleproducao.tuboarte.com/login";
+    //--------INSERE OPERACAO---------
+    prom_login = fetch(URL_LOGIN, {
+      method: "post",
+      body: formDataL,
+    })
+      .then(function (resp) {
+        return resp.json();
+      })
+      .then(function (r) {
+        if (r.mensagem.tipo == "sucesso") {
+            setLogado(true);
+        } else if (r.mensagem.tipo == "erro") {
+          setLogado(false);
+        }
+      });
+   
   };
+
+  const deslogar = () => {
+      setLogado(false);
+  }
 
   if (!id_posto) {
     comp_rederizado = (
       <SelecionarPosto funcao_selecionar={selecionar_posto}></SelecionarPosto>
     );
   } else if (logado == false) {
-    comp_rederizado = <Login funcao_logar={logar} id_posto={id_posto}> </Login>;
+    comp_rederizado = (
+      <Login funcao_logar={logar} id_posto={id_posto}>
+        {" "}
+      </Login>
+    );
   } else {
-    comp_rederizado = <Principal id_posto={id_posto}></Principal>;
+    comp_rederizado = (
+      <Principal id_posto={id_posto} funcao_deslogar={deslogar}></Principal>
+    );
   }
 
   return (

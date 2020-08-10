@@ -33,41 +33,53 @@ export default (props) => {
     const [senha, setSenha] = useState('');
 
     return (
-        <Div_Card>
-           < Card>
-                <Card.Content>
-                    <Title>Login  {senha}</Title>
-                    <Div_input>
-                        
-                        <TextInput
-                            style={{ height: 40, borderColor: 'gray', borderWidth: 1, marginVertical: 10}}
-                            onChangeText={text => setLogin(text)}
-                            value={login}
-                            autoCorrect={false}
-                        />
-                        <TextInput
-                            style={{ height: 40, borderColor: 'gray', borderWidth: 1, marginVertical: 10 }}
-                            onChangeText={text => setSenha(text)}
-                            secureTextEntry={true}
-                            visible-password={true}  
-                            value={senha}
-                            autoCorrect={false}
-                        />
-                    </Div_input>
-                </Card.Content>
-                <Div_Button>
-                    <Button 
-                        onPress={() => {
-                            props.funcao_logar(login,senha);
-                        }} 
-                        contentStyle={{ height: 60 , width: 300 }} 
-                        color="#007bff" 
-                        title='Login' 
-                        mode="contained">
-                            Entrar
-                    </Button>
-                </Div_Button>
-            </Card>
-        </Div_Card>
+      <Div_Card>
+        <Card>
+          <Card.Content>
+            <Title>Login {senha}</Title>
+            <Div_input>
+              <TextInput
+                style={{
+                  height: 40,
+                  borderColor: "gray",
+                  borderWidth: 1,
+                  marginVertical: 10,
+                }}
+                onChangeText={(text) => setLogin(text)}
+                value={login}
+                autoCapitalize="none"
+                autoCorrect={false}
+              />
+              <TextInput
+                style={{
+                  height: 40,
+                  borderColor: "gray",
+                  borderWidth: 1,
+                  marginVertical: 10,
+                }}
+                onChangeText={(text) => setSenha(text)}
+                secureTextEntry={true}
+                visible-password={true}
+                value={senha}
+                autoCapitalize="none"
+                autoCorrect={false}
+              />
+            </Div_input>
+          </Card.Content>
+          <Div_Button>
+            <Button
+              onPress={() => {
+                props.funcao_logar(login, senha);
+              }}
+              contentStyle={{ height: 60, width: 300 }}
+              color="#007bff"
+              title="Login"
+              mode="contained"
+            >
+              Entrar
+            </Button>
+          </Div_Button>
+        </Card>
+      </Div_Card>
     );
 };
