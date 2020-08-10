@@ -1,8 +1,7 @@
 import React, { Component, useState } from "react";
 import styled from "styled-components";
-import { Alert, TextInput } from "react-native";
+import { Alert, Picker } from "react-native";
 import { Button, Card, Title } from 'react-native-paper';
-
 
 const Div_Card = styled.View`
     margin-left: 150px;
@@ -15,6 +14,8 @@ const Div_input = styled.View`
     padding-right: 15px;
     margin-top: 45px;
     margin-bottom: 15px;
+    display: flex;
+    justify-content: space-evenly;
 `;
 
 const Div_Button = styled.View`
@@ -29,29 +30,36 @@ const Div_Button = styled.View`
 
 
 export default (props) => {
-    const [login, setLogin] = useState('');
-    const [senha, setSenha] = useState('');
+   const [selectedValue, setSelectedValue] = useState("");
 
     return (
-        <Div_Card>
-            < Card>
-                <Card.Content>
-                    <Title>Selecionar Posto </Title>
-                    <Div_input>
-                        
-                    </Div_input>
-                </Card.Content>
-                <Div_Button>
-                    <Button
-                        onPress={() => Alert.alert(login)}
-                        contentStyle={{ height: 60, width: 300 }}
-                        color="#007bff"
-                        title='Login'
-                        mode="contained">
-                        Entrar
-                    </Button>
-                </Div_Button>
-            </Card>
-        </Div_Card>
+      <Div_Card>
+        <Card>
+          <Card.Content>
+            <Title>Selecionar Posto </Title>
+            <Div_input>
+               <Picker
+                    selectedValue={selectedValue}
+                    style={{ height: 50,width: 3000 }}
+                    onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
+                >
+                    <Picker.Item label="Furadeira 1" value="01" />
+                    <Picker.Item label="Furadeira 2" value="02" />
+                </Picker>
+            </Div_input>
+          </Card.Content>
+          <Div_Button>
+            <Button
+              onPress={() => Alert.alert(login)}
+              contentStyle={{ height: 60, width: 300}}
+              color="#007bff"
+              title="Login"
+              mode="contained"
+            >
+              Entrar
+            </Button>
+          </Div_Button>
+        </Card>
+      </Div_Card>
     );
 };
