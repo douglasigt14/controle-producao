@@ -49,8 +49,10 @@ export default (props) => {
         <Appbar.Header style={Padrao.barra}>
           <Appbar.Content title="Controle de Produção" />
           <Appbar.Action
-            icon="dots-vertical"
-            onPress={() => Alert.alert("Opções")}
+            icon="arrow-right"
+            onPress={() => {
+              props.funcao_deslogar();
+            }}
           />
         </Appbar.Header>
         
