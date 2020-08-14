@@ -18,6 +18,7 @@ export default (props) => {
     const [cor_texto, setCor_texto] = useState('black');
     const [finalizado, setFinalizado] = useState(true);
     
+    
 
     const parar = (rotulo, descricao) =>{
         setCor('red');

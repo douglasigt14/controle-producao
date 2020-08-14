@@ -31,17 +31,27 @@ export default (props) => {
     const [isLoading, setLoading] = useState(true);
     const [data, setData] = useState([]);
     const [id_posto, setId_posto] = useState(props.id_posto);
-    
-            useEffect(() => {
-              fetch(
-                "http://controleproducao.tuboarte.com/paradas-frequencia/" +
-                  id_posto
-              )
-                .then((response) => response.json())
-                .then((json) => setData(json))
-                .catch((error) => console.error(error))
-                .finally(() => setLoading(false));
-            }, [id_posto]);
+    const [dados_posto, setDados_posto] = useState([]);
+
+
+    useEffect(() => {
+        fetch("http://controleproducao.tuboarte.com/postos/" + id_posto)
+            .then((response) => response.json())
+            .then((json) => setDados_posto(json))
+            .catch((error) => console.error(error))
+            .finally(() => setLoading(false));
+        
+
+        fetch(
+            "http://controleproducao.tuboarte.com/paradas-frequencia/" +
+            id_posto
+        )
+            .then((response) => response.json())
+            .then((json) => setData(json))
+            .catch((error) => console.error(error))
+            .finally(() => setLoading(false));
+    }, []);
+
 
     const atualizar_paradas_frequentes = function (id_parada){
       fetch(
