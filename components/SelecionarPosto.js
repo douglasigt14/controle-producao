@@ -30,7 +30,7 @@ const Div_Button = styled.View`
 
 
 export default (props) => {
-   const [selectedValue, setSelectedValue] = useState(""); 
+   const [selectedPosto, setSelectedPosto] = useState(""); 
    const [isLoading, setLoading] = useState(true);
    const [postos, setPostos] = useState([]);
 
@@ -49,9 +49,9 @@ export default (props) => {
             <Title>Selecionar Posto </Title>
             <Div_input>
               <Picker
-                selectedValue={selectedValue}
+                selectedPosto={selectedPosto}
                 onValueChange={(itemValue, itemIndex) =>
-                  setSelectedValue(itemValue)
+                  setSelectedPosto(itemValue)
                 }
               >
                 {postos.map((posto, i) => {
@@ -69,7 +69,7 @@ export default (props) => {
           <Div_Button>
             <Button
               onPress={() => {
-                  props.funcao_selecionar(selectedValue);
+                props.funcao_selecionar(selectedPosto);
               }}
               contentStyle={{ height: 60, width: 300 }}
               color="#007bff"
