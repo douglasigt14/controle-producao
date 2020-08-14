@@ -53,9 +53,7 @@ export default function App() {
     );
   } else if (logado == false) {
     comp_rederizado = (
-      <Login funcao_logar={logar} id_posto={id_posto}>
-        {" "}
-      </Login>
+      <Login id_posto={id_posto} funcao_logar={logar}></Login>
     );
   } else {
     comp_rederizado = (
