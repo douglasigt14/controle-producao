@@ -9,6 +9,7 @@ const Texto = styled.Text`
     font-size: 18px;
   `;
 
+
 const Div = styled.View`
     display: flex;    
     flex-direction: row;
@@ -79,7 +80,9 @@ export default (props) => {
             <Div_Card>
                 <Card>
                     <Card.Content>
-                        
+                        <Div>
+                            <Texto>{dados_posto.nome}</Texto>
+                        </Div>
                         <Div>
                             {isLoading ? <ActivityIndicator /> : (
                                 <FlatList style={Padrao.FlatList} numColumns={3}
