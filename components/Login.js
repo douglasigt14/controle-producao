@@ -1,4 +1,4 @@
-import React, { Component, useState }  from "react";
+import React, { Component, useState, useEffect }  from "react";
 import styled from "styled-components";
 import { Alert ,TextInput  } from "react-native";
 import {Button, Card, Title} from 'react-native-paper';
@@ -31,12 +31,25 @@ const Div_Button = styled.View`
 export default (props) => {
     const [login, setLogin] = useState('');
     const [senha, setSenha] = useState('');
+    const [id_posto, setId_posto] = useState(props.id_posto);
+    const [dados_posto, setDados_posto] = useState([]);
+    const [isLoading, setLoading] = useState(true);
+
+
+  useEffect(() => {
+    fetch("http://controleproducao.tuboarte.com/postos/"+id_posto)
+      .then((response) => response.json())
+      .then((json) => setDados_posto(json))
+      .catch((error) => console.error(error))
+      .finally(() => setLoading(false));
+  }, []);
+
 
     return (
       <Div_Card>
         <Card>
           <Card.Content>
-            <Title>Login</Title>
+            <Title>Login: {dados_posto.nome}</Title>
             <Div_input>
               <TextInput
                 style={{

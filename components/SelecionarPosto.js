@@ -49,7 +49,7 @@ export default (props) => {
             <Title>Selecionar Posto </Title>
             <Div_input>
               <Picker
-                selectedPosto={selectedPosto}
+                selectedValue={selectedPosto}
                 onValueChange={(itemValue, itemIndex) =>
                   setSelectedPosto(itemValue)
                 }
