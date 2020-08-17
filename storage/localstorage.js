@@ -2,10 +2,9 @@ import AsyncStorage from "@react-native-community/async-storage";
 // Chaves do localStorage
 // const maquina = "maquina";
 
-// Funções de remoção
-export const storageRemoveMaquina = () => localStorage.removeItem(maquina);
 
-// Funções de obtenção
+
+// Funções de definição
 export const storageSetMaquina = async (value) => {
   try {
     await AsyncStorage.setItem("maquina", value);
@@ -13,16 +12,28 @@ export const storageSetMaquina = async (value) => {
     // saving error
   }
 };
-// Funções de definição
-export const storageGetMaquina = async () => {
+// Funções de obtenção
+export const storageGetMaquina = async (value) => {
          try {
            const value = await AsyncStorage.getItem("maquina");
            if (value !== null) {
-             // value previously stored
            }
          } catch (e) {
-           // error reading value
          }
-       };
+};
 
-//console.log('Teste');//localStorage.setItem(maquina, vMaquina);
+
+export const consulta_storage = () => {
+  AsyncStorage.getAllKeys((err, keys) => {
+    AsyncStorage.multiGet(keys, (error, stores) => {
+      stores.map((result, i, store) => {
+        console.warn({ [store[i][0]]: store[i][1] });
+        return true;
+      });
+    });
+  });
+}
+
+export const teste = () => {
+    return 'Douglas';
+}

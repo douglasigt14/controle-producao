@@ -2,7 +2,12 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Alert, Picker, FlatList, Text } from "react-native";
 import { Button, Card, Title } from "react-native-paper";
-import { storageGetMaquina, storageSetMaquina } from "../storage/localstorage";
+import {
+  storageGetMaquina,
+  storageSetMaquina,
+  consulta_storage,
+  teste
+} from "../storage/localstorage";
 
 const Div_Card = styled.View`
     margin-left: 150px;
@@ -30,6 +35,7 @@ const Div_Button = styled.View`
 `;
 
 
+
 export default (props) => {
    const [selectedPosto, setSelectedPosto] = useState(""); 
    const [isLoading, setLoading] = useState(true);
@@ -44,6 +50,10 @@ export default (props) => {
        .catch((error) => console.error(error))
        .finally(() => setLoading(false));
    }, []);
+
+   let x = storageGetMaquina();
+
+   console.warn(x);
 
     return (
       <Div_Card>
