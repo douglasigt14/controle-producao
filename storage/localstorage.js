@@ -1,29 +1,28 @@
-import {AsyncStorage, Alert} from "react-native";
+import AsyncStorage from "@react-native-community/async-storage";
 // Chaves do localStorage
-const maquina = "maquina";
+// const maquina = "maquina";
 
 // Funções de remoção
 export const storageRemoveMaquina = () => localStorage.removeItem(maquina);
 
 // Funções de obtenção
+export const storageSetMaquina = async (value) => {
+  try {
+    await AsyncStorage.setItem("maquina", value);
+  } catch (e) {
+    // saving error
+  }
+};
+// Funções de definição
 export const storageGetMaquina = async () => {
          try {
-           const value = await AsyncStorage.getItem(maquina);
+           const value = await AsyncStorage.getItem("maquina");
            if (value !== null) {
-             value = 0;  
+             // value previously stored
            }
-         } catch (error) {
-           // Error retrieving data
+         } catch (e) {
+           // error reading value
          }
        };
-// Funções de definição
-export const storageSetMaquina = async (maquinaV) => {
-         try {
-           await AsyncStorage.setItem(maquina, maquinaV);
-           Alert.alert('Key: '+ maquina +"Value: "+maquinaV);
-         } catch (error) {;
-           // Error saving data
-         }
-};
 
 //console.log('Teste');//localStorage.setItem(maquina, vMaquina);

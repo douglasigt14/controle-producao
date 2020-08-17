@@ -5,10 +5,8 @@ import Padrao from './style/Padrao';
 import Principal from "./components/Principal";
 import Login from "./components/Login";
 import SelecionarPosto from "./components/SelecionarPosto";
-import { storageGetMaquina, storageSetMaquina } from "./storage/localstorage";
 
-export default function App() {
-  
+export default  function App() {
   const [id_posto, setId_posto] = useState(null);
   const [logado, setLogado] = useState(false);
   let comp_rederizado = null;
