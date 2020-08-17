@@ -41,8 +41,6 @@ export default (props) => {
    const [isLoading, setLoading] = useState(true);
    const [postos, setPostos] = useState([]);
 
-   storageSetMaquina('1');
-
    useEffect(() => {
      fetch("http://controleproducao.tuboarte.com/postos")
        .then((response) => response.json())
@@ -51,15 +49,13 @@ export default (props) => {
        .finally(() => setLoading(false));
    }, []);
 
-   let x = storageGetMaquina();
-
-   console.warn(x);
+   
 
     return (
       <Div_Card>
         <Card>
           <Card.Content>
-            <Title>Selecionar Posto </Title>
+            <Title>Selecionar Posto</Title>
             <Div_input>
               <Picker
                 selectedValue={selectedPosto}

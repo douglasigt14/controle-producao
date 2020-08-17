@@ -3,7 +3,7 @@ import { Alert, ActivityIndicator, FlatList, Text, View } from "react-native";
 import styled from "styled-components";
 import { Button, Card } from 'react-native-paper';
 import Padrao from '../style/Padrao';
-// import paradas_frequentes from '../api/paradas_frequentes';
+import { storageGetMaquina, storageSetMaquina } from "../storage/localstorage";
 
 const Texto = styled.Text`
     font-size: 18px;

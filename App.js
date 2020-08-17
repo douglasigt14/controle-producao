@@ -5,6 +5,12 @@ import Padrao from './style/Padrao';
 import Principal from "./components/Principal";
 import Login from "./components/Login";
 import SelecionarPosto from "./components/SelecionarPosto";
+import {
+  storageGetMaquina,
+  storageSetMaquina,
+  consulta_storage,
+  teste,
+} from "./storage/localstorage";
 
 export default  function App() {
   const [id_posto, setId_posto] = useState(null);
@@ -13,6 +19,8 @@ export default  function App() {
 
   const selecionar_posto = (id_postoP) => {
     setId_posto(id_postoP);
+    storageSetMaquina(JSON.stringify(id_postoP));
+    consulta_storage();
   };
 
   const logar = (login,senha) => {

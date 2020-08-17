@@ -7,19 +7,22 @@ import AsyncStorage from "@react-native-community/async-storage";
 // Funções de definição
 export const storageSetMaquina = async (value) => {
   try {
-    await AsyncStorage.setItem("maquina", value);
+    await AsyncStorage.setItem("@maquina", value);
   } catch (e) {
     // saving error
   }
 };
 // Funções de obtenção
-export const storageGetMaquina = async (value) => {
-         try {
-           const value = await AsyncStorage.getItem("maquina");
-           if (value !== null) {
-           }
-         } catch (e) {
-         }
+export const storageGetMaquina = async () => {
+  try {
+    const jsonValue = await AsyncStorage.getItem("@maquina");
+    console.warn(jsonValue);
+    return jsonValue != null ? JSON.parse(jsonValue) : null;
+  } catch (e) {
+    // read error
+  }
+
+  console.log("Done.");
 };
 
 
