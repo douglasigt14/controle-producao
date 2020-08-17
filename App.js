@@ -42,6 +42,9 @@ export default  function App() {
 
 
   const logar = (login,senha) => {
+    console.warn(login);
+    console.warn(senha);
+    if(login, senha) {
     const formDataL = new FormData();
     
     formDataL.append("usuario", login);
@@ -50,7 +53,7 @@ export default  function App() {
 
     const URL_LOGIN = "http://controleproducao.tuboarte.com/login";
     //--------INSERE OPERACAO---------
-    prom_login = fetch(URL_LOGIN, {
+    let prom_login = fetch(URL_LOGIN, {
       method: "post",
       body: formDataL,
     })
@@ -64,6 +67,7 @@ export default  function App() {
           setLogado(false);
         }
       });
+      }
    
   };
 
@@ -89,7 +93,6 @@ export default  function App() {
     <>
       <View style={Padrao.container}>
         {comp_rederizado}
-        <Text style={{ color: "#F00" }}>{id_posto}  </Text>
         <StatusBar style="auto" />
       </View>
     </>
