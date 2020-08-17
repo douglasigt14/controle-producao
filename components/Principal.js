@@ -10,7 +10,7 @@ import { storageGetMaquina,storageSetMaquina } from "../storage/localstorage";
 
 export default (props) => {
 
-
+    
     const [cor, setCor] = useState('#d3d3d3');
     const [status_texto, setStatus_texto] = useState('INICIAR');
     const [descricao, setDescricao] = useState(''); //P - 01 MANUTENÇÃO MECANICA

@@ -1,4 +1,5 @@
 import AsyncStorage from "@react-native-community/async-storage";
+import React, { useState, useEffect } from "react";
 // Chaves do localStorage
 // const maquina = "maquina";
 
@@ -14,16 +15,13 @@ export const storageSetMaquina = async (value) => {
 };
 // Funções de obtenção
 export const storageGetMaquina = async () => {
-  try {
-    const jsonValue = await AsyncStorage.getItem("@maquina");
-    console.warn(jsonValue);
-    return jsonValue != null ? JSON.parse(jsonValue) : null;
-  } catch (e) {
-    // read error
-  }
-
-  console.log("Done.");
-};
+         try {
+           let value = await AsyncStorage.getItem("@maquina");
+           value != null ? setId_posto(value) : setId_posto(null);
+         } catch (e) {
+           // read error
+         }
+       };
 
 
 export const consulta_storage = () => {

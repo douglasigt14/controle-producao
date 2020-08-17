@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
-import React, {useState} from 'react';
-import { View } from "react-native";
+import React, { useState, useEffect } from "react";
+import { View, Text } from "react-native";
 import Padrao from './style/Padrao';
 import Principal from "./components/Principal";
 import Login from "./components/Login";
@@ -11,17 +11,35 @@ import {
   consulta_storage,
   teste,
 } from "./storage/localstorage";
+import AsyncStorage from "@react-native-community/async-storage";
+
 
 export default  function App() {
-  const [id_posto, setId_posto] = useState(null);
-  const [logado, setLogado] = useState(false);
+   const selecionar_posto = (id_postoP) => {
+     setId_posto(id_postoP);
+     storageSetMaquina(JSON.stringify(id_postoP));
+   };
   let comp_rederizado = null;
 
-  const selecionar_posto = (id_postoP) => {
-    setId_posto(id_postoP);
-    storageSetMaquina(JSON.stringify(id_postoP));
-    consulta_storage();
-  };
+  const [id_posto, setId_posto] = useState(null);
+  const [logado, setLogado] = useState(false);
+
+ 
+  
+    useEffect(() => {
+      const buscar_posto_id = async () => {
+        try {
+          let value = await AsyncStorage.getItem("@maquina");
+          value != null ? setId_posto(value) : setId_posto(null);
+        } catch (e) {
+          // read error
+        }
+      };
+      buscar_posto_id();
+    }, []);
+
+    //
+
 
   const logar = (login,senha) => {
     const formDataL = new FormData();
@@ -68,9 +86,12 @@ export default  function App() {
   }
 
   return (
-    <View style={Padrao.container}>
-      {comp_rederizado}
-      <StatusBar style="auto" />
-    </View>
+    <>
+      <View style={Padrao.container}>
+        {comp_rederizado}
+        <Text style={{ color: "#F00" }}>{id_posto}  </Text>
+        <StatusBar style="auto" />
+      </View>
+    </>
   );
 }
