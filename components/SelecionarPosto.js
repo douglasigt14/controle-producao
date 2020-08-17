@@ -3,10 +3,8 @@ import styled from "styled-components";
 import { Alert, Picker, FlatList, Text } from "react-native";
 import { Button, Card, Title } from "react-native-paper";
 import {
-  storageGetMaquina,
-  storageSetMaquina,
-  consulta_storage,
-  teste
+  storageSet,
+  consulta_storage
 } from "../storage/localstorage";
 
 const Div_Card = styled.View`

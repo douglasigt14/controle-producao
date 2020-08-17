@@ -5,19 +5,14 @@ import Padrao from './style/Padrao';
 import Principal from "./components/Principal";
 import Login from "./components/Login";
 import SelecionarPosto from "./components/SelecionarPosto";
-import {
-  storageGetMaquina,
-  storageSetMaquina,
-  consulta_storage,
-  teste,
-} from "./storage/localstorage";
+import { storageSet, consulta_storage } from "./storage/localstorage";
 import AsyncStorage from "@react-native-community/async-storage";
 
 
 export default  function App() {
    const selecionar_posto = (id_postoP) => {
      setId_posto(id_postoP);
-     storageSetMaquina(JSON.stringify(id_postoP));
+     storageSet("@id_posto", JSON.stringify(id_postoP));
    };
   let comp_rederizado = null;
 
@@ -27,15 +22,16 @@ export default  function App() {
  
   
     useEffect(() => {
-      const buscar_posto_id = async () => {
+      const buscar_storage = async (key, set) => {
         try {
-          let value = await AsyncStorage.getItem("@maquina");
-          value != null ? setId_posto(value) : setId_posto(null);
+          let value = await AsyncStorage.getItem(key);
+          value != null ? set(value) : set(null);
         } catch (e) {
           // read error
         }
       };
-      buscar_posto_id();
+      buscar_storage("@id_posto", setId_posto);
+      buscar_storage("@logado", setLogado);
     }, []);
 
     //
@@ -62,8 +58,10 @@ export default  function App() {
       })
       .then(function (r) {
         if (r.mensagem.tipo == "sucesso") {
+            storageSet('@logado','true');
             setLogado(true);
         } else if (r.mensagem.tipo == "erro") {
+          storageSet("@logado", "false");
           setLogado(false);
         }
       });

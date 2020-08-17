@@ -3,23 +3,12 @@ import React, { useState, useEffect } from "react";
 // Chaves do localStorage
 // const maquina = "maquina";
 
-
-
 // Funções de definição
-export const storageSetMaquina = async (value) => {
-  try {
-    await AsyncStorage.setItem("@maquina", value);
-  } catch (e) {
-    // saving error
-  }
-};
-// Funções de obtenção
-export const storageGetMaquina = async () => {
+export const storageSet = async (key, value) => {
          try {
-           let value = await AsyncStorage.getItem("@maquina");
-           value != null ? setId_posto(value) : setId_posto(null);
+           await AsyncStorage.setItem(key, value);
          } catch (e) {
-           // read error
+           // saving error
          }
        };
 
@@ -33,8 +22,4 @@ export const consulta_storage = () => {
       });
     });
   });
-}
-
-export const teste = () => {
-    return 'Douglas';
 }

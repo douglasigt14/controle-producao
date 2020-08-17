@@ -6,7 +6,6 @@ import GrupoButoes from "./GrupoButoes";
 import ParadasFrequentes from "./ParadasFrequentes";
 import { Appbar ,Button } from "react-native-paper";
 import Padrao from '../style/Padrao';
-import { storageGetMaquina,storageSetMaquina } from "../storage/localstorage";
 
 export default (props) => {
 
