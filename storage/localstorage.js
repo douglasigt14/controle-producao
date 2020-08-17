@@ -1,7 +1,5 @@
 import AsyncStorage from "@react-native-community/async-storage";
 import React, { useState, useEffect } from "react";
-// Chaves do localStorage
-// const maquina = "maquina";
 
 // Funções de definição
 export const storageSet = async (key, value) => {
@@ -10,7 +8,7 @@ export const storageSet = async (key, value) => {
          } catch (e) {
            // saving error
          }
-       };
+};
 
 
 export const consulta_storage = () => {

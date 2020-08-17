@@ -17,7 +17,7 @@ export default  function App() {
   let comp_rederizado = null;
 
   const [id_posto, setId_posto] = useState(null);
-  const [logado, setLogado] = useState(false);
+  const [logado, setLogado] = useState("0");
 
  
   
@@ -38,8 +38,6 @@ export default  function App() {
 
 
   const logar = (login,senha) => {
-    console.warn(login);
-    console.warn(senha);
     if(login, senha) {
     const formDataL = new FormData();
     
@@ -58,10 +56,10 @@ export default  function App() {
       })
       .then(function (r) {
         if (r.mensagem.tipo == "sucesso") {
-            storageSet('@logado','true');
+            storageSet('@logado',"1");
             setLogado(true);
         } else if (r.mensagem.tipo == "erro") {
-          storageSet("@logado", "false");
+          storageSet("@logado", "0");
           setLogado(false);
         }
       });
@@ -70,6 +68,7 @@ export default  function App() {
   };
 
   const deslogar = () => {
+      storageSet("@logado", "0");
       setLogado(false);
   }
 
@@ -77,15 +76,18 @@ export default  function App() {
     comp_rederizado = (
       <SelecionarPosto funcao_selecionar={selecionar_posto}></SelecionarPosto>
     );
-  } else if (logado == false) {
-    comp_rederizado = (
-      <Login id_posto={id_posto} funcao_logar={logar}></Login>
-    );
-  } else {
-    comp_rederizado = (
-      <Principal id_posto={id_posto} funcao_deslogar={deslogar}></Principal>
-    );
-  }
+  } else if (logado == "0" || logado == false) {
+           comp_rederizado = (
+             <Login id_posto={id_posto} funcao_logar={logar}></Login>
+           );
+         } else {
+           comp_rederizado = (
+             <Principal
+               id_posto={id_posto}
+               funcao_deslogar={deslogar}
+             ></Principal>
+           );
+         }
 
   return (
     <>
