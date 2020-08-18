@@ -54,7 +54,7 @@ export default (props) => {
             }}
           />
         </Appbar.Header>
-        
+
         <GrupoButoes
           finalizado={finalizado}
           funcao_finalizar={finalizar}
@@ -62,6 +62,8 @@ export default (props) => {
 
         <ParadasFrequentes
           id_posto={props.id_posto}
+          operador_id={props.operador_id}
+          operador_desc={props.operador_desc}
           funcao_parar={parar}
         ></ParadasFrequentes>
 

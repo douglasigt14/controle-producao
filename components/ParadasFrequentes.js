@@ -11,13 +11,13 @@ const Texto = styled.Text`
 
 
 const Div = styled.View`
-    display: flex;    
-    flex-direction: row;
-    padding-left: 15px;
-    padding-right: 15px;
-    padding-top: 10px;
-    padding-bottom: 15px;
-    justify-content: space-evenly;
+  display: flex;
+  flex-direction: row;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 10px;
+  padding-bottom: 15px;
+  justify-content: space-evenly;
 `;
 
 const Div_Card = styled.View`
@@ -76,36 +76,47 @@ export default (props) => {
         
     }; 
     return (
-        <>
-            <Div_Card>
-                <Card>
-                    <Card.Content>
-                        <Div>
-                            <Texto>{dados_posto.nome}</Texto>
-                        </Div>
-                        <Div>
-                            {isLoading ? <ActivityIndicator /> : (
-                                <FlatList style={Padrao.FlatList} numColumns={3}
-                                    data={data}
-                                    keyExtractor={({ id }, index) => id}
-                                    renderItem={({ item }) => (
-                                        <Div>
-                                            <Button contentStyle={{ height: 90, width: 180 }} title='Paradas' color="#ffc107" title='Paradas' mode="contained" disabled={item.habilitado} onPress={() => {
-                                                props.funcao_parar(item.rotulo,item.descricao)
-                                                atualizar_paradas_frequentes(item.id);
-                                            }}>
-                                                <Texto>{item.rotulo} </Texto>
-                                            </Button>
-                                        </Div>
-                                    )}
-                                />
-                            )}
-                            
-                        </Div>
-                    </Card.Content>
-
-                </Card>
-            </Div_Card>
-        </>
+      <>
+        <Div_Card>
+          <Card>
+            <Card.Content>
+              <Div>
+                <Texto>Posto: {dados_posto.nome}</Texto>
+                <Texto>Operador: {props.operador_desc}</Texto>
+              </Div>
+              <Div>
+                {isLoading ? (
+                  <ActivityIndicator />
+                ) : (
+                  <FlatList
+                    style={Padrao.FlatList}
+                    numColumns={3}
+                    data={data}
+                    keyExtractor={({ id }, index) => id}
+                    renderItem={({ item }) => (
+                      <Div>
+                        <Button
+                          contentStyle={{ height: 90, width: 180 }}
+                          title="Paradas"
+                          color="#ffc107"
+                          title="Paradas"
+                          mode="contained"
+                          disabled={item.habilitado}
+                          onPress={() => {
+                            props.funcao_parar(item.rotulo, item.descricao);
+                            atualizar_paradas_frequentes(item.id);
+                          }}
+                        >
+                          <Texto>{item.rotulo} </Texto>
+                        </Button>
+                      </Div>
+                    )}
+                  />
+                )}
+              </Div>
+            </Card.Content>
+          </Card>
+        </Div_Card>
+      </>
     );
 };
