@@ -229,7 +229,11 @@ const ViewModalParadas = styled.View`
                       color="#ffc107"
                       mode="contained"
                       onPress={() => {
-                        props.funcao_parar(item.rotulo, item.descricao);
+                        props.funcao_parar(
+                          item.rotulo,
+                          item.descricao,
+                          item.id
+                        );
                         setModalParadasVisible(!modalParadasVisible);
                       }}
                     >

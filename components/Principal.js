@@ -9,42 +9,42 @@ import Padrao from '../style/Padrao';
 
 export default (props) => {
 
-     const [isLoading, setLoading] = useState(true);
-    const [cor, setCor] = useState('#d3d3d3');
-    const [status_texto, setStatus_texto] = useState('INICIAR');
-    const [descricao, setDescricao] = useState(''); //P - 01 MANUTENÇÃO MECANICA
-    const [cor_texto, setCor_texto] = useState('black');
-    const [finalizado, setFinalizado] = useState(true);
-    const [paradasFrequentes, setParadasFrequentes] = useState([]);
+    let [isLoading, setLoading] = useState(true);
+    let [cor, setCor] = useState("#d3d3d3");
+    let [status_texto, setStatus_texto] = useState("INICIAR");
+    let [descricao, setDescricao] = useState("");
+    let [parada_id, setParada_id] = useState(null); //P - 01 MANUTENÇÃO MECANICA
+    let [cor_texto, setCor_texto] = useState("black");
+    let [finalizado, setFinalizado] = useState(true);
+    let [paradasFrequentes, setParadasFrequentes] = useState([]);
     
-    //  useEffect(() => {
-    //   //  console.warn("Teste");
-    //    let id_parada = 10;
-    //    fetch(
-    //      "http://controleproducao.tuboarte.com/paradas-frequencia/" +
-    //        props.id_posto
-    //    )
-       
-    //      .then((response) => response.json())
-    //      .then((json) => {
-    //        json.forEach((dados) => {
-    //          true
-    //            ? (dados.habilitado = true)
-    //            : (dados.habilitado = false);
-    //        });
-    //        setParadasFrequentes(json);
-    //       //  console.warn(paradasFrequentes);
-    //      })
-    //      .catch((error) => console.error(error))
-    //      .finally(() => setLoading(false));
-    //  }, [finalizado, descricao]);
+     useEffect(() => {
+       fetch(
+         "http://controleproducao.tuboarte.com/paradas-frequencia/" +
+           props.id_posto
+       )
+         .then((response) => response.json())
+         .then((json) => {
+           json.forEach((dados) => {
+              (parada_id == dados.id && !finalizado)
+                ? (dados.habilitado = true)
+                : (dados.habilitado = false);
+           });
+           setParadasFrequentes(json);
+           //  console.warn(paradasFrequentes);
+         })
+         .catch((error) => console.error(error))
+         .finally(() => setLoading(false));
+     }, [finalizado, parada_id]);
 
-    const parar = (rotulo, descricao) =>{
+    const parar = (rotulo, descricao,parada_id) =>{
         setCor('red');
+        setParada_id(parada_id);
         setStatus_texto('PARADO');
         setCor_texto('white');
         setDescricao(rotulo+' '+descricao);
         setFinalizado(false);
+        console.warn(parada_id);
     } 
     
     const operar = (descricao) => {
@@ -84,6 +84,7 @@ export default (props) => {
           operador_id={props.operador_id}
           operador_desc={props.operador_desc}
           funcao_parar={parar}
+          paradasFrequentes={paradasFrequentes}
         ></ParadasFrequentes>
 
         <Bola

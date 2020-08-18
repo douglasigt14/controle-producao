@@ -10,10 +10,10 @@ import AsyncStorage from "@react-native-community/async-storage";
 
 
 export default  function App() {
-    const [id_posto, setId_posto] = useState(null);
-    const [logado, setLogado] = useState("0");
-    const [operador_id, setOperador_id] = useState(null);
-    const [operador_desc, setOperador_desc] = useState(null);
+    let [id_posto, setId_posto] = useState(null);
+    let [logado, setLogado] = useState("0");
+    let [operador_id, setOperador_id] = useState(null);
+    let [operador_desc, setOperador_desc] = useState(null);
 
     useEffect(() => {
       const buscar_storage = async (key, set) => {

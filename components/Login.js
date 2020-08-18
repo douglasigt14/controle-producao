@@ -29,11 +29,11 @@ const Div_Button = styled.View`
 
 
 export default (props) => {
-    const [login, setLogin] = useState('');
-    const [senha, setSenha] = useState('');
-    const [id_posto, setId_posto] = useState(props.id_posto);
-    const [dados_posto, setDados_posto] = useState([]);
-    const [isLoading, setLoading] = useState(true);
+    let [login, setLogin] = useState("");
+    let [senha, setSenha] = useState('');
+    let [id_posto, setId_posto] = useState(props.id_posto);
+    let [dados_posto, setDados_posto] = useState([]);
+    let [isLoading, setLoading] = useState(true);
 
 
   useEffect(() => {

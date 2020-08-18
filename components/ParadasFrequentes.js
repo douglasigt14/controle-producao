@@ -29,11 +29,11 @@ const Div_Card = styled.View`
 `;
 
 export default (props) => {    
-    const [isLoading, setLoading] = useState(true);
-    const [paradasFrequentes, setParadasFrequentes] = useState([]);
-    const [id_posto, setId_posto] = useState(props.id_posto);
-    const [dados_posto, setDados_posto] = useState([]);
+    let [isLoading, setLoading] = useState(true);
+    let [id_posto, setId_posto] = useState(props.id_posto);
+    let [dados_posto, setDados_posto] = useState([]);
     let finalizado = props.finalizado;
+    let paradasFrequentes = props.paradasFrequentes; 
 
     useEffect(() => {
         fetch("http://controleproducao.tuboarte.com/postos/" + id_posto)
@@ -41,37 +41,8 @@ export default (props) => {
             .then((json) => setDados_posto(json))
             .catch((error) => console.error(error))
             .finally(() => setLoading(false));
-        
-
-        fetch(
-          "http://controleproducao.tuboarte.com/paradas-frequencia/" + id_posto
-        )
-          .then((response) => response.json())
-          .then((json) => setParadasFrequentes(json))
-          .catch((error) => console.error(error))
-          .finally(() => setLoading(false));
     }, []);
 
-
-    const atualizar_paradas_frequentes = function (id_parada){
-      fetch(
-        "http://controleproducao.tuboarte.com/paradas-frequencia/" + id_posto
-      )
-        .then((response) => response.json())
-        .then((json) => {
-
-            // json.forEach((dados) => {
-            //   (id_parada == dados.id)
-            //     ? (dados.habilitado = true)
-            //     : (dados.habilitado = false);
-            // });
-             setParadasFrequentes(json);
-        } )
-        .catch((error) => console.error(error))
-        .finally(() => setLoading(false));
-        
-        
-    }; 
     return (
       <>
         <Div_Card>
@@ -184,8 +155,12 @@ export default (props) => {
                           mode="contained"
                           disabled={item.habilitado}
                           onPress={() => {
-                            props.funcao_parar(item.rotulo, item.descricao);
-                            atualizar_paradas_frequentes(item.id);
+                            props.funcao_parar(
+                              item.rotulo,
+                              item.descricao,
+                              item.id
+                            );
+                            // atualizar_paradas_frequentes(item.id);
                           }}
                         >
                           <Texto>{item.rotulo} </Texto>
