@@ -57,10 +57,10 @@ export default  function App() {
       .then(function (r) {
         if (r.mensagem.tipo == "sucesso") {
             storageSet('@logado',"1");
-            setLogado(true);
+            setLogado("1");
         } else if (r.mensagem.tipo == "erro") {
           storageSet("@logado", "0");
-          setLogado(false);
+          setLogado("0");
         }
       });
       }
@@ -69,14 +69,17 @@ export default  function App() {
 
   const deslogar = () => {
       storageSet("@logado", "0");
-      setLogado(false);
+      setLogado("0");
   }
+
+  // consulta_storage();
+  // console.warn(logado);
 
   if (!id_posto) {
     comp_rederizado = (
       <SelecionarPosto funcao_selecionar={selecionar_posto}></SelecionarPosto>
     );
-  } else if (logado == "0" || logado == false) {
+  } else if (logado == "0" || logado == null) {
            comp_rederizado = (
              <Login id_posto={id_posto} funcao_logar={logar}></Login>
            );
