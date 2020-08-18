@@ -163,7 +163,10 @@ export default (props) => {
             }}
           />
         </Appbar.Header>
-
+          <GrupoButoes
+            finalizado={finalizado}
+            funcao_finalizar={finalizar}>
+        </GrupoButoes>
         <ParadasFrequentes
           finalizado={finalizado}
           funcao_finalizar={finalizar}
