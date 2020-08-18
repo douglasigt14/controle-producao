@@ -20,6 +20,7 @@ export default (props) => {
     let [finalizado, setFinalizado] = useState(true);
     let [paradasFrequentes, setParadasFrequentes] = useState([]);
     let [mostrar_alert, setMostrar_alert] = useState(false);
+    let [toch, setToch] = useState('auto');
 
      let operador_id = props.operador_id;
   
@@ -44,7 +45,6 @@ export default (props) => {
                 : (dados.habilitado = false);
            });
            setParadasFrequentes(json);
-           //  console.warn(paradasFrequentes);
          })
          .catch((error) => console.error(error))
          .finally(() => setLoading(false));
@@ -89,6 +89,7 @@ export default (props) => {
       }
 
     const parar = (rotulo, descricao,parada_id) =>{
+      setToch('none');
       let prom_update_parada = update_parada();
        let prom_update_operacao= update_operacao();
 
@@ -106,6 +107,7 @@ export default (props) => {
           method: "post",
           body: formDataI
         }).then(function (response) {
+          setToch('auto');
           setCor('red');
           setParada_id(parada_id);
           setStatus_texto('PARADO');
@@ -114,7 +116,7 @@ export default (props) => {
           setDescricao_alert('PARADA INICIADA COM SUCESSO');
           setFinalizado(false);
           showAlert();
-          setTimeout(function () { hideAlert(); }, 1500);
+          setTimeout(function () { hideAlert(); }, 500); //setToch('auto');
         });
         //--------INSERE PARADA---------
       });
@@ -131,7 +133,7 @@ export default (props) => {
         setDescricao_alert('OPERAÇÃO INICIADA COM SUCESSO');
         setFinalizado(false);
         showAlert();
-        setTimeout(function () { hideAlert(); }, 1500);
+        setTimeout(function () { hideAlert(); }, 500);
     } 
 
     
@@ -153,7 +155,7 @@ export default (props) => {
 
     return (
       <>
-      <View>
+        <View pointerEvents={toch}>
         <Appbar.Header style={Padrao.barra}>
           <Appbar.Content title="Controle de Produção" />
           <Appbar.Action
@@ -186,7 +188,7 @@ export default (props) => {
           funcao_parar={parar}
           id_posto={props.id_posto}
         ></Bola>
-      </View>
+        </View>
 
         <AwesomeAlert
           show={mostrar_alert}

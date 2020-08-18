@@ -38,6 +38,8 @@ export default  function App() {
   let comp_rederizado = null;
 
   const logar = (login,senha) => {
+    console.warn(login);
+    console.warn(senha);
     if(login, senha) {
     const formDataL = new FormData();
     
