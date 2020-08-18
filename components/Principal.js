@@ -106,7 +106,6 @@ export default (props) => {
           method: "post",
           body: formDataI
         }).then(function (response) {
-          showAlert();
           setCor('red');
           setParada_id(parada_id);
           setStatus_texto('PARADO');
@@ -114,6 +113,7 @@ export default (props) => {
           setDescricao(rotulo + ' ' + descricao);
           setDescricao_alert('PARADA INICIADA COM SUCESSO');
           setFinalizado(false);
+          showAlert();
           setTimeout(function () { hideAlert(); }, 1500);
         });
         //--------INSERE PARADA---------
@@ -126,9 +126,12 @@ export default (props) => {
         setCor('green');
         setStatus_texto('OPERANDO');
         setCor_texto('white');
+        setParada_id(null);
         setDescricao(descricao);
         setDescricao_alert('OPERAÇÃO INICIADA COM SUCESSO');
         setFinalizado(false);
+        showAlert();
+        setTimeout(function () { hideAlert(); }, 1500);
     } 
 
     
@@ -141,6 +144,7 @@ export default (props) => {
         setStatus_texto('INICIAR');
         setCor_texto('black');
         setDescricao('');
+        setParada_id(null);
         setFinalizado(true);
         
       });
