@@ -56,7 +56,7 @@ export default (props) => {
               {finalizado == false ? (
                 <Div>
                   <Button contentStyle={{ height: 90 }} color="#6c757d" title='Finalizar' mode="contained" onPress={() => {
-                    props.funcao_finalizar()
+                    props.funcao_finalizar(props.id_posto)
                   }}>
                     <Texto>Finalizar</Texto>
                   </Button>

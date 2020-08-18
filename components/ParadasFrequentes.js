@@ -30,9 +30,10 @@ const Div_Card = styled.View`
 
 export default (props) => {    
     const [isLoading, setLoading] = useState(true);
-    const [data, setData] = useState([]);
+    const [paradasFrequentes, setParadasFrequentes] = useState([]);
     const [id_posto, setId_posto] = useState(props.id_posto);
     const [dados_posto, setDados_posto] = useState([]);
+    const [finalizado, setFinalizado] = useState(true);
 
 
     useEffect(() => {
@@ -44,13 +45,12 @@ export default (props) => {
         
 
         fetch(
-            "http://controleproducao.tuboarte.com/paradas-frequencia/" +
-            id_posto
+          "http://controleproducao.tuboarte.com/paradas-frequencia/" + id_posto
         )
-            .then((response) => response.json())
-            .then((json) => setData(json))
-            .catch((error) => console.error(error))
-            .finally(() => setLoading(false));
+          .then((response) => response.json())
+          .then((json) => setParadasFrequentes(json))
+          .catch((error) => console.error(error))
+          .finally(() => setLoading(false));
     }, []);
 
 
@@ -60,15 +60,15 @@ export default (props) => {
       )
         .then((response) => response.json())
         .then((json) => {
-            setData(json)
+            setParadasFrequentes(json);
 
-            data.forEach((dados) => {
-              id_parada == dados.id
+            paradasFrequentes.forEach((dados) => {
+              (id_parada == dados.id && !finalizado)
                 ? (dados.habilitado = true)
                 : (dados.habilitado = false);
             });
 
-             setData(data);
+             setParadasFrequentes(paradasFrequentes);
         } )
         .catch((error) => console.error(error))
         .finally(() => setLoading(false));
@@ -91,7 +91,7 @@ export default (props) => {
                   <FlatList
                     style={Padrao.FlatList}
                     numColumns={3}
-                    data={data}
+                    data={paradasFrequentes}
                     keyExtractor={({ id }, index) => id}
                     renderItem={({ item }) => (
                       <Div>
