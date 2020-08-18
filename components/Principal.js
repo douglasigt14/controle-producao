@@ -13,10 +13,12 @@ export default (props) => {
     let [cor, setCor] = useState("#d3d3d3");
     let [status_texto, setStatus_texto] = useState("INICIAR");
     let [descricao, setDescricao] = useState("");
-    let [parada_id, setParada_id] = useState(null); //P - 01 MANUTENÇÃO MECANICA
+    let [parada_id, setParada_id] = useState(null); 
     let [cor_texto, setCor_texto] = useState("black");
     let [finalizado, setFinalizado] = useState(true);
     let [paradasFrequentes, setParadasFrequentes] = useState([]);
+
+     let operador_id = props.operador_id;
     
      useEffect(() => {
        fetch(
@@ -37,14 +39,73 @@ export default (props) => {
          .finally(() => setLoading(false));
      }, [finalizado, parada_id]);
 
+     const update_parada = () => {
+        let URL_PARADA = "http://controleproducao.tuboarte.com/paradas-diarias";
+        //--------UPDATE PARADA---------
+
+        let formDataU = new FormData();
+       formDataU.append("operador_id", operador_id);
+        formDataU.append("_method", "put");
+
+        let prom_update = fetch(URL_PARADA, {
+          method: 'POST',
+          body: formDataU
+        }).then(function (response) {
+
+        });
+
+        return prom_update;
+      }
+
+      const update_operacao = () => {
+        let URL_OPERACAO = "http://controleproducao.tuboarte.com/operacoes-diarias";
+        //--------UPDATE PARADA---------
+
+        let formDataU = new FormData();
+        formDataU.append("operador_id", operador_id);
+        formDataU.append("_method", "put");
+
+        let prom_update = fetch(URL_OPERACAO, {
+          method: 'POST',
+          body: formDataU
+        }).then(function (response) {
+
+        });
+
+        return prom_update;
+
+      }
+
     const parar = (rotulo, descricao,parada_id) =>{
-        setCor('red');
-        setParada_id(parada_id);
-        setStatus_texto('PARADO');
-        setCor_texto('white');
-        setDescricao(rotulo+' '+descricao);
-        setFinalizado(false);
-        console.warn(parada_id);
+      let prom_update_parada = update_parada();
+       let prom_update_operacao= update_operacao();
+
+
+      Promise.all([prom_update_parada, prom_update_operacao]).then(valores => {
+        let URL_PARADA = "http://controleproducao.tuboarte.com/paradas-diarias";
+        const formDataI = new FormData();
+        formDataI.append("operador_id", operador_id);
+        formDataI.append("cod_id", parada_id);
+        formDataI.append("posto_id", props.id_posto);
+        formDataI.append("tempo_decisao", "0");
+
+        //--------INSERE PARADA---------
+        fetch(URL_PARADA, {
+          method: "post",
+          body: formDataI
+        }).then(function (response) {
+          setCor('red');
+          setParada_id(parada_id);
+          setStatus_texto('PARADO');
+          setCor_texto('white');
+          setDescricao(rotulo + ' ' + descricao);
+          setFinalizado(false);
+
+        });
+        //--------INSERE PARADA---------
+      });
+      
+      
     } 
     
     const operar = (descricao) => {
@@ -57,11 +118,17 @@ export default (props) => {
 
     
     const finalizar = () => {
+      let prom_update_parada = update_parada();
+      let prom_update_operacao = update_operacao();
+      
+      Promise.all([prom_update_parada, prom_update_operacao]).then(valores => {
         setCor('#d3d3d3');
         setStatus_texto('INICIAR');
         setCor_texto('black');
         setDescricao('');
         setFinalizado(true);
+        
+      });
     }
     
 
