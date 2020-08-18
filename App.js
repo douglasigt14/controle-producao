@@ -76,7 +76,6 @@ export default  function App() {
           storageSet("@operador_desc", "");
           setOperador_desc("");
         }
-        consulta_storage();
       });
       }
    
@@ -91,8 +90,6 @@ export default  function App() {
 
       storageSet("@operador_desc", "");
       setOperador_desc("");
-
-       consulta_storage();
   }
 
   

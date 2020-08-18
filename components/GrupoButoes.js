@@ -25,7 +25,7 @@ const Div_Card = styled.View`
 
 export default (props) => {
   const [msg, setMsg] = useState('Douglas');
-  let finalizado = props.finalizado;
+   let finalizado = props.finalizado;
   return (
     <>
     

@@ -33,8 +33,7 @@ export default (props) => {
     const [paradasFrequentes, setParadasFrequentes] = useState([]);
     const [id_posto, setId_posto] = useState(props.id_posto);
     const [dados_posto, setDados_posto] = useState([]);
-    const [finalizado, setFinalizado] = useState(true);
-
+    let finalizado = props.finalizado;
 
     useEffect(() => {
         fetch("http://controleproducao.tuboarte.com/postos/" + id_posto)
@@ -60,15 +59,13 @@ export default (props) => {
       )
         .then((response) => response.json())
         .then((json) => {
-            setParadasFrequentes(json);
 
-            paradasFrequentes.forEach((dados) => {
-              (id_parada == dados.id && !finalizado)
-                ? (dados.habilitado = true)
-                : (dados.habilitado = false);
-            });
-
-             setParadasFrequentes(paradasFrequentes);
+            // json.forEach((dados) => {
+            //   (id_parada == dados.id)
+            //     ? (dados.habilitado = true)
+            //     : (dados.habilitado = false);
+            // });
+             setParadasFrequentes(json);
         } )
         .catch((error) => console.error(error))
         .finally(() => setLoading(false));
@@ -77,6 +74,90 @@ export default (props) => {
     }; 
     return (
       <>
+        <Div_Card>
+          <Card>
+            <Card.Content>
+              <Div>
+                <Div>
+                  <Button
+                    contentStyle={{ height: 90 }}
+                    title="Paradas"
+                    color="#dc3545"
+                    title="Paradas"
+                    mode="contained"
+                    onPress={() => Alert.alert("Paradas")}
+                  >
+                    <Texto>Paradas</Texto>
+                  </Button>
+                </Div>
+                <Div>
+                  <Button
+                    contentStyle={{ height: 90 }}
+                    color="#28a745"
+                    title="Operações"
+                    mode="contained"
+                    onPress={() => console.log("Pressed")}
+                  >
+                    <Texto>Operações </Texto>
+                  </Button>
+                </Div>
+                <Div>
+                  <Button
+                    contentStyle={{ height: 90 }}
+                    color="#007bff"
+                    title="C. Diarios"
+                    mode="contained"
+                    onPress={() => console.log("Pressed")}
+                  >
+                    <Texto>C. Diarios </Texto>
+                  </Button>
+                </Div>
+                <Div>
+                  <Button
+                    contentStyle={{ height: 90 }}
+                    color="#ffc107"
+                    title="T. de Paradas"
+                    mode="contained"
+                    onPress={() => console.log("Pressed")}
+                  >
+                    <Texto>T. de Paradas</Texto>
+                  </Button>
+                </Div>
+                {finalizado == false ? (
+                  <Div>
+                    <Button
+                      contentStyle={{ height: 90 }}
+                      color="#6c757d"
+                      title="Finalizar"
+                      mode="contained"
+                      onPress={() => {
+                        props.funcao_finalizar(props.id_posto);
+                      }}
+                    >
+                      <Texto>Finalizar</Texto>
+                    </Button>
+                  </Div>
+                ) : (
+                  <Div>
+                    <Button
+                      contentStyle={{ height: 90 }}
+                      color="#6c757d"
+                      title="Finalizar"
+                      mode="contained"
+                      disabled="true"
+                      onPress={() => console.log("Pressed")}
+                    >
+                      <Texto>Finalizar</Texto>
+                    </Button>
+                  </Div>
+                )}
+              </Div>
+            </Card.Content>
+          </Card>
+        </Div_Card>
+
+
+
         <Div_Card>
           <Card>
             <Card.Content>
