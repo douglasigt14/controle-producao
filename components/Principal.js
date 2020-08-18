@@ -6,6 +6,7 @@ import GrupoButoes from "./GrupoButoes";
 import ParadasFrequentes from "./ParadasFrequentes";
 import { Appbar ,Button } from "react-native-paper";
 import Padrao from '../style/Padrao';
+import AwesomeAlert from 'react-native-awesome-alerts';
 
 export default (props) => {
 
@@ -13,13 +14,23 @@ export default (props) => {
     let [cor, setCor] = useState("#d3d3d3");
     let [status_texto, setStatus_texto] = useState("INICIAR");
     let [descricao, setDescricao] = useState("");
+    let [descricao_alert, setDescricao_alert] = useState("");
     let [parada_id, setParada_id] = useState(null); 
     let [cor_texto, setCor_texto] = useState("black");
     let [finalizado, setFinalizado] = useState(true);
     let [paradasFrequentes, setParadasFrequentes] = useState([]);
+    let [mostrar_alert, setMostrar_alert] = useState(false);
 
      let operador_id = props.operador_id;
-    
+  
+  const showAlert = () => {
+    setMostrar_alert(true);
+    };
+
+  const hideAlert = () => {
+    setMostrar_alert(false);
+  };
+
      useEffect(() => {
        fetch(
          "http://controleproducao.tuboarte.com/paradas-frequencia/" +
@@ -38,6 +49,7 @@ export default (props) => {
          .catch((error) => console.error(error))
          .finally(() => setLoading(false));
      }, [finalizado, parada_id]);
+     
 
      const update_parada = () => {
         let URL_PARADA = "http://controleproducao.tuboarte.com/paradas-diarias";
@@ -94,13 +106,15 @@ export default (props) => {
           method: "post",
           body: formDataI
         }).then(function (response) {
+          showAlert();
           setCor('red');
           setParada_id(parada_id);
           setStatus_texto('PARADO');
           setCor_texto('white');
           setDescricao(rotulo + ' ' + descricao);
+          setDescricao_alert('PARADA INICIADA COM SUCESSO');
           setFinalizado(false);
-
+          setTimeout(function () { hideAlert(); }, 1500);
         });
         //--------INSERE PARADA---------
       });
@@ -113,6 +127,7 @@ export default (props) => {
         setStatus_texto('OPERANDO');
         setCor_texto('white');
         setDescricao(descricao);
+        setDescricao_alert('OPERAÇÃO INICIADA COM SUCESSO');
         setFinalizado(false);
     } 
 
@@ -133,6 +148,7 @@ export default (props) => {
     
 
     return (
+      <>
       <View>
         <Appbar.Header style={Padrao.barra}>
           <Appbar.Content title="Controle de Produção" />
@@ -164,5 +180,19 @@ export default (props) => {
           id_posto={props.id_posto}
         ></Bola>
       </View>
+
+        <AwesomeAlert
+          show={mostrar_alert}
+          showProgress={false}
+          title={descricao_alert}
+          message={descricao}
+          closeOnTouchOutside={true}
+          closeOnHardwareBackPress={true}
+          cancelText="No, cancel"
+          contentStyle={{ width: 400, height: 200}}
+          titleStyle={{fontSize: 25,textAlign: 'center'}}
+          messageStyle={{ fontSize: 15 }}
+        />
+      </>
     );
 };
