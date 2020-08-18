@@ -10,17 +10,11 @@ import AsyncStorage from "@react-native-community/async-storage";
 
 
 export default  function App() {
-   const selecionar_posto = (id_postoP) => {
-     setId_posto(id_postoP);
-     storageSet("@id_posto", JSON.stringify(id_postoP));
-   };
-  let comp_rederizado = null;
+    const [id_posto, setId_posto] = useState(null);
+    const [logado, setLogado] = useState("0");
+    const [operador_id, setOperador_id] = useState(null);
+    const [operador_desc, setOperador_desc] = useState(null);
 
-  const [id_posto, setId_posto] = useState(null);
-  const [logado, setLogado] = useState("0");
-
- 
-  
     useEffect(() => {
       const buscar_storage = async (key, set) => {
         try {
@@ -34,8 +28,12 @@ export default  function App() {
       buscar_storage("@logado", setLogado);
     }, []);
 
-    //
+  const selecionar_posto = (id_postoP) => {
+    setId_posto(id_postoP);
+    storageSet("@id_posto", JSON.stringify(id_postoP));
+  };
 
+  let comp_rederizado = null;
 
   const logar = (login,senha) => {
     if(login, senha) {
@@ -56,12 +54,27 @@ export default  function App() {
       })
       .then(function (r) {
         if (r.mensagem.tipo == "sucesso") {
+            
             storageSet('@logado',"1");
             setLogado("1");
+
+            storageSet("@operador_id", JSON.stringify(r.user_id));
+            setOperador_id(r.user_id);
+
+            storageSet("@operador_desc", r.rotulo);
+            setOperador_desc(r.rotulo);
+
         } else if (r.mensagem.tipo == "erro") {
           storageSet("@logado", "0");
           setLogado("0");
+
+          storageSet("@operador_id", "");
+          setOperador_id("");
+
+          storageSet("@operador_desc", "");
+          setOperador_desc("");
         }
+        consulta_storage();
       });
       }
    
@@ -70,9 +83,17 @@ export default  function App() {
   const deslogar = () => {
       storageSet("@logado", "0");
       setLogado("0");
+
+      storageSet("@operador_id", "");
+      setOperador_id("");
+
+      storageSet("@operador_desc", "");
+      setOperador_desc("");
+
+       consulta_storage();
   }
 
-  // consulta_storage();
+  
   // console.warn(logado);
 
   if (!id_posto) {
@@ -80,17 +101,19 @@ export default  function App() {
       <SelecionarPosto funcao_selecionar={selecionar_posto}></SelecionarPosto>
     );
   } else if (logado == "0" || logado == null) {
-           comp_rederizado = (
-             <Login id_posto={id_posto} funcao_logar={logar}></Login>
-           );
-         } else {
-           comp_rederizado = (
-             <Principal
-               id_posto={id_posto}
-               funcao_deslogar={deslogar}
-             ></Principal>
-           );
-         }
+    comp_rederizado = (
+      <Login id_posto={id_posto} funcao_logar={logar}></Login>
+    );
+  } else {
+    comp_rederizado = (
+      <Principal
+        id_posto={id_posto}
+        operador_id={operador_id}
+        operador_desc={operador_desc}
+        funcao_deslogar={deslogar}
+      ></Principal>
+    );
+  }
 
   return (
     <>
