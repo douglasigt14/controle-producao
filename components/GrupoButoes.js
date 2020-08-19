@@ -65,6 +65,7 @@ export default (props) => {
       .then((response) => response.json())
       .then((json) => {
           setParadasDiarias(json)
+          console.warn(operador_id);
       })
       .catch((error) => console.error(error))
       .finally(() => setLoading(false));
