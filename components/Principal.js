@@ -89,7 +89,7 @@ export default (props) => {
       }
 
     const parar = (rotulo, descricao,parada_id) =>{
-      setToch('none');
+       setToch('none');
       let prom_update_parada = update_parada();
        let prom_update_operacao= update_operacao();
 
@@ -125,15 +125,35 @@ export default (props) => {
     } 
     
     const operar = (descricao) => {
-        setCor('green');
-        setStatus_texto('OPERANDO');
-        setCor_texto('white');
-        setParada_id(null);
-        setDescricao(descricao);
-        setDescricao_alert('OPERAÇÃO INICIADA COM SUCESSO');
-        setFinalizado(false);
-        showAlert();
-        setTimeout(function () { hideAlert(); }, 500);
+      let prom_update_parada = update_parada();
+      let prom_update_operacao = update_operacao();
+
+      Promise.all([prom_update_parada, prom_update_operacao]).then(valores => {
+
+                const URL_OPERACAO = "http://controleproducao.tuboarte.com/operacoes-diarias";
+                const formDataI = new FormData();
+                formDataI.append("operador_id", operador_id);
+                formDataI.append("cod_item", "123-ITEM DE TESTE | QTDE: ( 100 ) | 0001");
+                formDataI.append("posto_id", props.id_posto);
+                formDataI.append("tempo_decisao", "0");
+
+                //--------INSERE PARADA---------
+                fetch(URL_OPERACAO, {
+                  method: "post",
+                  body: formDataI
+                }).then(function (response) {
+
+                setCor('green');
+                setStatus_texto('OPERANDO');
+                setCor_texto('white');
+                setParada_id(null);
+                setDescricao(descricao);
+                setDescricao_alert('OPERAÇÃO INICIADA COM SUCESSO');
+                setFinalizado(false);
+                showAlert();
+                setTimeout(function () { hideAlert(); }, 500);
+        });
+      });
     } 
 
     
