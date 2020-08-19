@@ -1,5 +1,5 @@
 import React, { useState, useEffect} from "react";
-import { Alert, View, Text, StyleSheet, Modal } from "react-native";
+import { Alert, View, Text, StyleSheet, Modal, FlatList, ScrollView } from "react-native";
 import styled from "styled-components";
 import { Button, Card } from 'react-native-paper';
 import Padrao from "../style/Padrao";
@@ -25,8 +25,7 @@ const Div_Card = styled.View`
 `;
 
 const ViewModalParadas = styled.View`
-      width: 450px;
-      height: 380px;
+      max-height: 380px;
       display: flex;
   `;
 
@@ -40,7 +39,7 @@ const TextoModal = styled.Text`
 
 export default (props) => {
   const [msg, setMsg] = useState('Douglas');
-  const [modalVisible, setModalVisible] = useState(false);
+  const [modalVisibleParadas, setModalVisibleParadas] = useState(false);
   let [isLoading, setLoading] = useState(true);
   let [paradaDiarias, setParadasDiarias] = useState([]);
   let operador_id = props.operador_id;
@@ -53,7 +52,7 @@ export default (props) => {
       })
       .catch((error) => console.error(error))
       .finally(() => setLoading(false));
-  }, []);
+  }, [finalizado]);
 
    let finalizado = props.finalizado;
   return (
@@ -66,7 +65,7 @@ export default (props) => {
               <Div>
                 <Button contentStyle={{ height: 90 }} title='Paradas' color="#dc3545" title='Paradas' mode="contained" 
                 onPress={() => {
-                  setModalVisible(true);
+                  setModalVisibleParadas(true);
                 }}>
                   <Texto>Paradas</Texto>
                 </Button>
@@ -112,18 +111,33 @@ export default (props) => {
       <Modal
         animationType="fade"
         transparent={true}
-        visible={modalVisible}
+        visible={modalVisibleParadas}
         onRequestClose={() => {
-          setModalVisible(false);
+          setModalVisibleParadas(false);
         }}
         hardwareAccelerated={true}
       >
-        <View style={Padrao.centeredView}>
+        <View style={Padrao.topView}>
+              
           <ViewModalParadas style={Padrao.modalView}>
+
+            <Text style={{fontSize: 30,textAlign: "center",margin: 15}}>Paradas Diarias</Text>
+            <ScrollView>
+            <FlatList
+              numColumns={3}
+              data={paradaDiarias}
+              keyExtractor={({ id }, index) => id}
+              renderItem={({ item }) => (
+                <Div>
+                  <Text style={{ color: '#F00' }}>{item.rotulo}: {item.inicio} à {item.fim}   </Text>
+                </Div>
+              )}
+            />
+              </ScrollView>
             <TouchModal
               style={{ ...Padrao.openButton, backgroundColor: "gray" }}
               onPress={() => {
-                setModalVisible(!modalVisible);
+                setModalVisibleParadas(!modalVisibleParadas);
               }}
             >
               <TextoModal style={Padrao.textStyle}>Fechar</TextoModal>

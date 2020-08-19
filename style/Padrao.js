@@ -28,6 +28,12 @@ export default StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
+  topView: {
+    flex: 1,
+    justifyContent: "flex-start",
+    alignItems: "center",
+    marginTop: 190
+  },
   modalView: {
     backgroundColor: "white",
     borderRadius: 10,
