@@ -33,6 +33,14 @@ const TouchModal = styled.TouchableHighlight`
     margin-top: 10px;
   `;
 
+   const Div_Fechar = styled.View`
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: flex-end;
+    margin-top: 0px;
+  `;
+
 const TextoModal = styled.Text`
     font-size: 25px;
   `;
@@ -120,8 +128,18 @@ export default (props) => {
         <View style={Padrao.topView}>
               
           <ViewModalParadas style={Padrao.modalView}>
+            <Div_Fechar>
 
-            <Text style={{fontSize: 30,textAlign: "center",margin: 15}}>Paradas Diarias</Text>
+              <Text style={{ fontSize: 30, marginTop: 15, marginBottom: 15, marginRight: 400 }}>Paradas Diarias</Text>
+              <TouchModal
+                style={{ ...Padrao.closeButton }}
+                onPress={() => {
+                  setModalVisibleParadas(!modalVisibleParadas);
+                }}
+              >
+                <TextoModal style={Padrao.textStyle}>X</TextoModal>
+              </TouchModal>
+            </Div_Fechar>
             <ScrollView>
             <FlatList
               numColumns={3}
@@ -129,19 +147,11 @@ export default (props) => {
               keyExtractor={({ id }, index) => id}
               renderItem={({ item }) => (
                 <Div>
-                  <Text style={{ color: '#F00' }}>{item.rotulo}: {item.inicio} à {item.fim}   </Text>
+                  <Text style={{ color: '#F00',marginRight: 30 }}>{item.rotulo}: {item.inicio} à {item.fim}   </Text>
                 </Div>
               )}
             />
               </ScrollView>
-            <TouchModal
-              style={{ ...Padrao.openButton, backgroundColor: "gray" }}
-              onPress={() => {
-                setModalVisibleParadas(!modalVisibleParadas);
-              }}
-            >
-              <TextoModal style={Padrao.textStyle}>Fechar</TextoModal>
-            </TouchModal>
           </ViewModalParadas>
         </View>
       </Modal>

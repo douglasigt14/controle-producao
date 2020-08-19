@@ -56,7 +56,7 @@ export default StyleSheet.create({
     elevation: 2,
   },
   closeButton: {
-    backgroundColor: "red",
+    backgroundColor: "black",
     borderRadius: 50,
     height: 60,
     width: 60,
