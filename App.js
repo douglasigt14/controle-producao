@@ -7,13 +7,24 @@ import Login from "./components/Login";
 import SelecionarPosto from "./components/SelecionarPosto";
 import { storageSet, consulta_storage } from "./storage/localstorage";
 import AsyncStorage from "@react-native-community/async-storage";
-
+import AwesomeAlert from 'react-native-awesome-alerts';
 
 export default  function App() {
     let [id_posto, setId_posto] = useState(null);
     let [logado, setLogado] = useState("0");
     let [operador_id, setOperador_id] = useState(null);
     let [operador_desc, setOperador_desc] = useState(null);
+    let [mostrar_alert, setMostrar_alert] = useState(false);
+    let [descricao_alert_tit, setDescricao_alert_tit] = useState("");
+    let [descricao_alert_sub, setDescricao_alert_sub] = useState("");
+
+    const showAlert = () => {
+      setMostrar_alert(true);
+    };
+
+    const hideAlert = () => {
+      setMostrar_alert(false);
+    };
 
     useEffect(() => {
       const buscar_storage = async (key, set) => {
@@ -38,47 +49,54 @@ export default  function App() {
   let comp_rederizado = null;
 
   const logar = (login,senha) => {
-    console.warn(login);
-    console.warn(senha);
     if(login, senha) {
-    const formDataL = new FormData();
-    
-    formDataL.append("usuario", login);
-    formDataL.append("senha", senha);
-    formDataL.append("posto_id", id_posto);
+      const formDataL = new FormData();
+      
+      formDataL.append("usuario", login);
+      formDataL.append("senha", senha);
+      formDataL.append("posto_id", id_posto);
 
-    const URL_LOGIN = "http://controleproducao.tuboarte.com/login";
-    //--------INSERE OPERACAO---------
-    let prom_login = fetch(URL_LOGIN, {
-      method: "post",
-      body: formDataL,
-    })
-      .then(function (resp) {
-        return resp.json();
+      const URL_LOGIN = "http://controleproducao.tuboarte.com/login";
+      //--------INSERE OPERACAO---------
+      let prom_login = fetch(URL_LOGIN, {
+        method: "post",
+        body: formDataL,
       })
-      .then(function (r) {
-        if (r.mensagem.tipo == "sucesso") {
-            
-            storageSet('@logado',"1");
-            setLogado("1");
+        .then(function (resp) {
+          return resp.json();
+        })
+        .then(function (r) {
+          if (r.mensagem.tipo == "sucesso") {
+              
+              storageSet('@logado',"1");
+              setLogado("1");
 
-            storageSet("@operador_id", JSON.stringify(r.user_id));
-            setOperador_id(r.user_id);
+              storageSet("@operador_id", JSON.stringify(r.user_id));
+              setOperador_id(r.user_id);
 
-            storageSet("@operador_desc", r.rotulo);
-            setOperador_desc(r.rotulo);
+              storageSet("@operador_desc", r.rotulo);
+              setOperador_desc(r.rotulo);
 
-        } else if (r.mensagem.tipo == "erro") {
-          storageSet("@logado", "0");
-          setLogado("0");
+              setDescricao_alert_tit('Login feito com sucesso');
+            setDescricao_alert_sub('Iniciando aplicação');
 
-          storageSet("@operador_id", "");
-          setOperador_id("");
+          } else if (r.mensagem.tipo == "erro") {
+            storageSet("@logado", "0");
+            setLogado("0");
 
-          storageSet("@operador_desc", "");
-          setOperador_desc("");
-        }
-      });
+            storageSet("@operador_id", "");
+            setOperador_id("");
+
+            storageSet("@operador_desc", "");
+            setOperador_desc("");
+
+            setDescricao_alert_tit('(!) Login Incorreto');
+            setDescricao_alert_sub('Digite Novamente');
+          }
+
+          showAlert();
+          setTimeout(function () { hideAlert(); }, 500);
+        });
       }
    
   };
@@ -122,6 +140,19 @@ export default  function App() {
         {comp_rederizado}
         <StatusBar style="auto" />
       </View>
+
+      <AwesomeAlert
+        show={mostrar_alert}
+        showProgress={false}
+        title={descricao_alert_tit}
+        message={descricao_alert_sub}
+        closeOnTouchOutside={true}
+        closeOnHardwareBackPress={true}
+        cancelText="No, cancel"
+        contentStyle={{ width: 400, height: 200 }}
+        titleStyle={{ fontSize: 25, textAlign: 'center' }}
+        messageStyle={{ fontSize: 15 }}
+      />
     </>
   );
 }

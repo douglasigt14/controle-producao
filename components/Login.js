@@ -4,6 +4,7 @@ import { Alert ,TextInput  } from "react-native";
 import {Button, Card, Title} from 'react-native-paper';
 
 
+
 const Div_Card = styled.View`
     margin-left: 150px;
     margin-right: 150px;
@@ -34,7 +35,7 @@ export default (props) => {
     let [id_posto, setId_posto] = useState(props.id_posto);
     let [dados_posto, setDados_posto] = useState([]);
     let [isLoading, setLoading] = useState(true);
-
+    
 
   useEffect(() => {
     fetch("http://controleproducao.tuboarte.com/postos/"+id_posto)
@@ -46,6 +47,7 @@ export default (props) => {
 
 
     return (
+      <>
       <Div_Card>
         <Card>
           <Card.Content>
@@ -94,5 +96,8 @@ export default (props) => {
           </Div_Button>
         </Card>
       </Div_Card>
+       
+
+      </>
     );
 };
