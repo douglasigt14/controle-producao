@@ -29,6 +29,11 @@ const ViewModalParadas = styled.View`
       display: flex;
   `;
 
+const ViewModalOperacoes = styled.View`
+      max-height: 280px;
+      display: flex;
+  `;
+
 const TouchModal = styled.TouchableHighlight`
     margin-top: 10px;
   `;
@@ -47,6 +52,7 @@ const TextoModal = styled.Text`
 
 export default (props) => {
   let [modalVisibleParadas, setModalVisibleParadas] = useState(false);
+  let [modalVisibleOperacoes, setModalVisibleOperacoes] = useState(false);
   let [isLoading, setLoading] = useState(true);
   let [paradasDiarias, setParadasDiarias] = useState([]);
   let [operacoesDiarias, setOperacoesDiarias] = useState([]);
@@ -87,7 +93,10 @@ export default (props) => {
                 </Button>
               </Div>
               <Div>
-                <Button contentStyle={{ height: 90 }} color="#28a745" title='Operações' mode="contained" onPress={() => console.log('Pressed')}>
+                <Button contentStyle={{ height: 90 }} color="#28a745" title='Operações' mode="contained" 
+                onPress={() => {
+                  setModalVisibleOperacoes(true);
+                }}>
                   <Texto>Operações </Texto>
                 </Button>
               </Div>
@@ -123,7 +132,7 @@ export default (props) => {
       </Div_Card>
 
 
-
+      {/* Modal Paradas */}
       <Modal
         animationType="fade"
         transparent={true}
@@ -161,6 +170,51 @@ export default (props) => {
             />
               </ScrollView>
           </ViewModalParadas>
+        </View>
+      </Modal>
+
+
+
+
+
+      {/* Modal Operações */}
+      <Modal
+        animationType="fade"
+        transparent={true}
+        visible={modalVisibleOperacoes}
+        onRequestClose={() => {
+          setModalVisibleOperacoes(false);
+        }}
+        hardwareAccelerated={true}
+      >
+        <View style={Padrao.topView}>
+
+          <ViewModalOperacoes style={Padrao.modalView}>
+            <Div_Fechar>
+
+              <Text style={{ fontSize: 30, marginTop: 15, marginBottom: 15, marginRight: 400 }}>Operações Diarias</Text>
+              <TouchModal
+                style={{ ...Padrao.closeButton }}
+                onPress={() => {
+                  setModalVisibleOperacoes(!modalVisibleOperacoes);
+                }}
+              >
+                <TextoModal style={Padrao.textStyle}>X</TextoModal>
+              </TouchModal>
+            </Div_Fechar>
+            <ScrollView>
+              <FlatList
+                numColumns={3}
+                data={operacoesDiarias}
+                keyExtractor={({ id }, index) => id}
+                renderItem={({ item }) => (
+                  <Div>
+                    <Text style={{ color: 'green', marginRight: 30 }}>{item.cod_item} - {item.inicio} à {item.fim}   </Text>
+                  </Div>
+                )}
+              />
+            </ScrollView>
+          </ViewModalOperacoes>
         </View>
       </Modal>
     </>
