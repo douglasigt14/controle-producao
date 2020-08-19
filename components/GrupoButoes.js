@@ -58,7 +58,6 @@ export default (props) => {
   let [paradasDiarias, setParadasDiarias] = useState([]);
   let [operacoesDiarias, setOperacoesDiarias] = useState([]);
   let operador_id = props.operador_id;
-
   let finalizado = props.finalizado;
 
   useEffect(() => {

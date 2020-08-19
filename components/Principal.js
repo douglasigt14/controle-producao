@@ -7,11 +7,13 @@ import ParadasFrequentes from "./ParadasFrequentes";
 import { Appbar ,Button } from "react-native-paper";
 import Padrao from '../style/Padrao';
 import AwesomeAlert from 'react-native-awesome-alerts';
+import { storageSet, consulta_storage } from "../storage/localstorage";
+import AsyncStorage from "@react-native-community/async-storage";
 
 export default (props) => {
 
     let [isLoading, setLoading] = useState(true);
-    let [cor, setCor] = useState("#d3d3d3");
+    let [cor, setCor] = useState('#d3d3d3');
     let [status_texto, setStatus_texto] = useState("INICIAR");
     let [descricao, setDescricao] = useState("");
     let [descricao_alert, setDescricao_alert] = useState("");
@@ -32,15 +34,34 @@ export default (props) => {
     setMostrar_alert(false);
   };
 
-     useEffect(() => {
-       fetch(
+  useEffect(() => {
+    const buscar_storage = async (key, set) => {
+      try {
+        let value = await AsyncStorage.getItem(key);
+        value != null ? set(value) : set(null);
+      } catch (e) {
+        // read error
+      }
+    };
+    buscar_storage("@cor", setCor, '#d3d3d3');
+    buscar_storage("@parada_id", setParada_id, null);
+    buscar_storage("@status_texto", setStatus_texto, "INICIAR");
+    buscar_storage("@cor_texto", setCor_texto, "black");
+    buscar_storage("@descricao", setDescricao, "");
+
+  }, []);
+
+     useEffect(() => {      
+        // consulta_storage();
+      
+        fetch(
          "http://controleproducao.tuboarte.com/paradas-frequencia/" +
            props.id_posto
-       )
+          )
          .then((response) => response.json())
          .then((json) => {
            json.forEach((dados) => {
-              (parada_id == dados.id && !finalizado)
+              (parada_id == dados.id )
                 ? (dados.habilitado = true)
                 : (dados.habilitado = false);
            });
@@ -48,7 +69,11 @@ export default (props) => {
          })
          .catch((error) => console.error(error))
          .finally(() => setLoading(false));
+
+
      }, [finalizado, parada_id]);
+
+      
      
 
      const update_parada = () => {
@@ -108,13 +133,22 @@ export default (props) => {
           body: formDataI
         }).then(function (response) {
           setToch('auto');
+          
           setCor('red');
           setParada_id(parada_id);
           setStatus_texto('PARADO');
           setCor_texto('white');
           setDescricao(rotulo + ' ' + descricao);
+          
           setDescricao_alert('PARADA INICIADA COM SUCESSO');
           setFinalizado(false);
+
+          storageSet("@cor", 'red');
+          storageSet("@parada_id", JSON.stringify(parada_id));
+          storageSet("@status_texto", 'PARADO');
+          storageSet("@cor_texto", 'white');
+          storageSet("@descricao", rotulo + ' ' + descricao);
+          
           showAlert();
           setTimeout(function () { hideAlert(); }, 500); //setToch('auto');
         });
@@ -144,13 +178,23 @@ export default (props) => {
                   body: formDataI
                 }).then(function (response) {
                 setToch('auto');
+
                 setCor('green');
                 setStatus_texto('OPERANDO');
                 setCor_texto('white');
                 setParada_id(null);
                 setDescricao(descricao);
+                
                 setDescricao_alert('OPERAÇÃO INICIADA COM SUCESSO');
                 setFinalizado(false);
+
+                storageSet("@cor", 'green');
+                storageSet("@parada_id", '');
+                storageSet("@status_texto", 'OPERANDO');
+                storageSet("@cor_texto", 'white');
+                storageSet("@descricao", descricao);
+
+
                 showAlert();
                 setTimeout(function () { hideAlert(); }, 500);
         });
@@ -168,8 +212,14 @@ export default (props) => {
         setCor_texto('black');
         setDescricao('');
         setParada_id(null);
+        
         setFinalizado(true);
         
+        storageSet("@cor", '#d3d3d3');
+        storageSet("@parada_id", '');
+        storageSet("@status_texto", 'INICIAR');
+        storageSet("@cor_texto", 'black');
+        storageSet("@descricao", '');
       });
     }
     

@@ -39,6 +39,7 @@ export default  function App() {
       buscar_storage("@logado", setLogado);
       buscar_storage("@operador_id", setOperador_id);
       buscar_storage("@operador_desc", setOperador_desc);
+
     }, []);
 
   const selecionar_posto = (id_postoP) => {
