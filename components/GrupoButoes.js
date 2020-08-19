@@ -60,12 +60,12 @@ export default (props) => {
   let operador_id = props.operador_id;
   let finalizado = props.finalizado;
 
+
   useEffect(() => {
     fetch("http://controleproducao.tuboarte.com/paradas-diarias/"+operador_id)
       .then((response) => response.json())
       .then((json) => {
           setParadasDiarias(json)
-          console.warn(operador_id);
       })
       .catch((error) => console.error(error))
       .finally(() => setLoading(false));
@@ -77,7 +77,27 @@ export default (props) => {
       })
       .catch((error) => console.error(error))
       .finally(() => setLoading(false));
-  }, [finalizado]);
+  }, []); //No Inicio 
+
+
+  useEffect(() => {
+    fetch("http://controleproducao.tuboarte.com/paradas-diarias/" + operador_id)
+      .then((response) => response.json())
+      .then((json) => {
+        setParadasDiarias(json)
+      })
+      .catch((error) => console.error(error))
+      .finally(() => setLoading(false));
+
+    fetch("http://controleproducao.tuboarte.com/operacoes-diarias/" + operador_id)
+      .then((response) => response.json())
+      .then((json) => {
+        setOperacoesDiarias(json)
+      })
+      .catch((error) => console.error(error))
+      .finally(() => setLoading(false));
+  }, [finalizado]); // Com Dependencias
+
   let componentFinalizar = null;
   
   if (finalizado == false ){

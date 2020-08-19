@@ -25,7 +25,6 @@ export default (props) => {
     let [toch, setToch] = useState('auto');
 
      let operador_id = props.operador_id;
-  
   const showAlert = () => {
     setMostrar_alert(true);
     };
@@ -35,10 +34,10 @@ export default (props) => {
   };
 
   useEffect(() => {
-    const buscar_storage = async (key, set) => {
+    const buscar_storage = async (key, set,inicial) => {
       try {
         let value = await AsyncStorage.getItem(key);
-        value != null ? set(value) : set(null);
+        value != null ? set(value) : set(inicial);
       } catch (e) {
         // read error
       }
@@ -140,7 +139,7 @@ export default (props) => {
           setCor_texto('white');
           setDescricao(rotulo + ' ' + descricao);
           
-          setDescricao_alert('PARADA INICIADA COM SUCESSO');
+         
           setFinalizado(false);
 
           storageSet("@cor", 'red');
@@ -149,6 +148,7 @@ export default (props) => {
           storageSet("@cor_texto", 'white');
           storageSet("@descricao", rotulo + ' ' + descricao);
           
+          setDescricao_alert('PARADA INICIADA COM SUCESSO');
           showAlert();
           setTimeout(function () { hideAlert(); }, 500); //setToch('auto');
         });
@@ -185,7 +185,7 @@ export default (props) => {
                 setParada_id(null);
                 setDescricao(descricao);
                 
-                setDescricao_alert('OPERAÇÃO INICIADA COM SUCESSO');
+               
                 setFinalizado(false);
 
                 storageSet("@cor", 'green');
@@ -194,7 +194,7 @@ export default (props) => {
                 storageSet("@cor_texto", 'white');
                 storageSet("@descricao", descricao);
 
-
+                setDescricao_alert('OPERAÇÃO INICIADA COM SUCESSO');
                 showAlert();
                 setTimeout(function () { hideAlert(); }, 500);
         });
@@ -220,10 +220,13 @@ export default (props) => {
         storageSet("@status_texto", 'INICIAR');
         storageSet("@cor_texto", 'black');
         storageSet("@descricao", '');
+
+        setDescricao_alert('FINALIZADO COM SUCESSO');
+        showAlert();
+        setTimeout(function () { hideAlert(); }, 500);
       });
     }
-    
-
+   
     return (
       <>
         <View pointerEvents={toch}>
