@@ -44,6 +44,7 @@ const TouchModal = styled.TouchableHighlight`
     align-items: flex-end;
     justify-content: flex-end;
     margin-top: 0px;
+    margin-bottom: 10px;
   `;
 
 const TextoModal = styled.Text`
@@ -57,6 +58,8 @@ export default (props) => {
   let [paradasDiarias, setParadasDiarias] = useState([]);
   let [operacoesDiarias, setOperacoesDiarias] = useState([]);
   let operador_id = props.operador_id;
+
+  let finalizado = props.finalizado;
 
   useEffect(() => {
     fetch("http://controleproducao.tuboarte.com/paradas-diarias/"+operador_id)
@@ -76,7 +79,7 @@ export default (props) => {
       .finally(() => setLoading(false));
   }, [finalizado]);
 
-   let finalizado = props.finalizado;
+ 
   return (
     <>
     

@@ -125,6 +125,7 @@ export default (props) => {
     } 
     
     const operar = (descricao) => {
+      setToch('none');
       let prom_update_parada = update_parada();
       let prom_update_operacao = update_operacao();
 
@@ -142,7 +143,7 @@ export default (props) => {
                   method: "post",
                   body: formDataI
                 }).then(function (response) {
-
+                setToch('auto');
                 setCor('green');
                 setStatus_texto('OPERANDO');
                 setCor_texto('white');
