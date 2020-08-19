@@ -78,7 +78,24 @@ export default (props) => {
       .catch((error) => console.error(error))
       .finally(() => setLoading(false));
   }, [finalizado]);
-
+  let componentFinalizar = null;
+  
+  if (finalizado == false ){
+    componentFinalizar = <Div>
+                            <Button contentStyle={{ height: 90 }} color="#6c757d" title='Finalizar' mode="contained" onPress={() => {
+                              props.funcao_finalizar(props.id_posto)
+                            }}>
+                              <Texto>Finalizar</Texto>
+                            </Button>
+                          </Div>;
+  }
+  else{
+    componentFinalizar = <Div>
+                          <Button contentStyle={{ height: 90 }} color="#6c757d" title='Finalizar' mode="contained" disabled='true' onPress={() => console.log('Pressed')}>
+                            <Texto>Finalizar</Texto>
+                          </Button>
+                        </Div>;
+  }
  
   return (
     <>
@@ -113,21 +130,7 @@ export default (props) => {
                   <Texto>T. de Paradas</Texto>
                 </Button>
               </Div>
-              {finalizado == false ? (
-                <Div>
-                  <Button contentStyle={{ height: 90 }} color="#6c757d" title='Finalizar' mode="contained" onPress={() => {
-                    props.funcao_finalizar(props.id_posto)
-                  }}>
-                    <Texto>Finalizar</Texto>
-                  </Button>
-                </Div>
-              ) : (
-                  <Div>
-                    <Button contentStyle={{ height: 90 }} color="#6c757d" title='Finalizar' mode="contained" disabled='true' onPress={() => console.log('Pressed')}>
-                      <Texto>Finalizar</Texto>
-                    </Button>
-                  </Div>
-                )}
+              {componentFinalizar}
             </Div>
         </Card.Content>
         
