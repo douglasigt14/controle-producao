@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState, useEffect} from "react";
 import { Alert, View, Text, StyleSheet, Modal } from "react-native";
 import styled from "styled-components";
 import { Button, Card } from 'react-native-paper';
@@ -24,7 +24,7 @@ const Div_Card = styled.View`
     justify-content: space-around;
 `;
 
-const ViewModalSelecionar = styled.View`
+const ViewModalParadas = styled.View`
       width: 450px;
       height: 380px;
       display: flex;
@@ -41,6 +41,20 @@ const TextoModal = styled.Text`
 export default (props) => {
   const [msg, setMsg] = useState('Douglas');
   const [modalVisible, setModalVisible] = useState(false);
+  let [isLoading, setLoading] = useState(true);
+  let [paradaDiarias, setParadasDiarias] = useState([]);
+  let operador_id = props.operador_id;
+
+  useEffect(() => {
+    fetch("http://controleproducao.tuboarte.com/paradas-diarias/"+operador_id)
+      .then((response) => response.json())
+      .then((json) => {
+          setParadasDiarias(json)
+      })
+      .catch((error) => console.error(error))
+      .finally(() => setLoading(false));
+  }, []);
+
    let finalizado = props.finalizado;
   return (
     <>
@@ -96,37 +110,16 @@ export default (props) => {
 
 
       <Modal
-        animationType="slide"
+        animationType="fade"
         transparent={true}
         visible={modalVisible}
         onRequestClose={() => {
-          Alert.alert("Modal has been closed.");
+          setModalVisible(false);
         }}
+        hardwareAccelerated={true}
       >
         <View style={Padrao.centeredView}>
-          <ViewModalSelecionar style={Padrao.modalView}>
-            <TouchModal
-              style={{ ...Padrao.openButton, backgroundColor: "#28a745" }}
-              onPress={() => {
-                setModalVisible(!modalVisible);
-                props.funcao_operar("ITEM DESCRIÇÃO");
-              }}
-            >
-              <TextoModal style={Padrao.textStyle}>Operar</TextoModal>
-            </TouchModal>
-
-            <TouchModal
-              style={{ ...Padrao.openButton, backgroundColor: "#dc3545" }}
-              onPress={() => {
-                setModalVisible(!modalVisible);
-                setModalParadasVisible(true);
-              }}
-            >
-              <TextoModal style={Padrao.textStyle}>
-                Selecionar Parada
-              </TextoModal>
-            </TouchModal>
-
+          <ViewModalParadas style={Padrao.modalView}>
             <TouchModal
               style={{ ...Padrao.openButton, backgroundColor: "gray" }}
               onPress={() => {
@@ -135,7 +128,7 @@ export default (props) => {
             >
               <TextoModal style={Padrao.textStyle}>Fechar</TextoModal>
             </TouchModal>
-          </ViewModalSelecionar>
+          </ViewModalParadas>
         </View>
       </Modal>
     </>
