@@ -25,7 +25,7 @@ const Div_Card = styled.View`
 `;
 
 const ViewModalParadas = styled.View`
-      max-height: 380px;
+      max-height: 280px;
       display: flex;
   `;
 
@@ -46,10 +46,10 @@ const TextoModal = styled.Text`
   `;
 
 export default (props) => {
-  const [msg, setMsg] = useState('Douglas');
-  const [modalVisibleParadas, setModalVisibleParadas] = useState(false);
+  let [modalVisibleParadas, setModalVisibleParadas] = useState(false);
   let [isLoading, setLoading] = useState(true);
-  let [paradaDiarias, setParadasDiarias] = useState([]);
+  let [paradasDiarias, setParadasDiarias] = useState([]);
+  let [operacoesDiarias, setOperacoesDiarias] = useState([]);
   let operador_id = props.operador_id;
 
   useEffect(() => {
@@ -57,6 +57,14 @@ export default (props) => {
       .then((response) => response.json())
       .then((json) => {
           setParadasDiarias(json)
+      })
+      .catch((error) => console.error(error))
+      .finally(() => setLoading(false));
+
+    fetch("http://controleproducao.tuboarte.com/operacoes-diarias/" + operador_id)
+      .then((response) => response.json())
+      .then((json) => {
+        setOperacoesDiarias(json)
       })
       .catch((error) => console.error(error))
       .finally(() => setLoading(false));
@@ -143,7 +151,7 @@ export default (props) => {
             <ScrollView>
             <FlatList
               numColumns={3}
-              data={paradaDiarias}
+              data={paradasDiarias}
               keyExtractor={({ id }, index) => id}
               renderItem={({ item }) => (
                 <Div>

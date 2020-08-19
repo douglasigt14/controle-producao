@@ -98,12 +98,12 @@ const ViewModalParadas = styled.View`
   const msg = (texto) => {
     Alert.alert(texto);
   } 
-   const [modalVisible, setModalVisible] = useState(false);
-   const [modalParadasVisible, setModalParadasVisible] = useState(false);
+   let [modalVisible, setModalVisible] = useState(false);
+   let [modalParadasVisible, setModalParadasVisible] = useState(false);
 
-    const [isLoading, setLoading] = useState(true);
-    const [paradas, setParadas] = useState([]);
-    const [id_posto, setId_posto] = useState(props.id_posto);
+    let [isLoading, setLoading] = useState(true);
+    let [paradas, setParadas] = useState([]);
+    let [id_posto, setId_posto] = useState(props.id_posto);
 
      useEffect(() => {
        fetch(
