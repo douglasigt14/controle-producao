@@ -43,8 +43,10 @@ export default  function App() {
     }, []);
 
   const selecionar_posto = (id_postoP) => {
-    setId_posto(id_postoP);
-    storageSet("@id_posto", JSON.stringify(id_postoP));
+    if(id_postoP){
+      setId_posto(id_postoP);
+      storageSet("@id_posto", JSON.stringify(id_postoP));
+    }
   };
 
   let comp_rederizado = null;
