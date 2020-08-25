@@ -104,7 +104,7 @@ const ViewModalParadas = styled.View`
     let [isLoading, setLoading] = useState(true);
     let [paradas, setParadas] = useState([]);
     let [id_posto, setId_posto] = useState(props.id_posto);
-    let [isItemSelecionado, setIsItemSelecionado] = useState(true);
+    let [isItemSelecionado, setIsItemSelecionado] = useState(false);
 
     let botao_operacao = null; 
     if (isItemSelecionado) {
@@ -119,7 +119,16 @@ const ViewModalParadas = styled.View`
       </TouchModal>;
     }
     else{
-
+      botao_operacao = (
+        <TouchModal
+          style={{ ...Padrao.openButton, backgroundColor: "#28a745" }}
+          onPress={() => {
+            setModalVisible(!modalVisible);
+          }}
+        >
+          <TextoModal style={Padrao.textStyle}>Selecionar Item</TextoModal>
+        </TouchModal>
+      );
     }
 
      useEffect(() => {
