@@ -113,12 +113,13 @@ export default (props) => {
       }
 
     const parar = (rotulo, descricao,parada_id) =>{
-       setToch('none');
+       
       let prom_update_parada = update_parada();
        let prom_update_operacao= update_operacao();
 
 
       Promise.all([prom_update_parada, prom_update_operacao]).then(valores => {
+        setToch("none");
         let URL_PARADA = "http://controleproducao.tuboarte.com/paradas-diarias";
         const formDataI = new FormData();
         formDataI.append("operador_id", operador_id);
@@ -159,12 +160,12 @@ export default (props) => {
     } 
     
     const operar = (descricao) => {
-      setToch('none');
+      
       let prom_update_parada = update_parada();
       let prom_update_operacao = update_operacao();
 
       Promise.all([prom_update_parada, prom_update_operacao]).then(valores => {
-
+                setToch("none");
                 const URL_OPERACAO = "http://controleproducao.tuboarte.com/operacoes-diarias";
                 const formDataI = new FormData();
                 formDataI.append("operador_id", operador_id);
