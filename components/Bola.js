@@ -116,6 +116,9 @@ const ViewModalParadas = styled.View`
 
     let [cod_item, setCod_item] = useState("");
     let [cod_plano, setCod_plano] = useState("");
+  
+    let [focus_cod_plano, setFocus_cod_plano] = useState(false);
+    let [focus_cod_item, setFocus_cod_item] = useState(false);
 
     let botao_operacao = null; 
     if (isOfsSelecionadas) {
@@ -299,32 +302,27 @@ const ViewModalParadas = styled.View`
             </Div_Fechar>
             <Text>COD ITEM</Text>
             <TextInput
-              style={{
-                height: 80,
-                fontSize: 30,
-                borderColor: "gray",
-                borderWidth: 1,
-                marginVertical: 10,
-                paddingHorizontal: 10,
+              style={Padrao.inputModal}
+              onChangeText={(text) => {
+                  setCod_item(text)
+                  setFocus_cod_item(true);
+                  setFocus_cod_plano(false);
               }}
-              onChangeText={(text) => setCod_item(text)}
               value={cod_item}
               keyboardType={"phone-pad"}
+              autoFocus={focus_cod_item}
             />
             <Text>COD PLANO</Text>
             <TextInput
-              style={{
-                height: 80,
-                fontSize: 30,
-                borderColor: "gray",
-                borderWidth: 2,
-                paddingHorizontal: 10,
-                marginVertical: 10,
-              }}
+              style={Padrao.inputModal}
               value={cod_plano}
               onChangeText={(text) => {
-                  setCod_plano(text);  }}
+                  setCod_plano(text); 
+                  setFocus_cod_item(false);
+                  setFocus_cod_plano(true);
+                }}
               keyboardType={"phone-pad"}
+              autoFocus={focus_cod_plano}
             />
           </ViewModalItem>
         </View>

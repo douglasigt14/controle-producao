@@ -72,6 +72,14 @@ export default StyleSheet.create({
     marginBottom: 15,
     textAlign: "center",
   },
+  inputModal: {
+    height: 80,
+    fontSize: 30,
+    borderColor: "gray",
+    borderWidth: 2,
+    paddingHorizontal: 10,
+    marginVertical: 10,
+  }
 
   //Modal
 });
