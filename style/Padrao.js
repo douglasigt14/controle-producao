@@ -38,6 +38,7 @@ export default StyleSheet.create({
     backgroundColor: "white",
     borderRadius: 10,
     padding: 35,
+    paddingTop: 5,
     alignItems: "stretch",
     shadowColor: "#000",
     shadowOffset: {
@@ -58,9 +59,9 @@ export default StyleSheet.create({
   closeButton: {
     backgroundColor: "black",
     borderRadius: 50,
-    height: 60,
-    width: 60,
-    padding: 10,
+    height: 50,
+    width: 50,
+    padding: 5,
   },
   textStyle: {
     color: "white",

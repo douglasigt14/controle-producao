@@ -114,7 +114,8 @@ const ViewModalParadas = styled.View`
     let [id_posto, setId_posto] = useState(props.id_posto);
     let [isOfsSelecionadas, setIsOfsSelecionadas] = useState(false);
 
-     const [cod_item, setCod_item] = useState("");
+    let [cod_item, setCod_item] = useState("");
+    let [cod_plano, setCod_plano] = useState("");
 
     let botao_operacao = null; 
     if (isOfsSelecionadas) {
@@ -304,10 +305,25 @@ const ViewModalParadas = styled.View`
                 borderColor: "gray",
                 borderWidth: 1,
                 marginVertical: 10,
+                paddingHorizontal: 10,
               }}
               onChangeText={(text) => setCod_item(text)}
               value={cod_item}
-              autoFocus={true}
+              keyboardType={"phone-pad"}
+            />
+            <Text>COD PLANO</Text>
+            <TextInput
+              style={{
+                height: 80,
+                fontSize: 30,
+                borderColor: "gray",
+                borderWidth: 2,
+                paddingHorizontal: 10,
+                marginVertical: 10,
+              }}
+              value={cod_plano}
+              onChangeText={(text) => {
+                  setCod_plano(text);  }}
               keyboardType={"phone-pad"}
             />
           </ViewModalItem>
