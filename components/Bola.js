@@ -14,7 +14,7 @@ import {
 } from "react-native";
 import Padrao from "../style/Padrao";
 import { Button, Card } from "react-native-paper";
-import Accordion from "./Accordion";
+import Ofs from "./Ofs";
 
 
 
@@ -121,6 +121,7 @@ const ViewModalParadas = styled.View`
     let [focus_cod_item, setFocus_cod_item] = useState(false);
     let [mostrarOf, setMostrarOf] = useState(false);
     let [acoordeon, setAcordeon] = useState(null);
+    let [ofs, setOfs] = useState([]);
 
     let botao_operacao = null; 
     if (isOfsSelecionadas) {
@@ -149,11 +150,32 @@ const ViewModalParadas = styled.View`
       );
     }
   
+  const buscarOf = (cod_item,cod_plano) =>{
+    cod_item = cod_item ? cod_item : 0; 
+    cod_plano = cod_plano ? cod_plano : 0;
+    let URL = "http://controleproducao.tuboarte.com/itens/" + cod_item + "/" + cod_plano;
+    fetch(
+      URL
+    )
+      .then((response) => response.json())
+      .then((json) => {
+          setOfs(json);
+        if (json.length == 0){
+            setMostrarOf(false);
+          }
+          else{
+            setMostrarOf(true);
+          }
+      })
+      .catch((error) => console.error(error))
+      .finally(() => setLoading(false));
+   
+  }
  
   useEffect(() => {
     if (mostrarOf){
       setAcordeon(<View style={{ paddingTop: 10 }}>
-          <Accordion cod_item={cod_item} cod_plano={cod_plano}></Accordion>
+        <Ofs cod_item={cod_item} cod_plano={cod_plano} ofs={ofs}></Ofs>
         </View>);
     }
     else{
@@ -342,7 +364,7 @@ const ViewModalParadas = styled.View`
             <TouchModal
               style={{ ...Padrao.openButton, backgroundColor: "gray" }}
               onPress={() => {
-                setMostrarOf(true);
+                buscarOf(cod_item,cod_plano);
 
               }}
             >
