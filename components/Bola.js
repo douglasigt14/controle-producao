@@ -47,7 +47,7 @@ const Div = styled.View`
 
   const ViewModalSelecionar = styled.View`
       width: 450px;
-      height: 380px;
+      min-height: 380px;
       display: flex;
   `;
 
@@ -120,7 +120,6 @@ const ViewModalParadas = styled.View`
   return (
     <>
       <View>
-        <Accordion></Accordion>
         <Div_Descricao>
           <Descricao>{props.descricao}</Descricao>
         </Div_Descricao>
@@ -135,7 +134,6 @@ const ViewModalParadas = styled.View`
         </TouchableWithoutFeedback>
       </View>
 
-
       {/* Modais*/}
 
       {/* Modal Selecionar */}
@@ -149,6 +147,7 @@ const ViewModalParadas = styled.View`
       >
         <View style={Padrao.centeredView}>
           <ViewModalSelecionar style={Padrao.modalView}>
+            <Accordion></Accordion>
             <TouchModal
               style={{ ...Padrao.openButton, backgroundColor: "#28a745" }}
               onPress={() => {
@@ -183,9 +182,6 @@ const ViewModalParadas = styled.View`
         </View>
       </Modal>
       {/* Modal Selecionar */}
-
-
-      
 
       {/* Modal Paradas */}
       <Modal
