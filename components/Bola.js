@@ -10,6 +10,7 @@ import {
   TouchableHighlight,
   ScrollView,
   FlatList,
+  TextInput,
 } from "react-native";
 import Padrao from "../style/Padrao";
 import { Button, Card } from "react-native-paper";
@@ -50,6 +51,12 @@ const Div = styled.View`
       min-height: 380px;
       display: flex;
   `;
+
+   const ViewModalItem = styled.View`
+     width: 450px;
+     min-height: 380px;
+     display: flex;
+   `;
 
 
 const ViewModalParadas = styled.View`
@@ -101,29 +108,34 @@ const ViewModalParadas = styled.View`
     } 
     let [modalVisible, setModalVisible] = useState(false);
     let [modalParadasVisible, setModalParadasVisible] = useState(false);
+    let [modalItemVisible, setModalItemVisible] = useState(false);
     let [isLoading, setLoading] = useState(true);
     let [paradas, setParadas] = useState([]);
     let [id_posto, setId_posto] = useState(props.id_posto);
-    let [isItemSelecionado, setIsItemSelecionado] = useState(false);
+    let [isOfsSelecionadas, setIsOfsSelecionadas] = useState(false);
+
+     const [cod_item, setCod_item] = useState("");
 
     let botao_operacao = null; 
-    if (isItemSelecionado) {
-     botao_operacao =  <TouchModal
-        style={{ ...Padrao.openButton, backgroundColor: "#28a745" }}
-        onPress={() => {
-          setModalVisible(!modalVisible);
-          props.funcao_operar("ITEM DESCRIÇÃO");
-        }}
-      >
-        <TextoModal style={Padrao.textStyle}>Operar</TextoModal>
-      </TouchModal>;
-    }
-    else{
+    if (isOfsSelecionadas) {
       botao_operacao = (
         <TouchModal
           style={{ ...Padrao.openButton, backgroundColor: "#28a745" }}
           onPress={() => {
             setModalVisible(!modalVisible);
+            props.funcao_operar("ITEM DESCRIÇÃO");
+          }}
+        >
+          <TextoModal style={Padrao.textStyle}>Operar</TextoModal>
+        </TouchModal>
+      );
+    } else {
+      botao_operacao = (
+        <TouchModal
+          style={{ ...Padrao.openButton, backgroundColor: "#28a745" }}
+          onPress={() => {
+            setModalVisible(!modalVisible);
+            setModalItemVisible(true);
           }}
         >
           <TextoModal style={Padrao.textStyle}>Selecionar Item</TextoModal>
@@ -262,6 +274,46 @@ const ViewModalParadas = styled.View`
         </View>
       </Modal>
       {/* Modal Paradas */}
+
+      {/* Modal Item */}
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalItemVisible}
+        onRequestClose={() => {
+          Alert.alert("Modal has been closed.");
+        }}
+      >
+        <View style={Padrao.topView}>
+          <ViewModalItem style={Padrao.modalView}>
+            <Div_Fechar>
+              <TouchModal
+                style={{ ...Padrao.closeButton }}
+                onPress={() => {
+                  setModalItemVisible(!modalItemVisible);
+                }}
+              >
+                <TextoModal style={Padrao.textStyle}>X</TextoModal>
+              </TouchModal>
+            </Div_Fechar>
+            <Text>COD ITEM</Text>
+            <TextInput
+              style={{
+                height: 80,
+                fontSize: 30,
+                borderColor: "gray",
+                borderWidth: 1,
+                marginVertical: 10,
+              }}
+              onChangeText={(text) => setCod_item(text)}
+              value={cod_item}
+              autoFocus={true}
+              keyboardType={"phone-pad"}
+            />
+          </ViewModalItem>
+        </View>
+      </Modal>
+      {/* Modal Item */}
     </>
   );
 };
