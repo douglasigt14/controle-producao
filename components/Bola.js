@@ -324,6 +324,16 @@ const ViewModalParadas = styled.View`
               keyboardType={"phone-pad"}
               autoFocus={focus_cod_plano}
             />
+
+            <TouchModal
+              style={{ ...Padrao.openButton, backgroundColor: "gray" }}
+              onPress={() => {
+                setModalItemVisible(!modalParadasVisible);
+
+              }}
+            >
+              <TextoModal style={Padrao.textStyle}>Buscar</TextoModal>
+            </TouchModal>
           </ViewModalItem>
         </View>
       </Modal>
