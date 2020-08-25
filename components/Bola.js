@@ -96,15 +96,31 @@ const ViewModalParadas = styled.View`
     margin-top: 0px;
   `;
 
-  const msg = (texto) => {
-    Alert.alert(texto);
-  } 
-   let [modalVisible, setModalVisible] = useState(false);
-   let [modalParadasVisible, setModalParadasVisible] = useState(false);
-
+    const msg = (texto) => {
+      Alert.alert(texto);
+    } 
+    let [modalVisible, setModalVisible] = useState(false);
+    let [modalParadasVisible, setModalParadasVisible] = useState(false);
     let [isLoading, setLoading] = useState(true);
     let [paradas, setParadas] = useState([]);
     let [id_posto, setId_posto] = useState(props.id_posto);
+    let [isItemSelecionado, setIsItemSelecionado] = useState(true);
+
+    let botao_operacao = null; 
+    if (isItemSelecionado) {
+     botao_operacao =  <TouchModal
+        style={{ ...Padrao.openButton, backgroundColor: "#28a745" }}
+        onPress={() => {
+          setModalVisible(!modalVisible);
+          props.funcao_operar("ITEM DESCRIÇÃO");
+        }}
+      >
+        <TextoModal style={Padrao.textStyle}>Operar</TextoModal>
+      </TouchModal>;
+    }
+    else{
+
+    }
 
      useEffect(() => {
        fetch(
@@ -147,17 +163,17 @@ const ViewModalParadas = styled.View`
       >
         <View style={Padrao.centeredView}>
           <ViewModalSelecionar style={Padrao.modalView}>
-            <Accordion></Accordion>
-            <TouchModal
-              style={{ ...Padrao.openButton, backgroundColor: "#28a745" }}
-              onPress={() => {
-                setModalVisible(!modalVisible);
-                props.funcao_operar("ITEM DESCRIÇÃO");
-              }}
-            >
-              <TextoModal style={Padrao.textStyle}>Operar</TextoModal>
-            </TouchModal>
-
+            <Div_Fechar>
+              <TouchModal
+                style={{ ...Padrao.closeButton }}
+                onPress={() => {
+                  setModalVisible(!modalVisible);
+                }}
+              >
+                <TextoModal style={Padrao.textStyle}>X</TextoModal>
+              </TouchModal>
+            </Div_Fechar>
+            {botao_operacao}
             <TouchModal
               style={{ ...Padrao.openButton, backgroundColor: "#dc3545" }}
               onPress={() => {
@@ -168,15 +184,6 @@ const ViewModalParadas = styled.View`
               <TextoModal style={Padrao.textStyle}>
                 Selecionar Parada
               </TextoModal>
-            </TouchModal>
-
-            <TouchModal
-              style={{ ...Padrao.openButton, backgroundColor: "gray" }}
-              onPress={() => {
-                setModalVisible(!modalVisible);
-              }}
-            >
-              <TextoModal style={Padrao.textStyle}>Fechar</TextoModal>
             </TouchModal>
           </ViewModalSelecionar>
         </View>

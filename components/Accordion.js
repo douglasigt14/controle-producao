@@ -30,21 +30,6 @@ export default (props) => {
               </ListItem>
             </CollapseBody>
           </Collapse>
-          <Collapse>
-            <CollapseHeader style={{ height: 60 }}>
-              <Separator bordered>
-                <Text>FORWARD</Text>
-              </Separator>
-            </CollapseHeader>
-            <CollapseBody>
-              <ListItem style={{ height: 60 }}>
-                <Text>Aaron Bennet</Text>
-              </ListItem>
-              <ListItem last style={{ height: 60 }}>
-                <Text>Kelso Brittany</Text>
-              </ListItem>
-            </CollapseBody>
-          </Collapse>
         </View>
       </>
     );
