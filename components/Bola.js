@@ -13,6 +13,7 @@ import {
 } from "react-native";
 import Padrao from "../style/Padrao";
 import { Button, Card } from "react-native-paper";
+import Accordion from "./Accordion";
 
 
 
@@ -119,6 +120,7 @@ const ViewModalParadas = styled.View`
   return (
     <>
       <View>
+        <Accordion></Accordion>
         <Div_Descricao>
           <Descricao>{props.descricao}</Descricao>
         </Div_Descricao>
