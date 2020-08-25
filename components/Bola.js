@@ -119,6 +119,8 @@ const ViewModalParadas = styled.View`
   
     let [focus_cod_plano, setFocus_cod_plano] = useState(false);
     let [focus_cod_item, setFocus_cod_item] = useState(false);
+    let [mostrarOf, setMostrarOf] = useState(false);
+    let [acoordeon, setAcordeon] = useState(null);
 
     let botao_operacao = null; 
     if (isOfsSelecionadas) {
@@ -146,6 +148,18 @@ const ViewModalParadas = styled.View`
         </TouchModal>
       );
     }
+  
+ 
+  useEffect(() => {
+    if (mostrarOf){
+      setAcordeon(<View style={{ paddingTop: 10 }}>
+          <Accordion cod_item={cod_item} cod_plano={cod_plano}></Accordion>
+        </View>);
+    }
+    else{
+      setAcordeon(null);
+    }  
+  }, [mostrarOf]);
 
      useEffect(() => {
        fetch(
@@ -300,7 +314,7 @@ const ViewModalParadas = styled.View`
                 <TextoModal style={Padrao.textStyle}>X</TextoModal>
               </TouchModal>
             </Div_Fechar>
-            <Text>COD ITEM</Text>
+            <Text>COD PEÇA</Text>
             <TextInput
               style={Padrao.inputModal}
               onChangeText={(text) => {
@@ -312,7 +326,7 @@ const ViewModalParadas = styled.View`
               keyboardType={"phone-pad"}
               autoFocus={focus_cod_item}
             />
-            <Text>COD PLANO</Text>
+            <Text>COD PLANO (OBS: COLOCAR TODOS OS ZEROS)</Text>
             <TextInput
               style={Padrao.inputModal}
               value={cod_plano}
@@ -328,15 +342,15 @@ const ViewModalParadas = styled.View`
             <TouchModal
               style={{ ...Padrao.openButton, backgroundColor: "gray" }}
               onPress={() => {
-                setModalItemVisible(!modalParadasVisible);
+                setMostrarOf(true);
 
               }}
             >
               <TextoModal style={Padrao.textStyle}>Buscar</TextoModal>
             </TouchModal>
-            <View style={{paddingTop: 10}}>
-              <Accordion></Accordion>
-            </View>
+            {acoordeon}
+            
+          
           </ViewModalItem>
         </View>
       </Modal>

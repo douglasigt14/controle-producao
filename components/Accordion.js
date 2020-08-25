@@ -12,7 +12,8 @@ export default (props) => {
   let [ofs, setOfs] = useState([]);
   let [isLoading, setLoading] = useState(true);
 
-
+  let [cod_item, setCod_item] = useState(props.cod_item);
+  let [cod_plano, setCod_plano] = useState(props.cod_plano);
   // useEffect(() => {
   //   fetch("http://controleproducao.tuboarte.com/postos/" + id_posto)
   //     .then((response) => response.json())
@@ -27,7 +28,7 @@ export default (props) => {
           <Collapse>
             <CollapseHeader style={{ height: 60 }}>
               <Separator bordered>
-                <Text>28/08/2020</Text>
+              <Text>{cod_item}</Text>
               </Separator>
             </CollapseHeader>
             <CollapseBody>
