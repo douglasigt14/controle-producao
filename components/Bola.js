@@ -334,6 +334,9 @@ const ViewModalParadas = styled.View`
             >
               <TextoModal style={Padrao.textStyle}>Buscar</TextoModal>
             </TouchModal>
+            <View style={{paddingTop: 10}}>
+              <Accordion></Accordion>
+            </View>
           </ViewModalItem>
         </View>
       </Modal>
