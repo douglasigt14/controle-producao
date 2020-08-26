@@ -9,18 +9,13 @@ import { Thumbnail, List, ListItem, Separator } from "native-base";
 
 
 export default (props) => {
-  let [ofs, setOfs] = useState([]);
   let [isLoading, setLoading] = useState(true);
 
   let [cod_item, setCod_item] = useState(props.cod_item);
   let [cod_plano, setCod_plano] = useState(props.cod_plano);
-  // useEffect(() => {
-  //   fetch("http://controleproducao.tuboarte.com/postos/" + id_posto)
-  //     .then((response) => response.json())
-  //     .then((json) => setOfs(json))
-  //     .catch((error) => console.error(error))
-  //     .finally(() => setLoading(false));
-  // }, []);
+    let [ofs, setOfs] = useState(props.ofs);
+  //let [ofs, setOfs] = useState(null);
+  console.warn(ofs);
 
   return (
       <>
