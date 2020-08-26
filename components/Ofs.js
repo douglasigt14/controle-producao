@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, FlatList } from "react-native";
+import { View, Text, FlatList, StyleSheet } from "react-native";
 import {
   Collapse,
   CollapseHeader,
@@ -15,67 +15,70 @@ export default (props) => {
   let [cod_item, setCod_item] = useState(props.cod_item);
   let [cod_plano, setCod_plano] = useState(props.cod_plano);
   let [ofs, setOfs] = useState(props.ofs);
+  let [ofs2, setOfs2] = useState(props.ofs);
   //let [ofs, setOfs] = useState(null);
-  tabela = {
-    tableHead: ["Head", "Head2", "Head3", "Head4"],
-    tableData: [
-      ["1", "2", "3", "4"],
-      ["a", "b", "c", "d"],
-      ["1", "2", "3", "456\n789"],
-      ["a", "b", "c", "d"],
-    ],
-  };
+  
 
   useEffect(() => {
-    console.warn('Efeito');
+    //console.warn('Efeito');
     ofs.forEach(item => {
-      console.warn(item);
+      item.tabela = tabela = {
+        tableHead: ["NUM OF", "Head2", "Head3", "Head4"],
+        tableData: [
+          ["1", "2", "3", "4"],
+          ["a", "b", "c", "d"],
+          ["a", "b", "c", "d"],
+        ],
+      };
     });
-
+    setOfs(ofs);
   
    
   }, []);
 
   return (
-      <>
-        <View>
+    <>
+      <View>
         <FlatList
           LisHeaderComponent={<></>}
           // style={Padrao.FlatList}
           data={ofs}
           keyExtractor={({ id }, index) => id}
           renderItem={({ item }) => (
-            <View style={{fontSize: 40}}>
+            <View style={{ fontSize: 40 }}>
               <Collapse>
-                <CollapseHeader style={{ height: 80}}>
+                <CollapseHeader style={{ height: 80 }}>
                   <Separator bordered>
-                    <Text>{item.cod_item}</Text>
+                    <Text>{item.dt_inicial}</Text>
                   </Separator>
                 </CollapseHeader>
                 <CollapseBody>
-                  <FlatList
-                    LisHeaderComponent={<></>}
-                    // style={Padrao.FlatList}
-                    data={ofs}
-                    keyExtractor={({ id2 }, index2) => id2}
-                    renderItem={({ item2 }) => (
-                            <ListItem style={{ height: 60 }}>
-                              <Text>Claire Barclay</Text>
-                            </ListItem>
-                    )}
-                    ListFooterComponent={<></>}
-                  />
-                  <ListItem style={{ height: 60 }}>
-                    <Text>Claire Barclay</Text>
-                  </ListItem>
+                  <Table
+                    borderStyle={{
+                      borderWidth: 2,
+                      borderColor: "#c8e1ff",
+                    }}
+                  >
+                    <Row
+                      data={item.tabela.tableHead}
+                      style={styles.head}
+                      textStyle={styles.text}
+                    />
+                    <Rows data={tabela.tableData} textStyle={styles.text} />
+                  </Table>
                 </CollapseBody>
               </Collapse>
             </View>
           )}
           ListFooterComponent={<></>}
         />
-          
-        </View>
-      </>
-    );
+      </View>
+    </>
+  );
 }
+
+const styles = StyleSheet.create({
+  container: { flex: 1, padding: 16, paddingTop: 30, backgroundColor: "#fff" },
+  head: { height: 40, backgroundColor: "#f1f8ff" },
+  text: { margin: 6 },
+});
