@@ -53,7 +53,7 @@ const Div = styled.View`
   `;
 
    const ViewModalItem = styled.View`
-     width: 450px;
+     width: 100%;
      min-height: 380px;
      display: flex;
    `;
