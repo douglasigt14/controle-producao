@@ -15,26 +15,32 @@ export default (props) => {
   let [cod_item, setCod_item] = useState(props.cod_item);
   let [cod_plano, setCod_plano] = useState(props.cod_plano);
   let [ofs, setOfs] = useState(props.ofs);
+   let [dt_lotes, setDt_lotes] = useState(props.dt_lotes || []);
   let [ofs2, setOfs2] = useState(props.ofs);
-  //let [ofs, setOfs] = useState(null);
-  
+
+   let tabela = {
+     tableHead: ["OF", "ITEM", "COR", "QTD"],
+     tableData: [["1", "2", "3", "4"]],
+   };
+
+
 
   useEffect(() => {
-    //console.warn('Efeito');
-    ofs.forEach(item => {
-      item.tabela = tabela = {
-        tableHead: ["NUM OF", "Head2", "Head3", "Head4"],
-        tableData: [
-          ["1", "2", "3", "4"],
-          ["a", "b", "c", "d"],
-          ["a", "b", "c", "d"],
-        ],
-      };
-    });
-    setOfs(ofs);
-  
-   
+    // console.warn(dt_lotes);
+    //  let dt_lotes_temp = [];
+    //  json.forEach((item) => {
+    //    item.tabela = tabela;
+    //    dt_lotes_temp.push(item.dt_inicial + "|" + item.cor);
+    //  });
+    //  dt_lotes_temp = unique(dt_lotes_temp);
+    //  let dt_lotes_temp2 = [];
+    //  dt_lotes_temp.forEach((dt) => {
+    //    var res = dt.split("|");
+    //    dt_lotes_temp2.push({ dt: res[0], marcado: true, cor: res[1] });
+    //  });
+    //  setDt_lotes(dt_lotes_temp2);
   }, []);
+
 
   return (
     <>
@@ -60,7 +66,7 @@ export default (props) => {
                     }}
                   >
                     <Row
-                      data={item.tabela.tableHead}
+                      data={tabela.tableHead}
                       style={styles.head}
                       textStyle={styles.text}
                     />

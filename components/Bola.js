@@ -122,6 +122,7 @@ const ViewModalParadas = styled.View`
     let [mostrarOf, setMostrarOf] = useState(false);
     let [acoordeon, setAcordeon] = useState(null);
     let [ofs, setOfs] = useState([]);
+     let [dt_lotes, setDt_lotes] = useState([]);
 
     let botao_operacao = null; 
     if (isOfsSelecionadas) {
@@ -149,7 +150,17 @@ const ViewModalParadas = styled.View`
         </TouchModal>
       );
     }
-  
+   let tabela = {
+     tableHead: ["OF", "ITEM", "COR", "QTD"],
+     tableData: [["1", "2", "3", "4"]],
+   };
+
+     function unique(array) {
+       return array.filter(function (el, index, arr) {
+         return index == arr.indexOf(el);
+       });
+     }
+
   const buscarOf = (cod_item,cod_plano) =>{
     cod_item = cod_item ? cod_item : 0; 
     cod_plano = cod_plano ? cod_plano : 0;
@@ -160,12 +171,16 @@ const ViewModalParadas = styled.View`
       .then((response) => response.json())
       .then((json) => {
           setOfs(json);
-        if (json.length == 0){
+          if (json.length == 0){
             setMostrarOf(false);
           }
           else{
             setMostrarOf(true);
           }
+
+           
+
+          
       })
       .catch((error) => console.error(error))
       .finally(() => setLoading(false));
@@ -175,7 +190,7 @@ const ViewModalParadas = styled.View`
   useEffect(() => {
     if (mostrarOf){
       setAcordeon(<View style={{ paddingTop: 10 }}>
-        <Ofs cod_item={cod_item} cod_plano={cod_plano} ofs={ofs}></Ofs>
+        <Ofs cod_item={cod_item} cod_plano={cod_plano} ofs={ofs} dt_lotes={dt_lotes}></Ofs>
         </View>);
     }
     else{
@@ -274,15 +289,7 @@ const ViewModalParadas = styled.View`
             </Div_Fechar>
             <ScrollView>
               <FlatList
-                LisHeaderComponent={
-                  <TouchModal
-                    style={{ ...Padrao.openButton, backgroundColor: "gray" }}
-                    onPress={() => {
-                      setModalParadasVisible(!modalParadasVisible);
-                    }}
-                  >
-                    <TextoModal style={Padrao.textStyle}>Fechar</TextoModal>
-                  </TouchModal>
+                LisHeaderComponent={<></>
                 }
                 style={Padrao.FlatList}
                 numColumns={3}
