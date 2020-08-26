@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text } from "react-native";
+import { View, Text, FlatList } from "react-native";
 import {
   Collapse,
   CollapseHeader,
@@ -15,7 +15,6 @@ export default (props) => {
   let [cod_plano, setCod_plano] = useState(props.cod_plano);
     let [ofs, setOfs] = useState(props.ofs);
   //let [ofs, setOfs] = useState(null);
-  console.warn(ofs);
 
   return (
       <>

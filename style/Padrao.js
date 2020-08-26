@@ -32,7 +32,7 @@ export default StyleSheet.create({
     flex: 1,
     justifyContent: "flex-start",
     alignItems: "center",
-    marginTop: 190
+    marginTop: 50
   },
   modalView: {
     backgroundColor: "white",
