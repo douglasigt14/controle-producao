@@ -74,8 +74,8 @@ export default  function App() {
               storageSet('@logado',"1");
               setLogado("1");
 
-              storageSet("@operador_id", r.user_id);
-              setOperador_id(r.user_id);
+              storageSet("@operador_id", JSON.stringify(r.user_id));
+              setOperador_id(JSON.stringify(r.user_id));
 
               storageSet("@operador_desc", r.rotulo);
               setOperador_desc(r.rotulo);
@@ -116,7 +116,6 @@ export default  function App() {
   }
 
   
-  // console.warn(logado);
 
   if (!id_posto) {
     comp_rederizado = (

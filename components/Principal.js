@@ -23,8 +23,7 @@ export default (props) => {
     let [paradasFrequentes, setParadasFrequentes] = useState([]);
     let [mostrar_alert, setMostrar_alert] = useState(false);
     let [toch, setToch] = useState('auto');
-
-     let operador_id = props.operador_id;
+    let operador_id = props.operador_id;
   const showAlert = () => {
     setMostrar_alert(true);
     };
@@ -137,7 +136,7 @@ export default (props) => {
           setToch('auto');
             cor = parada_id == 18 ? "#f6c23e" : "red";
           setCor(cor);
-          setParada_id(parada_id);
+          setParada_id(JSON.stringify(parada_id));
           setStatus_texto('PARADO');
           setCor_texto('white');
           setDescricao(rotulo + ' ' + descricao);   
