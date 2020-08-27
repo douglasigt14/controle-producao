@@ -74,7 +74,7 @@ export default  function App() {
               storageSet('@logado',"1");
               setLogado("1");
 
-              storageSet("@operador_id", JSON.stringify(r.user_id));
+              storageSet("@operador_id", r.user_id);
               setOperador_id(r.user_id);
 
               storageSet("@operador_desc", r.rotulo);
