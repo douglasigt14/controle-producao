@@ -155,11 +155,12 @@ const ViewModalParadas = styled.View`
      tableData: [["1", "2", "3", "4"]],
    };
 
-     function unique(array) {
-       return array.filter(function (el, index, arr) {
-         return index == arr.indexOf(el);
-       });
-     }
+  const limparOf = () =>{
+    setCod_plano("");
+    setCod_item("");
+    setOfs([]);
+     setAcordeon(null);
+  }
 
   const buscarOf = (cod_item,cod_plano) =>{
     cod_item = cod_item ? cod_item : 0; 
@@ -190,7 +191,7 @@ const ViewModalParadas = styled.View`
   useEffect(() => {
     if (mostrarOf){
       setAcordeon(<View style={{ paddingTop: 10 }}>
-        <Ofs cod_item={cod_item} cod_plano={cod_plano} ofs={ofs} dt_lotes={dt_lotes}></Ofs>
+        <Ofs cod_item={cod_item} cod_plano={cod_plano} ofs={ofs} funcao_limparOf={limparOf}></Ofs>
         </View>);
     }
     else{
