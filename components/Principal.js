@@ -37,6 +37,8 @@ export default (props) => {
     const buscar_storage = async (key, set,inicial) => {
       try {
         let value = await AsyncStorage.getItem(key);
+        value = value == "true" ? true : value;
+        value = value == "false" ? false : value;
         value != null ? set(value) : set(inicial);
       } catch (e) {
         // read error
@@ -47,11 +49,11 @@ export default (props) => {
     buscar_storage("@status_texto", setStatus_texto, "INICIAR");
     buscar_storage("@cor_texto", setCor_texto, "black");
     buscar_storage("@descricao", setDescricao, "");
+    buscar_storage("@finalizado", setFinalizado, "true");
 
   }, []);
 
      useEffect(() => {      
-        // consulta_storage();
       
         fetch(
          "http://controleproducao.tuboarte.com/paradas-frequencia/" +
@@ -138,9 +140,7 @@ export default (props) => {
           setParada_id(parada_id);
           setStatus_texto('PARADO');
           setCor_texto('white');
-          setDescricao(rotulo + ' ' + descricao);
-          
-         
+          setDescricao(rotulo + ' ' + descricao);   
           setFinalizado(false);
 
           storageSet("@cor", 'red');
@@ -148,6 +148,7 @@ export default (props) => {
           storageSet("@status_texto", 'PARADO');
           storageSet("@cor_texto", 'white');
           storageSet("@descricao", rotulo + ' ' + descricao);
+          storageSet("@finalizado", "false");
           
           setDescricao_alert('PARADA INICIADA COM SUCESSO');
           showAlert();
@@ -194,6 +195,7 @@ export default (props) => {
                 storageSet("@status_texto", 'OPERANDO');
                 storageSet("@cor_texto", 'white');
                 storageSet("@descricao", descricao);
+                storageSet("@finalizado", "false");
 
                 setDescricao_alert('OPERAÇÃO INICIADA COM SUCESSO');
                 showAlert();
@@ -221,6 +223,7 @@ export default (props) => {
         storageSet("@status_texto", 'INICIAR');
         storageSet("@cor_texto", 'black');
         storageSet("@descricao", '');
+        storageSet("@finalizado", "true");
 
         setDescricao_alert('FINALIZADO COM SUCESSO');
         showAlert();
