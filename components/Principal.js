@@ -135,15 +135,15 @@ export default (props) => {
           body: formDataI
         }).then(function (response) {
           setToch('auto');
-          
-          setCor('red');
+            cor = parada_id == 18 ? "#f6c23e" : "red";
+          setCor(cor);
           setParada_id(parada_id);
           setStatus_texto('PARADO');
           setCor_texto('white');
           setDescricao(rotulo + ' ' + descricao);   
           setFinalizado(false);
 
-          storageSet("@cor", 'red');
+          storageSet("@cor", cor);
           storageSet("@parada_id", JSON.stringify(parada_id));
           storageSet("@status_texto", 'PARADO');
           storageSet("@cor_texto", 'white');
