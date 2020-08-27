@@ -19,7 +19,7 @@ export default (props) => {
     font-size: 25px;
   `;
   const TextoAccordeonHeader = styled.Text`
-    font-size: 20px;
+    font-size: 25px;
   `;
 
  
@@ -114,7 +114,7 @@ export default (props) => {
               props.funcao_limparOf();
             }}
           >
-            <TextoModal style={Padrao.textStyle}>Limpar</TextoModal>
+            <TextoModal style={Padrao.textStyle}>Corrigir</TextoModal>
           </TouchModal>
 
           <TouchModal

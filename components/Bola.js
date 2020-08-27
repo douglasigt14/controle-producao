@@ -119,6 +119,10 @@ const ViewModalParadas = styled.View`
   
     let [focus_cod_plano, setFocus_cod_plano] = useState(false);
     let [focus_cod_item, setFocus_cod_item] = useState(false);
+
+     let [editable_cod_plano, setEditable_cod_plano] = useState(true);
+     let [editable_cod_item, setEditable_cod_item] = useState(true);
+
     let [mostrarOf, setMostrarOf] = useState(false);
     let [acoordeon, setAcordeon] = useState(null);
     let [ofs, setOfs] = useState([]);
@@ -159,6 +163,8 @@ const ViewModalParadas = styled.View`
     setCod_plano("");
     setCod_item("");
     setOfs([]);
+    setEditable_cod_item(true);
+    setEditable_cod_plano(true);
     setAcordeon(null);
     setMostrarOf(false);
   }
@@ -175,9 +181,13 @@ const ViewModalParadas = styled.View`
           setOfs(json);
           if (json.length == 0){
             setMostrarOf(false);
+            setEditable_cod_item(true);
+            setEditable_cod_plano(true);
           }
           else{
             setMostrarOf(true);
+            setEditable_cod_item(false);
+            setEditable_cod_plano(false);
           }
 
            
@@ -291,8 +301,7 @@ const ViewModalParadas = styled.View`
             </Div_Fechar>
             <ScrollView>
               <FlatList
-                LisHeaderComponent={<></>
-                }
+                LisHeaderComponent={<></>}
                 style={Padrao.FlatList}
                 numColumns={3}
                 data={paradas}
@@ -348,12 +357,13 @@ const ViewModalParadas = styled.View`
             <Text>COD PEÇA</Text>
             <TextInput
               style={Padrao.inputModal}
-              onChangeText={(text) => {
-                  setCod_item(text)
-                  setFocus_cod_item(true);
-                  setFocus_cod_plano(false);
-              }}
               value={cod_item}
+              editable={editable_cod_item}
+              onChangeText={(text) => {
+                setCod_item(text);
+                setFocus_cod_item(true);
+                setFocus_cod_plano(false);
+              }}
               keyboardType={"phone-pad"}
               autoFocus={focus_cod_item}
             />
@@ -361,11 +371,12 @@ const ViewModalParadas = styled.View`
             <TextInput
               style={Padrao.inputModal}
               value={cod_plano}
+              editable={editable_cod_plano}
               onChangeText={(text) => {
-                  setCod_plano(text); 
-                  setFocus_cod_item(false);
-                  setFocus_cod_plano(true);
-                }}
+                setCod_plano(text);
+                setFocus_cod_item(false);
+                setFocus_cod_plano(true);
+              }}
               keyboardType={"phone-pad"}
               autoFocus={focus_cod_plano}
             />
@@ -373,15 +384,12 @@ const ViewModalParadas = styled.View`
             <TouchModal
               style={{ ...Padrao.openButton, backgroundColor: "gray" }}
               onPress={() => {
-                buscarOf(cod_item,cod_plano);
-
+                buscarOf(cod_item, cod_plano);
               }}
             >
               <TextoModal style={Padrao.textStyle}>Buscar</TextoModal>
             </TouchModal>
             {acoordeon}
-            
-          
           </ViewModalItem>
         </View>
       </Modal>
