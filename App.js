@@ -27,18 +27,18 @@ export default  function App() {
     };
 
     useEffect(() => {
-      const buscar_storage = async (key, set) => {
+      const buscar_storage = async (key, set, inicial) => {
         try {
           let value = await AsyncStorage.getItem(key);
-          value != null ? set(value) : set(null);
+          value != null ? set(value) : set(inicial);
         } catch (e) {
           // read error
         }
       };
-      buscar_storage("@id_posto", setId_posto);
-      buscar_storage("@logado", setLogado);
-      buscar_storage("@operador_id", setOperador_id);
-      buscar_storage("@operador_desc", setOperador_desc);
+      buscar_storage("@id_posto", setId_posto, null);
+      buscar_storage("@logado", setLogado, "0");
+      buscar_storage("@operador_id", setOperador_id, null);
+      buscar_storage("@operador_desc", setOperador_desc, null);
 
     }, []);
 
