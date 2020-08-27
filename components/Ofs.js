@@ -41,7 +41,7 @@ export default (props) => {
   let [cod_plano, setCod_plano] = useState(props.cod_plano);
   let [ofs, setOfs] = useState(props.ofs);
   let [dt_lotes, setDt_lotes] = useState(props.dt_lotes || []);
-  let [toggleCheckBox, setToggleCheckBox] = useState(false);
+  let [toggleCheckBox, setToggleCheckBox] = useState(true);
   
 
     function unique(array) {
@@ -75,6 +75,7 @@ export default (props) => {
             <CheckBox
               disabled={false}
               value={toggleCheckBox}
+              tintColors={{ true: "black" }}
               onValueChange={(newValue) => {
                 setToggleCheckBox(newValue);
               }}
@@ -137,6 +138,7 @@ export default (props) => {
                       <CheckBox
                         disabled={false}
                         value={toggleCheckBox}
+                        tintColors={{ true: "black" }}
                         onValueChange={(newValue) => {
                           setToggleCheckBox(newValue);
                         }}
