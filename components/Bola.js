@@ -382,6 +382,7 @@ const ViewModalParadas = styled.View`
             />
 
             <TouchModal
+              disabled={!editable_cod_item}
               style={{ ...Padrao.openButton, backgroundColor: "gray" }}
               onPress={() => {
                 buscarOf(cod_item, cod_plano);
