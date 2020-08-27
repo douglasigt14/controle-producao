@@ -128,7 +128,7 @@ export default (props) => {
           LisHeaderComponent={<></>}
           // style={Padrao.FlatList}
           data={dt_lotes}
-          keyExtractor={({ num_ordem }, index) => num_ordem}
+          keyExtractor={(index) => dt_lotes.dt}
           renderItem={({ item }) => (
             <View style={{ fontSize: 40 }}>
               <Collapse style={{ backgroundColor: "#fff" }}>
