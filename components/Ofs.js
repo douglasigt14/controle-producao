@@ -77,7 +77,7 @@ export default (props) => {
       <View>
         <ViewBotoesOfs>
           <TouchModal
-            style={{ ...Padrao.openButton, backgroundColor: "gray" }}
+            style={{ ...Padrao.openButton, backgroundColor: "#ffc107" }}
             onPress={() => {
               props.funcao_limparOf();
             }}
@@ -86,7 +86,7 @@ export default (props) => {
           </TouchModal>
 
           <TouchModal
-            style={{ ...Padrao.openButton, backgroundColor: "gray" }}
+            style={{ ...Padrao.openButton, backgroundColor: "#28a745" }}
             onPress={() => {}}
           >
             <TextoModal style={Padrao.textStyle}>Confirmar</TextoModal>
