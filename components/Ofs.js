@@ -34,9 +34,8 @@ export default (props) => {
    let [dt_lotes, setDt_lotes] = useState(props.dt_lotes || []);
 
    let tabela = {
-     tableHead: ["OF", "ITEM", "QTD"],
-     tableData: [
-     ],
+     tableHead: ["OF", "ITEM", "QTD", "DT", "DT OF"],
+     tableData: [],
    };
 
     function unique(array) {
@@ -57,22 +56,28 @@ export default (props) => {
      
      dt_lotes_temp.forEach((dt) => {
        var res = dt.split("|");
-       var tabela_temp = tabela;
+       var tabela_temp = [];
+       
        ofs.forEach((item) => {
-         if(item.dt_inicial == res[0]){
-            tabela_temp.tableData.push([
+         if(item.dt_inicial === res[0]){
+            tabela_temp.push([
               item.num_ordem,
               item.item,
-              item.qtde_of,
+              item.qtde_of
             ]);
-          }  
+          } 
        });
+       var tabelaFinal = {
+         tableHead: ["OF", "ITEM", "QTD"],
+         tableData: tabela_temp,
+       };
+
         dt_lotes_temp2.push({
-         dt: res[0],
-         marcado: true,
-         cor: { backgroundColor: res[1] },
-         tabela: tabela_temp,
-       });
+          dt: res[0],
+          marcado: true,
+          cor: { backgroundColor: res[1] },
+          tabela: tabelaFinal,
+        });
      });
      setDt_lotes(dt_lotes_temp2);
 
