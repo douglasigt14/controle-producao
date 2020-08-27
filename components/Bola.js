@@ -159,7 +159,8 @@ const ViewModalParadas = styled.View`
     setCod_plano("");
     setCod_item("");
     setOfs([]);
-     setAcordeon(null);
+    setAcordeon(null);
+    setMostrarOf(false);
   }
 
   const buscarOf = (cod_item,cod_plano) =>{
