@@ -7,6 +7,7 @@ import { Table, Row, Rows } from "react-native-table-component";
 import Padrao from "../style/Padrao";
 import CheckBox from "@react-native-community/checkbox";
 
+
 export default (props) => {
   const TouchModal = styled.TouchableHighlight`
     margin-top: 10px;
@@ -75,7 +76,7 @@ export default (props) => {
             <CheckBox
               disabled={false}
               value={toggleCheckBox}
-              tintColors={{ true: "black" }}
+              tintColors={{ true: "black", false: "black" }}
               onValueChange={(newValue) => {
                 setToggleCheckBox(newValue);
               }}
@@ -138,7 +139,7 @@ export default (props) => {
                       <CheckBox
                         disabled={false}
                         value={toggleCheckBox}
-                        tintColors={{ true: "black" }}
+                        tintColors={{ true: "black", false: "black" }}
                         onValueChange={(newValue) => {
                           setToggleCheckBox(newValue);
                         }}
