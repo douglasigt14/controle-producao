@@ -50,9 +50,32 @@ export default (props) => {
         return index == arr.indexOf(el);
       });
     }
-  const marcar_desmarcar = (newValue,dt) => {
-    console.warn(dt_lotes);
+  const marcar_desmarcar = (num_ordem) => {
+     ofs.forEach(item => {
+       if(item.num_ordem == num_ordem){
+         item.marcado = !item.marcado; 
+         console.warn(item);
+       }
+     });
+    setOfs(ofs);
   }; 
+
+
+  const marcar_desmarcar_geral = (dt) => {
+    dt_lotes.forEach(item => {
+      if (item.dt == dt) {
+        item.marcado = !item.marcado;
+        console.warn(item);
+      }
+    });
+    setOfs(ofs);
+  }; 
+
+  const confirmar_of = () => {
+    ofs.forEach(item => {
+      console.warn(item);
+    });
+  }  
 
   useEffect(() => {
     let dt_lotes_temp = [];
@@ -66,7 +89,7 @@ export default (props) => {
     dt_lotes_temp.forEach((dt) => {
       var res = dt.split("|");
       var tabela_temp = [];
-
+      
       ofs.forEach((item) => {
         if (item.dt_inicial === res[0]) {
           tabela_temp.push([
@@ -78,7 +101,8 @@ export default (props) => {
               value={toggleCheckBox}
               tintColors={{ true: "black", false: "black" }}
               onValueChange={(newValue) => {
-                setToggleCheckBox(newValue);
+                //setToggleCheckBox(newValue);
+                marcar_desmarcar(item.num_ordem);
               }}
             />,
           ]);
@@ -91,13 +115,17 @@ export default (props) => {
 
       dt_lotes_temp2.push({
         dt: res[0],
-        marcado: false,
+        marcado: true,
         cor: { backgroundColor: res[1] },
         tabela: tabelaFinal,
       });
     });
     setDt_lotes(dt_lotes_temp2);
-  }, [toggleCheckBox]);
+  }, []);
+
+
+
+
 
    useEffect(() => {
       dt_lotes.forEach((item) => {
@@ -119,7 +147,9 @@ export default (props) => {
 
           <TouchModal
             style={{ ...Padrao.openButton, backgroundColor: "#28a745" }}
-            onPress={() => {}}
+            onPress={() => {
+              confirmar_of();
+            }}
           >
             <TextoModal style={Padrao.textStyle}>Confirmar</TextoModal>
           </TouchModal>
@@ -138,10 +168,10 @@ export default (props) => {
                       <TextoAccordeonHeader>{item.dt}</TextoAccordeonHeader>
                       <CheckBox
                         disabled={false}
-                        value={toggleCheckBox}
+                        value={item.marcado}
                         tintColors={{ true: "black", false: "black" }}
                         onValueChange={(newValue) => {
-                          setToggleCheckBox(newValue);
+                          marcar_desmarcar_geral(item.dt);
                         }}
                       />
                     </ViewAccordeonHeader>
