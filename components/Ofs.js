@@ -98,7 +98,7 @@ export default (props) => {
             item.qtde_of,
             <CheckBox
               disabled={false}
-              value={toggleCheckBox}
+              value={item.marcado}
               tintColors={{ true: "black", false: "black" }}
               onValueChange={(newValue) => {
                 //setToggleCheckBox(newValue);
@@ -122,6 +122,7 @@ export default (props) => {
     });
     setDt_lotes(dt_lotes_temp2);
   }, []);
+
 
 
 
