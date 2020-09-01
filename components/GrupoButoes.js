@@ -77,6 +77,7 @@ export default (props) => {
   let finalizado = props.finalizado;
   let [id_posto, setId_posto] = useState(props.id_posto);
   let [paradas, setParadas] = useState([]);
+  let [tabela, setTabela] = useState([]);
 
 
   useEffect(() => {
@@ -111,7 +112,7 @@ export default (props) => {
             tableHead: ["ROTULO", "DESCRICÃO"],
             tableData: tabelaTemp
           };
-          console.warn(tabelaFinal);
+          setTabela(tabelaFinal);
           
         })
         .catch((error) => console.error(error))
@@ -351,9 +352,35 @@ export default (props) => {
                 <TextoModal style={Padrao.textStyle}>X</TextoModal>
               </TouchModal>
             </Div_Fechar2>
+            <Table
+              borderStyle={{
+                borderWidth: 2,
+                borderColor: "#bebebe",
+                backgroundColor: "#fff",
+              }}
+            >
+              <Row
+                data={tabela.tableHead}
+                style={{ height: 40, backgroundColor: "#d3d3d3" }}
+                textStyle={styles.text}
+              />
+              <Rows data={tabela.tableData} textStyle={styles.text} />
+            </Table>
           </ViewModalTipos>
         </View>
       </Modal>
     </>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 16,
+    paddingTop: 30,
+    backgroundColor: "#fff",
+    borderColor: "#000",
+  },
+  head: { height: 40, backgroundColor: "#d3d3d3" },
+  text: { margin: 6 },
+});
