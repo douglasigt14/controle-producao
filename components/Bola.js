@@ -246,7 +246,7 @@ const ViewModalParadas = styled.View`
         transparent={true}
         visible={modalVisible}
         onRequestClose={() => {
-          Alert.alert("Modal has been closed.");
+          setModalVisible(!modalVisible);
         }}
       >
         <View style={Padrao.centeredView}>
@@ -284,7 +284,7 @@ const ViewModalParadas = styled.View`
         transparent={true}
         visible={modalParadasVisible}
         onRequestClose={() => {
-          Alert.alert("Modal has been closed.");
+           setModalParadasVisible(!modalParadasVisible);
         }}
       >
         <View style={Padrao.centeredView}>
@@ -339,7 +339,7 @@ const ViewModalParadas = styled.View`
         transparent={true}
         visible={modalItemVisible}
         onRequestClose={() => {
-          Alert.alert("Modal has been closed.");
+          setModalItemVisible(!modalItemVisible);
         }}
       >
         <View style={Padrao.topView}>
