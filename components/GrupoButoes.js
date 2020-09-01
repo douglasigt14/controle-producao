@@ -3,6 +3,7 @@ import { Alert, View, Text, StyleSheet, Modal, FlatList, ScrollView } from "reac
 import styled from "styled-components";
 import { Button, Card } from 'react-native-paper';
 import Padrao from "../style/Padrao";
+import { Table, Row, Rows } from "react-native-table-component";
 
 const Texto = styled.Text`
     font-size: 18px;
@@ -74,8 +75,8 @@ export default (props) => {
   let [operacoesDiarias, setOperacoesDiarias] = useState([]);
   let operador_id = props.operador_id;
   let finalizado = props.finalizado;
-   let [id_posto, setId_posto] = useState(props.id_posto);
-     let [paradas, setParadas] = useState([]);
+  let [id_posto, setId_posto] = useState(props.id_posto);
+  let [paradas, setParadas] = useState([]);
 
 
   useEffect(() => {
@@ -99,7 +100,20 @@ export default (props) => {
           id_posto
       )
         .then((response) => response.json())
-        .then((json) => setParadas(json))
+        .then((json) => {
+          setParadas(json);
+          var tabelaTemp = []
+          json.forEach(item => {
+            tabelaTemp.push([item.rotulo,item.descricao]);
+          });
+
+          var tabelaFinal = {
+            tableHead: ["ROTULO", "DESCRICÃO"],
+            tableData: tabelaTemp
+          };
+          console.warn(tabelaFinal);
+          
+        })
         .catch((error) => console.error(error))
         .finally(() => setLoading(false));
   }, []); //No Inicio 
