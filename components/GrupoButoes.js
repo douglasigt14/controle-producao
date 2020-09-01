@@ -352,20 +352,22 @@ export default (props) => {
                 <TextoModal style={Padrao.textStyle}>X</TextoModal>
               </TouchModal>
             </Div_Fechar2>
-            <Table
-              borderStyle={{
-                borderWidth: 2,
-                borderColor: "#bebebe",
-                backgroundColor: "#fff",
-              }}
-            >
-              <Row
-                data={tabela.tableHead}
-                style={{ height: 40, backgroundColor: "#d3d3d3" }}
-                textStyle={styles.text}
-              />
-              <Rows data={tabela.tableData} textStyle={styles.text} />
-            </Table>
+            <ScrollView>
+              <Table
+                borderStyle={{
+                  borderWidth: 2,
+                  borderColor: "#bebebe",
+                  backgroundColor: "#fff",
+                }}
+              >
+                <Row
+                  data={tabela.tableHead}
+                  style={{ height: 40, backgroundColor: "#d3d3d3" }}
+                  textStyle={styles.text}
+                />
+                <Rows data={tabela.tableData} textStyle={styles.text} />
+              </Table>
+            </ScrollView>
           </ViewModalTipos>
         </View>
       </Modal>
