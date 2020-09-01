@@ -31,7 +31,6 @@ const ViewModalParadas = styled.View`
 
 const ViewModalTipos = styled.View`
   max-height: 280px;
-  width: 50%;
   display: flex;
 `;
 
@@ -75,6 +74,8 @@ export default (props) => {
   let [operacoesDiarias, setOperacoesDiarias] = useState([]);
   let operador_id = props.operador_id;
   let finalizado = props.finalizado;
+   let [id_posto, setId_posto] = useState(props.id_posto);
+     let [paradas, setParadas] = useState([]);
 
 
   useEffect(() => {
@@ -93,6 +94,14 @@ export default (props) => {
       })
       .catch((error) => console.error(error))
       .finally(() => setLoading(false));
+      fetch(
+        "http://controleproducao.tuboarte.com/paradas/codigos_restrito/" +
+          id_posto
+      )
+        .then((response) => response.json())
+        .then((json) => setParadas(json))
+        .catch((error) => console.error(error))
+        .finally(() => setLoading(false));
   }, []); //No Inicio 
 
 

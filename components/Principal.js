@@ -233,40 +233,40 @@ export default (props) => {
     return (
       <>
         <View pointerEvents={toch}>
-        <Appbar.Header style={Padrao.barra}>
-          <Appbar.Content title="Controle de Produção" />
-          <Appbar.Action
-            icon="arrow-right"
-            onPress={() => {
-              props.funcao_deslogar();
-            }}
-          />
-        </Appbar.Header>
+          <Appbar.Header style={Padrao.barra}>
+            <Appbar.Content title="Controle de Produção" />
+            <Appbar.Action
+              icon="arrow-right"
+              onPress={() => {
+                props.funcao_deslogar();
+              }}
+            />
+          </Appbar.Header>
           <GrupoButoes
             finalizado={finalizado}
             funcao_finalizar={finalizar}
-            operador_id={operador_id}>
-            
-        </GrupoButoes>
-        <ParadasFrequentes
-          finalizado={finalizado}
-          funcao_finalizar={finalizar}
-          id_posto={props.id_posto}
-          operador_id={props.operador_id}
-          operador_desc={props.operador_desc}
-          funcao_parar={parar}
-          paradasFrequentes={paradasFrequentes}
-        ></ParadasFrequentes>
+            operador_id={operador_id}
+            id_posto={props.id_posto}
+          ></GrupoButoes>
+          <ParadasFrequentes
+            finalizado={finalizado}
+            funcao_finalizar={finalizar}
+            id_posto={props.id_posto}
+            operador_id={props.operador_id}
+            operador_desc={props.operador_desc}
+            funcao_parar={parar}
+            paradasFrequentes={paradasFrequentes}
+          ></ParadasFrequentes>
 
-        <Bola
-          cor={cor}
-          cor_texto={cor_texto}
-          status_texto={status_texto}
-          descricao={descricao}
-          funcao_operar={operar}
-          funcao_parar={parar}
-          id_posto={props.id_posto}
-        ></Bola>
+          <Bola
+            cor={cor}
+            cor_texto={cor_texto}
+            status_texto={status_texto}
+            descricao={descricao}
+            funcao_operar={operar}
+            funcao_parar={parar}
+            id_posto={props.id_posto}
+          ></Bola>
         </View>
 
         <AwesomeAlert
@@ -277,8 +277,8 @@ export default (props) => {
           closeOnTouchOutside={true}
           closeOnHardwareBackPress={true}
           cancelText="No, cancel"
-          contentStyle={{ width: 400, height: 200}}
-          titleStyle={{fontSize: 25,textAlign: 'center'}}
+          contentStyle={{ width: 400, height: 200 }}
+          titleStyle={{ fontSize: 25, textAlign: "center" }}
           messageStyle={{ fontSize: 15 }}
         />
       </>
