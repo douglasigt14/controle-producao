@@ -68,13 +68,23 @@ export default (props) => {
 
 
   const marcar_desmarcar_geral = (dt) => {
-    dt_lotes.forEach(item => {
-      if (item.dt == dt) {
+    console.warn(dt);
+    let ofsTemp = ofs;
+    ofsTemp.forEach(item => {
+      if (item.dt_inicial == dt) {
         item.marcado = !item.marcado;
-        console.warn(item);
+        item.check = <CheckBox onPress={() => {
+          marcar_desmarcar(item.num_ordem);
+        }} checked={item.marcado} />;
       }
     });
-    setDt_lotes(dt_lotes);
+    // dt_lotes.forEach(item => {
+    //   if (item.dt == dt) {
+    //     item.marcado = !item.marcado;
+    //     console.warn(item);
+    //   }
+    // });
+    // setDt_lotes(dt_lotes);
   }; 
 
   const confirmar_of = () => {
