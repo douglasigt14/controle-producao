@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, FlatList, StyleSheet, ScrollView } from "react-native";
 import {Collapse,CollapseHeader,CollapseBody} from "accordion-collapse-react-native";
-import { Thumbnail, List, ListItem, Separator } from "native-base";
+import { Thumbnail, List, ListItem, Separator, CheckBox  } from "native-base";
 import styled from "styled-components";
 import { Table, Row, Rows } from "react-native-table-component";
 import Padrao from "../style/Padrao";
-import CheckBox from "@react-native-community/checkbox";
+// import CheckBox from "@react-native-community/checkbox";
 
 
 export default (props) => {
@@ -53,7 +53,8 @@ export default (props) => {
   const marcar_desmarcar = (num_ordem) => {
      ofs.forEach(item => {
        if(item.num_ordem == num_ordem){
-         item.marcado = !item.marcado; 
+         item.marcado = !item.marcado;
+         item.check.props.checked = !item.check.props.checked; 
          console.warn(item);
        }
      });
@@ -68,12 +69,14 @@ export default (props) => {
         console.warn(item);
       }
     });
-    setOfs(ofs);
+    setDt_lotes(dt_lotes);
   }; 
 
   const confirmar_of = () => {
     ofs.forEach(item => {
-      console.warn(item);
+      if(item.marcado == true){
+        console.warn(item);
+      }
     });
   }  
 
@@ -92,22 +95,18 @@ export default (props) => {
       
       ofs.forEach((item) => {
         if (item.dt_inicial === res[0]) {
+          item.check = <CheckBox onPress={() => {
+            marcar_desmarcar(item.dt);
+          }} checked={item.marcado} />;
           tabela_temp.push([
             item.num_ordem,
             item.item,
             item.qtde_of,
-            <CheckBox
-              disabled={false}
-              value={item.marcado}
-              tintColors={{ true: "black", false: "black" }}
-              onValueChange={(newValue) => {
-                //setToggleCheckBox(newValue);
-                marcar_desmarcar(item.num_ordem);
-              }}
-            />,
+            item.check
           ]);
         }
       });
+      setOfs(ofs);
       var tabelaFinal = {
         tableHead: ["OF", "ITEM", "QTD", "CHECK"],
         tableData: tabela_temp,
@@ -167,14 +166,17 @@ export default (props) => {
                   <Separator bordered style={item.cor}>
                     <ViewAccordeonHeader>
                       <TextoAccordeonHeader>{item.dt}</TextoAccordeonHeader>
-                      <CheckBox
+                      <CheckBox onPress={() => {
+                        marcar_desmarcar_geral(item.dt);
+                      }} checked={item.marcado} />
+                      {/* <CheckBox
                         disabled={false}
                         value={item.marcado}
                         tintColors={{ true: "black", false: "black" }}
                         onValueChange={(newValue) => {
                           marcar_desmarcar_geral(item.dt);
                         }}
-                      />
+                      /> */}
                     </ViewAccordeonHeader>
                   </Separator>
                 </CollapseHeader>
