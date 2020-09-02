@@ -51,14 +51,18 @@ export default (props) => {
       });
     }
   const marcar_desmarcar = (num_ordem) => {
-     ofs.forEach(item => {
+    console.warn(num_ordem);
+    let ofsTemp = ofs;
+    ofsTemp.forEach(item => {
        if(item.num_ordem == num_ordem){
          item.marcado = !item.marcado;
-         item.check.props.checked = !item.check.props.checked; 
-         console.warn(item);
+         item.check = <CheckBox onPress={() => {
+           marcar_desmarcar(item.num_ordem);
+         }} checked={item.marcado} />;
+         console.warn(item.check);
        }
      });
-    setOfs(ofs);
+    setOfs(ofsTemp);
   }; 
 
 
@@ -81,6 +85,7 @@ export default (props) => {
   }  
 
   useEffect(() => {
+    console.warn('Efeito OF')
     let dt_lotes_temp = [];
     ofs.forEach((item) => {
       dt_lotes_temp.push(item.dt_inicial + "|" + item.cor);
@@ -96,7 +101,7 @@ export default (props) => {
       ofs.forEach((item) => {
         if (item.dt_inicial === res[0]) {
           item.check = <CheckBox onPress={() => {
-            marcar_desmarcar(item.dt);
+            marcar_desmarcar(item.num_ordem);
           }} checked={item.marcado} />;
           tabela_temp.push([
             item.num_ordem,
@@ -106,7 +111,6 @@ export default (props) => {
           ]);
         }
       });
-      setOfs(ofs);
       var tabelaFinal = {
         tableHead: ["OF", "ITEM", "QTD", "CHECK"],
         tableData: tabela_temp,
@@ -120,7 +124,9 @@ export default (props) => {
       });
     });
     setDt_lotes(dt_lotes_temp2);
-  }, []);
+  }, [ofs]); //
+
+
 
 
 
