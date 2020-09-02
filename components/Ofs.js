@@ -41,7 +41,7 @@ export default (props) => {
   let [cod_item, setCod_item] = useState(props.cod_item);
   let [cod_plano, setCod_plano] = useState(props.cod_plano);
   let [ofs, setOfs] = useState(props.ofs);
-  let [dt_lotes, setDt_lotes] = useState(props.dt_lotes || []);
+  let [dt_lotes, setDt_lotes] = useState([]);
   let [toggleCheckBox, setToggleCheckBox] = useState(true);
   
 
@@ -67,24 +67,18 @@ export default (props) => {
   }; 
 
 
-  const marcar_desmarcar_geral = (dt) => {
-    console.warn(dt);
+  const marcar_desmarcar_geral = (dt, marcado_p) => {
     let ofsTemp = ofs;
     ofsTemp.forEach(item => {
       if (item.dt_inicial == dt) {
-        item.marcado = !item.marcado;
+        item.marcado = marcado_p;
         item.check = <CheckBox onPress={() => {
           marcar_desmarcar(item.num_ordem);
-        }} checked={item.marcado} />;
+        }} checked={marcado_p} />;
       }
     });
-    // dt_lotes.forEach(item => {
-    //   if (item.dt == dt) {
-    //     item.marcado = !item.marcado;
-    //     console.warn(item);
-    //   }
-    // });
-    // setDt_lotes(dt_lotes);
+    setOfs(ofsTemp);
+    atualizar_lote(marcado_p, dt);
   }; 
 
   const confirmar_of = () => {
@@ -95,26 +89,30 @@ export default (props) => {
     });
   }  
 
-  useEffect(() => {
-    
-    atualizar_lote();
-  }, [ofs]); //
 
-
-  const atualizar_lote = () => {
+  const atualizar_lote = (marcado_p = true, dt_p = null) => {
     let dt_lotes_temp = [];
-    console.warn('Efeito OF')
     ofs.forEach((item) => {
       dt_lotes_temp.push(item.dt_inicial + "|" + item.cor);
       item.marcado = JSON.parse(item.marcado);
     });
+    let dt_lotes_temp_original = dt_lotes_temp;
     dt_lotes_temp = unique(dt_lotes_temp);
     let dt_lotes_temp2 = [];
 
-    dt_lotes_temp.forEach((dt) => {
-      var res = dt.split("|");
-      var tabela_temp = [];
 
+
+    console.warn(dt_lotes_temp);
+
+    dt_lotes_temp.forEach((dt) => {
+      
+      let res = dt.split("|");
+      let tabela_temp = [];
+      
+      let marcado_temp = res[0] === dt_p ? marcado_p : true;
+
+
+      
       ofs.forEach((item) => {
         if (item.dt_inicial === res[0]) {
           item.check = <CheckBox onPress={() => {
@@ -128,19 +126,23 @@ export default (props) => {
           ]);
         }
       });
-      var tabelaFinal = {
+      let tabelaFinal = {
         tableHead: ["OF", "ITEM", "QTD", "CHECK"],
         tableData: tabela_temp,
       };
 
       dt_lotes_temp2.push({
         dt: res[0],
-        marcado: true,
+        marcado: marcado_temp,
         cor: { backgroundColor: res[1] },
         tabela: tabelaFinal,
+        check: <CheckBox onPress={() => {
+          marcar_desmarcar_geral(res[0], !marcado_temp);
+        }} checked={marcado_temp} />
       });
     });
     setDt_lotes(dt_lotes_temp2);
+    
   }  
 
 
@@ -148,10 +150,8 @@ export default (props) => {
 
 
    useEffect(() => {
-      dt_lotes.forEach((item) => {
-        item.marcado = JSON.parse(item.marcado);
-      });
-   }, [dt_lotes]);
+     atualizar_lote();
+   }, []);
   return (
     <>
       <View>
@@ -186,9 +186,7 @@ export default (props) => {
                   <Separator bordered style={item.cor}>
                     <ViewAccordeonHeader>
                       <TextoAccordeonHeader>{item.dt}</TextoAccordeonHeader>
-                      <CheckBox onPress={() => {
-                        marcar_desmarcar_geral(item.dt);
-                      }} checked={item.marcado} />
+                      {item.check}
                       {/* <CheckBox
                         disabled={false}
                         value={item.marcado}
