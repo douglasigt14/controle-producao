@@ -51,7 +51,6 @@ export default (props) => {
       });
     }
   const marcar_desmarcar = (num_ordem) => {
-    console.warn(num_ordem);
     let ofsTemp = ofs;
     ofsTemp.forEach(item => {
        if(item.num_ordem == num_ordem){
@@ -59,10 +58,12 @@ export default (props) => {
          item.check = <CheckBox onPress={() => {
            marcar_desmarcar(item.num_ordem);
          }} checked={item.marcado} />;
-         console.warn(item.check);
        }
      });
+
     setOfs(ofsTemp);
+
+    atualizar_lote();
   }; 
 
 
@@ -85,8 +86,14 @@ export default (props) => {
   }  
 
   useEffect(() => {
-    console.warn('Efeito OF')
+    
+    atualizar_lote();
+  }, [ofs]); //
+
+
+  const atualizar_lote = () => {
     let dt_lotes_temp = [];
+    console.warn('Efeito OF')
     ofs.forEach((item) => {
       dt_lotes_temp.push(item.dt_inicial + "|" + item.cor);
       item.marcado = JSON.parse(item.marcado);
@@ -97,7 +104,7 @@ export default (props) => {
     dt_lotes_temp.forEach((dt) => {
       var res = dt.split("|");
       var tabela_temp = [];
-      
+
       ofs.forEach((item) => {
         if (item.dt_inicial === res[0]) {
           item.check = <CheckBox onPress={() => {
@@ -124,10 +131,7 @@ export default (props) => {
       });
     });
     setDt_lotes(dt_lotes_temp2);
-  }, [ofs]); //
-
-
-
+  }  
 
 
 
