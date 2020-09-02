@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, FlatList, StyleSheet, ScrollView } from "react-native";
+import { View, Text, FlatList, StyleSheet, ScrollView, Alert } from "react-native";
 import {Collapse,CollapseHeader,CollapseBody} from "accordion-collapse-react-native";
 import { Thumbnail, List, ListItem, Separator, CheckBox  } from "native-base";
 import styled from "styled-components";
@@ -61,6 +61,10 @@ export default (props) => {
        }
      });
 
+    dt_lotes.forEach(item => {
+      console.warn(dt_lotes);
+    });
+
     setOfs(ofsTemp);
 
     atualizar_lote();
@@ -82,11 +86,18 @@ export default (props) => {
   }; 
 
   const confirmar_of = () => {
+    let ofs_marcadas = [];
     ofs.forEach(item => {
       if(item.marcado == true){
-        console.warn(item);
+        ofs_marcadas.push(item);
       }
     });
+    if(ofs_marcadas.length > 0 ){
+
+    }
+    else{
+      Alert.alert('Marque Pelo menos uma OF');
+    }
   }  
 
 
@@ -96,13 +107,12 @@ export default (props) => {
       dt_lotes_temp.push(item.dt_inicial + "|" + item.cor);
       item.marcado = JSON.parse(item.marcado);
     });
-    let dt_lotes_temp_original = dt_lotes_temp;
     dt_lotes_temp = unique(dt_lotes_temp);
     let dt_lotes_temp2 = [];
 
 
 
-    console.warn(dt_lotes_temp);
+    
 
     dt_lotes_temp.forEach((dt) => {
       
