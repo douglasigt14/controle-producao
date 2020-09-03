@@ -126,34 +126,13 @@ const ViewModalParadas = styled.View`
     let [mostrarOf, setMostrarOf] = useState(false);
     let [acoordeon, setAcordeon] = useState(null);
     let [ofs, setOfs] = useState([]);
-     let [dt_lotes, setDt_lotes] = useState([]);
+    let [ofs_selecionadas, setOfsSelecionadas] = useState(JSON.parse(props.ofs_selecionadas));
+    let [dt_lotes, setDt_lotes] = useState([]);
+
+    let [componentVerde, setComponentVerde] = useState(null); 
 
     let botao_operacao = null; 
-    if (isOfsSelecionadas) {
-      botao_operacao = (
-        <TouchModal
-          style={{ ...Padrao.openButton, backgroundColor: "#28a745" }}
-          onPress={() => {
-            setModalVisible(!modalVisible);
-            props.funcao_operar("ITEM DESCRIÇÃO");
-          }}
-        >
-          <TextoModal style={Padrao.textStyle}>Operar</TextoModal>
-        </TouchModal>
-      );
-    } else {
-      botao_operacao = (
-        <TouchModal
-          style={{ ...Padrao.openButton, backgroundColor: "#28a745" }}
-          onPress={() => {
-            setModalVisible(!modalVisible);
-            setModalItemVisible(true);
-          }}
-        >
-          <TextoModal style={Padrao.textStyle}>Selecionar Item</TextoModal>
-        </TouchModal>
-      );
-    }
+    
    let tabela = {
      tableHead: ["OF", "ITEM", "COR", "QTD"],
      tableData: [["1", "2", "3", "4"]],
@@ -222,6 +201,31 @@ const ViewModalParadas = styled.View`
          .then((json) => setParadas(json))
          .catch((error) => console.error(error))
          .finally(() => setLoading(false));
+       if (ofs_selecionadas.length > 0 ) {
+         setComponentVerde( (
+           <TouchModal
+             style={{ ...Padrao.openButton, backgroundColor: "#28a745" }}
+             onPress={() => {
+               setModalVisible(!modalVisible);
+               props.funcao_operar("ITEM DESCRIÇÃO");
+             }}
+           >
+             <TextoModal style={Padrao.textStyle}>Operar</TextoModal>
+           </TouchModal>
+         ) );
+       } else {
+         setComponentVerde( (
+           <TouchModal
+             style={{ ...Padrao.openButton, backgroundColor: "#28a745" }}
+             onPress={() => {
+               setModalVisible(!modalVisible);
+               setModalItemVisible(true);
+             }}
+           >
+             <TextoModal style={Padrao.textStyle}>Selecionar Item</TextoModal>
+           </TouchModal>
+         ) );
+       }
      }, []);
 
   return (
@@ -264,7 +268,7 @@ const ViewModalParadas = styled.View`
                 <TextoModal style={Padrao.textStyle}>X</TextoModal>
               </TouchModal>
             </Div_Fechar>
-            {botao_operacao}
+            {componentVerde}
             <TouchModal
               style={{ ...Padrao.openButton, backgroundColor: "#dc3545" }}
               onPress={() => {

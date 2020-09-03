@@ -71,11 +71,7 @@ export default (props) => {
   let [paradas, setParadas] = useState([]);
   let [tabela, setTabela] = useState([]);
   let [ofs_selecionadas, setOfsSelecionadas]  = useState(JSON.parse(props.ofs_selecionadas));
-  let [componentFinalizar, setComponentFinalizar] = useState(null);
-
-  console.warn(ofs_selecionadas.length);
-  console.warn(ofs_selecionadas);
- 
+  let [componentFinalizar, setComponentFinalizar] = useState(null); 
   
 
   useEffect(() => {
