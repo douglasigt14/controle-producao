@@ -126,7 +126,7 @@ const ViewModalParadas = styled.View`
     let [mostrarOf, setMostrarOf] = useState(false);
     let [acoordeon, setAcordeon] = useState(null);
     let [ofs, setOfs] = useState([]);
-  let [ofs_selecionadas, setOfsSelecionadas] = useState(JSON.parse(props.ofs_selecionadas));
+  let [ofs_selecionadas, setOfsSelecionadas] = useState(props.ofs_selecionadas); // JSON.parse()
     let [dt_lotes, setDt_lotes] = useState([]);
 
     let [componentVerde, setComponentVerde] = useState(null); 
@@ -149,6 +149,7 @@ const ViewModalParadas = styled.View`
     setEditable_cod_plano(true);
     setAcordeon(null);
     setMostrarOf(false);
+    
   }
 
   const buscarOf = (cod_item,cod_plano) =>{

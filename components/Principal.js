@@ -52,8 +52,9 @@ export default (props) => {
     buscar_storage("@cor_texto", setCor_texto, "black");
     buscar_storage("@descricao", setDescricao, "");
     buscar_storage("@finalizado", setFinalizado, "true");
-    buscar_storage("@ofs_selecionadas", setOfs_selecionadas, JSON.stringify([]));
-    consulta_storage();
+    buscar_storage("@ofs_selecionadas", setOfs_selecionadas, []);
+
+    // consulta_storage();
   }, []);
 
      useEffect(() => {    
@@ -76,7 +77,7 @@ export default (props) => {
 
      }, [finalizado, parada_id]);
 
-      
+    
      
 
      const update_parada = () => {
@@ -231,7 +232,7 @@ export default (props) => {
         showAlert();
         setTimeout(function () { hideAlert(); }, 500);
       });
-    }
+    } 
    
     return (
       <>

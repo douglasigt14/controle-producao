@@ -4,6 +4,8 @@ import styled from "styled-components";
 import { Button, Card } from 'react-native-paper';
 import Padrao from "../style/Padrao";
 import { Table, Row, Rows } from "react-native-table-component";
+import AsyncStorage from "@react-native-community/async-storage";
+import { consulta_storage } from "../storage/localstorage";
 
 const Texto = styled.Text`
     font-size: 18px;
@@ -66,13 +68,14 @@ export default (props) => {
   let [paradasDiarias, setParadasDiarias] = useState([]);
   let [operacoesDiarias, setOperacoesDiarias] = useState([]);
   let operador_id = props.operador_id;
-  let [finalizado, SetFinalizado] = useState(props.finalizado);
+  
   let [id_posto, setId_posto] = useState(props.id_posto);
   let [paradas, setParadas] = useState([]);
   let [tabela, setTabela] = useState([]);
-  let [ofs_selecionadas, setOfsSelecionadas] = useState(JSON.parse(props.ofs_selecionadas));
+  let [ofs_selecionadas, setOfsSelecionadas] = useState(props.ofs_selecionadas);
   let [componentFinalizar, setComponentFinalizar] = useState(null); 
   
+  let finalizado = props.finalizado;
 
   useEffect(() => {
     fetch("http://controleproducao.tuboarte.com/paradas-diarias/"+operador_id)
@@ -111,33 +114,7 @@ export default (props) => {
         })
         .catch((error) => console.error(error))
         .finally(() => setLoading(false));
-
         
-        if (ofs_selecionadas.length > 0) {
-          setComponentFinalizar(<Div>
-            <Button contentStyle={{ height: 90 }} color="#6c757d" title='Finalizar' mode="contained" onPress={() => {
-              setModalVisibleOfsSelecionadas(true);
-            }}>
-              <Texto>Finalizar</Texto>
-            </Button>
-          </Div>);
-        }
-        else if (finalizado == false) {
-          setComponentFinalizar(<Div>
-            <Button contentStyle={{ height: 90 }} color="#6c757d" title='Finalizar' mode="contained" onPress={() => {
-              props.funcao_finalizar(props.id_posto)
-            }}>
-              <Texto>Finalizar</Texto>
-            </Button>
-          </Div>);
-        }
-        else {
-          setComponentFinalizar(<Div>
-            <Button contentStyle={{ height: 90 }} color="#6c757d" title='Finalizar' mode="contained" disabled='true' onPress={() => console.log('Pressed')}>
-              <Texto>Finalizar</Texto>
-            </Button>
-          </Div>);
-        }
 
   }, []); //No Inicio 
 
@@ -158,6 +135,34 @@ export default (props) => {
       })
       .catch((error) => console.error(error))
       .finally(() => setLoading(false));
+
+
+
+    if (ofs_selecionadas.length > 0) {
+      setComponentFinalizar(<Div>
+        <Button contentStyle={{ height: 90 }} color="#000000" title='Finalizar' mode="contained" onPress={() => {
+          setModalVisibleOfsSelecionadas(true);
+        }}>
+          <Texto>Finalizar</Texto>
+        </Button>
+      </Div>);
+    }
+    else if (finalizado == false) {
+      setComponentFinalizar(<Div>
+        <Button contentStyle={{ height: 90 }} color="#6c757d" title='Finalizar' mode="contained" onPress={() => {
+          props.funcao_finalizar(props.id_posto)
+        }}>
+          <Texto>Finalizar</Texto>
+        </Button>
+      </Div>);
+    }
+    else {
+      setComponentFinalizar(<Div>
+        <Button contentStyle={{ height: 90 }} color="#6c757d" title='Finalizar' mode="contained" disabled='true' onPress={() => console.log('Pressed')}>
+          <Texto>Finalizar</Texto>
+        </Button>
+      </Div>);
+    }
   }, [finalizado]); // Com Dependencias
 
 
