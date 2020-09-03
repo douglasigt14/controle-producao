@@ -25,20 +25,11 @@ const Div_Card = styled.View`
     justify-content: space-around;
 `;
 
-const ViewModalParadas = styled.View`
+const ViewModal = styled.View`
       max-height: 280px;
       display: flex;
   `;
 
-const ViewModalTipos = styled.View`
-  max-height: 280px;
-  display: flex;
-`;
-
-const ViewModalOperacoes = styled.View`
-      max-height: 280px;
-      display: flex;
-  `;
 
 const TouchModal = styled.TouchableHighlight`
     margin-top: 10px;
@@ -70,6 +61,7 @@ export default (props) => {
   let [modalVisibleParadas, setModalVisibleParadas] = useState(false);
   let [modalVisibleOperacoes, setModalVisibleOperacoes] = useState(false);
   let [modalVisibleTipos, setModalVisibleTipos] = useState(false);
+  let [modalVisibleOfsSelecionadas, setModalVisibleOfsSelecionadas] = useState(false);
   let [isLoading, setLoading] = useState(true);
   let [paradasDiarias, setParadasDiarias] = useState([]);
   let [operacoesDiarias, setOperacoesDiarias] = useState([]);
@@ -78,7 +70,8 @@ export default (props) => {
   let [id_posto, setId_posto] = useState(props.id_posto);
   let [paradas, setParadas] = useState([]);
   let [tabela, setTabela] = useState([]);
-  let ofs_selecionadas =props.ofs_selecionadas;
+  let ofs_selecionadas = props.ofs_selecionadas;
+  let [componentFinalizar, setComponentFinalizar] = useState(null);
 
   useEffect(() => {
     fetch("http://controleproducao.tuboarte.com/paradas-diarias/"+operador_id)
@@ -117,6 +110,34 @@ export default (props) => {
         })
         .catch((error) => console.error(error))
         .finally(() => setLoading(false));
+
+        
+        if (ofs_selecionadas != []) {
+          setComponentFinalizar(<Div>
+            <Button contentStyle={{ height: 90 }} color="#6c757d" title='Finalizar' mode="contained" onPress={() => {
+              setModalVisibleOfsSelecionadas(true);
+            }}>
+              <Texto>Finalizar</Texto>
+            </Button>
+          </Div>);
+        }
+        else if (finalizado == false) {
+          setComponentFinalizar(<Div>
+            <Button contentStyle={{ height: 90 }} color="#6c757d" title='Finalizar' mode="contained" onPress={() => {
+              props.funcao_finalizar(props.id_posto)
+            }}>
+              <Texto>Finalizar</Texto>
+            </Button>
+          </Div>);
+        }
+        else {
+          setComponentFinalizar(<Div>
+            <Button contentStyle={{ height: 90 }} color="#6c757d" title='Finalizar' mode="contained" disabled='true' onPress={() => console.log('Pressed')}>
+              <Texto>Finalizar</Texto>
+            </Button>
+          </Div>);
+        }
+
   }, []); //No Inicio 
 
 
@@ -138,25 +159,8 @@ export default (props) => {
       .finally(() => setLoading(false));
   }, [finalizado]); // Com Dependencias
 
-  let componentFinalizar = null;
-  
-  if (finalizado == false ){
-    componentFinalizar = <Div>
-                            <Button contentStyle={{ height: 90 }} color="#6c757d" title='Finalizar' mode="contained" onPress={() => {
-                              props.funcao_finalizar(props.id_posto)
-                            }}>
-                              <Texto>Finalizar</Texto>
-                            </Button>
-                          </Div>;
-  }
-  else{
-    componentFinalizar = <Div>
-                          <Button contentStyle={{ height: 90 }} color="#6c757d" title='Finalizar' mode="contained" disabled='true' onPress={() => console.log('Pressed')}>
-                            <Texto>Finalizar</Texto>
-                          </Button>
-                        </Div>;
-  }
- 
+
+
   return (
     <>
       <Div_Card>
@@ -231,7 +235,7 @@ export default (props) => {
         hardwareAccelerated={true}
       >
         <View style={Padrao.topView}>
-          <ViewModalParadas style={Padrao.modalView}>
+          <ViewModal style={Padrao.modalView}>
             <Div_Fechar>
               <Text
                 style={{
@@ -266,7 +270,7 @@ export default (props) => {
                 )}
               />
             </ScrollView>
-          </ViewModalParadas>
+          </ViewModal>
         </View>
       </Modal>
 
@@ -281,7 +285,7 @@ export default (props) => {
         hardwareAccelerated={true}
       >
         <View style={Padrao.topView}>
-          <ViewModalOperacoes style={Padrao.modalView}>
+          <ViewModal style={Padrao.modalView}>
             <Div_Fechar>
               <Text
                 style={{
@@ -316,7 +320,7 @@ export default (props) => {
                 )}
               />
             </ScrollView>
-          </ViewModalOperacoes>
+          </ViewModal>
         </View>
       </Modal>
 
@@ -331,7 +335,7 @@ export default (props) => {
         hardwareAccelerated={true}
       >
         <View style={Padrao.topView}>
-          <ViewModalTipos style={Padrao.modalView}>
+          <ViewModal style={Padrao.modalView}>
             <Div_Fechar2>
               <Text
                 style={{
@@ -368,9 +372,52 @@ export default (props) => {
                 <Rows data={tabela.tableData} textStyle={styles.text} />
               </Table>
             </ScrollView>
-          </ViewModalTipos>
+          </ViewModal>
         </View>
       </Modal>
+
+
+
+
+      {/* Modal OFS Selecionadas */}
+      <Modal
+        animationType="fade"
+        transparent={true}
+        visible={modalVisibleOfsSelecionadas}
+        onRequestClose={() => {
+          setModalVisibleOfsSelecionadas(false);
+        }}
+        hardwareAccelerated={true}
+      >
+        <View style={Padrao.topView}>
+          <ViewModal style={Padrao.modalView}>
+            <Div_Fechar2>
+              <Text
+                style={{
+                  fontSize: 30,
+                  marginTop: 15,
+                  marginBottom: 15,
+                  marginRight: 400,
+                }}
+              >
+                Tipos de Paradas
+              </Text>
+              <TouchModal
+                style={{ ...Padrao.closeButton }}
+                onPress={() => {
+                  setModalVisibleOfsSelecionadas(!modalVisibleOfsSelecionadas);
+                }}
+              >
+                <TextoModal style={Padrao.textStyle}>X</TextoModal>
+              </TouchModal>
+            </Div_Fechar2>
+            <ScrollView>
+              <Text>Douglas</Text>
+            </ScrollView>
+          </ViewModal>
+        </View>
+      </Modal>
+
     </>
   );
 };
