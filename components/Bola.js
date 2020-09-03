@@ -54,7 +54,7 @@ const Div = styled.View`
 
    const ViewModalItem = styled.View`
      width: 95%;
-     min-height: 380px;
+     min-height: 520px;
      display: flex;
    `;
 
@@ -126,7 +126,7 @@ const ViewModalParadas = styled.View`
     let [mostrarOf, setMostrarOf] = useState(false);
     let [acoordeon, setAcordeon] = useState(null);
     let [ofs, setOfs] = useState([]);
-    let [ofs_selecionadas, setOfsSelecionadas] = useState(JSON.parse(props.ofs_selecionadas));
+  let [ofs_selecionadas, setOfsSelecionadas] = useState(JSON.parse(props.ofs_selecionadas));
     let [dt_lotes, setDt_lotes] = useState([]);
 
     let [componentVerde, setComponentVerde] = useState(null); 
@@ -218,7 +218,7 @@ const ViewModalParadas = styled.View`
            <TouchModal
              style={{ ...Padrao.openButton, backgroundColor: "#28a745" }}
              onPress={() => {
-               setModalVisible(!modalVisible);
+               setModalVisible(false);
                setModalItemVisible(true);
              }}
            >

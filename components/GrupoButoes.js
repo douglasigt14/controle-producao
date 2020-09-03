@@ -70,7 +70,7 @@ export default (props) => {
   let [id_posto, setId_posto] = useState(props.id_posto);
   let [paradas, setParadas] = useState([]);
   let [tabela, setTabela] = useState([]);
-  let [ofs_selecionadas, setOfsSelecionadas]  = useState(JSON.parse(props.ofs_selecionadas));
+  let [ofs_selecionadas, setOfsSelecionadas] = useState(JSON.parse(props.ofs_selecionadas));
   let [componentFinalizar, setComponentFinalizar] = useState(null); 
   
 

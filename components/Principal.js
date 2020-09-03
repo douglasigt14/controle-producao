@@ -25,6 +25,9 @@ export default (props) => {
     let [ofs_selecionadas, setOfs_selecionadas] = useState([]);
     let [toch, setToch] = useState('auto');
     let operador_id = props.operador_id;
+
+   console.warn(ofs_selecionadas);
+    
   const showAlert = () => {
     setMostrar_alert(true);
     };
@@ -34,7 +37,7 @@ export default (props) => {
   };
 
   useEffect(() => {
-    const buscar_storage = async (key, set,inicial) => {
+    const buscar_storage = async (key, set,inicial, json = false) => {
       try {
         let value = await AsyncStorage.getItem(key);
         value = value == "true" ? true : value;
@@ -50,7 +53,7 @@ export default (props) => {
     buscar_storage("@cor_texto", setCor_texto, "black");
     buscar_storage("@descricao", setDescricao, "");
     buscar_storage("@finalizado", setFinalizado, "true");
-    buscar_storage("@ofs_selecionadas", setOfs_selecionadas, []);
+    buscar_storage("@ofs_selecionadas", setOfs_selecionadas, JSON.stringify([]));
   }, []);
 
      useEffect(() => {    
@@ -169,7 +172,7 @@ export default (props) => {
                 const URL_OPERACAO = "http://controleproducao.tuboarte.com/operacoes-diarias";
                 const formDataI = new FormData();
                 formDataI.append("operador_id", operador_id);
-                formDataI.append("cod_item", "123-ITEM DE TESTE | QTDE: ( 100 ) | 0001");
+                formDataI.append("cod_item", ofs_selecionadas[0].cod_item+"-ITEM DE TESTE | QTDE: ( 100 ) | 0001");
                 formDataI.append("posto_id", props.id_posto);
                 formDataI.append("tempo_decisao", "0");
 
