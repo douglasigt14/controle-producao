@@ -26,7 +26,6 @@ export default (props) => {
     let [toch, setToch] = useState('auto');
     let operador_id = props.operador_id;
 
-   console.warn(ofs_selecionadas);
     
   const showAlert = () => {
     setMostrar_alert(true);
@@ -54,6 +53,7 @@ export default (props) => {
     buscar_storage("@descricao", setDescricao, "");
     buscar_storage("@finalizado", setFinalizado, "true");
     buscar_storage("@ofs_selecionadas", setOfs_selecionadas, JSON.stringify([]));
+    consulta_storage();
   }, []);
 
      useEffect(() => {    
