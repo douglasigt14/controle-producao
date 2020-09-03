@@ -36,7 +36,7 @@ export default (props) => {
   };
 
   useEffect(() => {
-    const buscar_storage = async (key, set,inicial, json = false) => {
+    const buscar_storage = async (key, set,inicial) => {
       try {
         let value = await AsyncStorage.getItem(key);
         value = value == "true" ? true : value;
@@ -52,9 +52,9 @@ export default (props) => {
     buscar_storage("@cor_texto", setCor_texto, "black");
     buscar_storage("@descricao", setDescricao, "");
     buscar_storage("@finalizado", setFinalizado, "true");
-    buscar_storage("@ofs_selecionadas", setOfs_selecionadas, []);
+    buscar_storage("@ofs_selecionadas", setOfs_selecionadas, JSON.stringify({}));
 
-    // consulta_storage();
+    //consulta_storage();
   }, []);
 
      useEffect(() => {    
@@ -251,7 +251,9 @@ export default (props) => {
             funcao_finalizar={finalizar}
             operador_id={operador_id}
             id_posto={props.id_posto}
-            ofs_selecionadas={ofs_selecionadas}
+            ofs_selecionadas={
+              ofs_selecionadas
+            }
           ></GrupoButoes>
           <ParadasFrequentes
             finalizado={finalizado}
@@ -271,7 +273,9 @@ export default (props) => {
             funcao_operar={operar}
             funcao_parar={parar}
             id_posto={props.id_posto}
-            ofs_selecionadas={ofs_selecionadas}
+            ofs_selecionadas={
+              ofs_selecionadas
+            }
           ></Bola>
         </View>
 

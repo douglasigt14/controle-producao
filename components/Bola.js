@@ -126,7 +126,7 @@ const ViewModalParadas = styled.View`
     let [mostrarOf, setMostrarOf] = useState(false);
     let [acoordeon, setAcordeon] = useState(null);
     let [ofs, setOfs] = useState([]);
-  let [ofs_selecionadas, setOfsSelecionadas] = useState(props.ofs_selecionadas); // JSON.parse()
+    let ofs_selecionadas = props.ofs_selecionadas;
     let [dt_lotes, setDt_lotes] = useState([]);
 
     let [componentVerde, setComponentVerde] = useState(null); 

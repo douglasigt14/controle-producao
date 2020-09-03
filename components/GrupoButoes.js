@@ -72,10 +72,14 @@ export default (props) => {
   let [id_posto, setId_posto] = useState(props.id_posto);
   let [paradas, setParadas] = useState([]);
   let [tabela, setTabela] = useState([]);
-  let [ofs_selecionadas, setOfsSelecionadas] = useState(props.ofs_selecionadas);
+  let [tabelaOfs, setTabelaOfs] = useState([]);
+  let [ofs_convertida, setOfs_convertida] = useState([]);
   let [componentFinalizar, setComponentFinalizar] = useState(null); 
   
   let finalizado = props.finalizado;
+  let ofs_selecionadas = props.ofs_selecionadas;
+
+
 
   useEffect(() => {
     fetch("http://controleproducao.tuboarte.com/paradas-diarias/"+operador_id)
@@ -114,7 +118,7 @@ export default (props) => {
         })
         .catch((error) => console.error(error))
         .finally(() => setLoading(false));
-        
+
 
   }, []); //No Inicio 
 
@@ -136,14 +140,19 @@ export default (props) => {
       .catch((error) => console.error(error))
       .finally(() => setLoading(false));
 
+    
+    if (ofs_selecionadas.length > 2){
+      let ofs_selecionadas_temp = JSON.parse(ofs_selecionadas);
+      setOfs_convertida(ofs_selecionadas_temp);
+    }  
+    console.warn(ofs_convertida);
 
-
-    if (ofs_selecionadas.length > 0) {
+    if (ofs_selecionadas.length > 2) {
       setComponentFinalizar(<Div>
         <Button contentStyle={{ height: 90 }} color="#000000" title='Finalizar' mode="contained" onPress={() => {
           setModalVisibleOfsSelecionadas(true);
         }}>
-          <Texto>Finalizar</Texto>
+          <Texto>Finalizar ITEM</Texto>
         </Button>
       </Div>);
     }
@@ -163,7 +172,7 @@ export default (props) => {
         </Button>
       </Div>);
     }
-  }, [finalizado]); // Com Dependencias
+  }, [finalizado, ofs_selecionadas]); // Com Dependencias
 
 
 
@@ -406,7 +415,7 @@ export default (props) => {
                   marginRight: 400,
                 }}
               >
-                Tipos de Paradas
+                  Finalizar ITEM
               </Text>
               <TouchModal
                 style={{ ...Padrao.closeButton }}
@@ -418,7 +427,20 @@ export default (props) => {
               </TouchModal>
             </Div_Fechar2>
             <ScrollView>
-              <Text>Douglas</Text>
+              <Table
+                borderStyle={{
+                  borderWidth: 2,
+                  borderColor: "#bebebe",
+                  backgroundColor: "#fff",
+                }}
+              >
+                <Row
+                  data={tabela.tableHead}
+                  style={{ height: 40, backgroundColor: "#d3d3d3" }}
+                  textStyle={styles.text}
+                />
+                <Rows data={tabela.tableData} textStyle={styles.text} />
+              </Table>
             </ScrollView>
           </ViewModal>
         </View>
