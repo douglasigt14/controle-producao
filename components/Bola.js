@@ -138,8 +138,9 @@ const ViewModalParadas = styled.View`
      tableData: [["1", "2", "3", "4"]],
    };
 
-  const sumir_modalItem = () => {
+  const sumir_modalItem = (ofs_marcadas_p) => {
     setModalItemVisible(false);
+    props.funcao_alterar_of(ofs_marcadas_p);
   }  
   const limparOf = () =>{
     setCod_plano("");

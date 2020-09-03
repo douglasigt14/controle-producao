@@ -95,7 +95,7 @@ export default (props) => {
     });
     if(ofs_marcadas.length > 0 ){
       storageSet("@ofs_selecionadas", JSON.stringify(ofs_marcadas));
-      props.funcao_sumir_modalItem();
+      props.funcao_sumir_modalItem(JSON.stringify(ofs_marcadas));
       props.funcao_limparOf();
     }
     else{

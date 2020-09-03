@@ -145,14 +145,13 @@ export default (props) => {
       let ofs_selecionadas_temp = JSON.parse(ofs_selecionadas);
       setOfs_convertida(ofs_selecionadas_temp);
     }  
-    console.warn(ofs_convertida);
 
     if (ofs_selecionadas.length > 2) {
       setComponentFinalizar(<Div>
         <Button contentStyle={{ height: 90 }} color="#000000" title='Finalizar' mode="contained" onPress={() => {
           setModalVisibleOfsSelecionadas(true);
         }}>
-          <Texto>Finalizar ITEM</Texto>
+          <Texto>Finalizar Item</Texto>
         </Button>
       </Div>);
     }
