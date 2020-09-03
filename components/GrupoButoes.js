@@ -26,7 +26,7 @@ const Div_Card = styled.View`
 `;
 
 const ViewModal = styled.View`
-      max-height: 280px;
+      max-height: 520px;
       display: flex;
   `;
 
@@ -70,7 +70,7 @@ export default (props) => {
   let [id_posto, setId_posto] = useState(props.id_posto);
   let [paradas, setParadas] = useState([]);
   let [tabela, setTabela] = useState([]);
-  let ofs_selecionadas = props.ofs_selecionadas;
+  let [ofs_selecionadas, setOfsSelecionadas]  = useState(props.ofs_selecionadas);
   let [componentFinalizar, setComponentFinalizar] = useState(null);
 
   useEffect(() => {
