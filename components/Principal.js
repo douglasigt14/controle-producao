@@ -50,7 +50,7 @@ export default (props) => {
     buscar_storage("@cor_texto", setCor_texto, "black");
     buscar_storage("@descricao", setDescricao, "");
     buscar_storage("@finalizado", setFinalizado, "true");
-    buscar_storage("@ofs_selecionadas", setOfs_selecionadas, "[]");
+    buscar_storage("@ofs_selecionadas", setOfs_selecionadas, []);
   }, []);
 
      useEffect(() => {    

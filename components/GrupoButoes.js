@@ -70,8 +70,13 @@ export default (props) => {
   let [id_posto, setId_posto] = useState(props.id_posto);
   let [paradas, setParadas] = useState([]);
   let [tabela, setTabela] = useState([]);
-  let [ofs_selecionadas, setOfsSelecionadas]  = useState(props.ofs_selecionadas);
+  let [ofs_selecionadas, setOfsSelecionadas]  = useState([]);
   let [componentFinalizar, setComponentFinalizar] = useState(null);
+
+  console.warn(ofs_selecionadas.length);
+  console.warn(ofs_selecionadas);
+ 
+  
 
   useEffect(() => {
     fetch("http://controleproducao.tuboarte.com/paradas-diarias/"+operador_id)
@@ -112,7 +117,7 @@ export default (props) => {
         .finally(() => setLoading(false));
 
         
-        if (ofs_selecionadas != []) {
+        if (ofs_selecionadas.length > 0) {
           setComponentFinalizar(<Div>
             <Button contentStyle={{ height: 90 }} color="#6c757d" title='Finalizar' mode="contained" onPress={() => {
               setModalVisibleOfsSelecionadas(true);
