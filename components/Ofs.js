@@ -5,6 +5,7 @@ import { Thumbnail, List, ListItem, Separator, CheckBox  } from "native-base";
 import styled from "styled-components";
 import { Table, Row, Rows } from "react-native-table-component";
 import Padrao from "../style/Padrao";
+import { storageSet, consulta_storage } from "../storage/localstorage";
 // import CheckBox from "@react-native-community/checkbox";
 
 
@@ -93,7 +94,9 @@ export default (props) => {
       }
     });
     if(ofs_marcadas.length > 0 ){
-
+      storageSet("@ofs_selecionadas", JSON.stringify(ofs_marcadas));
+      props.funcao_sumir_modalItem();
+      props.funcao_limparOf();
     }
     else{
       Alert.alert('Marque Pelo menos uma OF');

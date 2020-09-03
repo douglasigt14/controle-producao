@@ -22,6 +22,7 @@ export default (props) => {
     let [finalizado, setFinalizado] = useState(true);
     let [paradasFrequentes, setParadasFrequentes] = useState([]);
     let [mostrar_alert, setMostrar_alert] = useState(false);
+    let [ofs_selecionadas, setOfs_selecionadas] = useState([]);
     let [toch, setToch] = useState('auto');
     let operador_id = props.operador_id;
   const showAlert = () => {
@@ -49,11 +50,11 @@ export default (props) => {
     buscar_storage("@cor_texto", setCor_texto, "black");
     buscar_storage("@descricao", setDescricao, "");
     buscar_storage("@finalizado", setFinalizado, "true");
-
+    buscar_storage("@ofs_selecionadas", setOfs_selecionadas, "[]");
+    consulta_storage();
   }, []);
 
-     useEffect(() => {      
-      
+     useEffect(() => {    
         fetch(
          "http://controleproducao.tuboarte.com/paradas-frequencia/" +
            props.id_posto
@@ -247,6 +248,7 @@ export default (props) => {
             funcao_finalizar={finalizar}
             operador_id={operador_id}
             id_posto={props.id_posto}
+            ofs_selecionadas={ofs_selecionadas}
           ></GrupoButoes>
           <ParadasFrequentes
             finalizado={finalizado}
@@ -266,6 +268,7 @@ export default (props) => {
             funcao_operar={operar}
             funcao_parar={parar}
             id_posto={props.id_posto}
+            ofs_selecionadas={ofs_selecionadas}
           ></Bola>
         </View>
 

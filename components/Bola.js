@@ -159,6 +159,9 @@ const ViewModalParadas = styled.View`
      tableData: [["1", "2", "3", "4"]],
    };
 
+  const sumir_modalItem = () => {
+    setModalItemVisible(false);
+  }  
   const limparOf = () =>{
     setCod_plano("");
     setCod_item("");
@@ -202,7 +205,7 @@ const ViewModalParadas = styled.View`
   useEffect(() => {
     if (mostrarOf){
       setAcordeon(<View style={{ paddingTop: 10 }}>
-        <Ofs cod_item={cod_item} cod_plano={cod_plano} ofs={ofs} funcao_limparOf={limparOf}></Ofs>
+        <Ofs cod_item={cod_item} cod_plano={cod_plano} ofs={ofs} funcao_limparOf={limparOf} funcao_sumir_modalItem={sumir_modalItem}></Ofs>
         </View>);
     }
     else{

@@ -78,7 +78,7 @@ export default (props) => {
   let [id_posto, setId_posto] = useState(props.id_posto);
   let [paradas, setParadas] = useState([]);
   let [tabela, setTabela] = useState([]);
-
+  let ofs_selecionadas =props.ofs_selecionadas;
 
   useEffect(() => {
     fetch("http://controleproducao.tuboarte.com/paradas-diarias/"+operador_id)
