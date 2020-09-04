@@ -206,12 +206,14 @@ const ViewModalParadas = styled.View`
 
   
        if (ofs_selecionadas.length > 2 ) {
+         let ofs_selecionadas_temp = JSON.parse(ofs_selecionadas);
+         console.warn(ofs_selecionadas_temp[0]);
          setComponentVerde( (
            <TouchModal
              style={{ ...Padrao.openButton, backgroundColor: "#28a745" }}
              onPress={() => {
-               setModalVisible(!modalVisible);
-               props.funcao_operar("ITEM DESCRIÇÃO");
+               setModalVisible(false);
+               props.funcao_operar(ofs_selecionadas_temp[0].cod_item+'-'+ofs_selecionadas_temp[0].item, 50);
              }}
            >
              <TextoModal style={Padrao.textStyle}>Operar</TextoModal>
@@ -230,7 +232,7 @@ const ViewModalParadas = styled.View`
            </TouchModal>
          ) );
        }
-     }, []);
+     }, [ofs_selecionadas]);
 
   return (
     <>
