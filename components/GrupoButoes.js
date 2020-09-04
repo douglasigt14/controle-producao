@@ -1,5 +1,5 @@
 import React, { useState, useEffect} from "react";
-import { Alert, View, Text, StyleSheet, Modal, FlatList, ScrollView } from "react-native";
+import { Alert, View, Text, StyleSheet, Modal, FlatList, ScrollView, TextInput } from "react-native";
 import styled from "styled-components";
 import { Button, Card } from 'react-native-paper';
 import Padrao from "../style/Padrao";
@@ -58,6 +58,19 @@ const TouchModal = styled.TouchableHighlight`
 const TextoModal = styled.Text`
     font-size: 25px;
   `;
+
+const ViewModalFinalizarInputs = styled.View`
+     display: flex;
+     flex-direction: row;
+     margin-top: 10px;
+     margin-bottom: 10px;
+`;
+
+const ViewModalFinalizarButton = styled.View`
+     display: flex;
+     margin: 15px;
+`;
+
 
 export default (props) => {
   let [modalVisibleParadas, setModalVisibleParadas] = useState(false);
@@ -437,6 +450,20 @@ export default (props) => {
                 <TextoModal style={Padrao.textStyle}>X</TextoModal>
               </TouchModal>
             </Div_Fechar2>
+            <ViewModalFinalizarInputs>
+              
+            </ViewModalFinalizarInputs>
+            <ViewModalFinalizarButton>
+                  <TouchModal
+                style={{ ...Padrao.openButton, backgroundColor: "#007bff" }}
+                    onPress={() => {
+                    }}
+                  >
+                  
+                    <TextoModal style={Padrao.textStyle}>Finalizar Item</TextoModal>
+                  </TouchModal>
+            </ViewModalFinalizarButton>
+
             <ScrollView>
               <Table
                 borderStyle={{
