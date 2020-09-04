@@ -125,15 +125,17 @@ export default (props) => {
       .catch((error) => console.error(error))
       .finally(() => setLoading(false));
     
+    console.warn(id_posto);
     fetch("http://controleproducao.tuboarte.com/controles-diarios/" + id_posto + "/" + operador_id)
       .then((response) => response.json())
       .then((json) => {
         setControlesDiarios(json)
+      
       })
       .catch((error) => console.error(error))
       .finally(() => setLoading(false));
 
-      fetch(
+    fetch(
         "http://controleproducao.tuboarte.com/paradas/codigos_restrito/" +
           id_posto
       )
@@ -263,7 +265,7 @@ export default (props) => {
     };
     setTabelaControles(tabelaFinal);
 
-  }, [finalizado, ofs_selecionadas,descricao]); // Com Dependencias
+  }, [finalizado, ofs_selecionadas]); // Com Dependencias
 
 
   return (

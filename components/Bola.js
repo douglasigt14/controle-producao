@@ -18,23 +18,7 @@ import Ofs from "./Ofs";
 
 
 
-
-export default (props) => {
-  
-  const Bola = styled.View`
-    width: 500px;
-    height: 500px;
-    margin: 20px auto;
-    border-radius: 500px;
-    color: white;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    background-color: ${props.cor};
-  `;
-
- const ViewModalItemInputs = styled.View`
+const ViewModalItemInputs = styled.View`
      display: flex;
      flex-direction: row;
      margin: 5px;
@@ -52,13 +36,13 @@ const Div = styled.View`
 `;
 
 
-  const ViewModalSelecionar = styled.View`
+const ViewModalSelecionar = styled.View`
       width: 450px;
       min-height: 380px;
       display: flex;
   `;
 
-   const ViewModalItem = styled.View`
+const ViewModalItem = styled.View`
      width: 95%;
      min-height: 520px;
      display: flex;
@@ -71,29 +55,26 @@ const ViewModalParadas = styled.View`
   display: flex;
 `;
 
-  const TouchModal = styled.TouchableHighlight`
+const TouchModal = styled.TouchableHighlight`
     margin-top: 10px;
   `;
-  
 
-  const TextoParadas = styled.Text`
+
+const TextoParadas = styled.Text`
     font-size: 18px;
   `;
 
-  const Texto = styled.Text`
-    font-size: 40px;
-    color: ${props.cor_texto};
-  `;
 
-  const TextoModal = styled.Text`
+
+const TextoModal = styled.Text`
     font-size: 25px;
   `;
 
-  const Descricao = styled.Text`
+const Descricao = styled.Text`
     font-size: 23px;
   `;
 
-  const Div_Descricao = styled.View`
+const Div_Descricao = styled.View`
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -101,12 +82,33 @@ const ViewModalParadas = styled.View`
     margin-top: 20px;
   `;
 
-  const Div_Fechar = styled.View`
+const Div_Fechar = styled.View`
     display: flex;
     flex-direction: row;
     align-items: flex-end;
     justify-content: flex-end;
     margin-top: 0px;
+  `;
+
+
+export default (props) => {
+  
+  const Bola = styled.View`
+    width: 500px;
+    height: 500px;
+    margin: 20px auto;
+    border-radius: 500px;
+    color: white;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-color: ${props.cor};
+  `;
+
+  const Texto = styled.Text`
+    font-size: 40px;
+    color: ${props.cor_texto};
   `;
 
     const msg = (texto) => {
