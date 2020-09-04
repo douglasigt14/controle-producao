@@ -159,7 +159,7 @@ export default (props) => {
           
           setDescricao_alert('PARADA INICIADA COM SUCESSO');
           showAlert();
-          setTimeout(function () { hideAlert(); }, 500); //setToch('auto');
+          setTimeout(function () { hideAlert(); }, 1000); //setToch('auto');
         });
         //--------INSERE PARADA---------
       });
@@ -206,7 +206,7 @@ export default (props) => {
 
                 setDescricao_alert('OPERAÇÃO INICIADA COM SUCESSO');
                 showAlert();
-                setTimeout(function () { hideAlert(); }, 500);
+                  setTimeout(function () { hideAlert(); }, 1000);
         });
       });
     } 
@@ -236,12 +236,16 @@ export default (props) => {
 
         setDescricao_alert('FINALIZADO COM SUCESSO');
         showAlert();
-        setTimeout(function () { hideAlert(); }, 500);
+        setTimeout(function () { hideAlert(); }, 1000);
       });
     } 
 
   const alterar_of = (ofs_marcadas_p) => {
     setOfs_selecionadas(ofs_marcadas_p)
+
+    setDescricao_alert('ITEM SELECIONADO COM SUCESSO');
+    showAlert();
+    setTimeout(function () { hideAlert(); }, 1000);
   }
    
     return (

@@ -114,8 +114,8 @@ const ViewModalParadas = styled.View`
     let [id_posto, setId_posto] = useState(props.id_posto);
     let [isOfsSelecionadas, setIsOfsSelecionadas] = useState(false);
 
-    let [cod_item, setCod_item] = useState("");
-    let [cod_plano, setCod_plano] = useState("");
+    let [cod_item, setCod_item] = useState("0");
+    let [cod_plano, setCod_plano] = useState("0");
   
     let [focus_cod_plano, setFocus_cod_plano] = useState(false);
     let [focus_cod_item, setFocus_cod_item] = useState(false);
@@ -289,6 +289,7 @@ const ViewModalParadas = styled.View`
                 Selecionar Parada
               </TextoModal>
             </TouchModal>
+            
           </ViewModalSelecionar>
         </View>
       </Modal>
@@ -370,6 +371,7 @@ const ViewModalParadas = styled.View`
                 <TextoModal style={Padrao.textStyle}>X</TextoModal>
               </TouchModal>
             </Div_Fechar>
+            <View>
             <Text>COD PEÇA</Text>
             <TextInput
               style={Padrao.inputModal}
@@ -396,7 +398,7 @@ const ViewModalParadas = styled.View`
               keyboardType={"phone-pad"}
               autoFocus={focus_cod_plano}
             />
-
+            </View>
             <TouchModal
               disabled={!editable_cod_item}
               style={{ ...Padrao.openButton, backgroundColor: "gray" }}

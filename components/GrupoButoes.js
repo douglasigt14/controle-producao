@@ -187,7 +187,7 @@ export default (props) => {
         <Button contentStyle={{ height: 90 }} color="#6c757d" title='Finalizar' mode="contained" onPress={() => {
           setModalVisibleOfsSelecionadas(true);
         }}>
-          <Texto>Finalizar Item</Texto>
+          <Texto>Finalizar</Texto>
         </Button>
       </Div>);
     }
