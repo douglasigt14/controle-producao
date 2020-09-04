@@ -126,11 +126,12 @@ export default (props) => {
       .finally(() => setLoading(false));
     
     console.warn(id_posto);
+    console.warn(operador_id);
     fetch("http://controleproducao.tuboarte.com/controles-diarios/" + id_posto + "/" + operador_id)
       .then((response) => response.json())
       .then((json) => {
         setControlesDiarios(json)
-      
+        console.warn(json);
       })
       .catch((error) => console.error(error))
       .finally(() => setLoading(false));
@@ -255,7 +256,7 @@ export default (props) => {
     let controles_temp = controlesDiarios;
     let tabelaTemp_controles = [];
     controles_temp.forEach(item => {
-      tabelaTemp_controles.push([]);
+      tabelaTemp_controles.push([item.cod_item,'-',item.volume_produzido,item.retrabalho]);
     });
 
 
@@ -373,7 +374,7 @@ export default (props) => {
               >
                 <Row
                   data={tabelaParadas.tableHead}
-                  style={{ height: 40, backgroundColor: "#dc3545",color: "white" }}
+                  style={{ height: 40, backgroundColor: "#dc3545"}}
                   textStyle={styles.text}
                 />
                 <Rows data={tabelaParadas.tableData} textStyle={styles.text} />
@@ -425,7 +426,7 @@ export default (props) => {
               >
                 <Row
                   data={tabelaOperacoes.tableHead}
-                  style={{ height: 40, backgroundColor: "#28a745", color: "white" }}
+                  style={{ height: 40, backgroundColor: "#28a745" }}
                   textStyle={styles.text}
                 />
                 <Rows data={tabelaOperacoes.tableData} textStyle={styles.text} />
