@@ -277,6 +277,7 @@ export default (props) => {
             operador_desc={props.operador_desc}
             funcao_parar={parar}
             paradasFrequentes={paradasFrequentes}
+            descricao={descricao}
           ></ParadasFrequentes>
 
           <Bola

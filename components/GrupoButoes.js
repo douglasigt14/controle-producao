@@ -100,7 +100,7 @@ export default (props) => {
   
   let finalizado = props.finalizado;
   let ofs_selecionadas = props.ofs_selecionadas;
-
+  let descricao = props.descricao;
 
 
   useEffect(() => {
@@ -235,7 +235,7 @@ export default (props) => {
     };
     setTabelaOperacoes(tabelaFinal);
 
-  }, [finalizado, ofs_selecionadas]); // Com Dependencias
+  }, [finalizado, ofs_selecionadas,descricao]); // Com Dependencias
 
 
   return (
@@ -255,7 +255,7 @@ export default (props) => {
                     setModalVisibleParadas(true);
                   }}
                 >
-                  <Texto>Paradas</Texto>
+                  <Texto>Paradas {descricao}</Texto>
                 </Button>
               </Div>
               <Div>
