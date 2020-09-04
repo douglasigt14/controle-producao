@@ -144,6 +144,18 @@ export default (props) => {
     if (ofs_selecionadas.length > 2){
       let ofs_selecionadas_temp = JSON.parse(ofs_selecionadas);
       setOfs_convertida(ofs_selecionadas_temp);
+      
+      var tabelaTemp = []
+      ofs_selecionadas_temp.forEach(item => {
+        tabelaTemp.push([item.num_ordem, item.dt_inicial]);
+      });
+
+      var tabelaFinal = {
+        tableHead: ["NUM_OF", "DATA"],
+        tableData: tabelaTemp
+      };
+      setTabelaOfs(tabelaFinal);
+
     }  
 
     if (ofs_selecionadas.length > 2) {
@@ -434,11 +446,11 @@ export default (props) => {
                 }}
               >
                 <Row
-                  data={tabela.tableHead}
+                  data={tabelaOfs.tableHead}
                   style={{ height: 40, backgroundColor: "#d3d3d3" }}
                   textStyle={styles.text}
                 />
-                <Rows data={tabela.tableData} textStyle={styles.text} />
+                <Rows data={tabelaOfs.tableData} textStyle={styles.text} />
               </Table>
             </ScrollView>
           </ViewModal>

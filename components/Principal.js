@@ -240,7 +240,6 @@ export default (props) => {
 
   const alterar_of = (ofs_marcadas_p) => {
     setOfs_selecionadas(ofs_marcadas_p)
-    console.warn(ofs_marcadas_p)
   }
    
     return (
