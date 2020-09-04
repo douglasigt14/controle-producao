@@ -62,14 +62,14 @@ const TextoModal = styled.Text`
 const ViewModalFinalizarInputs = styled.View`
      display: flex;
      flex-direction: row;
-     margin: 15px;
+     margin: 5px;
      justify-content: space-around;
 `;
 
 const ViewModalFinalizarButton = styled.View`
      display: flex;
-     margin-top: 15px;
-     margin-bottom: 15px;
+     margin-top: 5px;
+     margin-bottom: 10px;
 `;
 
 
