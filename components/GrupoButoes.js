@@ -210,7 +210,7 @@ export default (props) => {
     else if (finalizado == false) {
       setComponentFinalizar(<Div>
         <Button contentStyle={{ height: 90 }} color="#6c757d" title='Finalizar' mode="contained" onPress={() => {
-          props.funcao_finalizar(props.id_posto)
+          props.funcao_finalizar()
         }}>
           <Texto>Finalizar</Texto>
         </Button>
