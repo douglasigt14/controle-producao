@@ -65,11 +65,7 @@ const ViewModalFinalizarInputs = styled.View`
      margin: 5px;
      justify-content: space-around;
 `;
-const ViewModalItem = styled.View`
-     width: 95%;
-     min-height: 520px;
-     display: flex;
-   `;
+
 const ViewModalFinalizarButton = styled.View`
      display: flex;
      margin-top: 5px;
@@ -82,7 +78,6 @@ export default (props) => {
   let [modalVisibleOperacoes, setModalVisibleOperacoes] = useState(false);
   let [modalVisibleTipos, setModalVisibleTipos] = useState(false);
   let [modalVisibleOfsSelecionadas, setModalVisibleOfsSelecionadas] = useState(false);
-  let [modalItemVisible, setModalItemVisible] = useState(false);
   let [isLoading, setLoading] = useState(true);
   let [paradasDiarias, setParadasDiarias] = useState([]);
   let [operacoesDiarias, setOperacoesDiarias] = useState([]);
@@ -103,16 +98,6 @@ export default (props) => {
   
   let finalizado = props.finalizado;
   let ofs_selecionadas = props.ofs_selecionadas;
-
-
-  let [cod_item, setCod_item] = useState("");
-  let [cod_plano, setCod_plano] = useState("");
-
-  let [focus_cod_plano, setFocus_cod_plano] = useState(false);
-  let [focus_cod_item, setFocus_cod_item] = useState(false);
-
-  let [editable_cod_plano, setEditable_cod_plano] = useState(true);
-  let [editable_cod_item, setEditable_cod_item] = useState(true);
 
 
 
@@ -265,7 +250,7 @@ export default (props) => {
                   color="#007bff"
                   title="C. Diarios"
                   mode="contained"
-                  onPress={() => setModalItemVisible(true)}
+                  onPress={() => console.log("Pressed")}
                 >
                   <Texto>C. Diarios </Texto>
                 </Button>
@@ -540,70 +525,7 @@ export default (props) => {
         </View>
       </Modal>
 
-      {/* Modal Item */}
-      <Modal
-        animationType="fade"
-        transparent={true}
-        visible={modalItemVisible}
-        onRequestClose={() => {
-          setModalItemVisible(!modalItemVisible);
-        }}
-      >
-        <View style={Padrao.topView}>
-          <ViewModalItem style={Padrao.modalView}>
-            <Div_Fechar>
-              <TouchModal
-                style={{ ...Padrao.closeButton }}
-                onPress={() => {
-                  setModalItemVisible(!modalItemVisible);
-                }}
-              >
-                <TextoModal style={Padrao.textStyle}>X</TextoModal>
-              </TouchModal>
-            </Div_Fechar>
-            <View>
-              <Text>COD PEÇA</Text>
-              <TextInput
-                style={[Padrao.inputModal]}
-                value={cod_item}
-                editable={editable_cod_item}
-                onChangeText={(text) => {
-                  setCod_item(text);
-                  setFocus_cod_item(true);
-                  setFocus_cod_plano(false);
-                }}
-                keyboardType={"phone-pad"}
-                autoFocus={focus_cod_item}
-              />
-            </View>
-            <View>
-              <Text>COD PLANO )</Text>
-              <TextInput
-                style={[Padrao.inputModal]}
-                value={cod_plano}
-                editable={editable_cod_plano}
-                onChangeText={(text) => {
-                  setCod_plano(text);
-                  setFocus_cod_item(false);
-                  setFocus_cod_plano(true);
-                }}
-                keyboardType={"phone-pad"}
-                autoFocus={focus_cod_plano}
-              />
-            </View>
-            <TouchModal
-              disabled={!editable_cod_item}
-              style={{ ...Padrao.openButton, backgroundColor: "gray" }}
-              onPress={() => {
-                buscarOf(cod_item, cod_plano);
-              }}
-            >
-              <TextoModal style={Padrao.textStyle}>Buscar</TextoModal>
-            </TouchModal>
-            {/* {acoordeon} */}
-          </ViewModalItem>
-        </View>
-      </Modal>
+      
 
     </>
   );
