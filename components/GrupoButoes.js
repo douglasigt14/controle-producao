@@ -87,6 +87,8 @@ export default (props) => {
   let [paradas, setParadas] = useState([]);
   let [tabela, setTabela] = useState([]);
   let [tabelaOfs, setTabelaOfs] = useState([]);
+  let [tabelaParadas, setTabelaParadas] = useState([]);
+  let [tabelaOperacoes, setTabelaOperacoes] = useState([]);
   let [ofs_convertida, setOfs_convertida] = useState([]);
   let [componentFinalizar, setComponentFinalizar] = useState(null); 
 
@@ -207,8 +209,33 @@ export default (props) => {
         </Button>
       </Div>);
     }
-  }, [finalizado, ofs_selecionadas]); // Com Dependencias
+    let paradas_temp = paradasDiarias;
+    let tabelaTemp_paradas = [];
+    paradas_temp.forEach(item => {
+      tabelaTemp_paradas.push([item.rotulo, item.inicio, item.fim]);
+    });
 
+
+    var tabelaFinal = {
+      tableHead: ["TIPO", "INICIO","FIM"],
+      tableData: tabelaTemp_paradas
+    };
+    setTabelaParadas(tabelaFinal);
+
+    let operacoes_temp = operacoesDiarias;
+    let tabelaTemp_operacoes = [];
+    operacoes_temp.forEach(item => {
+      tabelaTemp_operacoes.push([item.cod_item, item.inicio, item.fim]);
+    });
+
+
+    var tabelaFinal = {
+      tableHead: ["TIPO", "INICIO", "FIM"],
+      tableData: tabelaTemp_operacoes
+    };
+    setTabelaOperacoes(tabelaFinal);
+
+  }, [finalizado, ofs_selecionadas]); // Com Dependencias
 
 
   return (
@@ -307,18 +334,20 @@ export default (props) => {
               </TouchModal>
             </Div_Fechar>
             <ScrollView>
-              <FlatList
-                numColumns={3}
-                data={paradasDiarias}
-                keyExtractor={({ id }, index) => id}
-                renderItem={({ item }) => (
-                  <Div>
-                    <Text style={{ color: "#F00", marginRight: 30 }}>
-                      {item.rotulo}: {item.inicio} à {item.fim}{" "}
-                    </Text>
-                  </Div>
-                )}
-              />
+              <Table
+                borderStyle={{
+                  borderWidth: 2,
+                  borderColor: "#bebebe",
+                  backgroundColor: "#fff",
+                }}
+              >
+                <Row
+                  data={tabelaParadas.tableHead}
+                  style={{ height: 40, backgroundColor: "#dc3545",color: "white" }}
+                  textStyle={styles.text}
+                />
+                <Rows data={tabelaParadas.tableData} textStyle={styles.text} />
+              </Table>
             </ScrollView>
           </ViewModal>
         </View>
@@ -357,18 +386,20 @@ export default (props) => {
               </TouchModal>
             </Div_Fechar>
             <ScrollView>
-              <FlatList
-                numColumns={3}
-                data={operacoesDiarias}
-                keyExtractor={({ id }, index) => id}
-                renderItem={({ item }) => (
-                  <Div>
-                    <Text style={{ color: "green", marginRight: 30 }}>
-                      {item.cod_item} - {item.inicio} à {item.fim}{" "}
-                    </Text>
-                  </Div>
-                )}
-              />
+              <Table
+                borderStyle={{
+                  borderWidth: 2,
+                  borderColor: "#bebebe",
+                  backgroundColor: "#fff",
+                }}
+              >
+                <Row
+                  data={tabelaOperacoes.tableHead}
+                  style={{ height: 40, backgroundColor: "#28a745", color: "white" }}
+                  textStyle={styles.text}
+                />
+                <Rows data={tabelaOperacoes.tableData} textStyle={styles.text} />
+              </Table>
             </ScrollView>
           </ViewModal>
         </View>

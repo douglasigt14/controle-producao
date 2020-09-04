@@ -394,7 +394,7 @@ const ViewModalParadas = styled.View`
             />
             </View>
               <View>
-            <Text>COD PLANO )</Text>
+            <Text>COD PLANO (COLOCAR TODOS OS ZEROS)</Text>
             <TextInput
                   style={[Padrao.inputModal]}
               value={cod_plano}
