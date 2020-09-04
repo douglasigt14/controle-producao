@@ -78,17 +78,22 @@ export default (props) => {
   let [modalVisibleOperacoes, setModalVisibleOperacoes] = useState(false);
   let [modalVisibleTipos, setModalVisibleTipos] = useState(false);
   let [modalVisibleOfsSelecionadas, setModalVisibleOfsSelecionadas] = useState(false);
+  let [modalVisibleControles, setModalVisibleControles] = useState(false);
   let [isLoading, setLoading] = useState(true);
   let [paradasDiarias, setParadasDiarias] = useState([]);
   let [operacoesDiarias, setOperacoesDiarias] = useState([]);
+  let [controlesDiarios, setControlesDiarios] = useState([]);
   let operador_id = props.operador_id;
   
   let [id_posto, setId_posto] = useState(props.id_posto);
   let [paradas, setParadas] = useState([]);
+  
   let [tabela, setTabela] = useState([]);
   let [tabelaOfs, setTabelaOfs] = useState([]);
   let [tabelaParadas, setTabelaParadas] = useState([]);
   let [tabelaOperacoes, setTabelaOperacoes] = useState([]);
+  let [tabelaControles, setTabelaControles] = useState([]);
+
   let [ofs_convertida, setOfs_convertida] = useState([]);
   let [componentFinalizar, setComponentFinalizar] = useState(null); 
 
@@ -119,6 +124,15 @@ export default (props) => {
       })
       .catch((error) => console.error(error))
       .finally(() => setLoading(false));
+    
+    fetch("http://controleproducao.tuboarte.com/controles-diarios/" + id_posto + "/" + operador_id)
+      .then((response) => response.json())
+      .then((json) => {
+        setControlesDiarios(json)
+      })
+      .catch((error) => console.error(error))
+      .finally(() => setLoading(false));
+
       fetch(
         "http://controleproducao.tuboarte.com/paradas/codigos_restrito/" +
           id_posto
@@ -235,6 +249,20 @@ export default (props) => {
     };
     setTabelaOperacoes(tabelaFinal);
 
+
+    let controles_temp = controlesDiarios;
+    let tabelaTemp_controles = [];
+    controles_temp.forEach(item => {
+      tabelaTemp_controles.push([]);
+    });
+
+
+    var tabelaFinal = {
+      tableHead: ["COD ITEM", "ER", "QTDE PRODUZIDA", "RETRABALHO"],
+      tableData: tabelaTemp_controles
+    };
+    setTabelaControles(tabelaFinal);
+
   }, [finalizado, ofs_selecionadas,descricao]); // Com Dependencias
 
 
@@ -277,7 +305,7 @@ export default (props) => {
                   color="#007bff"
                   title="C. Diarios"
                   mode="contained"
-                  onPress={() => console.log("Pressed")}
+                  onPress={() =>setModalVisibleControles()}
                 >
                   <Texto>C. Diarios </Texto>
                 </Button>
@@ -451,6 +479,59 @@ export default (props) => {
                   textStyle={styles.text}
                 />
                 <Rows data={tabela.tableData} textStyle={styles.text} />
+              </Table>
+            </ScrollView>
+          </ViewModal>
+        </View>
+      </Modal>
+
+
+      {/* Modal Controles Diarios */}
+      <Modal
+        animationType="fade"
+        transparent={true}
+        visible={modalVisibleControles}
+        onRequestClose={() => {
+          setModalVisibleControles(false);
+        }}
+        hardwareAccelerated={true}
+      >
+        <View style={Padrao.topView}>
+          <ViewModal style={Padrao.modalView}>
+            <Div_Fechar2>
+              <Text
+                style={{
+                  fontSize: 30,
+                  marginTop: 15,
+                  marginBottom: 15,
+                  marginRight: 400,
+                }}
+              >
+                Controles Diarios
+              </Text>
+              <TouchModal
+                style={{ ...Padrao.closeButton }}
+                onPress={() => {
+                  setModalVisibleControles(false);
+                }}
+              >
+                <TextoModal style={Padrao.textStyle}>X</TextoModal>
+              </TouchModal>
+            </Div_Fechar2>
+            <ScrollView>
+              <Table
+                borderStyle={{
+                  borderWidth: 2,
+                  borderColor: "#bebebe",
+                  backgroundColor: "#fff",
+                }}
+              >
+                <Row
+                  data={tabelaControles.tableHead}
+                  style={{ height: 40, backgroundColor: "#d3d3d3" }}
+                  textStyle={styles.text}
+                />
+                <Rows data={tabelaControles.tableData} textStyle={styles.text} />
               </Table>
             </ScrollView>
           </ViewModal>
