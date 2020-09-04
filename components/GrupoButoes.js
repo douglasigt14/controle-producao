@@ -160,7 +160,7 @@ export default (props) => {
 
     if (ofs_selecionadas.length > 2) {
       setComponentFinalizar(<Div>
-        <Button contentStyle={{ height: 90 }} color="#000000" title='Finalizar' mode="contained" onPress={() => {
+        <Button contentStyle={{ height: 90 }} color="#6c757d" title='Finalizar' mode="contained" onPress={() => {
           setModalVisibleOfsSelecionadas(true);
         }}>
           <Texto>Finalizar Item</Texto>

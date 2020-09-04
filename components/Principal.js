@@ -177,7 +177,7 @@ export default (props) => {
                 const URL_OPERACAO = "http://controleproducao.tuboarte.com/operacoes-diarias";
                 const formDataI = new FormData();
                 formDataI.append("operador_id", operador_id);
-                formDataI.append("cod_item", descricao + "| QTDE: ( " +qtde+" ) | 0001");
+                formDataI.append("cod_item", descricao + "| QTDE: ( "+qtde+" ) | 0002");
                 formDataI.append("posto_id", props.id_posto);
                 formDataI.append("tempo_decisao", "0");
 
