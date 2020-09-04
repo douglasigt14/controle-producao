@@ -124,14 +124,11 @@ export default (props) => {
       })
       .catch((error) => console.error(error))
       .finally(() => setLoading(false));
-    
-    console.warn(id_posto);
-    console.warn(operador_id);
+ 
     fetch("http://controleproducao.tuboarte.com/controles-diarios/" + id_posto + "/" + operador_id)
       .then((response) => response.json())
       .then((json) => {
         setControlesDiarios(json)
-        console.warn(json);
       })
       .catch((error) => console.error(error))
       .finally(() => setLoading(false));
@@ -478,7 +475,7 @@ export default (props) => {
               >
                 <Row
                   data={tabela.tableHead}
-                  style={{ height: 40, backgroundColor: "#d3d3d3" }}
+                  style={{ height: 40, backgroundColor: "#ffc107" }}
                   textStyle={styles.text}
                 />
                 <Rows data={tabela.tableData} textStyle={styles.text} />
@@ -531,7 +528,7 @@ export default (props) => {
               >
                 <Row
                   data={tabelaControles.tableHead}
-                  style={{ height: 40, backgroundColor: "#d3d3d3" }}
+                  style={{ height: 40, backgroundColor: "#007bff" }}
                   textStyle={styles.text}
                 />
                 <Rows data={tabelaControles.tableData} textStyle={styles.text} />
