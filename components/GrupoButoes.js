@@ -147,11 +147,11 @@ export default (props) => {
       
       var tabelaTemp = []
       ofs_selecionadas_temp.forEach(item => {
-        tabelaTemp.push([item.num_ordem, item.dt_inicial]);
+        tabelaTemp.push([item.num_ordem, item.dt_inicial, item.item,  item.qtde_of ]);
       });
 
       var tabelaFinal = {
-        tableHead: ["NUM_OF", "DATA"],
+        tableHead: ["NUM_OF", "DATA", "ITEM","QTDE"],
         tableData: tabelaTemp
       };
       setTabelaOfs(tabelaFinal);
