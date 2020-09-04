@@ -224,6 +224,7 @@ export default (props) => {
         setParada_id(null);
         
         setFinalizado(true);
+        setOfs_selecionadas({});
         
         storageSet("@cor", '#d3d3d3');
         storageSet("@parada_id", '');
@@ -231,6 +232,7 @@ export default (props) => {
         storageSet("@cor_texto", 'black');
         storageSet("@descricao", '');
         storageSet("@finalizado", "true");
+        storageSet("@ofs_selecionadas", JSON.stringify({}));
 
         setDescricao_alert('FINALIZADO COM SUCESSO');
         showAlert();

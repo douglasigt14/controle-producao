@@ -62,13 +62,14 @@ const TextoModal = styled.Text`
 const ViewModalFinalizarInputs = styled.View`
      display: flex;
      flex-direction: row;
-     margin-top: 10px;
-     margin-bottom: 10px;
+     margin: 15px;
+     justify-content: space-around;
 `;
 
 const ViewModalFinalizarButton = styled.View`
      display: flex;
-     margin: 15px;
+     margin-top: 15px;
+     margin-bottom: 15px;
 `;
 
 
@@ -88,6 +89,12 @@ export default (props) => {
   let [tabelaOfs, setTabelaOfs] = useState([]);
   let [ofs_convertida, setOfs_convertida] = useState([]);
   let [componentFinalizar, setComponentFinalizar] = useState(null); 
+
+  let [qtde, setQtde] = useState("0");
+  let [retrabalho, setRetrabalho] = useState("0");
+
+  let [focus_qtde, setFocus_qtde] = useState(false);
+  let [focus_retrabalho, setFocus_retrabalho] = useState(false);
   
   let finalizado = props.finalizado;
   let ofs_selecionadas = props.ofs_selecionadas;
@@ -158,10 +165,14 @@ export default (props) => {
       let ofs_selecionadas_temp = JSON.parse(ofs_selecionadas);
       setOfs_convertida(ofs_selecionadas_temp);
       
-      var tabelaTemp = []
+      var tabelaTemp = [];
+      let qtde = 0;
       ofs_selecionadas_temp.forEach(item => {
         tabelaTemp.push([item.num_ordem, item.dt_inicial, item.item,  item.qtde_of ]);
+        qtde += parseInt(item.qtde_of);
       });
+
+      setQtde(String(qtde));
 
       var tabelaFinal = {
         tableHead: ["NUM_OF", "DATA", "ITEM","QTDE"],
@@ -439,7 +450,7 @@ export default (props) => {
                   marginRight: 400,
                 }}
               >
-                  Finalizar ITEM
+                  Resumo dos Itens
               </Text>
               <TouchModal
                 style={{ ...Padrao.closeButton }}
@@ -451,12 +462,42 @@ export default (props) => {
               </TouchModal>
             </Div_Fechar2>
             <ViewModalFinalizarInputs>
-              
+              <View>
+                <Texto>QTDE TOTAL</Texto>
+              <TextInput
+                style={[Padrao.inputModal, {width: 250}]}
+                value={qtde}
+                onChangeText={(text) => {
+                  setQtde(text);
+                  setFocus_qtde(true);
+                  setFocus_retrabalho(false);
+                }}
+                keyboardType={"phone-pad"}
+                autoFocus={focus_qtde}
+              />
+              </View>
+
+              <View>
+                <Texto>RETRABALHO</Texto>
+                <TextInput
+                  style={[Padrao.inputModal, { width: 250 }]}
+                  value={retrabalho}
+                  onChangeText={(text) => {
+                    setRetrabalho(text);
+                    setFocus_qtde(false);
+                    setFocus_retrabalho(true);
+                  }}
+                  keyboardType={"phone-pad"}
+                  autoFocus={focus_retrabalho}
+                />
+              </View>
             </ViewModalFinalizarInputs>
             <ViewModalFinalizarButton>
                   <TouchModal
                 style={{ ...Padrao.openButton, backgroundColor: "#007bff" }}
                     onPress={() => {
+                      props.funcao_finalizar();
+                      setModalVisibleOfsSelecionadas(false);
                     }}
                   >
                   
