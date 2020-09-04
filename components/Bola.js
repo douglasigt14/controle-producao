@@ -126,12 +126,12 @@ const ViewModalParadas = styled.View`
     let [mostrarOf, setMostrarOf] = useState(false);
     let [acoordeon, setAcordeon] = useState(null);
     let [ofs, setOfs] = useState([]);
-    let ofs_selecionadas = props.ofs_selecionadas;
+    
     let [dt_lotes, setDt_lotes] = useState([]);
 
     let [componentVerde, setComponentVerde] = useState(null); 
-
-    let botao_operacao = null; 
+    
+  let ofs_selecionadas = props.ofs_selecionadas;
     
    let tabela = {
      tableHead: ["OF", "ITEM", "COR", "QTD"],
@@ -203,7 +203,9 @@ const ViewModalParadas = styled.View`
          .then((json) => setParadas(json))
          .catch((error) => console.error(error))
          .finally(() => setLoading(false));
-       if (ofs_selecionadas.length > 0 ) {
+
+  
+       if (ofs_selecionadas.length > 2 ) {
          setComponentVerde( (
            <TouchModal
              style={{ ...Padrao.openButton, backgroundColor: "#28a745" }}
