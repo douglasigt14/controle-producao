@@ -401,11 +401,8 @@ export default (props) => {
               editable={editable_cod_item}
               onChangeText={(text) => {
                 setCod_item(text);
-                setFocus_cod_item(true);
-                setFocus_cod_plano(false);
               }}
               keyboardType={"phone-pad"}
-              autoFocus={focus_cod_item}
             />
             </View>
               <View>
@@ -416,11 +413,8 @@ export default (props) => {
               editable={editable_cod_plano}
               onChangeText={(text) => {
                 setCod_plano(text);
-                setFocus_cod_item(false);
-                setFocus_cod_plano(true);
               }}
               keyboardType={"phone-pad"}
-              autoFocus={focus_cod_plano}
             />
             </View>
             <TouchModal
