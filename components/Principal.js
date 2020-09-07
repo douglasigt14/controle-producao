@@ -25,6 +25,7 @@ export default (props) => {
     let [ofs_selecionadas, setOfs_selecionadas] = useState([]);
     let [toch, setToch] = useState('auto');
   let [cod_plano, setCod_plano] = useState("");
+  let [id_controle, setId_controle] = useState(null); 
     let operador_id = props.operador_id;
 
     
@@ -55,7 +56,7 @@ export default (props) => {
     buscar_storage("@finalizado", setFinalizado, "true");
     buscar_storage("@ofs_selecionadas", setOfs_selecionadas, {});
     buscar_storage("@cod_plano", setCod_plano, "");
-   // consulta_storage();
+    buscar_storage("@id_controle", setId_controle, null);
   }, []);
 
   useEffect(() => {  
@@ -273,19 +274,38 @@ export default (props) => {
 
     })
       .then(function (r) {
-
-        // localStorage.setItem("item_selecionado", item_s);
-        // localStorage.setItem("desc_item_selecionado", $scope.nome_peca);
-        // localStorage.setItem("qtde_of_total", $scope.qtde_of_total);
-        // localStorage.setItem("qtde_of_total_fixa", $scope.qtde_of_total_fixa);
-        // localStorage.setItem("ordens_selecionadas", JSON.stringify($scope.ordens_selecionadas));
-        // localStorage.setItem("id_controle", r.id);
-        console.warn(r);
+        storageSet("@id_controle", JSON.stringify(r.id));
+        setId_controle(r.id);
       });
   }
 
   const fechar_controle_diario = () => {
+          const formDataL = new FormData();
+          formDataL.append("_method", 'put');
+          formDataL.append("volume_produzido", "0");
+          formDataL.append("retrabalho", "0");
+          formDataL.append("id", "id_controle"); 
+          const URL_CONTROLE = "http://controleproducao.tuboarte.com/controles-diarios";
+          //--------INSERE OPERACAO---------
+          prom_login = fetch(URL_CONTROLE, {
+            method: "post",
+            body: formDataL
+          }).then(function (resp) {
 
+            return resp.json();
+
+          })
+            .then(function (r) {
+
+              localStorage.setItem("estado", "");
+              localStorage.setItem("desc", "");
+              localStorage.setItem("id_parada", "");
+              localStorage.setItem("cod_op", "");
+
+              localStorage.setItem("item_selecionado", "");
+              localStorage.setItem("desc_item_selecionado", "");
+              document.location.reload(true);
+            });
   }
    
     return (

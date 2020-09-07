@@ -176,6 +176,14 @@ export default (props) => {
       .catch((error) => console.error(error))
       .finally(() => setLoading(false));
 
+    fetch("http://controleproducao.tuboarte.com/controles-diarios/" + id_posto + "/" + operador_id)
+      .then((response) => response.json())
+      .then((json) => {
+        setControlesDiarios(json)
+      })
+      .catch((error) => console.error(error))
+      .finally(() => setLoading(false));
+
     
     if (ofs_selecionadas.length > 2){
       let ofs_selecionadas_temp = JSON.parse(ofs_selecionadas);
