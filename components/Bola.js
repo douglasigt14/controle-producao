@@ -150,7 +150,10 @@ export default (props) => {
   const sumir_modalItem = (ofs_marcadas_p) => {
     setModalItemVisible(false);
     storageSet("@cod_plano", cod_plano);
-    props.funcao_alterar_of(ofs_marcadas_p,cod_plano);
+
+    let ofs_marcadas_j = JSON.parse(ofs_marcadas_p);
+    let cod_i = ofs_marcadas_j[0].cod_item || "";
+    props.funcao_alterar_of(ofs_marcadas_p,cod_plano,cod_i);
   }  
   const limparOf = () =>{
     setCod_plano("");

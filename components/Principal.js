@@ -167,6 +167,8 @@ export default (props) => {
       
       
     } 
+
+  
     
     const operar = (descricao, qtde) => {
       
@@ -242,13 +244,48 @@ export default (props) => {
         setTimeout(function () { hideAlert(); }, 1000);
       });
     } 
+    
 
-  const alterar_of = (ofs_marcadas_p,cod_plano) => {
+  const alterar_of = (ofs_marcadas_p,cod_plano,cod_item) => {
     setOfs_selecionadas(ofs_marcadas_p)
     setCod_plano(cod_plano);
     setDescricao_alert('ITEM SELECIONADO COM SUCESSO');
+    abrir_controle_diario(cod_item);
     showAlert();
     setTimeout(function () { hideAlert(); }, 1000);
+  }
+
+  const abrir_controle_diario = (cod_item) => {
+    const formDataL = new FormData();
+    formDataL.append("operador_id", props.operador_id);
+    formDataL.append("posto_id", props.id_posto);
+    formDataL.append("cod_item", cod_item);
+    formDataL.append("status", 1);
+
+    const URL_CONTROLE = "http://controleproducao.tuboarte.com/controles-diarios";
+  
+    fetch(URL_CONTROLE, {
+      method: "post",
+      body: formDataL
+    }).then(function (resp) {
+
+      return resp.json();
+
+    })
+      .then(function (r) {
+
+        // localStorage.setItem("item_selecionado", item_s);
+        // localStorage.setItem("desc_item_selecionado", $scope.nome_peca);
+        // localStorage.setItem("qtde_of_total", $scope.qtde_of_total);
+        // localStorage.setItem("qtde_of_total_fixa", $scope.qtde_of_total_fixa);
+        // localStorage.setItem("ordens_selecionadas", JSON.stringify($scope.ordens_selecionadas));
+        // localStorage.setItem("id_controle", r.id);
+        console.warn(r);
+      });
+  }
+
+  const fechar_controle_diario = () => {
+
   }
    
     return (
