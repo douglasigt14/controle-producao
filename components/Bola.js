@@ -132,6 +132,7 @@ export default (props) => {
      let [editable_cod_item, setEditable_cod_item] = useState(true);
 
     let [mostrarOf, setMostrarOf] = useState(false);
+  let [mostrarAlert, setMostrarAlert] = useState(false);
     let [acoordeon, setAcordeon] = useState(null);
     let [ofs, setOfs] = useState([]);
     
@@ -159,7 +160,7 @@ export default (props) => {
     setEditable_cod_plano(true);
     setAcordeon(null);
     setMostrarOf(false);
-    
+    setMostrarAlert(false);
   }
 
   const buscarOf = (cod_item,cod_plano) =>{
@@ -174,11 +175,13 @@ export default (props) => {
           setOfs(json);
           if (json.length == 0){
             setMostrarOf(false);
+            setMostrarAlert(true);
             setEditable_cod_item(true);
             setEditable_cod_plano(true);
           }
           else{
             setMostrarOf(true);
+            setMostrarAlert(false);
             setEditable_cod_item(false);
             setEditable_cod_plano(false);
           }
@@ -198,10 +201,16 @@ export default (props) => {
         <Ofs cod_item={cod_item} cod_plano={cod_plano} ofs={ofs} funcao_limparOf={limparOf} funcao_sumir_modalItem={sumir_modalItem}></Ofs>
         </View>);
     }
+    else if (mostrarAlert) {
+      setAcordeon(
+        <View style={{ padding: 20, backgroundColor: '#F8D7D9', borderColor: '#f5c6cb' }}>
+          <Text>Nenhuma OF encontrada</Text>
+        </View>);
+    }
     else{
       setAcordeon(null);
     }  
-  }, [mostrarOf]);
+  }, [mostrarOf, mostrarAlert]);
 
      useEffect(() => {
        fetch(

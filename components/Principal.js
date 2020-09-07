@@ -55,7 +55,7 @@ export default (props) => {
     buscar_storage("@finalizado", setFinalizado, "true");
     buscar_storage("@ofs_selecionadas", setOfs_selecionadas, {});
     buscar_storage("@cod_plano", setCod_plano, "");
-    consulta_storage();
+   // consulta_storage();
   }, []);
 
   useEffect(() => {  
