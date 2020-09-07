@@ -197,6 +197,7 @@ export default (props) => {
       });
 
       setQtde(String(qtde));
+      setRetrabalho("0");
 
       var tabelaFinal = {
         tableHead: ["NUM_OF", "DATA", "ITEM","QTDE"],
