@@ -617,6 +617,7 @@ export default (props) => {
                 style={{ ...Padrao.openButton, backgroundColor: "#007bff" }}
                     onPress={() => {
                       props.funcao_finalizar();
+                      props.funcao_fechar_controle_diario(qtde,retrabalho);
                       setModalVisibleOfsSelecionadas(false);
                     }}
                   >

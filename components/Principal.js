@@ -279,12 +279,12 @@ export default (props) => {
       });
   }
 
-  const fechar_controle_diario = () => {
+  const fechar_controle_diario = (qtde,retrabalho) => {
           const formDataL = new FormData();
           formDataL.append("_method", 'put');
-          formDataL.append("volume_produzido", "0");
-          formDataL.append("retrabalho", "0");
-          formDataL.append("id", "id_controle"); 
+          formDataL.append("volume_produzido", qtde);
+          formDataL.append("retrabalho", retrabalho);
+          formDataL.append("id", id_controle); 
           const URL_CONTROLE = "http://controleproducao.tuboarte.com/controles-diarios";
           //--------INSERE OPERACAO---------
           prom_login = fetch(URL_CONTROLE, {
@@ -297,14 +297,7 @@ export default (props) => {
           })
             .then(function (r) {
 
-              localStorage.setItem("estado", "");
-              localStorage.setItem("desc", "");
-              localStorage.setItem("id_parada", "");
-              localStorage.setItem("cod_op", "");
-
-              localStorage.setItem("item_selecionado", "");
-              localStorage.setItem("desc_item_selecionado", "");
-              document.location.reload(true);
+             //console.warn(r);
             });
   }
    
@@ -323,6 +316,7 @@ export default (props) => {
           <GrupoButoes
             finalizado={finalizado}
             funcao_finalizar={finalizar}
+            funcao_fechar_controle_diario={fechar_controle_diario}
             operador_id={operador_id}
             id_posto={props.id_posto}
             ofs_selecionadas={
