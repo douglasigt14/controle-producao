@@ -24,6 +24,7 @@ export default (props) => {
     let [mostrar_alert, setMostrar_alert] = useState(false);
     let [ofs_selecionadas, setOfs_selecionadas] = useState([]);
     let [toch, setToch] = useState('auto');
+  let [cod_plano, setCod_plano] = useState("");
     let operador_id = props.operador_id;
 
     
@@ -53,8 +54,8 @@ export default (props) => {
     buscar_storage("@descricao", setDescricao, "");
     buscar_storage("@finalizado", setFinalizado, "true");
     buscar_storage("@ofs_selecionadas", setOfs_selecionadas, {});
-
-    //consulta_storage();
+    buscar_storage("@cod_plano", setCod_plano, "");
+    consulta_storage();
   }, []);
 
   useEffect(() => {  
@@ -177,7 +178,7 @@ export default (props) => {
                 const URL_OPERACAO = "http://controleproducao.tuboarte.com/operacoes-diarias";
                 const formDataI = new FormData();
                 formDataI.append("operador_id", operador_id);
-                formDataI.append("cod_item", descricao + "| QTDE: ( "+qtde+" ) | 0002");
+                formDataI.append("cod_item", descricao + "| QTDE: ( "+qtde+" ) | "+cod_plano);
                 formDataI.append("posto_id", props.id_posto);
                 formDataI.append("tempo_decisao", "0");
 
@@ -225,6 +226,7 @@ export default (props) => {
         
         setFinalizado(true);
         setOfs_selecionadas({});
+        setCod_plano('');
         
         storageSet("@cor", '#d3d3d3');
         storageSet("@parada_id", '');
@@ -232,6 +234,7 @@ export default (props) => {
         storageSet("@cor_texto", 'black');
         storageSet("@descricao", '');
         storageSet("@finalizado", "true");
+        storageSet("@cod_plano", "");
         storageSet("@ofs_selecionadas", JSON.stringify({}));
 
         setDescricao_alert('FINALIZADO COM SUCESSO');
@@ -240,9 +243,9 @@ export default (props) => {
       });
     } 
 
-  const alterar_of = (ofs_marcadas_p) => {
+  const alterar_of = (ofs_marcadas_p,cod_plano) => {
     setOfs_selecionadas(ofs_marcadas_p)
-
+    setCod_plano(cod_plano);
     setDescricao_alert('ITEM SELECIONADO COM SUCESSO');
     showAlert();
     setTimeout(function () { hideAlert(); }, 1000);

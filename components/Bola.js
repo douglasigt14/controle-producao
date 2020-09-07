@@ -15,7 +15,7 @@ import {
 import Padrao from "../style/Padrao";
 import { Button, Card } from "react-native-paper";
 import Ofs from "./Ofs";
-
+import { storageSet, consulta_storage } from "../storage/localstorage";
 
 
 const ViewModalItemInputs = styled.View`
@@ -148,7 +148,8 @@ export default (props) => {
 
   const sumir_modalItem = (ofs_marcadas_p) => {
     setModalItemVisible(false);
-    props.funcao_alterar_of(ofs_marcadas_p);
+    storageSet("@cod_plano", cod_plano);
+    props.funcao_alterar_of(ofs_marcadas_p,cod_plano);
   }  
   const limparOf = () =>{
     setCod_plano("");
