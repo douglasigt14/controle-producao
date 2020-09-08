@@ -62,9 +62,9 @@ export default (props) => {
        }
      });
 
-    dt_lotes.forEach(item => {
-      console.warn(dt_lotes);
-    });
+    // dt_lotes.forEach(item => {
+    //   console.warn(dt_lotes);
+    // });
 
     setOfs(ofsTemp);
 
@@ -149,7 +149,7 @@ export default (props) => {
           if (item.marcado) {
             cont_of++;
           }
-          item.check = <CheckBox style={{width: 40, height: 40}} onPress={() => {
+          item.check = <CheckBox style={{ width: 40, height: 40 }} color='black' onPress={() => {
             marcar_desmarcar(item.num_ordem);
           }} checked={item.marcado} />;
           tabela_temp.push([
@@ -174,7 +174,7 @@ export default (props) => {
         marcado: marcado_temp,
         cor: { backgroundColor: res[1] },
         tabela: tabelaFinal,
-        check: <CheckBox style={{ width: 40, height: 40 }} onPress={() => {
+        check: <CheckBox style={{ width: 50, height: 50}} color='black' onPress={() => {
           marcar_desmarcar_geral(res[0], !marcado_temp);
         }} checked={marcado_temp} />
       });
