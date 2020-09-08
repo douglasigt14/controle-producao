@@ -27,6 +27,7 @@ export default (props) => {
   let [cod_plano, setCod_plano] = useState("");
   let [id_controle, setId_controle] = useState(null); 
     let operador_id = props.operador_id;
+  let [showAlert2, setShowAlert2] = useState(false);
 
     
   const showAlert = () => {
@@ -307,10 +308,10 @@ export default (props) => {
           <Appbar.Header style={Padrao.barra}>
             <Appbar.Content title="Controle de Produção" />
             <Appbar.Action
-              icon="mail" 
+              icon="arrow-right" 
               style={{width: 100}}
               onPress={() => {
-                props.funcao_deslogar();
+                setShowAlert2(true);
               }}
             />
             {/* arrow-right */}
@@ -363,6 +364,34 @@ export default (props) => {
           contentStyle={{ width: 400, height: 200 }}
           titleStyle={{ fontSize: 25, textAlign: "center" }}
           messageStyle={{ fontSize: 15 }}
+        />
+
+
+        <AwesomeAlert
+          show={showAlert2}
+          showProgress={false}
+          title="Tem certeza que deseja sair?"
+          closeOnTouchOutside={true}
+          closeOnHardwareBackPress={false}
+          showCancelButton={true}
+          showConfirmButton={true}
+          cancelText="Não"
+          confirmText="Sim"
+          cancelButtonColor='#dc3545'
+          confirmButtonColor="#28a745"
+          onCancelPressed={() => {
+            setShowAlert2(false);
+          }}
+          onConfirmPressed={() => {
+            setShowAlert2(false);
+            props.funcao_deslogar();
+          }}
+          contentStyle={{ width: 500, height: 200 }}
+          titleStyle={{ fontSize: 25, textAlign: "center" }}
+          cancelButtonTextStyle={{ fontSize: 35, textAlign: "center" }}
+          confirmButtonTextStyle={{ fontSize: 35, textAlign: "center" }}
+          cancelButtonStyle={{ width: 250 }}
+          confirmButtonStyle={{ width: 250 }}
         />
       </>
     );
