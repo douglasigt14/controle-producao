@@ -321,6 +321,7 @@ export default (props) => {
             funcao_fechar_controle_diario={fechar_controle_diario}
             operador_id={operador_id}
             id_posto={props.id_posto}
+            parada_id={parada_id}
             ofs_selecionadas={
               ofs_selecionadas
             }

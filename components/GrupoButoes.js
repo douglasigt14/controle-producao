@@ -106,6 +106,7 @@ export default (props) => {
   let finalizado = props.finalizado;
   let ofs_selecionadas = props.ofs_selecionadas;
   let descricao = props.descricao;
+  let parada_id = props.parada_id;
 
 
   useEffect(() => {
@@ -272,7 +273,7 @@ export default (props) => {
     };
     setTabelaControles(tabelaFinal);
 
-  }, [finalizado, ofs_selecionadas]); // Com Dependencias
+  }, [parada_id,finalizado, ofs_selecionadas]); // Com Dependencias
 
 
   return (
