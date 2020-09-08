@@ -6,6 +6,7 @@ import Padrao from "../style/Padrao";
 import { Table, Row, Rows } from "react-native-table-component";
 import AsyncStorage from "@react-native-community/async-storage";
 import { consulta_storage } from "../storage/localstorage";
+import AwesomeAlert from 'react-native-awesome-alerts';
 
 const Texto = styled.Text`
     font-size: 18px;
@@ -108,6 +109,7 @@ export default (props) => {
   let descricao = props.descricao;
   let parada_id = props.parada_id;
 
+  let [showAlert, setShowAlert] = useState(false);
 
   useEffect(() => {
     fetch("http://controleproducao.tuboarte.com/paradas-diarias/"+operador_id)
@@ -618,9 +620,7 @@ export default (props) => {
                   <TouchModal
                 style={{ ...Padrao.openButton, backgroundColor: "#007bff" }}
                     onPress={() => {
-                      props.funcao_finalizar();
-                      props.funcao_fechar_controle_diario(qtde,retrabalho);
-                      setModalVisibleOfsSelecionadas(false);
+                      setShowAlert(true);
                     }}
                   >
                   
@@ -648,7 +648,29 @@ export default (props) => {
         </View>
       </Modal>
 
-      
+        <AwesomeAlert
+          show={showAlert}
+          showProgress={false}
+          title="Finalizar"
+          message="Tem certeza que deseja finalizar?"
+          closeOnTouchOutside={true}
+          closeOnHardwareBackPress={false}
+          showCancelButton={true}
+          showConfirmButton={true}
+          cancelText="Não"
+          confirmText="Sim"
+          cancelButtonColor='#dc3545'
+          confirmButtonColor="#28a745"
+          onCancelPressed={() => {
+            setShowAlert(false);
+          }}
+          onConfirmPressed={() => {
+            props.funcao_finalizar();
+            props.funcao_fechar_controle_diario(qtde, retrabalho);
+            setModalVisibleOfsSelecionadas(false);
+            setShowAlert(false);
+          }}
+        />
 
     </>
   );
