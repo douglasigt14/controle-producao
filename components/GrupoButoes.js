@@ -651,8 +651,7 @@ export default (props) => {
         <AwesomeAlert
           show={showAlert}
           showProgress={false}
-          title="Finalizar"
-          message="Tem certeza que deseja finalizar?"
+          title="Tem certeza que deseja finalizar?"
           closeOnTouchOutside={true}
           closeOnHardwareBackPress={false}
           showCancelButton={true}
@@ -670,6 +669,12 @@ export default (props) => {
             setModalVisibleOfsSelecionadas(false);
             setShowAlert(false);
           }}
+          contentStyle={{ width: 500, height: 200 }}
+          titleStyle={{ fontSize: 25, textAlign: "center" }}
+          cancelButtonTextStyle={{ fontSize: 35, textAlign: "center" }}
+          confirmButtonTextStyle={{ fontSize: 35, textAlign: "center" }}
+          cancelButtonStyle={{width: 250}}
+          confirmButtonStyle={{ width: 250 }}
         />
 
     </>
