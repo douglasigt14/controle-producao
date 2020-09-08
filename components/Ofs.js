@@ -105,6 +105,7 @@ export default (props) => {
 
 
   const atualizar_lote = (marcado_p = true, dt_p = null) => {
+  
     let dt_lotes_temp = [];
     ofs.forEach((item) => {
       dt_lotes_temp.push(item.dt_inicial + "|" + item.cor);
@@ -115,7 +116,7 @@ export default (props) => {
 
 
 
-    
+    console.warn(dt_lotes_temp);
 
     dt_lotes_temp.forEach((dt) => {
       
@@ -164,7 +165,7 @@ export default (props) => {
 
    useEffect(() => {
      atualizar_lote();
-   }, []);
+   }, [ofs]);
   return (
     <>
       <View>

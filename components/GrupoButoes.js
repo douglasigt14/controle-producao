@@ -292,7 +292,7 @@ export default (props) => {
                     setModalVisibleParadas(true);
                   }}
                 >
-                  <Texto>Paradas {descricao}</Texto>
+                  <Texto>Paradas</Texto>
                 </Button>
               </Div>
               <Div>
