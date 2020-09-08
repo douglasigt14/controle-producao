@@ -6,6 +6,7 @@ import styled from "styled-components";
 import { Table, Row, Rows } from "react-native-table-component";
 import Padrao from "../style/Padrao";
 import { storageSet, consulta_storage } from "../storage/localstorage";
+import AwesomeAlert from 'react-native-awesome-alerts';
 // import CheckBox from "@react-native-community/checkbox";
 
 
@@ -44,6 +45,8 @@ export default (props) => {
   let [ofs, setOfs] = useState(props.ofs);
   let [dt_lotes, setDt_lotes] = useState([]);
   let [toggleCheckBox, setToggleCheckBox] = useState(true);
+  let [descricao_alert, setDescricao_alert] = useState("");
+  let [mostrar_alert, setMostrar_alert] = useState(false);
   
 
     function unique(array) {
@@ -99,7 +102,9 @@ export default (props) => {
       props.funcao_limparOf();
     }
     else{
-      Alert.alert('Marque Pelo menos uma OF');
+      setDescricao_alert("Marque pelo Menos uma OF");
+      setMostrar_alert(true);
+      setTimeout(function () { setMostrar_alert(false); }, 1000);
     }
   }  
 
@@ -263,6 +268,21 @@ export default (props) => {
           ListFooterComponent={<></>}
         />
       </View>
+
+
+      <AwesomeAlert
+        show={mostrar_alert}
+        showProgress={false}
+        title={descricao_alert}
+        message=""
+        closeOnTouchOutside={true}
+        closeOnHardwareBackPress={true}
+        cancelText="No, cancel"
+        contentStyle={{ width: 400, height: 200 }}
+        titleStyle={{ fontSize: 25, textAlign: "center" }}
+        messageStyle={{ fontSize: 15 }}
+      />
+
     </>
   );
 }
