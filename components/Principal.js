@@ -307,11 +307,13 @@ export default (props) => {
           <Appbar.Header style={Padrao.barra}>
             <Appbar.Content title="Controle de Produção" />
             <Appbar.Action
-              icon="arrow-right"
+              icon="mail" 
+              style={{width: 100}}
               onPress={() => {
                 props.funcao_deslogar();
               }}
             />
+            {/* arrow-right */}
           </Appbar.Header>
           <GrupoButoes
             finalizado={finalizado}

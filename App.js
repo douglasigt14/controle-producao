@@ -45,7 +45,7 @@ export default  function App() {
   const selecionar_posto = (id_postoP) => {
     if(id_postoP){
       setId_posto(id_postoP);
-      storageSet("@id_posto", JSON.stringify(id_postoP));
+      storageSet("@id_posto", String(id_postoP));
     }
   };
 
@@ -74,8 +74,8 @@ export default  function App() {
               storageSet('@logado',"1");
               setLogado("1");
 
-              storageSet("@operador_id", JSON.stringify(r.user_id));
-              setOperador_id(JSON.stringify(r.user_id));
+              storageSet("@operador_id", String(r.user_id));
+              setOperador_id( String(r.user_id) );
 
               storageSet("@operador_desc", r.rotulo);
               setOperador_desc(r.rotulo);
