@@ -103,6 +103,22 @@ export default (props) => {
     }
   }  
 
+  const contarRepeticoes = (array, valor) => {
+
+    let contador = 0;
+
+    if (array != null) {
+  
+      array.forEach(element => {
+        if (element != null) {
+          if (element.dt_inicial == valor) {
+            contador++;
+          }
+        }
+      });
+    }
+    return contador;
+  }
 
   const atualizar_lote = (marcado_p = true, dt_p = null) => {
   
@@ -116,19 +132,23 @@ export default (props) => {
 
 
 
-    console.warn(dt_lotes_temp);
-
     dt_lotes_temp.forEach((dt) => {
       
       let res = dt.split("|");
       let tabela_temp = [];
-      
-      let marcado_temp = res[0] === dt_p ? marcado_p : true;
 
+      let cont = contarRepeticoes(ofs,res[0]);
+      let cont_of = 0;
+     
 
+    
       
       ofs.forEach((item) => {
+        
         if (item.dt_inicial === res[0]) {
+          if (item.marcado) {
+            cont_of++;
+          }
           item.check = <CheckBox onPress={() => {
             marcar_desmarcar(item.num_ordem);
           }} checked={item.marcado} />;
@@ -140,6 +160,10 @@ export default (props) => {
           ]);
         }
       });
+
+      // console.warn('Dt '+res[0]+': '+cont+' - '+cont_of);
+      let marcado_temp = cont == cont_of ? true : false;
+
       let tabelaFinal = {
         tableHead: ["OF", "ITEM", "QTD", "CHECK"],
         tableData: tabela_temp,
