@@ -24,10 +24,11 @@ export default (props) => {
     let [mostrar_alert, setMostrar_alert] = useState(false);
     let [ofs_selecionadas, setOfs_selecionadas] = useState([]);
     let [toch, setToch] = useState('auto');
-  let [cod_plano, setCod_plano] = useState("");
-  let [id_controle, setId_controle] = useState(null); 
+    let [cod_plano, setCod_plano] = useState("");
+    let [id_controle, setId_controle] = useState(null); 
     let operador_id = props.operador_id;
-  let [showAlert2, setShowAlert2] = useState(false);
+    let [showAlert2, setShowAlert2] = useState(false);
+    let [componentSair, setComponentSair] = useState(null);
 
     
   const showAlert = () => {
@@ -81,6 +82,18 @@ export default (props) => {
          .catch((error) => console.error(error))
          .finally(() => setLoading(false));
 
+         if(finalizado){
+           setComponentSair((<Appbar.Action
+             icon="arrow-right"
+             style={{ width: 100 }}
+             onPress={() => {
+               setShowAlert2(true);
+             }}
+           />)); 
+         }
+         else{
+           setComponentSair(null);
+         }
 
      }, [finalizado, parada_id]);
 
@@ -307,14 +320,7 @@ export default (props) => {
         <View pointerEvents={toch}>
           <Appbar.Header style={Padrao.barra}>
             <Appbar.Content title="Controle de Produção" />
-            <Appbar.Action
-              icon="arrow-right" 
-              style={{width: 100}}
-              onPress={() => {
-                setShowAlert2(true);
-              }}
-            />
-            {/* arrow-right */}
+            {componentSair}
           </Appbar.Header>
           <GrupoButoes
             finalizado={finalizado}
