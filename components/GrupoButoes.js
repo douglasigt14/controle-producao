@@ -277,7 +277,10 @@ export default (props) => {
 
   }, [parada_id,finalizado, ofs_selecionadas]); // Com Dependencias
 
-
+  // var hours = new Date().getHours(); //To get the Current Hours
+  // var min = new Date().getMinutes(); //To get the Current Minutes
+  // var sec = new Date().getSeconds(); //To get the Current Seconds
+  // var hora_atual = hours+':'+min+':'+sec;
   return (
     <>
       <Div_Card>
