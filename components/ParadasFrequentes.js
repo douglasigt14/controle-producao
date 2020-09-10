@@ -20,6 +20,12 @@ const Div = styled.View`
   justify-content: space-evenly;
 `;
 
+const Div2 = styled.View`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+`;
+
 const Div_Card = styled.View`
     padding-left: 5px;
     padding-right: 5px;
@@ -48,10 +54,10 @@ export default (props) => {
         <Div_Card>
           <Card>
             <Card.Content>
-              <Div>
+              <Div2>
                 <Texto>Posto: {dados_posto.nome}</Texto>
                 <Texto>Operador: {props.operador_desc}</Texto>
-              </Div>
+              </Div2>
               <Div>
                 {isLoading ? (
                   <ActivityIndicator />
