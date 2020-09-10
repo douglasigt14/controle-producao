@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { Text, Button,View } from "react-native";
+import { Text, Button,View, StyleSheet } from "react-native";
 import Padrao from '../style/Padrao';
 import styled from "styled-components";
 
@@ -28,6 +28,7 @@ export default (props) => {
         let segundo = novaHora.getSeconds();
         // Chamamos a função zero para que ela retorne a concatenação
         // com os minutos e segundos
+        hora = zero(hora);
         minuto = zero(minuto);
         segundo = zero(segundo);
         // Com o textContent, iremos inserir as horas, minutos e segundos
