@@ -18,6 +18,8 @@ export default  function App() {
     let [descricao_alert_tit, setDescricao_alert_tit] = useState("");
     let [descricao_alert_sub, setDescricao_alert_sub] = useState("");
 
+    let url = "http://controleproducao.tuboarte.com";
+
     const showAlert = () => {
       setMostrar_alert(true);
     };
@@ -59,7 +61,7 @@ export default  function App() {
       formDataL.append("senha", senha);
       formDataL.append("posto_id", id_posto);
 
-      const URL_LOGIN = "http://controleproducao.tuboarte.com/login";
+      const URL_LOGIN = url+"/login";
       //--------INSERE OPERACAO---------
       let prom_login = fetch(URL_LOGIN, {
         method: "post",
@@ -119,11 +121,11 @@ export default  function App() {
 
   if (!id_posto) {
     comp_rederizado = (
-      <SelecionarPosto funcao_selecionar={selecionar_posto}></SelecionarPosto>
+      <SelecionarPosto funcao_selecionar={selecionar_posto} url={url}></SelecionarPosto>
     );
   } else if (logado == "0" || logado == null) {
     comp_rederizado = (
-      <Login id_posto={id_posto} funcao_logar={logar}></Login>
+      <Login id_posto={id_posto} funcao_logar={logar} url={url}></Login>
     );
   } else {
     comp_rederizado = (
@@ -132,6 +134,7 @@ export default  function App() {
         operador_id={operador_id}
         operador_desc={operador_desc}
         funcao_deslogar={deslogar}
+        url={url}
       ></Principal>
     );
   }

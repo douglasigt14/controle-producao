@@ -38,9 +38,10 @@ export default (props) => {
    const [selectedPosto, setSelectedPosto] = useState(""); 
    const [isLoading, setLoading] = useState(true);
    const [postos, setPostos] = useState([]);
+   let url = props.url;
 
    useEffect(() => {
-     fetch("http://controleproducao.tuboarte.com/postos")
+     fetch(url+"/postos")
        .then((response) => response.json())
        .then((json) => setPostos(json))
        .catch((error) => console.error(error))
