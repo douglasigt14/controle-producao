@@ -84,7 +84,8 @@ export default (props) => {
 
          if(finalizado){
            setComponentSair((<Appbar.Action
-             icon="arrow-right"
+             icon="arrow-right-box"
+             size={60}
              style={{ width: 100 }}
              onPress={() => {
                setShowAlert2(true);
