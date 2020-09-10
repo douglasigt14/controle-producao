@@ -11,9 +11,8 @@ const Texto = styled.Text`
 const Div = styled.View`
   display: flex;
   flex-direction: row;
-  padding-left: 15px;
-  padding-right: 15px;
-  justify-content: space-evenly;
+  padding-right: 35px;
+  justify-content: flex-end;
 `;
 
 export default (props) => {
