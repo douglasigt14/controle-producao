@@ -9,6 +9,7 @@ import Padrao from '../style/Padrao';
 import AwesomeAlert from 'react-native-awesome-alerts';
 import { storageSet, consulta_storage } from "../storage/localstorage";
 import AsyncStorage from "@react-native-community/async-storage";
+import Relogio from "./Relogio";
 
 export default (props) => {
 
@@ -347,7 +348,7 @@ export default (props) => {
             paradasFrequentes={paradasFrequentes}
             descricao={descricao}
           ></ParadasFrequentes>
-
+         
           <Bola
             cor={cor}
             cor_texto={cor_texto}
@@ -361,6 +362,7 @@ export default (props) => {
             }
             funcao_alterar_of={alterar_of}
           ></Bola>
+          <Relogio></Relogio>
         </View>
 
         <AwesomeAlert
