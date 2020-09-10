@@ -115,6 +115,10 @@ export default (props) => {
           body: formDataU
         }).then(function (response) {
 
+        }).catch(function (error) {
+          setDescricao_alert('FALHA NA CONEXÃO');
+          showAlert();
+          setTimeout(function () { hideAlert(); }, 1000); 
         });
 
         return prom_update;
@@ -182,6 +186,10 @@ export default (props) => {
           setDescricao_alert('PARADA INICIADA COM SUCESSO');
           showAlert();
           setTimeout(function () { hideAlert(); }, 1000); //setToch('auto');
+        }).catch(function (error) {
+          setDescricao_alert('FALHA NA CONEXÃO');
+          showAlert();
+          setTimeout(function () { hideAlert(); }, 1000);
         });
         //--------INSERE PARADA---------
       });
@@ -231,7 +239,11 @@ export default (props) => {
                 setDescricao_alert('OPERAÇÃO INICIADA COM SUCESSO');
                 showAlert();
                   setTimeout(function () { hideAlert(); }, 1000);
-        });
+                }).catch(function (error) {
+                  setDescricao_alert('FALHA NA CONEXÃO');
+                  showAlert();
+                  setTimeout(function () { hideAlert(); }, 1000);
+                });
       });
     } 
 
@@ -261,6 +273,10 @@ export default (props) => {
         storageSet("@ofs_selecionadas", JSON.stringify({}));
 
         setDescricao_alert('FINALIZADO COM SUCESSO');
+        showAlert();
+        setTimeout(function () { hideAlert(); }, 1000);
+      }).catch(function (error) {
+        setDescricao_alert('FALHA NA CONEXÃO');
         showAlert();
         setTimeout(function () { hideAlert(); }, 1000);
       });
@@ -293,10 +309,14 @@ export default (props) => {
       return resp.json();
 
     })
-      .then(function (r) {
-        storageSet("@id_controle", JSON.stringify(r.id));
-        setId_controle(r.id);
-      });
+    .then(function (r) {
+      storageSet("@id_controle", JSON.stringify(r.id));
+      setId_controle(r.id);
+    }).catch(function (error) {
+      setDescricao_alert('FALHA NA CONEXÃO');
+      showAlert();
+      setTimeout(function () { hideAlert(); }, 1000);
+    });
   }
 
   const fechar_controle_diario = (qtde,retrabalho) => {
@@ -315,10 +335,14 @@ export default (props) => {
             return resp.json();
 
           })
-            .then(function (r) {
+          .then(function (r) {
 
-             //console.warn(r);
-            });
+            //console.warn(r);
+          }).catch(function (error) {
+            setDescricao_alert('FALHA NA CONEXÃO');
+            showAlert();
+            setTimeout(function () { hideAlert(); }, 1000);
+          });
   }
    
     return (
