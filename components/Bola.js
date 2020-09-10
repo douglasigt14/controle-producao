@@ -141,6 +141,7 @@ export default (props) => {
     let [componentVerde, setComponentVerde] = useState(null); 
     
   let ofs_selecionadas = props.ofs_selecionadas;
+  let url = props.url;
     
    let tabela = {
      tableHead: ["OF", "ITEM", "COR", "QTD"],
@@ -169,7 +170,7 @@ export default (props) => {
   const buscarOf = (cod_item,cod_plano) =>{
     cod_item = cod_item ? cod_item : 0; 
     cod_plano = cod_plano ? cod_plano : 0;
-    let URL = "http://controleproducao.tuboarte.com/itens/" + cod_item + "/" + cod_plano;
+    let URL = url+"/itens/" + cod_item + "/" + cod_plano;
     fetch(
       URL
     )
@@ -217,7 +218,7 @@ export default (props) => {
 
      useEffect(() => {
        fetch(
-         "http://controleproducao.tuboarte.com/paradas/codigos_restrito/" +
+         url+"/paradas/codigos_restrito/" +
            id_posto
        )
          .then((response) => response.json())
