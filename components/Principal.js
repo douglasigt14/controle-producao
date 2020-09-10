@@ -363,6 +363,7 @@ export default (props) => {
             operador_id={operador_id}
             id_posto={props.id_posto}
             parada_id={parada_id}
+            url={props.url}
             ofs_selecionadas={
               ofs_selecionadas
             }
@@ -376,6 +377,7 @@ export default (props) => {
             funcao_parar={parar}
             paradasFrequentes={paradasFrequentes}
             descricao={descricao}
+            url={props.url}
           ></ParadasFrequentes>
          
           <Bola
@@ -390,6 +392,7 @@ export default (props) => {
               ofs_selecionadas
             }
             funcao_alterar_of={alterar_of}
+            url={props.url}
           ></Bola>
           <Relogio></Relogio>
         </View>

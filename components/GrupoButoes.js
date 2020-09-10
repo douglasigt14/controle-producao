@@ -107,11 +107,12 @@ export default (props) => {
   let ofs_selecionadas = props.ofs_selecionadas;
   let descricao = props.descricao;
   let parada_id = props.parada_id;
+  let url = props.url;
 
   let [showAlert, setShowAlert] = useState(false);
 
   useEffect(() => {
-    fetch("http://controleproducao.tuboarte.com/paradas-diarias/"+operador_id)
+    fetch(url+"/paradas-diarias/"+operador_id)
       .then((response) => response.json())
       .then((json) => {
           setParadasDiarias(json)
@@ -119,7 +120,7 @@ export default (props) => {
       .catch((error) => console.error(error))
       .finally(() => setLoading(false));
 
-    fetch("http://controleproducao.tuboarte.com/operacoes-diarias/" + operador_id)
+    fetch(url+"/operacoes-diarias/" + operador_id)
       .then((response) => response.json())
       .then((json) => {
         setOperacoesDiarias(json)
@@ -127,7 +128,7 @@ export default (props) => {
       .catch((error) => console.error(error))
       .finally(() => setLoading(false));
  
-    fetch("http://controleproducao.tuboarte.com/controles-diarios/" + id_posto + "/" + operador_id)
+    fetch(url+"/controles-diarios/" + id_posto + "/" + operador_id)
       .then((response) => response.json())
       .then((json) => {
         setControlesDiarios(json)
@@ -136,7 +137,7 @@ export default (props) => {
       .finally(() => setLoading(false));
 
     fetch(
-        "http://controleproducao.tuboarte.com/paradas/codigos_restrito/" +
+         url+"/paradas/codigos_restrito/" +
           id_posto
       )
         .then((response) => response.json())
@@ -162,7 +163,7 @@ export default (props) => {
 
 
   useEffect(() => {
-    fetch("http://controleproducao.tuboarte.com/paradas-diarias/" + operador_id)
+    fetch(url+"/paradas-diarias/" + operador_id)
       .then((response) => response.json())
       .then((json) => {
         setParadasDiarias(json)
@@ -170,7 +171,7 @@ export default (props) => {
       .catch((error) => console.error(error))
       .finally(() => setLoading(false));
 
-    fetch("http://controleproducao.tuboarte.com/operacoes-diarias/" + operador_id)
+    fetch(url+"/operacoes-diarias/" + operador_id)
       .then((response) => response.json())
       .then((json) => {
         setOperacoesDiarias(json)
@@ -178,7 +179,7 @@ export default (props) => {
       .catch((error) => console.error(error))
       .finally(() => setLoading(false));
 
-    fetch("http://controleproducao.tuboarte.com/controles-diarios/" + id_posto + "/" + operador_id)
+    fetch(url+"/controles-diarios/" + id_posto + "/" + operador_id)
       .then((response) => response.json())
       .then((json) => {
         setControlesDiarios(json)
