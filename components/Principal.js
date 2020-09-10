@@ -320,7 +320,10 @@ export default (props) => {
       <>
         <View pointerEvents={toch}>
           <Appbar.Header style={Padrao.barra}>
-            <Appbar.Content title="Controle de Produção" />
+            <Appbar.Content 
+              title="Controle de Produção"
+              titleStyle={{fontSize: 25}} 
+            />
             {componentSair}
           </Appbar.Header>
           <GrupoButoes
