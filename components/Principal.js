@@ -133,6 +133,10 @@ export default (props) => {
           body: formDataU
         }).then(function (response) {
 
+        }).catch(function (error) {
+          setDescricao_alert('FALHA NA CONEXÃO');
+          showAlert();
+          setTimeout(function () { hideAlert(); }, 1000); 
         });
 
         return prom_update;
