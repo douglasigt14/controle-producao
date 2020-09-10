@@ -302,7 +302,7 @@ export default (props) => {
           formDataL.append("id", id_controle); 
           const URL_CONTROLE = "http://controleproducao.tuboarte.com/controles-diarios";
           //--------INSERE OPERACAO---------
-          prom_login = fetch(URL_CONTROLE, {
+          fetch(URL_CONTROLE, {
             method: "post",
             body: formDataL
           }).then(function (resp) {
