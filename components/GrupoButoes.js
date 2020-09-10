@@ -9,7 +9,7 @@ import { consulta_storage } from "../storage/localstorage";
 import AwesomeAlert from 'react-native-awesome-alerts';
 
 const Texto = styled.Text`
-    font-size: 18px;
+    font-size: 17px;
   `;
 
 const Div = styled.View`
@@ -17,7 +17,6 @@ const Div = styled.View`
     flex-direction: row;
     padding-left: 5px;
     padding-right: 5px;
-    padding-top: 10px;
     justify-content: space-around;
 `;
 
