@@ -35,10 +35,10 @@ export default (props) => {
     let [id_posto, setId_posto] = useState(props.id_posto);
     let [dados_posto, setDados_posto] = useState([]);
     let [isLoading, setLoading] = useState(true);
-    
+    let url = props.url;
 
   useEffect(() => {
-    fetch("http://controleproducao.tuboarte.com/postos/"+id_posto)
+    fetch(url+"/postos/"+id_posto)
       .then((response) => response.json())
       .then((json) => setDados_posto(json))
       .catch((error) => console.error(error))

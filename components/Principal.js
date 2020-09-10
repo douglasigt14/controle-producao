@@ -30,6 +30,7 @@ export default (props) => {
     let operador_id = props.operador_id;
     let [showAlert2, setShowAlert2] = useState(false);
     let [componentSair, setComponentSair] = useState(null);
+    let url = props.url;
 
     
   const showAlert = () => {
@@ -68,7 +69,7 @@ export default (props) => {
 
      useEffect(() => {    
         fetch(
-         "http://controleproducao.tuboarte.com/paradas-frequencia/" +
+         url+"/paradas-frequencia/" +
            props.id_posto
           )
          .then((response) => response.json())
@@ -103,7 +104,7 @@ export default (props) => {
      
 
      const update_parada = () => {
-        let URL_PARADA = "http://controleproducao.tuboarte.com/paradas-diarias";
+       let URL_PARADA = url+"/paradas-diarias";
         //--------UPDATE PARADA---------
 
         let formDataU = new FormData();
@@ -125,7 +126,7 @@ export default (props) => {
       }
 
       const update_operacao = () => {
-        let URL_OPERACAO = "http://controleproducao.tuboarte.com/operacoes-diarias";
+        let URL_OPERACAO = url+"/operacoes-diarias";
         //--------UPDATE PARADA---------
 
         let formDataU = new FormData();
@@ -155,7 +156,7 @@ export default (props) => {
 
       Promise.all([prom_update_parada, prom_update_operacao]).then(valores => {
         setToch("none");
-        let URL_PARADA = "http://controleproducao.tuboarte.com/paradas-diarias";
+        let URL_PARADA = url+"/paradas-diarias";
         const formDataI = new FormData();
         formDataI.append("operador_id", operador_id);
         formDataI.append("cod_id", parada_id);
@@ -206,7 +207,7 @@ export default (props) => {
 
       Promise.all([prom_update_parada, prom_update_operacao]).then(valores => {
                 setToch("none");
-                const URL_OPERACAO = "http://controleproducao.tuboarte.com/operacoes-diarias";
+                const URL_OPERACAO = url +"/operacoes-diarias";
                 const formDataI = new FormData();
                 formDataI.append("operador_id", operador_id);
                 formDataI.append("cod_item", descricao + "| QTDE: ( "+qtde+" ) | "+cod_plano);
@@ -299,7 +300,7 @@ export default (props) => {
     formDataL.append("cod_item", cod_item);
     formDataL.append("status", 1);
 
-    const URL_CONTROLE = "http://controleproducao.tuboarte.com/controles-diarios";
+    const URL_CONTROLE = url+"/controles-diarios";
   
     fetch(URL_CONTROLE, {
       method: "post",
@@ -325,7 +326,7 @@ export default (props) => {
           formDataL.append("volume_produzido", qtde);
           formDataL.append("retrabalho", retrabalho);
           formDataL.append("id", id_controle); 
-          const URL_CONTROLE = "http://controleproducao.tuboarte.com/controles-diarios";
+          const URL_CONTROLE = url+"/controles-diarios";
           //--------INSERE OPERACAO---------
           fetch(URL_CONTROLE, {
             method: "post",
