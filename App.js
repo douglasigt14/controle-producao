@@ -71,7 +71,8 @@ export default  function App() {
         })
         .then(function (r) {
           if (r.mensagem.tipo == "sucesso") {
-              focco_login();
+              focco_logar();
+
               storageSet('@logado',"1");
               setLogado("1");
 
@@ -106,7 +107,7 @@ export default  function App() {
    
   };
 
-  const focco_login = () => {
+  const focco_logar = () => {
     let urlFocco = url + "/focco/login";
     fetch(urlFocco, {
       method: "get",
@@ -118,6 +119,7 @@ export default  function App() {
          storageSet("@token", r.Token);
       });
   }
+  
   
   const deslogar = () => {
       storageSet("@logado", "0");

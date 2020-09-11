@@ -315,12 +315,36 @@ export default (props) => {
     .then(function (r) {
       storageSet("@id_controle", JSON.stringify(r.id));
       setId_controle(r.id);
+      abrir_apontamento();
     }).catch(function (error) {
       setDescricao_alert('FALHA NA CONEXÃO');
       showAlert();
       setTimeout(function () { hideAlert(); }, 1000);
     });
   }
+
+    const abrir_apontamento = () => {
+      const formDataL = new FormData();
+      formDataL.append("token", token);
+
+      const URL_CONTROLE = url + "/focco/incluir_apontamento_tempo_padrao";
+
+      fetch(URL_CONTROLE, {
+        method: "post",
+        body: formDataL
+      }).then(function (resp) {
+
+        return resp.text();
+
+      })
+        .then(function (r) {
+            console.warn(r);
+        }).catch(function (error) {
+          setDescricao_alert('FALHA NA CONEXÃO');
+          showAlert();
+          setTimeout(function () { hideAlert(); }, 1000);
+        });
+    }
 
   const fechar_controle_diario = (qtde,retrabalho) => {
           const formDataL = new FormData();
