@@ -63,7 +63,6 @@ export default (props) => {
     buscar_storage("@cod_plano", setCod_plano, "");
     buscar_storage("@id_controle", setId_controle, null);
     buscar_storage("@token", setToken, "");
-    consulta_storage();
   }, []);
 
   useEffect(() => {  
@@ -371,7 +370,7 @@ export default (props) => {
               ofs_selecionadas
             }
           ></GrupoButoes>
-          <Text>{token} Teste</Text>
+          {/* <Text>{token}</Text> */}
           <ParadasFrequentes
             finalizado={finalizado}
             funcao_finalizar={finalizar}
