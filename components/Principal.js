@@ -31,7 +31,7 @@ export default (props) => {
     let [showAlert2, setShowAlert2] = useState(false);
     let [componentSair, setComponentSair] = useState(null);
     let url = props.url;
-    let token = props.token;
+    let [token, setToken] = useState("");
 
     
   const showAlert = () => {
@@ -62,6 +62,8 @@ export default (props) => {
     buscar_storage("@ofs_selecionadas", setOfs_selecionadas, {});
     buscar_storage("@cod_plano", setCod_plano, "");
     buscar_storage("@id_controle", setId_controle, null);
+    buscar_storage("@token", setToken, "");
+    consulta_storage();
   }, []);
 
   useEffect(() => {  

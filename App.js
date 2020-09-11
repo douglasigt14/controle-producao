@@ -17,7 +17,6 @@ export default  function App() {
     let [mostrar_alert, setMostrar_alert] = useState(false);
     let [descricao_alert_tit, setDescricao_alert_tit] = useState("");
     let [descricao_alert_sub, setDescricao_alert_sub] = useState("");
-
     let url = "http://teste.controleproducao.tuboarte.com";
 
     const showAlert = () => {
@@ -72,7 +71,7 @@ export default  function App() {
         })
         .then(function (r) {
           if (r.mensagem.tipo == "sucesso") {
-              
+              focco_login();
               storageSet('@logado',"1");
               setLogado("1");
 
@@ -86,6 +85,7 @@ export default  function App() {
             setDescricao_alert_sub('Iniciando aplicação');
 
           } else if (r.mensagem.tipo == "erro") {
+           
             storageSet("@logado", "0");
             setLogado("0");
 
@@ -106,19 +106,19 @@ export default  function App() {
    
   };
 
-  // let urlFocco = url + "/focco/login";
-  // console.warn(urlFocco);
-  // fetch(urlFocco, {
-  //   method: "post",
-  //   body: formDataL,
-  // })
-  //   .then(function (resp) {
-  //     return resp.text();
-  //   })
-  //   .then(function (r) {
-  //     console.warn(r);
-  //   });
-
+  const focco_login = () => {
+    let urlFocco = url + "/focco/login";
+    fetch(urlFocco, {
+      method: "get",
+    })
+      .then(function (resp) {
+        return resp.json();
+      })
+      .then(function (r) {
+         storageSet("@token", r.Token);
+      });
+  }
+  
   const deslogar = () => {
       storageSet("@logado", "0");
       setLogado("0");
