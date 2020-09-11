@@ -31,6 +31,7 @@ export default (props) => {
     let [showAlert2, setShowAlert2] = useState(false);
     let [componentSair, setComponentSair] = useState(null);
     let url = props.url;
+    let token = props.token;
 
     
   const showAlert = () => {
@@ -368,6 +369,7 @@ export default (props) => {
               ofs_selecionadas
             }
           ></GrupoButoes>
+          <Text>{token} Teste</Text>
           <ParadasFrequentes
             finalizado={finalizado}
             funcao_finalizar={finalizar}
