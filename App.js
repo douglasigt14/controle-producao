@@ -17,7 +17,7 @@ export default  function App() {
     let [mostrar_alert, setMostrar_alert] = useState(false);
     let [descricao_alert_tit, setDescricao_alert_tit] = useState("");
     let [descricao_alert_sub, setDescricao_alert_sub] = useState("");
-    let [token, setToken] = useState("");
+
     let url = "http://teste.controleproducao.tuboarte.com";
 
     const showAlert = () => {
@@ -73,8 +73,6 @@ export default  function App() {
         .then(function (r) {
           if (r.mensagem.tipo == "sucesso") {
               
-
-
               storageSet('@logado',"1");
               setLogado("1");
 
@@ -88,19 +86,6 @@ export default  function App() {
             setDescricao_alert_sub('Iniciando aplicação');
 
           } else if (r.mensagem.tipo == "erro") {
-            console.warn('Douglas');
-            fetch(url + "/focco/login", {
-              method: "post",
-              body: formDataL,
-            })
-            .then(function (resp) {
-              return resp.json();
-            })
-            .then(function (r) {
-              setToken(r.Token);
-              console.warn(r);
-            });
-
             storageSet("@logado", "0");
             setLogado("0");
 
@@ -120,6 +105,19 @@ export default  function App() {
       }
    
   };
+
+  // let urlFocco = url + "/focco/login";
+  // console.warn(urlFocco);
+  // fetch(urlFocco, {
+  //   method: "post",
+  //   body: formDataL,
+  // })
+  //   .then(function (resp) {
+  //     return resp.text();
+  //   })
+  //   .then(function (r) {
+  //     console.warn(r);
+  //   });
 
   const deslogar = () => {
       storageSet("@logado", "0");
@@ -150,7 +148,6 @@ export default  function App() {
         operador_desc={operador_desc}
         funcao_deslogar={deslogar}
         url={url}
-        token={token}
       ></Principal>
     );
   }
