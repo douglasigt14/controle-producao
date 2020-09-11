@@ -32,6 +32,7 @@ export default (props) => {
     let [componentSair, setComponentSair] = useState(null);
     let url = props.url;
     let [token, setToken] = useState("");
+    let [inicio, setInicio] = useState("");
 
     
   const showAlert = () => {
@@ -63,6 +64,8 @@ export default (props) => {
     buscar_storage("@cod_plano", setCod_plano, "");
     buscar_storage("@id_controle", setId_controle, null);
     buscar_storage("@token", setToken, "");
+    buscar_storage("@inicio", setInicio, "");
+    consulta_storage();
   }, []);
 
   useEffect(() => {  
@@ -291,6 +294,12 @@ export default (props) => {
     setCod_plano(cod_plano);
     setDescricao_alert('ITEM SELECIONADO COM SUCESSO');
     abrir_controle_diario(cod_item);
+    let novaHora = new Date();
+
+    console.warn(novaHora);
+    
+    storageSet("@inicio", String(novaHora));
+    
     showAlert();
     setTimeout(function () { hideAlert(); }, 1000);
   }
@@ -315,7 +324,7 @@ export default (props) => {
     .then(function (r) {
       storageSet("@id_controle", JSON.stringify(r.id));
       setId_controle(r.id);
-      abrir_apontamento();
+      
     }).catch(function (error) {
       setDescricao_alert('FALHA NA CONEXÃO');
       showAlert();
@@ -326,6 +335,7 @@ export default (props) => {
     const abrir_apontamento = () => {
       const formDataL = new FormData();
       formDataL.append("token", token);
+      formDataL.append("inicio", inicio);
 
       const URL_CONTROLE = url + "/focco/incluir_apontamento_tempo_padrao";
 
@@ -363,7 +373,7 @@ export default (props) => {
 
           })
           .then(function (r) {
-
+            abrir_apontamento();
             //console.warn(r);
           }).catch(function (error) {
             setDescricao_alert('FALHA NA CONEXÃO');
