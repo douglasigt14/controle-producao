@@ -295,13 +295,24 @@ export default (props) => {
     setDescricao_alert('ITEM SELECIONADO COM SUCESSO');
     abrir_controle_diario(cod_item);
     let novaHora = new Date();
-
-    console.warn(novaHora);
+    let hora = novaHora.getHours();
+    let minuto = novaHora.getMinutes();
+    let segundo = novaHora.getSeconds();
+    hora = zero(hora);
+    minuto = zero(minuto);
+    segundo = zero(segundo);
     
-    storageSet("@inicio", String(novaHora));
+    storageSet("@inicio", hora+':'+minuto+':'+segundo);
+    setInicio(hora + ':' + minuto + ':' + segundo);
     
     showAlert();
     setTimeout(function () { hideAlert(); }, 1000);
+  }
+
+  function zero(x) {
+    if (x < 10) {
+      x = '0' + x;
+    } return x;
   }
 
   const abrir_controle_diario = (cod_item) => {
@@ -333,9 +344,18 @@ export default (props) => {
   }
 
     const abrir_apontamento = () => {
+      let novaHora = new Date();
+      let hora = novaHora.getHours();
+      let minuto = novaHora.getMinutes();
+      let segundo = novaHora.getSeconds();
+      hora = zero(hora);
+      minuto = zero(minuto);
+      segundo = zero(segundo);
+      
       const formDataL = new FormData();
       formDataL.append("token", token);
       formDataL.append("inicio", inicio);
+      formDataL.append("fim", hora+':'+minuto+':'+segundo);
 
       const URL_CONTROLE = url + "/focco/incluir_apontamento_tempo_padrao";
 
