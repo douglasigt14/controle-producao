@@ -65,7 +65,7 @@ export default (props) => {
     buscar_storage("@id_controle", setId_controle, null);
     buscar_storage("@token", setToken, "");
     buscar_storage("@inicio", setInicio, "");
-    consulta_storage();
+   // consulta_storage();
   }, []);
 
   useEffect(() => {  
@@ -343,7 +343,7 @@ export default (props) => {
     });
   }
 
-    const abrir_apontamento = () => {
+    const apontamento = (qtde) => {
       let novaHora = new Date();
       let hora = novaHora.getHours();
       let minuto = novaHora.getMinutes();
@@ -352,29 +352,33 @@ export default (props) => {
       minuto = zero(minuto);
       segundo = zero(segundo);
       
+
       const formDataL = new FormData();
       formDataL.append("token", token);
       formDataL.append("inicio", inicio);
-      formDataL.append("fim", hora+':'+minuto+':'+segundo);
+      formDataL.append("qtde", qtde);
+      formDataL.append("fim", hora + ":" + minuto + ":" + segundo);
 
       const URL_CONTROLE = url + "/focco/incluir_apontamento_tempo_padrao";
 
       fetch(URL_CONTROLE, {
         method: "post",
-        body: formDataL
-      }).then(function (resp) {
-
-        return resp.text();
-
+        body: formDataL,
       })
+        .then(function (resp) {
+          return resp.text();
+        })
         .then(function (r) {
-            console.warn(r);
-        }).catch(function (error) {
-          setDescricao_alert('FALHA NA CONEXÃO');
+          console.warn(r);
+        })
+        .catch(function (error) {
+          setDescricao_alert("FALHA NA CONEXÃO");
           showAlert();
-          setTimeout(function () { hideAlert(); }, 1000);
+          setTimeout(function () {
+            hideAlert();
+          }, 1000);
         });
-    }
+    };
 
   const fechar_controle_diario = (qtde,retrabalho) => {
           const formDataL = new FormData();
@@ -393,7 +397,7 @@ export default (props) => {
 
           })
           .then(function (r) {
-            abrir_apontamento();
+            apontamento(qtde);
             //console.warn(r);
           }).catch(function (error) {
             setDescricao_alert('FALHA NA CONEXÃO');
