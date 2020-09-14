@@ -343,7 +343,7 @@ export default (props) => {
     });
   }
 
-    const apontamento = (qtde) => {
+    const apontamento = (qtde, cod_barra) => {
       let novaHora = new Date();
       let hora = novaHora.getHours();
       let minuto = novaHora.getMinutes();
@@ -357,6 +357,7 @@ export default (props) => {
       formDataL.append("token", token);
       formDataL.append("inicio", inicio);
       formDataL.append("qtde", qtde);
+      formDataL.append("cod_barra", cod_barra);
       formDataL.append("fim", hora + ":" + minuto + ":" + segundo);
 
       const URL_CONTROLE = url + "/focco/incluir_apontamento_tempo_padrao";
@@ -388,7 +389,7 @@ export default (props) => {
           formDataL.append("id", id_controle); 
           const URL_CONTROLE = url+"/controles-diarios";
           //--------INSERE OPERACAO---------
-          fetch(URL_CONTROLE, {
+         let prom_fechar_controle = fetch(URL_CONTROLE, {
             method: "post",
             body: formDataL
           }).then(function (resp) {
@@ -397,13 +398,24 @@ export default (props) => {
 
           })
           .then(function (r) {
-            apontamento(qtde);
+            
             //console.warn(r);
           }).catch(function (error) {
             setDescricao_alert('FALHA NA CONEXÃO');
             showAlert();
             setTimeout(function () { hideAlert(); }, 1000);
           });
+
+           Promise.all([prom_fechar_controle]).then((valores) => {
+                 if (ofs_selecionadas.length > 2 ) {
+                     let ofs_selecionadas_temp = JSON.parse(ofs_selecionadas);
+                     ofs_selecionadas_temp.forEach((item) => {
+                         console.warn(item.cod_barra+" - "+item.qtde_of);
+                         apontamento(item.qtde_of, item.cod_barra);
+                     }); 
+                 }
+                // 
+           });
   }
    
     return (
