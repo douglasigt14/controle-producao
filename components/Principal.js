@@ -278,9 +278,9 @@ export default (props) => {
         storageSet("@cod_plano", "");
         storageSet("@ofs_selecionadas", JSON.stringify({}));
 
-        setDescricao_alert('FINALIZADO COM SUCESSO');
-        showAlert();
-        setTimeout(function () { hideAlert(); }, 1000);
+        // setDescricao_alert('FINALIZADO COM SUCESSO');
+        // showAlert();
+        // setTimeout(function () { hideAlert(); }, 1000);
       }).catch(function (error) {
         setDescricao_alert('FALHA NA CONEXÃO');
         showAlert();
@@ -410,7 +410,6 @@ export default (props) => {
                  if (ofs_selecionadas.length > 2 ) {
                      let ofs_selecionadas_temp = JSON.parse(ofs_selecionadas);
                      ofs_selecionadas_temp.forEach((item) => {
-                         console.warn(item.cod_barra+" - "+item.qtde_of);
                          apontamento(item.qtde_of, item.cod_barra);
                      }); 
                  }
