@@ -371,6 +371,7 @@ export default (props) => {
         })
         .then(function (r) {
           console.warn(r);
+          console.log(r);
         })
         .catch(function (error) {
           setDescricao_alert("FALHA NA CONEXÃO");
