@@ -160,6 +160,7 @@ export default (props) => {
           tabela_temp.push([
             item.num_ordem,
             item.item,
+            item.mascara,
             item.qtde_of,
             item.check
           ]);
@@ -170,7 +171,7 @@ export default (props) => {
       let marcado_temp = cont == cont_of ? true : false;
 
       let tabelaFinal = {
-        tableHead: ["OF", "ITEM", "QTD", "CHECK"],
+        tableHead: ["OF", "ITEM", "COR", "QTD", "CHECK"],
         tableData: tabela_temp,
       };
 
