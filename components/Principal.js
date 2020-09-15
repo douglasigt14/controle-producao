@@ -383,7 +383,8 @@ export default (props) => {
         });
     };
 
-  const fechar_controle_diario = (qtde,retrabalho) => {
+  const fechar_controle_diario = (qtde,retrabalho,ofs) => {
+          console.warn(ofs);
           const formDataL = new FormData();
           formDataL.append("_method", 'put');
           formDataL.append("volume_produzido", qtde);
@@ -409,11 +410,11 @@ export default (props) => {
           });
 
            Promise.all([prom_fechar_controle]).then((valores) => {
-                 if (ofs_selecionadas.length > 2 ) {
-                     let ofs_selecionadas_temp = JSON.parse(ofs_selecionadas);
-                     ofs_selecionadas_temp.forEach((item) => {
-                         apontamento(item.qtde_of, item.cod_barra);
-                     }); 
+                 if (ofs.length > 2) {
+                   let ofs_selecionadas_temp = JSON.parse(ofs);
+                   ofs_selecionadas_temp.forEach((item) => {
+                     apontamento(item.qtde_prod, item.cod_barra);
+                   });
                  }
                 // 
            });
