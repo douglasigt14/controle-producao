@@ -161,7 +161,7 @@ export default (props) => {
             item.num_ordem,
             item.cod_item+' - '+item.item,
             item.mascara,
-            item.qtde_of,
+            item.qtde_pend,
             item.check
           ]);
         }

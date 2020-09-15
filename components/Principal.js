@@ -410,12 +410,12 @@ export default (props) => {
           });
 
            Promise.all([prom_fechar_controle]).then((valores) => {
-                 if (ofs.length > 2) {
-                   let ofs_selecionadas_temp = JSON.parse(ofs);
+                 //if (ofs.length > 2) {
+                   let ofs_selecionadas_temp = ofs;
                    ofs_selecionadas_temp.forEach((item) => {
                      apontamento(item.qtde_prod, item.cod_barra);
                    });
-                 }
+                 //}
                 // 
            });
   }
