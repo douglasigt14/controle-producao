@@ -159,7 +159,7 @@ export default (props) => {
           }} checked={item.marcado} />;
           tabela_temp.push([
             item.num_ordem,
-            item.item,
+            item.cod_item+' - '+item.item,
             item.mascara,
             item.qtde_of,
             item.check
