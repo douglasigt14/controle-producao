@@ -343,7 +343,7 @@ export default (props) => {
     });
   }
 
-    const apontamento = (qtde, cod_barra) => {
+    const apontamento = (qtde, cod_barra, qtde_pend) => {
       let novaHora = new Date();
       let hora = novaHora.getHours();
       let minuto = novaHora.getMinutes();
@@ -357,6 +357,7 @@ export default (props) => {
       formDataL.append("token", token);
       formDataL.append("inicio", inicio);
       formDataL.append("qtde", qtde);
+      formDataL.append("qtde_pend", qtde_pend);
       formDataL.append("cod_barra", cod_barra);
       formDataL.append("fim", hora + ":" + minuto + ":" + segundo);
 
@@ -384,7 +385,6 @@ export default (props) => {
     };
 
   const fechar_controle_diario = (qtde,retrabalho,ofs) => {
-          console.warn(ofs);
           const formDataL = new FormData();
           formDataL.append("_method", 'put');
           formDataL.append("volume_produzido", qtde);
@@ -413,7 +413,11 @@ export default (props) => {
                  //if (ofs.length > 2) {
                    let ofs_selecionadas_temp = ofs;
                    ofs_selecionadas_temp.forEach((item) => {
-                     apontamento(item.qtde_prod, item.cod_barra);
+                     apontamento(
+                       item.qtde_prod,
+                       item.cod_barra,
+                       item.qtde_pend
+                     );
                    });
                  //}
                 // 

@@ -312,7 +312,7 @@ export default (props) => {
           item.num_ordem,
           item.dt_inicial,
           item.cod_item + " - " + item.item,
-          item.qtde_of,
+          item.qtde_pend,
           item.input,
         ]);
         qtde += parseInt(item.qtde_prod);
@@ -362,11 +362,10 @@ export default (props) => {
           item.num_ordem,
           item.dt_inicial,
           item.cod_item + " - " + item.item,
-          item.qtde_of,
+          item.qtde_pend,
           item.input,
         ]);
-        qtde += parseInt(item.qtde_of);
-
+        qtde += parseInt(item.qtde_prod);
       setQtde(String(qtde));
       setRetrabalho("0");
 
