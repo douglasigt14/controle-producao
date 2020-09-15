@@ -367,11 +367,12 @@ export default (props) => {
         body: formDataL,
       })
         .then(function (resp) {
-          return resp.text();
+          return resp.json();
         })
         .then(function (r) {
-          console.warn(r);
-          console.log(r);
+          let ok = r.Succeeded ? 'OK' : 'ERROR :' ; 
+          console.warn(cod_barra+" - "+ok+' '+r.ErrorMessage);
+          console.log(cod_barra + " - " + ok + " " + r.ErrorMessage);
         })
         .catch(function (error) {
           setDescricao_alert("FALHA NA CONEXÃO");

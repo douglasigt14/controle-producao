@@ -109,6 +109,8 @@ export default (props) => {
   let parada_id = props.parada_id;
   let url = props.url;
 
+  let [value, onChangeText] = useState("0");
+
   let [showAlert, setShowAlert] = useState(false);
 
   useEffect(() => {
@@ -195,7 +197,26 @@ export default (props) => {
       var tabelaTemp = [];
       let qtde = 0;
       ofs_selecionadas_temp.forEach(item => {
-        tabelaTemp.push([item.num_ordem, item.dt_inicial, item.item,  item.qtde_of ]);
+        item.input = (
+          <TextInput
+            style={{
+              height: 40,
+              borderColor: "gray",
+              borderWidth: 1,
+              margin: 20,
+              padding: 10
+            }}
+            onChangeText={(text) => onChangeText(text)}
+            value={value}
+          />
+        );
+        tabelaTemp.push([
+          item.num_ordem,
+          item.dt_inicial,
+          item.cod_item + " - " + item.item,
+          item.qtde_of,
+          item.input,
+        ]);
         qtde += parseInt(item.qtde_of);
       });
 
@@ -203,8 +224,8 @@ export default (props) => {
       setRetrabalho("0");
 
       var tabelaFinal = {
-        tableHead: ["NUM_OF", "DATA", "ITEM","QTDE"],
-        tableData: tabelaTemp
+        tableHead: ["NUM_OF", "DATA", "ITEM", "QTDE OF", "QTDE PROD"],
+        tableData: tabelaTemp,
       };
       setTabelaOfs(tabelaFinal);
 
