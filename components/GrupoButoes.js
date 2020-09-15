@@ -32,6 +32,11 @@ const ViewModal = styled.View`
       display: flex;
   `;
 
+const ViewModalMaior = styled.View`
+      max-height: 920px;
+      display: flex;
+  `;
+
 
 const TouchModal = styled.TouchableHighlight`
     margin-top: 10px;
@@ -341,7 +346,7 @@ export default (props) => {
                   color="#007bff"
                   title="C. Diarios"
                   mode="contained"
-                  onPress={() =>setModalVisibleControles()}
+                  onPress={() => setModalVisibleControles()}
                 >
                   <Texto>C. Diarios </Texto>
                 </Button>
@@ -407,7 +412,7 @@ export default (props) => {
               >
                 <Row
                   data={tabelaParadas.tableHead}
-                  style={{ height: 40, backgroundColor: "#dc3545"}}
+                  style={{ height: 40, backgroundColor: "#dc3545" }}
                   textStyle={styles.text}
                 />
                 <Rows data={tabelaParadas.tableData} textStyle={styles.text} />
@@ -462,7 +467,10 @@ export default (props) => {
                   style={{ height: 40, backgroundColor: "#28a745" }}
                   textStyle={styles.text}
                 />
-                <Rows data={tabelaOperacoes.tableData} textStyle={styles.text} />
+                <Rows
+                  data={tabelaOperacoes.tableData}
+                  textStyle={styles.text}
+                />
               </Table>
             </ScrollView>
           </ViewModal>
@@ -521,7 +529,6 @@ export default (props) => {
         </View>
       </Modal>
 
-
       {/* Modal Controles Diarios */}
       <Modal
         animationType="fade"
@@ -567,15 +574,15 @@ export default (props) => {
                   style={{ height: 40, backgroundColor: "#007bff" }}
                   textStyle={styles.text}
                 />
-                <Rows data={tabelaControles.tableData} textStyle={styles.text} />
+                <Rows
+                  data={tabelaControles.tableData}
+                  textStyle={styles.text}
+                />
               </Table>
             </ScrollView>
           </ViewModal>
         </View>
       </Modal>
-
-
-
 
       {/* Modal OFS Selecionadas */}
       <Modal
@@ -588,7 +595,7 @@ export default (props) => {
         hardwareAccelerated={true}
       >
         <View style={Padrao.topView}>
-          <ViewModal style={Padrao.modalView}>
+          <ViewModalMaior style={Padrao.modalView}>
             <Div_Fechar2>
               <Text
                 style={{
@@ -598,7 +605,7 @@ export default (props) => {
                   marginRight: 400,
                 }}
               >
-                  Resumo dos Itens
+                Resumo dos Itens
               </Text>
               <TouchModal
                 style={{ ...Padrao.closeButton }}
@@ -612,17 +619,18 @@ export default (props) => {
             <ViewModalFinalizarInputs>
               <View>
                 <Texto>QTDE TOTAL</Texto>
-              <TextInput
-                style={[Padrao.inputModal, {width: 250}]}
-                value={qtde}
-                onChangeText={(text) => {
-                  setQtde(text);
-                  setFocus_qtde(true);
-                  setFocus_retrabalho(false);
-                }}
-                keyboardType={"phone-pad"}
-                autoFocus={focus_qtde}
-              />
+                <TextInput
+                  style={[Padrao.inputModal, { width: 250 }]}
+                  value={qtde}
+                  editable={false}
+                  onChangeText={(text) => {
+                    setQtde(text);
+                    setFocus_qtde(true);
+                    setFocus_retrabalho(false);
+                  }}
+                  keyboardType={"phone-pad"}
+                  autoFocus={focus_qtde}
+                />
               </View>
 
               <View>
@@ -641,15 +649,14 @@ export default (props) => {
               </View>
             </ViewModalFinalizarInputs>
             <ViewModalFinalizarButton>
-                  <TouchModal
+              <TouchModal
                 style={{ ...Padrao.openButton, backgroundColor: "#007bff" }}
-                    onPress={() => {
-                      setShowAlert(true);
-                    }}
-                  >
-                  
-                    <TextoModal style={Padrao.textStyle}>Finalizar Item</TextoModal>
-                  </TouchModal>
+                onPress={() => {
+                  setShowAlert(true);
+                }}
+              >
+                <TextoModal style={Padrao.textStyle}>Finalizar Item</TextoModal>
+              </TouchModal>
             </ViewModalFinalizarButton>
 
             <ScrollView>
@@ -668,39 +675,38 @@ export default (props) => {
                 <Rows data={tabelaOfs.tableData} textStyle={styles.text} />
               </Table>
             </ScrollView>
-          </ViewModal>
+          </ViewModalMaior>
         </View>
       </Modal>
 
-        <AwesomeAlert
-          show={showAlert}
-          showProgress={false}
-          title="Tem certeza que deseja finalizar?"
-          closeOnTouchOutside={false}
-          closeOnHardwareBackPress={false}
-          showCancelButton={true}
-          showConfirmButton={true}
-          cancelText="Não"
-          confirmText="Sim"
-          cancelButtonColor='#dc3545'
-          confirmButtonColor="#28a745"
-          onCancelPressed={() => {
-            setShowAlert(false);
-          }}
-          onConfirmPressed={() => {
-            props.funcao_finalizar();
-            props.funcao_fechar_controle_diario(qtde, retrabalho);
-            setModalVisibleOfsSelecionadas(false);
-            setShowAlert(false);
-          }}
-          contentStyle={{ width: 500, height: 200 }}
-          titleStyle={{ fontSize: 25, textAlign: "center" }}
-          cancelButtonTextStyle={{ fontSize: 35, textAlign: "center" }}
-          confirmButtonTextStyle={{ fontSize: 35, textAlign: "center" }}
-          cancelButtonStyle={{width: 250}}
-          confirmButtonStyle={{ width: 250 }}
-        />
-
+      <AwesomeAlert
+        show={showAlert}
+        showProgress={false}
+        title="Tem certeza que deseja finalizar?"
+        closeOnTouchOutside={false}
+        closeOnHardwareBackPress={false}
+        showCancelButton={true}
+        showConfirmButton={true}
+        cancelText="Não"
+        confirmText="Sim"
+        cancelButtonColor="#dc3545"
+        confirmButtonColor="#28a745"
+        onCancelPressed={() => {
+          setShowAlert(false);
+        }}
+        onConfirmPressed={() => {
+          props.funcao_finalizar();
+          props.funcao_fechar_controle_diario(qtde, retrabalho);
+          setModalVisibleOfsSelecionadas(false);
+          setShowAlert(false);
+        }}
+        contentStyle={{ width: 500, height: 200 }}
+        titleStyle={{ fontSize: 25, textAlign: "center" }}
+        cancelButtonTextStyle={{ fontSize: 35, textAlign: "center" }}
+        confirmButtonTextStyle={{ fontSize: 35, textAlign: "center" }}
+        cancelButtonStyle={{ width: 250 }}
+        confirmButtonStyle={{ width: 250 }}
+      />
     </>
   );
 };
