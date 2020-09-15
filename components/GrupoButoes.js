@@ -109,6 +109,7 @@ export default (props) => {
   let [focus_retrabalho, setFocus_retrabalho] = useState(false);
   
   let finalizado = props.finalizado;
+  let [ofs_selecionadas2, setOfs_selecionadas] = useState([]);
   let ofs_selecionadas = props.ofs_selecionadas;
   let descricao = props.descricao;
   let parada_id = props.parada_id;
@@ -119,53 +120,60 @@ export default (props) => {
   let [showAlert, setShowAlert] = useState(false);
 
   useEffect(() => {
-    fetch(url+"/paradas-diarias/"+operador_id)
+    const buscar_storage = async (key, set, inicial) => {
+      try {
+        let value = await AsyncStorage.getItem(key);
+        value = value == "true" ? true : value;
+        value = value == "false" ? false : value;
+        value != null ? set(value) : set(inicial);
+      } catch (e) {
+        // read error
+      }
+    };
+    buscar_storage("@ofs_selecionadas", setOfs_selecionadas, {});
+    // consulta_storage();
+
+    fetch(url + "/paradas-diarias/" + operador_id)
       .then((response) => response.json())
       .then((json) => {
-          setParadasDiarias(json)
+        setParadasDiarias(json);
       })
       .catch((error) => console.error(error))
       .finally(() => setLoading(false));
 
-    fetch(url+"/operacoes-diarias/" + operador_id)
+    fetch(url + "/operacoes-diarias/" + operador_id)
       .then((response) => response.json())
       .then((json) => {
-        setOperacoesDiarias(json)
-      })
-      .catch((error) => console.error(error))
-      .finally(() => setLoading(false));
- 
-    fetch(url+"/controles-diarios/" + id_posto + "/" + operador_id)
-      .then((response) => response.json())
-      .then((json) => {
-        setControlesDiarios(json)
+        setOperacoesDiarias(json);
       })
       .catch((error) => console.error(error))
       .finally(() => setLoading(false));
 
-    fetch(
-         url+"/paradas/codigos_restrito/" +
-          id_posto
-      )
-        .then((response) => response.json())
-        .then((json) => {
-          setParadas(json);
-          var tabelaTemp = []
-          json.forEach(item => {
-            tabelaTemp.push([item.rotulo,item.descricao]);
-          });
+    fetch(url + "/controles-diarios/" + id_posto + "/" + operador_id)
+      .then((response) => response.json())
+      .then((json) => {
+        setControlesDiarios(json);
+      })
+      .catch((error) => console.error(error))
+      .finally(() => setLoading(false));
 
-          var tabelaFinal = {
-            tableHead: ["ROTULO", "DESCRICÃO"],
-            tableData: tabelaTemp
-          };
-          setTabela(tabelaFinal);
-          
-        })
-        .catch((error) => console.error(error))
-        .finally(() => setLoading(false));
+    fetch(url + "/paradas/codigos_restrito/" + id_posto)
+      .then((response) => response.json())
+      .then((json) => {
+        setParadas(json);
+        var tabelaTemp = [];
+        json.forEach((item) => {
+          tabelaTemp.push([item.rotulo, item.descricao]);
+        });
 
-
+        var tabelaFinal = {
+          tableHead: ["ROTULO", "DESCRICÃO"],
+          tableData: tabelaTemp,
+        };
+        setTabela(tabelaFinal);
+      })
+      .catch((error) => console.error(error))
+      .finally(() => setLoading(false));
   }, []); //No Inicio 
 
 
@@ -202,6 +210,7 @@ export default (props) => {
       var tabelaTemp = [];
       let qtde = 0;
       ofs_selecionadas_temp.forEach(item => {
+        item.qtde_prod = "0";
         item.input = (
           <TextInput
             style={{
@@ -209,10 +218,12 @@ export default (props) => {
               borderColor: "gray",
               borderWidth: 1,
               margin: 20,
-              padding: 10
+              padding: 10,
             }}
-            onChangeText={(text) => onChangeText(text)}
-            value={value}
+            value={item.qtde_prod}
+            onChangeText={(text) => { 
+               mudarqtde_prod(item.num_ordem,text); 
+            }}
           />
         );
         tabelaTemp.push([
@@ -266,7 +277,7 @@ export default (props) => {
     paradas_temp.forEach(item => {
       tabelaTemp_paradas.push([item.rotulo, item.inicio, item.fim]);
     });
-
+    
 
     var tabelaFinal = {
       tableHead: ["TIPO", "INICIO","FIM"],
@@ -303,10 +314,9 @@ export default (props) => {
 
   }, [parada_id,finalizado, ofs_selecionadas]); // Com Dependencias
 
-  // var hours = new Date().getHours(); //To get the Current Hours
-  // var min = new Date().getMinutes(); //To get the Current Minutes
-  // var sec = new Date().getSeconds(); //To get the Current Seconds
-  // var hora_atual = hours+':'+min+':'+sec;
+  const mudarqtde_prod = (num_ordem, text) => {
+    console.warn(text);
+  }
   return (
     <>
       <Div_Card>
