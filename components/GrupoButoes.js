@@ -125,7 +125,6 @@ export default (props) => {
 
   useEffect(() => {
     // consulta_storage();;
-
     fetch(url + "/paradas-diarias/" + operador_id)
       .then((response) => response.json())
       .then((json) => {
@@ -170,6 +169,7 @@ export default (props) => {
   }, []); //No Inicio
 
   useEffect(() => {
+      setRetrabalho("0");
       fetch(url + "/paradas-diarias/" + operador_id)
         .then((response) => response.json())
         .then((json) => {
