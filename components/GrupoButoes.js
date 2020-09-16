@@ -86,6 +86,9 @@ export default (props) => {
     false
   );
   let [modalVisibleControles, setModalVisibleControles] = useState(false);
+
+  let [modalVisibleSimNao, setModalVisibleSimNao] = useState(false);
+
   let [isLoading, setLoading] = useState(true);
   let [paradasDiarias, setParadasDiarias] = useState([]);
   let [operacoesDiarias, setOperacoesDiarias] = useState([]);
@@ -739,7 +742,7 @@ export default (props) => {
               <TouchModal
                 style={{ ...Padrao.openButton, backgroundColor: "#007bff" }}
                 onPress={() => {
-                  setShowAlert(true);
+                  setModalVisibleSimNao(true);
                 }}
               >
                 <TextoModal style={Padrao.textStyle}>Finalizar Item</TextoModal>
@@ -763,6 +766,56 @@ export default (props) => {
               </Table>
             </ScrollView>
           </ViewModalMaior>
+        </View>
+      </Modal>
+
+      {/* Modal SIM ou Não */}
+      <Modal
+        animationType="fade"
+        transparent={true}
+        visible={modalVisibleSimNao}
+        onRequestClose={() => {
+          setModalVisibleSimNao(false);
+        }}
+        hardwareAccelerated={true}
+      >
+        <View style={Padrao.centeredView}>
+          <ViewModal style={Padrao.modalView}>
+            <Div_Fechar>
+              <Text
+                style={{
+                  fontSize: 30,
+                  marginTop: 15,
+                  marginBottom: 15,
+                }}
+              >Tem Certeza que deseja Finalizar ?</Text>
+            </Div_Fechar>
+            <View>
+              <TouchModal
+                style={{ ...Padrao.openButton, backgroundColor: "#28a745" }}
+                onPress={() => {
+                  props.funcao_finalizar();
+                  props.funcao_fechar_controle_diario(
+                    qtde,
+                    retrabalho,
+                    ofs_enviar
+                  );
+                  setModalVisibleOfsSelecionadas(false);
+                  setModalVisibleSimNao(false);
+                }}
+              >
+                <TextoModal style={Padrao.textStyle}>SIM</TextoModal>
+              </TouchModal>
+              <TouchModal
+                style={{ ...Padrao.openButton, backgroundColor: "#dc3545" }}
+                onPress={() => {
+                  setModalVisibleSimNao(false);
+                }}
+              >
+                <TextoModal style={Padrao.textStyle}>NÃO</TextoModal>
+              </TouchModal>
+            </View>
+          </ViewModal>
         </View>
       </Modal>
 
