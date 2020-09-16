@@ -788,7 +788,7 @@ export default (props) => {
                   marginTop: 15,
                   marginBottom: 15,
                 }}
-              >Tem Certeza que deseja Finalizar ?</Text>
+              >Tem certeza que deseja finalizar ?</Text>
             </Div_Fechar>
             <View>
               <TouchModal
