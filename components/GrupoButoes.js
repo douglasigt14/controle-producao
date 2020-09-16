@@ -340,7 +340,7 @@ export default (props) => {
     
     of_temp.forEach((item) => {
       if (item.num_ordem == num_ordem) {
-        item.qtde_prod = text != ''? text : 0;
+        item.qtde_prod = text != '' && parseInt(text) <= parseInt(item.qtde_pend) ? text : 0;
       }
 
       item.input =
