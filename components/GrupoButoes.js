@@ -331,6 +331,7 @@ export default (props) => {
           item.num_ordem,
           item.dt_inicial,
           item.cod_item + " - " + item.item,
+          item.mascara,
           item.button,
           item.input,
         ]);
@@ -342,7 +343,7 @@ export default (props) => {
       setRetrabalho("0");
 
       var tabelaFinal = {
-        tableHead: ["NUM_OF", "DATA", "ITEM", "QTDE OF", "QTDE PROD"],
+        tableHead: ["NUM_OF", "DATA", "ITEM", "COR", "QTDE OF", "QTDE PROD"],
         tableData: tabelaTemp,
       };
       setTabelaOfs(tabelaFinal);
