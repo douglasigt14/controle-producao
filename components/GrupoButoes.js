@@ -299,11 +299,11 @@ export default (props) => {
         item.input =
           <TextInput
             style={{
-              height: 40,
+              height:   90,
               borderColor: "gray",
               borderWidth: 1,
-              margin: 20,
-              padding: 10,
+              fontSize: 30,
+              padding: 10
             }}
             value={item.qtde_prod}
             keyboardType={"phone-pad"}
@@ -362,21 +362,22 @@ export default (props) => {
         item.qtde_prod = text != '' && parseInt(text) <= parseInt(item.qtde_pend) ? text : 0;
       }
 
-      item.input =
-          <TextInput
-            style={{
-              height: 40,
-              borderColor: "gray",
-              borderWidth: 1,
-              margin: 20,
-              padding: 10,
-            }}
-            value={item.qtde_prod}
-            keyboardType={"phone-pad"}
-            onChangeText={(text) => {
-              mudar_qtde_prod(item.num_ordem, text);
-            }}
-          />;
+      item.input = (
+        <TextInput
+          style={{
+            height: 90,
+            borderColor: "gray",
+            borderWidth: 1,
+            fontSize: 30,
+            padding: 10,
+          }}
+          value={item.qtde_prod}
+          keyboardType={"phone-pad"}
+          onChangeText={(text) => {
+            mudar_qtde_prod(item.num_ordem, text);
+          }}
+        />
+      );
         tabelaTemp.push([
           item.num_ordem,
           item.dt_inicial,
