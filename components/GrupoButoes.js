@@ -340,7 +340,6 @@ export default (props) => {
 
       setOfs_enviar(ofs_selecionadas_temp);
       setQtde(String(qtde));
-      setRetrabalho("0");
 
       var tabelaFinal = {
         tableHead: ["NUM_OF", "DATA", "ITEM", "COR", "QTDE OF", "QTDE PROD"],
@@ -388,7 +387,6 @@ export default (props) => {
         ]);
         qtde += parseInt(item.qtde_prod);
       setQtde(String(qtde));
-      setRetrabalho("0");
 
       var tabelaFinal = {
         tableHead: ["NUM_OF", "DATA", "ITEM", "QTDE OF", "QTDE PROD"],
