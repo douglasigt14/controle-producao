@@ -231,7 +231,7 @@ export default (props) => {
          let ofs_selecionadas_temp = JSON.parse(ofs_selecionadas);
          let qtde = 0;
          ofs_selecionadas_temp.forEach(item => {
-           qtde += parseInt(item.qtde_of);
+           qtde += parseInt(item.qtde_pend);
          });
          setComponentVerde( (
            <TouchModal
