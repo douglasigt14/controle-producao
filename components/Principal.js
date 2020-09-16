@@ -34,6 +34,8 @@ export default (props) => {
     let [token, setToken] = useState("");
     let [inicio, setInicio] = useState("");
 
+    let [resumo_apontamento, setResumo_apontamento] = useState(" ");
+
     
   const showAlert = () => {
     setMostrar_alert(true);
@@ -69,7 +71,6 @@ export default (props) => {
   }, []);
 
   useEffect(() => {  
-    //console.warn('Teste Efeito');
   }, [ofs_selecionadas]);
 
      useEffect(() => {    
@@ -359,11 +360,12 @@ export default (props) => {
       formDataL.append("qtde", qtde);
       formDataL.append("qtde_pend", qtde_pend);
       formDataL.append("cod_barra", cod_barra);
+      formDataL.append("operador", props.operador_desc);
       formDataL.append("fim", hora + ":" + minuto + ":" + segundo);
 
       const URL_CONTROLE = url + "/focco/incluir_apontamento_tempo_padrao";
 
-      fetch(URL_CONTROLE, {
+      let prom_apontamento = fetch(URL_CONTROLE, {
         method: "post",
         body: formDataL,
       })
@@ -371,9 +373,9 @@ export default (props) => {
           return resp.json();
         })
         .then(function (r) {
-          let ok = r.Succeeded ? 'OK' : 'ERROR :' ; 
-          console.warn(cod_barra+" - "+ok+' '+r.ErrorMessage);
-          console.log(cod_barra + " - " + ok + " " + r.ErrorMessage);
+           let ok = r.Succeeded ? 'OK' : 'ERROR :' ;
+           let msg = cod_barra + " - " + ok + " " + r.ErrorMessage+"\n";
+           console.warn(msg);
         })
         .catch(function (error) {
           setDescricao_alert("FALHA NA CONEXÃO");
@@ -382,6 +384,8 @@ export default (props) => {
             hideAlert();
           }, 1000);
         });
+
+        return prom_apontamento;
     };
 
   const fechar_controle_diario = (qtde,retrabalho,ofs) => {
@@ -402,7 +406,6 @@ export default (props) => {
           })
           .then(function (r) {
             
-            //console.warn(r);
           }).catch(function (error) {
             setDescricao_alert('FALHA NA CONEXÃO');
             showAlert();
@@ -410,18 +413,23 @@ export default (props) => {
           });
 
            Promise.all([prom_fechar_controle]).then((valores) => {
-                 //if (ofs.length > 2) {
                    let ofs_selecionadas_temp = ofs;
-                   ofs_selecionadas_temp.forEach((item) => {
-                     apontamento(
-                       item.qtde_prod,
-                       item.cod_barra,
-                       item.qtde_pend
-                     );
+                   let proms_apontamentos = [];
+                   let prom_for = ofs_selecionadas_temp.forEach((item) => {
+                     if (parseInt(item.qtde_prod) != 0){
+                       proms_apontamentos.push(
+                         apontamento(
+                           item.qtde_prod,
+                           item.cod_barra,
+                           item.qtde_pend
+                         )
+                       );
+                    }
                    });
-                 //}
-                // 
+                     
            });
+
+          
   }
    
     return (
