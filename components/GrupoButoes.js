@@ -308,11 +308,27 @@ export default (props) => {
               mudar_qtde_prod(item.num_ordem, text, JSON.stringify(ofs_selecionadas_temp ));
             }}
           />;
+          item.button =
+            <Button
+              contentStyle={{ height: 90 }}
+              color="#6c757d"
+              mode="contained"
+              onPress={() => {
+                mudar_qtde_prod(
+                  item.num_ordem,
+                  item.qtde_pend,
+                  JSON.stringify(ofs_selecionadas_temp)
+                );
+              }}
+            >
+              <Texto>{item.qtde_pend}</Texto>
+            </Button>;
+
         tabelaTemp.push([
           item.num_ordem,
           item.dt_inicial,
           item.cod_item + " - " + item.item,
-          item.qtde_pend,
+          item.button,
           item.input,
         ]);
         qtde += parseInt(item.qtde_prod);
