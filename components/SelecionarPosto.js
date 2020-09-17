@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { Alert, FlatList, Text } from "react-native";
+import { Alert, FlatList, Text, Picker } from "react-native";
 import { Button, Card, Title } from "react-native-paper";
 import {
   storageSet,
   consulta_storage
 } from "../storage/localstorage";
-import { Picker } from "@react-native-community/picker";
+// import { Picker } from "@react-native-community/picker";
 
 const Div_Card = styled.View`
     margin-left: 150px;

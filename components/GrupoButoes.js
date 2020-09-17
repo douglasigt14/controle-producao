@@ -17,6 +17,7 @@ import { Table, Row, Rows } from "react-native-table-component";
 import AsyncStorage from "@react-native-community/async-storage";
 import { consulta_storage } from "../storage/localstorage";
 import AwesomeAlert from 'react-native-awesome-alerts';
+// import { Picker } from "@react-native-community/picker";
 
 const Texto = styled.Text`
     font-size: 17px;
