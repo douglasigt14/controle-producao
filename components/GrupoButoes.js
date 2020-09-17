@@ -245,7 +245,7 @@ export default (props) => {
       let paradas_temp = paradasDiarias;
       let tabelaTemp_paradas = [];
       paradas_temp.forEach((item) => {
-        tabelaTemp_paradas.push([item.rotulo, item.inicio, item.fim]);
+        tabelaTemp_paradas.push([item.rotulo+' - '+item.descricao, item.inicio, item.fim]);
       });
 
       var tabelaFinal = {
@@ -257,7 +257,7 @@ export default (props) => {
       let operacoes_temp = operacoesDiarias;
       let tabelaTemp_operacoes = [];
       operacoes_temp.forEach((item) => {
-        tabelaTemp_operacoes.push([item.cod_item, item.inicio, item.fim]);
+        tabelaTemp_operacoes.push([item.cod_item+'-'+item.item, item.inicio, item.fim]);
       });
 
       var tabelaFinal = {
