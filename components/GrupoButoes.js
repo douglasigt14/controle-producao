@@ -71,6 +71,13 @@ const ViewModalFinalizarInputs = styled.View`
      justify-content: space-around;
 `;
 
+const ViewModalSimNao = styled.View`
+  display: flex;
+  flex-direction: row;
+  margin: 5px;
+  justify-content: space-between;
+`;
+
 const ViewModalFinalizarButton = styled.View`
      display: flex;
      margin-top: 5px;
@@ -169,125 +176,132 @@ export default (props) => {
   }, []); //No Inicio
 
   useEffect(() => {
-      setRetrabalho("0");
-      fetch(url + "/paradas-diarias/" + operador_id)
-        .then((response) => response.json())
-        .then((json) => {
-          setParadasDiarias(json);
-        })
-        .catch((error) => console.error(error))
-        .finally(() => setLoading(false));
+    setRetrabalho("0");
+    fetch(url + "/paradas-diarias/" + operador_id)
+      .then((response) => response.json())
+      .then((json) => {
+        setParadasDiarias(json);
+      })
+      .catch((error) => console.error(error))
+      .finally(() => setLoading(false));
 
-      fetch(url + "/operacoes-diarias/" + operador_id)
-        .then((response) => response.json())
-        .then((json) => {
-          setOperacoesDiarias(json);
-        })
-        .catch((error) => console.error(error))
-        .finally(() => setLoading(false));
+    fetch(url + "/operacoes-diarias/" + operador_id)
+      .then((response) => response.json())
+      .then((json) => {
+        setOperacoesDiarias(json);
+      })
+      .catch((error) => console.error(error))
+      .finally(() => setLoading(false));
 
-      fetch(url + "/controles-diarios/" + id_posto + "/" + operador_id)
-        .then((response) => response.json())
-        .then((json) => {
-          setControlesDiarios(json);
-        })
-        .catch((error) => console.error(error))
-        .finally(() => setLoading(false));
-    
-      if (ofs_selecionadas.length > 2) {
-        setComponentFinalizar(
-          <Div>
-            <Button
-              contentStyle={{ height: 90 }}
-              color="#6c757d"
-              title="Finalizar"
-              mode="contained"
-              onPress={() => {
-                setModalVisibleOfsSelecionadas(true);
-              }}
-            >
-              <Texto>Finalizar</Texto>
-            </Button>
-          </Div>
-        );
-      } else if (finalizado == false) {
-        setComponentFinalizar(
-          <Div>
-            <Button
-              contentStyle={{ height: 90 }}
-              color="#6c757d"
-              title="Finalizar"
-              mode="contained"
-              onPress={() => {
-                props.funcao_finalizar();
-              }}
-            >
-              <Texto>Finalizar</Texto>
-            </Button>
-          </Div>
-        );
-      } else {
-        setComponentFinalizar(
-          <Div>
-            <Button
-              contentStyle={{ height: 90 }}
-              color="#6c757d"
-              title="Finalizar"
-              mode="contained"
-              disabled="true"
-              onPress={() => console.log("Pressed")}
-            >
-              <Texto>Finalizar</Texto>
-            </Button>
-          </Div>
-        );
-      }
-      let paradas_temp = paradasDiarias;
-      let tabelaTemp_paradas = [];
-      paradas_temp.forEach((item) => {
-        tabelaTemp_paradas.push([item.rotulo+' - '+item.descricao, item.inicio, item.fim]);
-      });
+    fetch(url + "/controles-diarios/" + id_posto + "/" + operador_id)
+      .then((response) => response.json())
+      .then((json) => {
+        setControlesDiarios(json);
+      })
+      .catch((error) => console.error(error))
+      .finally(() => setLoading(false));
 
-      var tabelaFinal = {
-        tableHead: ["TIPO", "INICIO", "FIM"],
-        tableData: tabelaTemp_paradas,
-      };
-      setTabelaParadas(tabelaFinal);
+    if (ofs_selecionadas.length > 2) {
+      setComponentFinalizar(
+        <Div>
+          <Button
+            contentStyle={{ height: 90 }}
+            color="#6c757d"
+            title="Finalizar"
+            mode="contained"
+            onPress={() => {
+              setModalVisibleOfsSelecionadas(true);
+            }}
+          >
+            <Texto>Finalizar</Texto>
+          </Button>
+        </Div>
+      );
+    } else if (finalizado == false) {
+      setComponentFinalizar(
+        <Div>
+          <Button
+            contentStyle={{ height: 90 }}
+            color="#6c757d"
+            title="Finalizar"
+            mode="contained"
+            onPress={() => {
+              props.funcao_finalizar();
+            }}
+          >
+            <Texto>Finalizar</Texto>
+          </Button>
+        </Div>
+      );
+    } else {
+      setComponentFinalizar(
+        <Div>
+          <Button
+            contentStyle={{ height: 90 }}
+            color="#6c757d"
+            title="Finalizar"
+            mode="contained"
+            disabled="true"
+            onPress={() => console.log("Pressed")}
+          >
+            <Texto>Finalizar</Texto>
+          </Button>
+        </Div>
+      );
+    }
+    let paradas_temp = paradasDiarias;
+    let tabelaTemp_paradas = [];
+    paradas_temp.forEach((item) => {
+      tabelaTemp_paradas.push([
+        item.rotulo + " - " + item.descricao,
+        item.inicio,
+        item.fim,
+      ]);
+    });
 
-      let operacoes_temp = operacoesDiarias;
-      let tabelaTemp_operacoes = [];
-      operacoes_temp.forEach((item) => {
-        tabelaTemp_operacoes.push([item.cod_item+'-'+item.item, item.inicio, item.fim]);
-      });
+    var tabelaFinal = {
+      tableHead: ["TIPO", "INICIO", "FIM"],
+      tableData: tabelaTemp_paradas,
+    };
+    setTabelaParadas(tabelaFinal);
 
-      var tabelaFinal = {
-        tableHead: ["TIPO", "INICIO", "FIM"],
-        tableData: tabelaTemp_operacoes,
-      };
-      setTabelaOperacoes(tabelaFinal);
+    let operacoes_temp = operacoesDiarias;
+    let tabelaTemp_operacoes = [];
+    operacoes_temp.forEach((item) => {
+      tabelaTemp_operacoes.push([
+        item.cod_item + "-" + item.item,
+        item.inicio,
+        item.fim,
+      ]);
+    });
 
-      let controles_temp = controlesDiarios;
-      let tabelaTemp_controles = [];
-      controles_temp.forEach((item) => {
-        tabelaTemp_controles.push([
-          item.cod_item,
-          "-",
-          item.volume_produzido,
-          item.retrabalho,
-        ]);
-      });
+    var tabelaFinal = {
+      tableHead: ["TIPO", "INICIO", "FIM"],
+      tableData: tabelaTemp_operacoes,
+    };
+    setTabelaOperacoes(tabelaFinal);
 
-      var tabelaFinal = {
-        tableHead: ["COD ITEM", "ER", "QTDE PRODUZIDA", "RETRABALHO"],
-        tableData: tabelaTemp_controles,
-      };
-      setTabelaControles(tabelaFinal);
+    let controles_temp = controlesDiarios;
+    let tabelaTemp_controles = [];
+    controles_temp.forEach((item) => {
+      tabelaTemp_controles.push([
+        item.cod_item,
+        "-",
+        item.volume_produzido,
+        item.retrabalho,
+      ]);
+    });
+
+    var tabelaFinal = {
+      tableHead: ["COD ITEM", "ER", "QTDE PRODUZIDA", "RETRABALHO"],
+      tableData: tabelaTemp_controles,
+    };
+    setTabelaControles(tabelaFinal);
 
     atualizar(ofs_selecionadas);
   }, [parada_id, finalizado, ofs_selecionadas]); // Com Dependencias
 
   const atualizar = (ofs) => {
-
     if (ofs.length > 2) {
       let ofs_selecionadas_temp = JSON.parse(ofs);
 
@@ -296,36 +310,42 @@ export default (props) => {
       ofs_selecionadas_temp.forEach((item) => {
         // console.warn(item.qtde_prod);
 
-        item.input =
+        item.input = (
           <TextInput
             style={{
-              height:   90,
+              height: 90,
               borderColor: "gray",
               borderWidth: 1,
               fontSize: 30,
-              padding: 10
+              padding: 10,
             }}
             value={item.qtde_prod}
             keyboardType={"phone-pad"}
             onChangeText={(text) => {
-              mudar_qtde_prod(item.num_ordem, text, JSON.stringify(ofs_selecionadas_temp ));
+              mudar_qtde_prod(
+                item.num_ordem,
+                text,
+                JSON.stringify(ofs_selecionadas_temp)
+              );
             }}
-          />;
-          item.button =
-            <Button
-              contentStyle={{ height: 90 }}
-              color="#6c757d"
-              mode="contained"
-              onPress={() => {
-                mudar_qtde_prod(
-                  item.num_ordem,
-                  item.qtde_pend,
-                  JSON.stringify(ofs_selecionadas_temp)
-                );
-              }}
-            >
-              <Texto>{item.qtde_pend}</Texto>
-            </Button>;
+          />
+        );
+        item.button = (
+          <Button
+            contentStyle={{ height: 90 }}
+            color="#6c757d"
+            mode="contained"
+            onPress={() => {
+              mudar_qtde_prod(
+                item.num_ordem,
+                item.qtde_pend,
+                JSON.stringify(ofs_selecionadas_temp)
+              );
+            }}
+          >
+            <Texto>{item.qtde_pend}</Texto>
+          </Button>
+        );
 
         tabelaTemp.push([
           item.num_ordem,
@@ -347,19 +367,18 @@ export default (props) => {
       };
       setTabelaOfs(tabelaFinal);
     }
-
-    
-  } 
+  };
 
   const mudar_qtde_prod = (num_ordem, text, ofs) => {
     let of_temp = JSON.parse(ofs);
 
     var tabelaTemp = [];
     let qtde = 0;
-    
+
     of_temp.forEach((item) => {
       if (item.num_ordem == num_ordem) {
-        item.qtde_prod = text != '' && parseInt(text) <= parseInt(item.qtde_pend) ? text : 0;
+        item.qtde_prod =
+          text != "" && parseInt(text) <= parseInt(item.qtde_pend) ? text : 0;
       }
 
       item.input = (
@@ -378,14 +397,14 @@ export default (props) => {
           }}
         />
       );
-        tabelaTemp.push([
-          item.num_ordem,
-          item.dt_inicial,
-          item.cod_item + " - " + item.item,
-          item.qtde_pend,
-          item.input,
-        ]);
-        qtde += parseInt(item.qtde_prod);
+      tabelaTemp.push([
+        item.num_ordem,
+        item.dt_inicial,
+        item.cod_item + " - " + item.item,
+        item.qtde_pend,
+        item.input,
+      ]);
+      qtde += parseInt(item.qtde_prod);
       setQtde(String(qtde));
 
       var tabelaFinal = {
@@ -397,6 +416,14 @@ export default (props) => {
     atualizar(JSON.stringify(of_temp));
   };
 
+  useEffect(() => {
+    if (modalVisibleSimNao){
+      let ofs_temp = ofs_enviar;
+      ofs_temp.forEach(item => {
+        
+      });
+    } 
+  }, [modalVisibleSimNao]); //No Inicio
   return (
     <>
       <Div_Card>
@@ -788,11 +815,17 @@ export default (props) => {
                   marginTop: 15,
                   marginBottom: 15,
                 }}
-              >Tem certeza que deseja finalizar ?</Text>
+              >
+                Tem certeza que deseja finalizar ?
+              </Text>
             </Div_Fechar>
-            <View>
+            <ViewModalSimNao>
               <TouchModal
-                style={{ ...Padrao.openButton, backgroundColor: "#28a745" }}
+                style={{
+                  ...Padrao.openButton,
+                  backgroundColor: "#28a745",
+                  width: 200,
+                }}
                 onPress={() => {
                   props.funcao_finalizar();
                   props.funcao_fechar_controle_diario(
@@ -807,14 +840,18 @@ export default (props) => {
                 <TextoModal style={Padrao.textStyle}>SIM</TextoModal>
               </TouchModal>
               <TouchModal
-                style={{ ...Padrao.openButton, backgroundColor: "#dc3545" }}
+                style={{
+                  ...Padrao.openButton,
+                  backgroundColor: "#dc3545",
+                  width: 200,
+                }}
                 onPress={() => {
                   setModalVisibleSimNao(false);
                 }}
               >
                 <TextoModal style={Padrao.textStyle}>NÃO</TextoModal>
               </TouchModal>
-            </View>
+            </ViewModalSimNao>
           </ViewModal>
         </View>
       </Modal>
@@ -849,7 +886,7 @@ export default (props) => {
       />
     </>
   );
-};;
+};;;
 
 const styles = StyleSheet.create({
   container: {
