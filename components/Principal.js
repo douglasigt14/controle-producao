@@ -378,7 +378,7 @@ export default (props) => {
            console.warn(msg);
         })
         .catch(function (error) {
-          setDescricao_alert("FALHA NA CONEXÃO");
+          setDescricao_alert("FALHA NO APONTAMENTO");
           showAlert();
           setTimeout(function () {
             hideAlert();
