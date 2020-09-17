@@ -130,6 +130,8 @@ export default (props) => {
 
   let [showAlert, setShowAlert] = useState(false);
 
+  let [componentNotificacao, setComponentNotificacao] = useState(null);
+
   useEffect(() => {
     // consulta_storage();;
     fetch(url + "/paradas-diarias/" + operador_id)
@@ -419,9 +421,25 @@ export default (props) => {
   useEffect(() => {
     if (modalVisibleSimNao){
       let ofs_temp = ofs_enviar;
+      let verifica_qtde = false;
       ofs_temp.forEach(item => {
-        
+         if( parseInt(item.qtde_prod) < parseInt(item.qtde_pend) ){
+           verifica_qtde = true;
+         }
       });
+      if(verifica_qtde){
+          setComponentNotificacao(
+            <View>
+              <Text>Aviso</Text>
+            </View>
+          );
+      }
+      else{
+            setComponentNotificacao(null);
+      }
+    }
+    else{
+      setComponentNotificacao(null);
     } 
   }, [modalVisibleSimNao]); //No Inicio
   return (
@@ -819,6 +837,7 @@ export default (props) => {
                 Tem certeza que deseja finalizar ?
               </Text>
             </Div_Fechar>
+            {componentNotificacao}
             <ViewModalSimNao>
               <TouchModal
                 style={{
