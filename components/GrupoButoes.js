@@ -1,5 +1,15 @@
 import React, { useState, useEffect} from "react";
-import { Alert, View, Text, StyleSheet, Modal, FlatList, ScrollView, TextInput } from "react-native";
+import {
+  Alert,
+  View,
+  Text,
+  StyleSheet,
+  Modal,
+  FlatList,
+  ScrollView,
+  TextInput,
+  Picker,
+} from "react-native";
 import styled from "styled-components";
 import { Button, Card } from 'react-native-paper';
 import Padrao from "../style/Padrao";
@@ -131,6 +141,12 @@ export default (props) => {
   let [showAlert, setShowAlert] = useState(false);
 
   let [componentNotificacao, setComponentNotificacao] = useState(null);
+   const [selectedNotificacao, setSelectedNotificacao] = useState(""); 
+
+   let postos = [
+     { id: 1, descricao: "PAUSA DE TRABALHO" },
+     { id: 2, descricao: "PECAS DANIFICADAS" }
+   ];
 
   useEffect(() => {
     // consulta_storage();;
@@ -429,8 +445,28 @@ export default (props) => {
       });
       if(verifica_qtde){
           setComponentNotificacao(
-            <View>
-              <Text>Aviso</Text>
+            <View
+              style={{ backgroundColor: "#F8D7D9", borderColor: "#f5c6cb" }}
+            >
+              <Text style={{ fontSize: 15, textAlign: "center" }}>
+                MOTIVO DE QUANTIDADE INFERIOR
+              </Text>
+              <Picker
+                selectedValue={selectedNotificacao}
+                onValueChange={(itemValue, itemIndex) =>
+                  setSelectedNotificacao(itemValue)
+                }
+              >
+                {postos.map((posto, i) => {
+                  return (
+                    <Picker.Item
+                      value={posto.id}
+                      label={posto.descricao}
+                      key={posto.id}
+                    />
+                  );
+                })}
+              </Picker>
             </View>
           );
       }
