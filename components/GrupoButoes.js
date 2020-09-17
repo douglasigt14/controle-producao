@@ -144,9 +144,9 @@ export default (props) => {
   let [componentNotificacao, setComponentNotificacao] = useState(null);
    const [selectedNotificacao, setSelectedNotificacao] = useState(""); 
 
-   let postos = [
-     { id: 1, descricao: "PAUSA DE TRABALHO" },
-     { id: 2, descricao: "PECAS DANIFICADAS" }
+   let motivos = [
+     { id: 1, descricao: "PAUSA NO TRABALHO" },
+     { id: 2, descricao: "PEÇAS DANIFICADAS" }
    ];
 
   useEffect(() => {
@@ -436,49 +436,47 @@ export default (props) => {
   };
 
   useEffect(() => {
-    if (modalVisibleSimNao){
+    if (modalVisibleSimNao) {
       let ofs_temp = ofs_enviar;
       let verifica_qtde = false;
-      ofs_temp.forEach(item => {
-         if( parseInt(item.qtde_prod) < parseInt(item.qtde_pend) ){
-           verifica_qtde = true;
-         }
+      ofs_temp.forEach((item) => {
+        if (parseInt(item.qtde_prod) < parseInt(item.qtde_pend)) {
+          verifica_qtde = true;
+        }
       });
-      if(verifica_qtde){
-          setComponentNotificacao(
-            <View
-              style={{ backgroundColor: "#F8D7D9", borderColor: "#f5c6cb" }}
+      if (verifica_qtde) {
+        setComponentNotificacao(
+          <View style={{ backgroundColor: "#F8D7D9", borderColor: "#f5c6cb" }}>
+            <Text style={{ fontSize: 15, textAlign: "center", margin: 30 }}>
+              MOTIVO DE QUANTIDADE INFERIOR
+            </Text>
+            <Picker
+             
+              selectedValue={selectedNotificacao}
+              onValueChange={(itemValue, i) =>
+                setSelectedNotificacao(itemValue)
+              }
             >
-              <Text style={{ fontSize: 15, textAlign: "center" }}>
-                MOTIVO DE QUANTIDADE INFERIOR
-              </Text>
-              <Picker
-                selectedValue={selectedNotificacao}
-                onValueChange={(itemValue, itemIndex) =>
-                  setSelectedNotificacao(itemValue)
-                }
-              >
-                {postos.map((posto, i) => {
-                  return (
-                    <Picker.Item
-                      value={posto.id}
-                      label={posto.descricao}
-                      key={posto.id}
-                    />
-                  );
-                })}
-              </Picker>
-            </View>
-          );
+              {motivos.map((motivo, i) => {
+                return (
+                  <Picker.Item
+                    style={{ fontSize: 50 }}
+                    value={motivo.id}
+                    label={motivo.descricao}
+                    key={motivo.id}
+                  />
+                );
+              })}
+            </Picker>
+          </View>
+        );
+      } else {
+        setComponentNotificacao(null);
       }
-      else{
-            setComponentNotificacao(null);
-      }
-    }
-    else{
+    } else {
       setComponentNotificacao(null);
-    } 
-  }, [modalVisibleSimNao]); //No Inicio
+    }
+  }, [modalVisibleSimNao,selectedNotificacao]); //No Inicio
   return (
     <>
       <Div_Card>
@@ -911,35 +909,6 @@ export default (props) => {
           </ViewModal>
         </View>
       </Modal>
-
-      <AwesomeAlert
-        show={showAlert}
-        showProgress={false}
-        title="Tem certeza que deseja finalizar?"
-        closeOnTouchOutside={false}
-        closeOnHardwareBackPress={false}
-        showCancelButton={true}
-        showConfirmButton={true}
-        cancelText="Não"
-        confirmText="Sim"
-        cancelButtonColor="#dc3545"
-        confirmButtonColor="#28a745"
-        onCancelPressed={() => {
-          setShowAlert(false);
-        }}
-        onConfirmPressed={() => {
-          props.funcao_finalizar();
-          props.funcao_fechar_controle_diario(qtde, retrabalho, ofs_enviar);
-          setModalVisibleOfsSelecionadas(false);
-          setShowAlert(false);
-        }}
-        contentStyle={{ width: 500, height: 200 }}
-        titleStyle={{ fontSize: 25, textAlign: "center" }}
-        cancelButtonTextStyle={{ fontSize: 35, textAlign: "center" }}
-        confirmButtonTextStyle={{ fontSize: 35, textAlign: "center" }}
-        cancelButtonStyle={{ width: 250 }}
-        confirmButtonStyle={{ width: 250 }}
-      />
     </>
   );
 };;;
