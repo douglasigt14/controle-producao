@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { View, Text, Alert } from "react-native";
+import { View, Text, Alert, ToastAndroid } from "react-native";
 import Bola from "./Bola";
 import GrupoButoes from "./GrupoButoes";
 import ParadasFrequentes from "./ParadasFrequentes";
@@ -10,6 +10,7 @@ import AwesomeAlert from 'react-native-awesome-alerts';
 import { storageSet, consulta_storage } from "../storage/localstorage";
 import AsyncStorage from "@react-native-community/async-storage";
 import Relogio from "./Relogio";
+import { Toast } from "native-base";
 
 export default (props) => {
 
@@ -33,8 +34,12 @@ export default (props) => {
     let url = props.url;
     let [token, setToken] = useState("");
     let [inicio, setInicio] = useState("");
-
     let [resumo_apontamento, setResumo_apontamento] = useState(" ");
+     const showToast = (msg) => {
+       ToastAndroid.show(msg, ToastAndroid.SHORT);
+     };
+
+    
 
     
   const showAlert = () => {
@@ -123,9 +128,7 @@ export default (props) => {
         }).then(function (response) {
 
         }).catch(function (error) {
-          setDescricao_alert('FALHA NA CONEXÃO');
-          showAlert();
-          setTimeout(function () { hideAlert(); }, 1000); 
+          showToast("FALHA NA CONEXÃO");
         });
 
         return prom_update;
@@ -145,9 +148,7 @@ export default (props) => {
         }).then(function (response) {
 
         }).catch(function (error) {
-          setDescricao_alert('FALHA NA CONEXÃO');
-          showAlert();
-          setTimeout(function () { hideAlert(); }, 1000); 
+          showToast("FALHA NA CONEXÃO");
         });
 
         return prom_update;
@@ -189,14 +190,10 @@ export default (props) => {
           storageSet("@cor_texto", 'white');
           storageSet("@descricao", rotulo + ' ' + descricao);
           storageSet("@finalizado", "false");
-          
-          setDescricao_alert('PARADA INICIADA COM SUCESSO');
-          showAlert();
-          setTimeout(function () { hideAlert(); }, 1000); //setToch('auto');
+
+          showToast("PARADA INICIADA COM SUCESSO");
         }).catch(function (error) {
-          setDescricao_alert('FALHA NA CONEXÃO');
-          showAlert();
-          setTimeout(function () { hideAlert(); }, 1000);
+           showToast("FALHA NA CONEXÃO");
         });
         //--------INSERE PARADA---------
       });
@@ -243,13 +240,10 @@ export default (props) => {
                 storageSet("@descricao", descricao);
                 storageSet("@finalizado", "false");
 
-                setDescricao_alert('OPERAÇÃO INICIADA COM SUCESSO');
-                showAlert();
-                  setTimeout(function () { hideAlert(); }, 1000);
+                showToast("OPERAÇÃO INICIADA COM SUCESSO");
+
                 }).catch(function (error) {
-                  setDescricao_alert('FALHA NA CONEXÃO');
-                  showAlert();
-                  setTimeout(function () { hideAlert(); }, 1000);
+                  showToast("FALHA NA CONEXÃO");
                 });
       });
     } 
@@ -279,13 +273,8 @@ export default (props) => {
         storageSet("@cod_plano", "");
         storageSet("@ofs_selecionadas", JSON.stringify({}));
 
-        // setDescricao_alert('FINALIZADO COM SUCESSO');
-        // showAlert();
-        // setTimeout(function () { hideAlert(); }, 1000);
       }).catch(function (error) {
-        setDescricao_alert('FALHA NA CONEXÃO');
-        showAlert();
-        setTimeout(function () { hideAlert(); }, 1000);
+        showToast("FALHA NA CONEXÃO");
       });
     } 
     
@@ -293,7 +282,6 @@ export default (props) => {
   const alterar_of = (ofs_marcadas_p,cod_plano,cod_item) => {
     setOfs_selecionadas(ofs_marcadas_p)
     setCod_plano(cod_plano);
-    setDescricao_alert('ITEM SELECIONADO COM SUCESSO');
     abrir_controle_diario(cod_item);
     let novaHora = new Date();
     let hora = novaHora.getHours();
@@ -306,8 +294,8 @@ export default (props) => {
     storageSet("@inicio", hora+':'+minuto+':'+segundo);
     setInicio(hora + ':' + minuto + ':' + segundo);
     
-    showAlert();
-    setTimeout(function () { hideAlert(); }, 1000);
+
+    showToast("ITEM SELECIONADO COM SUCESSO");
   }
 
   function zero(x) {
@@ -338,9 +326,7 @@ export default (props) => {
       setId_controle(r.id);
       
     }).catch(function (error) {
-      setDescricao_alert('FALHA NA CONEXÃO');
-      showAlert();
-      setTimeout(function () { hideAlert(); }, 1000);
+      showToast("FALHA NA CONEXÃO");
     });
   }
 
@@ -375,14 +361,10 @@ export default (props) => {
         .then(function (r) {
            let ok = r.Succeeded ? 'OK' : 'ERROR :' ;
            let msg = cod_barra + " - " + ok + " " + r.ErrorMessage+"\n";
-           console.warn(msg);
+           showToast(msg);
         })
         .catch(function (error) {
-          setDescricao_alert("FALHA NO APONTAMENTO");
-          showAlert();
-          setTimeout(function () {
-            hideAlert();
-          }, 1000);
+          showToast("FALHA NA CONEXÃO");
         });
 
         return prom_apontamento;
@@ -407,9 +389,7 @@ export default (props) => {
           .then(function (r) {
             
           }).catch(function (error) {
-            setDescricao_alert('FALHA NA CONEXÃO');
-            showAlert();
-            setTimeout(function () { hideAlert(); }, 1000);
+            showToast("FALHA NA CONEXÃO");
           });
 
            Promise.all([prom_fechar_controle]).then((valores) => {
