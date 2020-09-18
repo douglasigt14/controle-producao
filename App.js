@@ -171,13 +171,13 @@ export default  function App() {
 
   return (
     <>
-       <ScrollView style={Padrao.container}
+       <View style={Padrao.container}
         refreshControl={
                    <RefreshControl refreshing={refreshing} onRefresh={onRefresh} /> 
         }>
         {comp_rederizado}
         <StatusBar style="auto" />
-      </ScrollView>
+      </View>
 
       <AwesomeAlert
         show={mostrar_alert}
