@@ -452,16 +452,17 @@ export default (props) => {
       if (verifica_qtde) {
         setComponentNotificacao(
           <View style={{ backgroundColor: "#F8D7D9", borderColor: "#f5c6cb" }}>
-            <Text style={{ fontSize: 15, textAlign: "center", margin: 30 }}>
+            <Text style={{ fontSize: 20, textAlign: "center", margin: 5 }}>
               MOTIVO DE QUANTIDADE INFERIOR
             </Text>
+
             <Picker
-             
               selectedValue={selectedNotificacao}
               onValueChange={(itemValue, i) =>
                 setSelectedNotificacao(itemValue)
               }
-            >
+              style={{ height: 120 }}
+              >
               {motivos.map((motivo, i) => {
                 return (
                   <Picker.Item
