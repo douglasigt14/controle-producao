@@ -36,7 +36,7 @@ export default (props) => {
     let [inicio, setInicio] = useState("");
     let [resumo_apontamento, setResumo_apontamento] = useState(" ");
      const showToast = (msg) => {
-       ToastAndroid.show(msg, ToastAndroid.SHORT);
+       ToastAndroid.show(msg, ToastAndroid.SHORT, ToastAndroid.CENTER);
      };
 
     
@@ -330,7 +330,7 @@ export default (props) => {
     });
   }
 
-    const apontamento = (qtde, cod_barra, qtde_pend) => {
+    const apontamento = (qtde, cod_barra, qtde_pend, id_maquina) => {
       let novaHora = new Date();
       let hora = novaHora.getHours();
       let minuto = novaHora.getMinutes();
@@ -347,6 +347,7 @@ export default (props) => {
       formDataL.append("qtde_pend", qtde_pend);
       formDataL.append("cod_barra", cod_barra);
       formDataL.append("operador", props.operador_desc);
+      formDataL.append("id_maquina", id_maquina);
       formDataL.append("fim", hora + ":" + minuto + ":" + segundo);
 
       const URL_CONTROLE = url + "/focco/incluir_apontamento_tempo_padrao";
@@ -401,7 +402,8 @@ export default (props) => {
                          apontamento(
                            item.qtde_prod,
                            item.cod_barra,
-                           item.qtde_pend
+                           item.qtde_pend,
+                           item.id_maquina
                          )
                        );
                     }
