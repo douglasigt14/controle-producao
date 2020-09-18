@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState, useEffect } from "react";
-import { View, Text } from "react-native";
+import { View, Text, RefreshControl, ScrollView } from "react-native";
 import Padrao from './style/Padrao';
 import Principal from "./components/Principal";
 import Login from "./components/Login";
@@ -18,6 +18,21 @@ export default  function App() {
     let [descricao_alert_tit, setDescricao_alert_tit] = useState("");
     let [descricao_alert_sub, setDescricao_alert_sub] = useState("");
     let url = "http://teste.controleproducao.tuboarte.com";
+   
+    const wait = (timeout) => {
+      return new Promise((resolve) => {
+        setTimeout(resolve, timeout);
+      });
+    };
+
+   const [refreshing, setRefreshing] = React.useState(false);
+
+   const onRefresh = React.useCallback(() => {
+     setRefreshing(true);
+
+     wait(2000).then(() => setRefreshing(false));
+   }, []);
+
 
     const showAlert = () => {
       setMostrar_alert(true);
@@ -156,10 +171,13 @@ export default  function App() {
 
   return (
     <>
-      <View style={Padrao.container}>
+       <ScrollView style={Padrao.container}
+        refreshControl={
+                   <RefreshControl refreshing={refreshing} onRefresh={onRefresh} /> 
+        }>
         {comp_rederizado}
         <StatusBar style="auto" />
-      </View>
+      </ScrollView>
 
       <AwesomeAlert
         show={mostrar_alert}
@@ -170,7 +188,7 @@ export default  function App() {
         closeOnHardwareBackPress={true}
         cancelText="No, cancel"
         contentStyle={{ width: 400, height: 200 }}
-        titleStyle={{ fontSize: 25, textAlign: 'center' }}
+        titleStyle={{ fontSize: 25, textAlign: "center" }}
         messageStyle={{ fontSize: 15 }}
       />
     </>

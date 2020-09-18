@@ -398,14 +398,15 @@ export default (props) => {
                    let proms_apontamentos = [];
                    let prom_for = ofs_selecionadas_temp.forEach((item) => {
                      if (parseInt(item.qtde_prod) != 0){
-                       proms_apontamentos.push(
-                         apontamento(
-                           item.qtde_prod,
-                           item.cod_barra,
-                           item.qtde_pend,
-                           item.id_maquina
-                         )
-                       );
+                        setTimeout(() => {
+                           apontamento(
+                             item.qtde_prod,
+                             item.cod_barra,
+                             item.qtde_pend,
+                             item.id_maquina
+                           );
+                        }, 1000);
+                        
                     }
                    });
                      

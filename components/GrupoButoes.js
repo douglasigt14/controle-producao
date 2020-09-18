@@ -11,13 +11,13 @@ import {
   Picker,
 } from "react-native";
 import styled from "styled-components";
-import { Button, Card } from 'react-native-paper';
+import { Button, Card, ToggleButton } from "react-native-paper";
 import Padrao from "../style/Padrao";
 import { Table, Row, Rows } from "react-native-table-component";
 import AsyncStorage from "@react-native-community/async-storage";
 import { consulta_storage } from "../storage/localstorage";
 import AwesomeAlert from 'react-native-awesome-alerts';
-// import { Picker } from "@react-native-community/picker";
+import ButtonToggleGroup from "react-native-button-toggle-group";
 
 const Texto = styled.Text`
     font-size: 17px;
@@ -142,7 +142,8 @@ export default (props) => {
   let [showAlert, setShowAlert] = useState(false);
 
   let [componentNotificacao, setComponentNotificacao] = useState(null);
-   const [selectedNotificacao, setSelectedNotificacao] = useState(""); 
+  let [selectedNotificacao, setSelectedNotificacao] = useState(""); 
+  let [selectedMotivo, setSelectedMotivo] = useState(null); 
 
    let [motivos, setMotivos] = useState([]);
 
@@ -451,31 +452,29 @@ export default (props) => {
       });
       if (verifica_qtde) {
         setComponentNotificacao(
-          <View style={{ backgroundColor: "#F8D7D9", borderColor: "#f5c6cb" }}>
-            <Text style={{ fontSize: 20, textAlign: "center", margin: 5 }}>
+          <View>
+            <Text style={{ fontSize: 20, textAlign: "center", margin: 20 }}>
               MOTIVO DE QUANTIDADE INFERIOR
             </Text>
-
-            <Picker
-              selectedValue={selectedNotificacao}
-              onValueChange={(itemValue, i) =>
-                setSelectedNotificacao(itemValue)
-              }
-              style={{ height: 150 }}
-              mode="dropdown"
-               itemTextStyle={{ fontSize: 18, color: 'white' }}
+            <ButtonToggleGroup
+              highlightBackgroundColor={"blue"}
+              highlightTextColor={"white"}
+              inactiveBackgroundColor={"transparent"}
+              inactiveTextColor={"grey"}
+              values={["Auto", "Light", "Dark"]}
+              onSelect={(val) => console.log(val)}
+            />
+            {/* <ToggleButton.Row
+              onValueChange={(value) => setSelectedMotivo(value)}
+              value={selectedMotivo}
             >
-              {motivos.map((motivo, i) => {
-                return (
-                  <Picker.Item
-                    style={{ fontSize: 50 }}
-                    value={motivo.id}
-                    label={motivo.descricao}
-                    key={motivo.id}
-                  />
-                );
-              })}
-            </Picker>
+              <ToggleButton style={{ width: 200 }} title="Title" value="left">
+                <Text>Douglas</Text>
+              </ToggleButton>
+              <ToggleButton style={{ width: 200 }}  value="right">
+                <Text>Douglas</Text>
+              </ToggleButton>
+            </ToggleButton.Row> */}
           </View>
         );
       } else {
@@ -484,7 +483,7 @@ export default (props) => {
     } else {
       setComponentNotificacao(null);
     }
-  }, [modalVisibleSimNao,selectedNotificacao]); //No Inicio
+  }, [modalVisibleSimNao,selectedNotificacao, selectedMotivo]); //No Inicio
   return (
     <>
       <Div_Card>
@@ -546,6 +545,7 @@ export default (props) => {
             </Div>
           </Card.Content>
         </Card>
+       
       </Div_Card>
 
       {/* Modal Paradas */}
