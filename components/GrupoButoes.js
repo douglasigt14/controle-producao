@@ -144,10 +144,7 @@ export default (props) => {
   let [componentNotificacao, setComponentNotificacao] = useState(null);
    const [selectedNotificacao, setSelectedNotificacao] = useState(""); 
 
-   let motivos = [
-     { id: 1, descricao: "PAUSA NO TRABALHO" },
-     { id: 2, descricao: "PEÇAS DANIFICADAS" }
-   ];
+   let [motivos, setMotivos] = useState([]);
 
   useEffect(() => {
     // consulta_storage();;
@@ -192,6 +189,14 @@ export default (props) => {
       })
       .catch((error) => console.error(error))
       .finally(() => setLoading(false));
+
+      fetch(url + "/motivos")
+        .then((response) => response.json())
+        .then((json) => {
+          setMotivos(json);
+        })
+        .catch((error) => console.error(error))
+        .finally(() => setLoading(false));
   }, []); //No Inicio
 
   useEffect(() => {
