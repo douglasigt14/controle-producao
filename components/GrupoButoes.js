@@ -461,8 +461,10 @@ export default (props) => {
               onValueChange={(itemValue, i) =>
                 setSelectedNotificacao(itemValue)
               }
-              style={{ height: 120 }}
-              >
+              style={{ height: 150 }}
+              mode="dropdown"
+               itemTextStyle={{ fontSize: 18, color: 'white' }}
+            >
               {motivos.map((motivo, i) => {
                 return (
                   <Picker.Item
