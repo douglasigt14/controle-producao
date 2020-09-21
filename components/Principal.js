@@ -346,7 +346,7 @@ export default (props) => {
     setTimeout(() => {
         setIds_ofs(ids_ofs_temp);
         storageSet("@ids_ofs", JSON.stringify(ids_ofs_temp));
-        setOfs_selecionadas(ofs_temp);
+        setOfs_selecionadas(JSON.stringify(ofs_temp));
         storageSet("@ids_ofs", JSON.stringify(ofs_temp));
     }, 5000);
    
@@ -454,6 +454,7 @@ export default (props) => {
                       formDataOF.append("mascara", item.mascara);
                       formDataOF.append("qtde_pend", item.qtde_pend);
                       formDataOF.append("qtde_prod", item.qtde_prod);
+                      formDataOF.append("id", item.id_of);
                       formDataOF.append("em_andamento", false);
                       formDataOF.append("motivo_qtde_inferior", motivo);
                       formDataOF.append("_method", "put");
