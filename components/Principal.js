@@ -327,7 +327,7 @@ export default (props) => {
              return resp.text();
            })
            .then(function (r) {
-             console.warn(r);
+             //console.warn(r);
            })
            .catch(function (error) {
              showToast("FALHA NA CONEXÃO");
