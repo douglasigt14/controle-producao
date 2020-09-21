@@ -466,7 +466,7 @@ export default (props) => {
                 setSelectedMotivo(value);
               }}
               selectedIndex={selectedMotivo}
-              buttons={["PAUSA NO TRABALHO", "PEÇA DANIFICADA"]}
+              buttons={["PAUSA NO TRABALHO", "PEÇAS DANIFICADAS"]}
               containerStyle={{ height: 100 }}
             />
           </View>
@@ -899,7 +899,8 @@ export default (props) => {
                   props.funcao_fechar_controle_diario(
                     qtde,
                     retrabalho,
-                    ofs_enviar
+                    ofs_enviar,
+                    selectedMotivo
                   );
                   setModalVisibleOfsSelecionadas(false);
                   setModalVisibleSimNao(false);

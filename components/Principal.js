@@ -371,7 +371,7 @@ export default (props) => {
         return prom_apontamento;
     };
 
-  const fechar_controle_diario = (qtde,retrabalho,ofs) => {
+  const fechar_controle_diario = (qtde,retrabalho,ofs,motivo) => {
           const formDataL = new FormData();
           formDataL.append("_method", 'put');
           formDataL.append("volume_produzido", qtde);
