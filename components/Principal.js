@@ -311,40 +311,43 @@ export default (props) => {
   const abrir_controle_diario = (cod_item, ofs_marcadas_p) => {
     
     let ids_ofs_temp = [];
-    ofs_marcadas_p.forEach(item => {
-       const formDataOF = new FormData();
-       formDataOF.append("num_ordem", item.num_ordem);
-       formDataOF.append("data", item.dt_inicial);
-       formDataOF.append("item", item.cod_item + " - " + item.item);
-       formDataOF.append("mascara", item.mascara);
-       formDataOF.append("qtde_pend", item.qtde_pend);
-       formDataOF.append("qtde_prod", item.qtde_prod);
-       formDataOF.append("em_andamento", true);
-       formDataOF.append("motivo_qtde_inferior", null);
-       formDataOF.append("operador_id", props.operador_id);
-       formDataOF.append("posto_id", props.id_posto);
+    let ofs_temp = ofs_marcadas_p;
+    ofs_temp.forEach((item) => {
+      const formDataOF = new FormData();
+      formDataOF.append("num_ordem", item.num_ordem);
+      formDataOF.append("data", item.dt_inicial);
+      formDataOF.append("item", item.cod_item + " - " + item.item);
+      formDataOF.append("mascara", item.mascara);
+      formDataOF.append("qtde_pend", item.qtde_pend);
+      formDataOF.append("qtde_prod", item.qtde_prod);
+      formDataOF.append("em_andamento", true);
+      formDataOF.append("motivo_qtde_inferior", null);
+      formDataOF.append("operador_id", props.operador_id);
+      formDataOF.append("posto_id", props.id_posto);
 
       const URL_CONTROLE = url + "/ofs";
 
-         fetch(URL_CONTROLE, {
-           method: "post",
-           body: formDataOF,
-         })
-           .then(function (resp) {
-             return resp.json();
-           })
-           .then(function (r) {
-             ids_ofs_temp.push(r);
-           })
-           .catch(function (error) {
-             showToast("FALHA NA CONEXÃO");
-           });
-           
+      fetch(URL_CONTROLE, {
+        method: "post",
+        body: formDataOF,
+      })
+        .then(function (resp) {
+          return resp.json();
+        })
+        .then(function (r) {
+          item.id_of = r;
+          ids_ofs_temp.push(r);
+        })
+        .catch(function (error) {
+          showToast("FALHA NA CONEXÃO");
+        });
     });
 
     setTimeout(() => {
         setIds_ofs(ids_ofs_temp);
         storageSet("@ids_ofs", JSON.stringify(ids_ofs_temp));
+        setOfs_selecionadas(ofs_temp);
+        storageSet("@ids_ofs", JSON.stringify(ofs_temp));
     }, 5000);
    
     
