@@ -305,7 +305,35 @@ export default (props) => {
   }
 
   const abrir_controle_diario = (cod_item, ofs_marcadas_p) => {
+    
+    ofs_marcadas_p.forEach(item => {
+       const formDataOF = new FormData();
+       formDataOF.append("num_ordem", item.num_ordem);
+       formDataOF.append("data", item.dt_inicial);
+       formDataOF.append("item", item.cod_item + " - " + item.item);
+       formDataOF.append("mascara", item.mascara);
+       formDataOF.append("qtde_pend", item.qtde_pend);
+       formDataOF.append("qtde_prod", item.qtde_prod);
+       formDataOF.append("em_andamento", true);
+       formDataOF.append("motivo_qtde_inferior", null);
 
+      const URL_CONTROLE = url + "/ofs";
+
+         fetch(URL_CONTROLE, {
+           method: "post",
+           body: formDataOF,
+         })
+           .then(function (resp) {
+             return resp.text();
+           })
+           .then(function (r) {
+             console.warn(r);
+           })
+           .catch(function (error) {
+             showToast("FALHA NA CONEXÃO");
+           });
+    });
+    
     const formDataL = new FormData();
     formDataL.append("operador_id", props.operador_id);
     formDataL.append("posto_id", props.id_posto);
