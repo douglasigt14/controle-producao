@@ -145,6 +145,9 @@ export default (props) => {
   let [componentNotificacao, setComponentNotificacao] = useState(null);
   let [selectedNotificacao, setSelectedNotificacao] = useState(""); 
   let [selectedMotivo, setSelectedMotivo] = useState(null); 
+  
+   let [sim, setSim] = useState(true);
+    let [corsim, setCorsim] = useState({ backgroundColor: "#d3d3d3" } );
 
    let [motivos, setMotivos] = useState([]);
 
@@ -453,7 +456,7 @@ export default (props) => {
       });
       if (verifica_qtde) {
         setComponentNotificacao(
-          <View style={{ alignItems: "center" }}>
+          <View style={{ alignItems: "center",  backgroundColor: '#F8D7D9', borderColor: '#f5c6cb'  }}>
             <Text style={{ fontSize: 20, textAlign: "center", margin: 20 }}>
               MOTIVO DE QUANTIDADE INFERIOR
             </Text>
@@ -468,11 +471,24 @@ export default (props) => {
             />
           </View>
         );
+              if (selectedMotivo != null) {
+                setSim(false);
+                setCorsim({ backgroundColor: "#28a745" });
+              }
+              else{
+                setSim(true);
+                setCorsim({ backgroundColor: "#d3d3d3" });
+              }
       } else {
         setComponentNotificacao(null);
+        setSim(false);
+        setCorsim({ backgroundColor: "#28a745" });
       }
     } else {
       setComponentNotificacao(null);
+      setSim(false);
+      setCorsim({ backgroundColor: "#28a745" });
+      setSelectedMotivo(null);
     }
   }, [modalVisibleSimNao,selectedNotificacao, selectedMotivo]); //No Inicio
   return (
@@ -536,7 +552,6 @@ export default (props) => {
             </Div>
           </Card.Content>
         </Card>
-       
       </Div_Card>
 
       {/* Modal Paradas */}
@@ -874,11 +889,11 @@ export default (props) => {
             {componentNotificacao}
             <ViewModalSimNao>
               <TouchModal
-                style={{
+                disabled={sim}
+                style={[{
                   ...Padrao.openButton,
-                  backgroundColor: "#28a745",
                   width: 200,
-                }}
+                }, corsim ]}
                 onPress={() => {
                   props.funcao_finalizar();
                   props.funcao_fechar_controle_diario(
