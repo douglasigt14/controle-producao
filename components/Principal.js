@@ -35,6 +35,8 @@ export default (props) => {
     let [token, setToken] = useState("");
     let [inicio, setInicio] = useState("");
     let [resumo_apontamento, setResumo_apontamento] = useState(" ");
+    let [ids_ofs, setIds_ofs] = useState([]);
+
      const showToast = (msg) => {
        ToastAndroid.show(msg, ToastAndroid.SHORT, ToastAndroid.CENTER);
      };
@@ -72,7 +74,8 @@ export default (props) => {
     buscar_storage("@id_controle", setId_controle, null);
     buscar_storage("@token", setToken, "");
     buscar_storage("@inicio", setInicio, "");
-   // consulta_storage();
+    buscar_storage("@ids_ofs", setIds_ofs, {});
+    consulta_storage();
   }, []);
 
   useEffect(() => {  
@@ -272,6 +275,7 @@ export default (props) => {
         storageSet("@finalizado", "true");
         storageSet("@cod_plano", "");
         storageSet("@ofs_selecionadas", JSON.stringify({}));
+        storageSet("@ids_ofs", JSON.stringify({}));
 
       }).catch(function (error) {
         showToast("FALHA NA CONEXÃO");
@@ -306,6 +310,7 @@ export default (props) => {
 
   const abrir_controle_diario = (cod_item, ofs_marcadas_p) => {
     
+    let ids_ofs_temp = [];
     ofs_marcadas_p.forEach(item => {
        const formDataOF = new FormData();
        formDataOF.append("num_ordem", item.num_ordem);
@@ -316,6 +321,8 @@ export default (props) => {
        formDataOF.append("qtde_prod", item.qtde_prod);
        formDataOF.append("em_andamento", true);
        formDataOF.append("motivo_qtde_inferior", null);
+       formDataOF.append("operador_id", props.operador_id);
+       formDataOF.append("posto_id", props.id_posto);
 
       const URL_CONTROLE = url + "/ofs";
 
@@ -324,15 +331,22 @@ export default (props) => {
            body: formDataOF,
          })
            .then(function (resp) {
-             return resp.text();
+             return resp.json();
            })
            .then(function (r) {
-             //console.warn(r);
+             ids_ofs_temp.push(r);
            })
            .catch(function (error) {
              showToast("FALHA NA CONEXÃO");
            });
+           
     });
+
+    setTimeout(() => {
+        setIds_ofs(ids_ofs_temp);
+        storageSet("@ids_ofs", JSON.stringify(ids_ofs_temp));
+    }, 5000);
+   
     
     const formDataL = new FormData();
     formDataL.append("operador_id", props.operador_id);
@@ -451,7 +465,7 @@ export default (props) => {
                           return resp.text();
                         })
                         .then(function (r) {
-                          console.warn(r);
+                          
                         })
                         .catch(function (error) {
                           showToast("FALHA NA CONEXÃO");
