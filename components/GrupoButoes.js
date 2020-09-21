@@ -18,6 +18,7 @@ import AsyncStorage from "@react-native-community/async-storage";
 import { consulta_storage } from "../storage/localstorage";
 import AwesomeAlert from 'react-native-awesome-alerts';
 import ButtonToggleGroup from "react-native-button-toggle-group";
+import { ButtonGroup } from "react-native-elements";
 
 const Texto = styled.Text`
     font-size: 17px;
@@ -452,29 +453,19 @@ export default (props) => {
       });
       if (verifica_qtde) {
         setComponentNotificacao(
-          <View>
+          <View style={{ alignItems: "center" }}>
             <Text style={{ fontSize: 20, textAlign: "center", margin: 20 }}>
               MOTIVO DE QUANTIDADE INFERIOR
             </Text>
-            <ButtonToggleGroup
-              highlightBackgroundColor={"blue"}
-              highlightTextColor={"white"}
-              inactiveBackgroundColor={"transparent"}
-              inactiveTextColor={"grey"}
-              values={["Auto", "Light", "Dark"]}
-              onSelect={(val) => console.log(val)}
+
+            <ButtonGroup
+              onPress={(value) => {
+                setSelectedMotivo(value);
+              }}
+              selectedIndex={selectedMotivo}
+              buttons={["PAUSA NO TRABALHO", "PEÇA DANIFICADA"]}
+              containerStyle={{ height: 100 }}
             />
-            {/* <ToggleButton.Row
-              onValueChange={(value) => setSelectedMotivo(value)}
-              value={selectedMotivo}
-            >
-              <ToggleButton style={{ width: 200 }} title="Title" value="left">
-                <Text>Douglas</Text>
-              </ToggleButton>
-              <ToggleButton style={{ width: 200 }}  value="right">
-                <Text>Douglas</Text>
-              </ToggleButton>
-            </ToggleButton.Row> */}
           </View>
         );
       } else {
