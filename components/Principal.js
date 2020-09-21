@@ -282,7 +282,7 @@ export default (props) => {
   const alterar_of = (ofs_marcadas_p,cod_plano,cod_item) => {
     setOfs_selecionadas(ofs_marcadas_p)
     setCod_plano(cod_plano);
-    abrir_controle_diario(cod_item);
+    abrir_controle_diario(cod_item, JSON.parse(ofs_marcadas_p));
     let novaHora = new Date();
     let hora = novaHora.getHours();
     let minuto = novaHora.getMinutes();
@@ -304,31 +304,31 @@ export default (props) => {
     } return x;
   }
 
-  const abrir_controle_diario = (cod_item) => {
+  const abrir_controle_diario = (cod_item, ofs_marcadas_p) => {
+
     const formDataL = new FormData();
     formDataL.append("operador_id", props.operador_id);
     formDataL.append("posto_id", props.id_posto);
     formDataL.append("cod_item", cod_item);
     formDataL.append("status", 1);
 
-    const URL_CONTROLE = url+"/controles-diarios";
-  
+    const URL_CONTROLE = url + "/controles-diarios";
+
     fetch(URL_CONTROLE, {
       method: "post",
-      body: formDataL
-    }).then(function (resp) {
-
-      return resp.json();
-
+      body: formDataL,
     })
-    .then(function (r) {
-      storageSet("@id_controle", JSON.stringify(r.id));
-      setId_controle(r.id);
-      
-    }).catch(function (error) {
-      showToast("FALHA NA CONEXÃO");
-    });
-  }
+      .then(function (resp) {
+        return resp.json();
+      })
+      .then(function (r) {
+        storageSet("@id_controle", JSON.stringify(r.id));
+        setId_controle(r.id);
+      })
+      .catch(function (error) {
+        showToast("FALHA NA CONEXÃO");
+      });
+  };
 
     const apontamento = (qtde, cod_barra, qtde_pend, id_maquina) => {
       let novaHora = new Date();
