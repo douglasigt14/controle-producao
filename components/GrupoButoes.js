@@ -450,7 +450,10 @@ export default (props) => {
       let ofs_temp = ofs_enviar;
       let verifica_qtde = false;
       ofs_temp.forEach((item) => {
-        if (parseInt(item.qtde_prod) < parseInt(item.qtde_pend)) {
+        if (
+          parseInt(item.qtde_prod) < parseInt(item.qtde_pend) &&
+          parseInt(item.qtde_prod) != 0
+        ) {
           verifica_qtde = true;
         }
       });
