@@ -502,7 +502,7 @@ export default (props) => {
       setCorsim({ backgroundColor: "#28a745" });
       setSelectedMotivo(null);
     }
-  }, [modalVisibleSimNao,selectedNotificacao, selectedMotivo]); //No Inicio
+  }, [modalVisibleSimNao,selectedNotificacao, selectedMotivo]);
   return (
     <>
       <Div_Card>
