@@ -299,7 +299,6 @@ export default (props) => {
     setInicio(hora + ':' + minuto + ':' + segundo);
     
 
-    showToast("ITEM SELECIONADO COM SUCESSO");
   }
 
   function zero(x) {
@@ -347,7 +346,8 @@ export default (props) => {
         setIds_ofs(ids_ofs_temp);
         storageSet("@ids_ofs", JSON.stringify(ids_ofs_temp));
         setOfs_selecionadas(JSON.stringify(ofs_temp));
-        storageSet("@ofs_selecionadas", JSON.stringify(ofs_temp));
+        storageSet("@ofs_selecionadas", JSON.stringify(ofs_temp)); 
+       showToast("ITEM SELECIONADO COM SUCESSO");
     }, 3000);
    
     

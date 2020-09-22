@@ -915,7 +915,7 @@ export default (props) => {
         }}
         hardwareAccelerated={true}
       >
-        <View style={Padrao.topView}>
+        <View style={Padrao.centeredView}>
           <ViewModal2 style={Padrao.modalView}>
             <Div_Fechar>
               <Text
