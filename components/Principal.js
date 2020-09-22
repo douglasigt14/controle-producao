@@ -75,7 +75,7 @@ export default (props) => {
     buscar_storage("@token", setToken, "");
     buscar_storage("@inicio", setInicio, "");
     buscar_storage("@ids_ofs", setIds_ofs, {});
-    consulta_storage();
+    // consulta_storage();
   }, []);
 
   useEffect(() => {  
@@ -345,10 +345,12 @@ export default (props) => {
 
     setTimeout(() => {
         setIds_ofs(ids_ofs_temp);
+        console.warn(ids_ofs_temp);
+        console.warn(ofs_temp);
         storageSet("@ids_ofs", JSON.stringify(ids_ofs_temp));
         setOfs_selecionadas(JSON.stringify(ofs_temp));
-        storageSet("@ids_ofs", JSON.stringify(ofs_temp));
-    }, 5000);
+        storageSet("@ofs_selecionadas", JSON.stringify(ofs_temp));
+    }, 3000);
    
     
     const formDataL = new FormData();
