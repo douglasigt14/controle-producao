@@ -345,8 +345,6 @@ export default (props) => {
 
     setTimeout(() => {
         setIds_ofs(ids_ofs_temp);
-        console.warn(ids_ofs_temp);
-        console.warn(ofs_temp);
         storageSet("@ids_ofs", JSON.stringify(ids_ofs_temp));
         setOfs_selecionadas(JSON.stringify(ofs_temp));
         storageSet("@ofs_selecionadas", JSON.stringify(ofs_temp));
@@ -458,7 +456,7 @@ export default (props) => {
                       formDataOF.append("qtde_prod", item.qtde_prod);
                       formDataOF.append("id", item.id_of);
                       formDataOF.append("em_andamento", false);
-                      formDataOF.append("motivo_qtde_inferior", motivo);
+                      formDataOF.append("motivo_qtde_inferior", item.motivo);
                       formDataOF.append("_method", "put");
 
                       const URL_CONTROLE = url + "/ofs";

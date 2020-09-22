@@ -342,7 +342,7 @@ export default (props) => {
       let qtde = 0;
       ofs_selecionadas_temp.forEach((item) => {
         // console.warn(item.qtde_prod);
-
+        item.motivo = null;
         item.input = (
           <TextInput
             style={{
@@ -450,9 +450,15 @@ export default (props) => {
   };
 
   useEffect(() => {
-    if (modalVisibleSimNao) { // Modal Aberto
+    atualizar_motivos();
+  }, [ofs_enviar, modalVisibleSimNao, selectedNotificacao, selectedMotivo]);
+
+  const atualizar_motivos = () => {
+    if (modalVisibleSimNao) {
+      // Modal Aberto
       let ofs_temp = ofs_enviar;
       let verifica_qtde = false;
+      let verifica_motivo = false;
       let lista_compt_notificacao = [];
       ofs_temp.forEach((item) => {
         if (
@@ -469,22 +475,29 @@ export default (props) => {
 
               <ButtonGroup
                 onPress={(value) => {
-                  setSelectedMotivo(value);
+                  alterarOf_enviar(value, item.num_ordem);
                 }}
-                selectedIndex={selectedMotivo}
+                selectedIndex={item.motivo}
                 buttons={["PAUSA NO TRABALHO", "PEÇAS DANIFICADAS"]}
                 containerStyle={{ height: 60 }}
               />
             </View>
           );
+          if (item.motivo == null) {
+            verifica_motivo = true;
+          }
         }
+
+        
       });
       if (verifica_qtde) {
         // Tem Restrinção de Qtde Inferior
-        let componentNotificacaoTemp = <>{lista_compt_notificacao.map((value) => value)}</>;
+        let componentNotificacaoTemp = (
+          <>{lista_compt_notificacao.map((value) => value)}</>
+        );
         setComponentNotificacao(componentNotificacaoTemp);
         // setComponentNotificacao(<Text>Notificação Table</Text>);
-        if (selectedMotivo == null) {
+        if (verifica_motivo) {
           // Não Escolheu Alternativa
           setSim(true);
           setCorsim({ backgroundColor: "#d3d3d3" });
@@ -499,13 +512,27 @@ export default (props) => {
         setSim(false);
         setCorsim({ backgroundColor: "#28a745" });
       }
-    } else { // Modal Fechado
+    } else {
+      // Modal Fechado
       setComponentNotificacao(null);
       setSim(false);
       setCorsim({ backgroundColor: "#28a745" });
       setSelectedMotivo(null);
     }
-  }, [modalVisibleSimNao,selectedNotificacao, selectedMotivo]);
+  }
+
+  const alterarOf_enviar = (value,num_ordem) => {
+      // console.warn(value+" - "+num_ordem);
+      let ofs_temp2 = ofs_enviar;
+       ofs_temp2.forEach((item) => {
+          if(item.num_ordem == num_ordem){
+            item.motivo = value;
+           
+          }  
+       });
+       setOfs_enviar(ofs_temp2);
+       atualizar_motivos();
+  }
   return (
     <>
       <Div_Card>
