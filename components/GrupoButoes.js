@@ -44,6 +44,10 @@ const ViewModal = styled.View`
       display: flex;
   `;
 
+const ViewModal2 = styled.View`
+  display: flex;
+`;
+
 const ViewModalMaior = styled.View`
       max-height: 920px;
       display: flex;
@@ -449,38 +453,37 @@ export default (props) => {
     if (modalVisibleSimNao) { // Modal Aberto
       let ofs_temp = ofs_enviar;
       let verifica_qtde = false;
+      let lista_compt_notificacao = [];
       ofs_temp.forEach((item) => {
         if (
           parseInt(item.qtde_prod) < parseInt(item.qtde_pend) &&
           parseInt(item.qtde_prod) != 0
         ) {
           verifica_qtde = true;
+          // console.warn(item.num_ordem);
+          lista_compt_notificacao.push(
+            <View style={Padrao.viewNotificacao}>
+              <Text style={{ fontSize: 15, textAlign: "center", margin: 10 }}>
+                MOTIVO DE QUANTIDADE INFERIOR ({item.num_ordem})
+              </Text>
+
+              <ButtonGroup
+                onPress={(value) => {
+                  setSelectedMotivo(value);
+                }}
+                selectedIndex={selectedMotivo}
+                buttons={["PAUSA NO TRABALHO", "PEÇAS DANIFICADAS"]}
+                containerStyle={{ height: 60 }}
+              />
+            </View>
+          );
         }
       });
       if (verifica_qtde) {
         // Tem Restrinção de Qtde Inferior
-        setComponentNotificacao(
-          <View
-            style={{
-              alignItems: "center",
-              backgroundColor: "#F8D7D9",
-              borderColor: "#f5c6cb",
-            }}
-          >
-            <Text style={{ fontSize: 20, textAlign: "center", margin: 20 }}>
-              MOTIVO DE QUANTIDADE INFERIOR
-            </Text>
-
-            <ButtonGroup
-              onPress={(value) => {
-                setSelectedMotivo(value);
-              }}
-              selectedIndex={selectedMotivo}
-              buttons={["PAUSA NO TRABALHO", "PEÇAS DANIFICADAS"]}
-              containerStyle={{ height: 100 }}
-            />
-          </View>
-        );
+        let componentNotificacaoTemp = <>{lista_compt_notificacao.map((value) => value)}</>;
+        setComponentNotificacao(componentNotificacaoTemp);
+        // setComponentNotificacao(<Text>Notificação Table</Text>);
         if (selectedMotivo == null) {
           // Não Escolheu Alternativa
           setSim(true);
@@ -885,8 +888,8 @@ export default (props) => {
         }}
         hardwareAccelerated={true}
       >
-        <View style={Padrao.centeredView}>
-          <ViewModal style={Padrao.modalView}>
+        <View style={Padrao.topView}>
+          <ViewModal2 style={Padrao.modalView}>
             <Div_Fechar>
               <Text
                 style={{
@@ -902,10 +905,13 @@ export default (props) => {
             <ViewModalSimNao>
               <TouchModal
                 disabled={sim}
-                style={[{
-                  ...Padrao.openButton,
-                  width: 200,
-                }, corsim ]}
+                style={[
+                  {
+                    ...Padrao.openButton,
+                    width: 200,
+                  },
+                  corsim,
+                ]}
                 onPress={() => {
                   props.funcao_finalizar();
                   props.funcao_fechar_controle_diario(
@@ -933,7 +939,7 @@ export default (props) => {
                 <TextoModal style={Padrao.textStyle}>NÃO</TextoModal>
               </TouchModal>
             </ViewModalSimNao>
-          </ViewModal>
+          </ViewModal2>
         </View>
       </Modal>
     </>

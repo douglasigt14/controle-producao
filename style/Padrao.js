@@ -79,6 +79,11 @@ export default StyleSheet.create({
     borderWidth: 2,
     paddingHorizontal: 10,
     marginVertical: 10,
+  },
+  viewNotificacao: {
+    alignItems: "center",
+    backgroundColor: "#F8D7D9",
+    borderColor: "#f5c6cb"
   }
 
   //Modal
