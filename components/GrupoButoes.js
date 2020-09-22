@@ -446,7 +446,7 @@ export default (props) => {
   };
 
   useEffect(() => {
-    if (modalVisibleSimNao) {
+    if (modalVisibleSimNao) { // Modal Aberto
       let ofs_temp = ofs_enviar;
       let verifica_qtde = false;
       ofs_temp.forEach((item) => {
@@ -458,8 +458,15 @@ export default (props) => {
         }
       });
       if (verifica_qtde) {
+        // Tem Restrinção de Qtde Inferior
         setComponentNotificacao(
-          <View style={{ alignItems: "center",  backgroundColor: '#F8D7D9', borderColor: '#f5c6cb'  }}>
+          <View
+            style={{
+              alignItems: "center",
+              backgroundColor: "#F8D7D9",
+              borderColor: "#f5c6cb",
+            }}
+          >
             <Text style={{ fontSize: 20, textAlign: "center", margin: 20 }}>
               MOTIVO DE QUANTIDADE INFERIOR
             </Text>
@@ -474,20 +481,22 @@ export default (props) => {
             />
           </View>
         );
-              if (selectedMotivo != null) {
-                setSim(false);
-                setCorsim({ backgroundColor: "#28a745" });
-              }
-              else{
-                setSim(true);
-                setCorsim({ backgroundColor: "#d3d3d3" });
-              }
+        if (selectedMotivo == null) {
+          // Não Escolheu Alternativa
+          setSim(true);
+          setCorsim({ backgroundColor: "#d3d3d3" });
+        } else {
+          // Escolheu Alternativa
+          setSim(false);
+          setCorsim({ backgroundColor: "#28a745" });
+        }
       } else {
+        // Não Tem Restrinção de Qtde Inferior
         setComponentNotificacao(null);
         setSim(false);
         setCorsim({ backgroundColor: "#28a745" });
       }
-    } else {
+    } else { // Modal Fechado
       setComponentNotificacao(null);
       setSim(false);
       setCorsim({ backgroundColor: "#28a745" });
