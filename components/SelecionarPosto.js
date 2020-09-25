@@ -37,6 +37,7 @@ const Div_Button = styled.View`
 
 export default (props) => {
    const [selectedPosto, setSelectedPosto] = useState(""); 
+   const [selectedCentro, setSelectedCentro] = useState(""); 
    const [isLoading, setLoading] = useState(true);
    const [postos, setPostos] = useState([]);
    let url = props.url;
@@ -59,16 +60,17 @@ export default (props) => {
             <Div_input>
               <Picker
                 selectedValue={selectedPosto}
-                onValueChange={(itemValue, itemIndex) =>
-                  setSelectedPosto(itemValue)
+                onValueChange={(itemValue, itemIndex) => {
+                    setSelectedPosto(itemValue);
+                  }
                 }
               >
                 {postos.map((posto, i) => {
                   return (
                     <Picker.Item
-                      value={posto.id}
+                      value={posto.id + "-" + posto.cod_centro}
                       label={posto.nome}
-                      key={posto.id}
+                      key={posto.id + "-" + posto.cod_centro}
                     />
                   );
                 })}

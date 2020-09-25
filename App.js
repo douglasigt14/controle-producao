@@ -58,10 +58,13 @@ export default  function App() {
 
     }, []);
 
-  const selecionar_posto = (id_postoP) => {
-    if(id_postoP){
-      setId_posto(id_postoP);
-      storageSet("@id_posto", String(id_postoP));
+  const selecionar_posto = (value) => {
+    if(value){
+      let partes = value.split("-");
+      setId_posto(partes[0]);
+      storageSet("@id_posto", String(partes[0]));
+
+      storageSet("@cod_centro", String(partes[1]));
     }
   };
 

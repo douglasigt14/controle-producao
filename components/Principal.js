@@ -75,7 +75,7 @@ export default (props) => {
     buscar_storage("@token", setToken, "");
     buscar_storage("@inicio", setInicio, "");
     buscar_storage("@ids_ofs", setIds_ofs, {});
-    // consulta_storage();
+    consulta_storage();
   }, []);
 
   useEffect(() => {  
