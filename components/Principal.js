@@ -36,6 +36,7 @@ export default (props) => {
     let [inicio, setInicio] = useState("");
     let [resumo_apontamento, setResumo_apontamento] = useState(" ");
     let [ids_ofs, setIds_ofs] = useState([]);
+    let [cod_centro, setCod_centro] = useState("");
 
      const showToast = (msg) => {
        ToastAndroid.show(msg, ToastAndroid.SHORT, ToastAndroid.CENTER);
@@ -75,6 +76,7 @@ export default (props) => {
     buscar_storage("@token", setToken, "");
     buscar_storage("@inicio", setInicio, "");
     buscar_storage("@ids_ofs", setIds_ofs, {});
+    buscar_storage("@cod_centro", setCod_centro, "");
     consulta_storage();
   }, []);
 
@@ -539,6 +541,7 @@ export default (props) => {
             funcao_operar={operar}
             funcao_parar={parar}
             id_posto={props.id_posto}
+            cod_centro={cod_centro}
             ofs_selecionadas={
               ofs_selecionadas
             }
