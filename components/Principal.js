@@ -379,7 +379,7 @@ export default (props) => {
       });
   };
 
-    const apontamento = (qtde, cod_barra, qtde_pend, id_maquina_nao_uso_mais) => {
+    const apontamento = (qtde, cod_barra, qtde_pend, motivo) => {
       let novaHora = new Date();
       let hora = novaHora.getHours();
       let minuto = novaHora.getMinutes();
@@ -397,6 +397,7 @@ export default (props) => {
       formDataL.append("cod_barra", cod_barra);
       formDataL.append("operador", props.operador_desc);
       formDataL.append("id_maquina", id_maquina);
+      formDataL.append("motivo", motivo);
       formDataL.append("fim", hora + ":" + minuto + ":" + segundo);
 
       const URL_CONTROLE = url + "/focco/incluir_apontamento_tempo_padrao";
@@ -482,13 +483,12 @@ export default (props) => {
 
                      if (parseInt(item.qtde_prod) != 0){
                       
-
                         setTimeout(() => {
                            apontamento(
                              item.qtde_prod,
                              item.cod_barra,
                              item.qtde_pend,
-                             item.id_maquina
+                             item.motivo
                            );
                         }, 1000);
                         
