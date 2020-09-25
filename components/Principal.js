@@ -447,52 +447,47 @@ export default (props) => {
                    let ofs_selecionadas_temp = ofs;
                    let proms_apontamentos = [];
                    let prom_for = ofs_selecionadas_temp.forEach((item) => {
+                     // Update OF
+                     const formDataOF = new FormData();
+                     formDataOF.append("num_ordem", item.num_ordem);
+                     formDataOF.append("data", item.dt_inicial);
+                     formDataOF.append(
+                       "item",
+                       item.cod_item + " - " + item.item
+                     );
+                     formDataOF.append("mascara", item.mascara);
+                     formDataOF.append("qtde_pend", item.qtde_pend);
+                     formDataOF.append("qtde_prod", item.qtde_prod);
+                     formDataOF.append("id", item.id_of);
+                     formDataOF.append("em_andamento", false);
+                     formDataOF.append("motivo_qtde_inferior", item.motivo);
+                     formDataOF.append("_method", "put");
 
+                     const URL_CONTROLE = url + "/ofs";
 
-                      const formDataOF = new FormData();
-                      formDataOF.append("num_ordem", item.num_ordem);
-                      formDataOF.append("data", item.dt_inicial);
-                      formDataOF.append(
-                        "item",
-                        item.cod_item + " - " + item.item
-                      );
-                      formDataOF.append("mascara", item.mascara);
-                      formDataOF.append("qtde_pend", item.qtde_pend);
-                      formDataOF.append("qtde_prod", item.qtde_prod);
-                      formDataOF.append("id", item.id_of);
-                      formDataOF.append("em_andamento", false);
-                      formDataOF.append("motivo_qtde_inferior", item.motivo);
-                      formDataOF.append("_method", "put");
+                     fetch(URL_CONTROLE, {
+                       method: "post",
+                       body: formDataOF,
+                     })
+                       .then(function (resp) {
+                         return resp.text();
+                       })
+                       .then(function (r) {})
+                       .catch(function (error) {
+                         showToast("FALHA NA CONEXÃO");
+                       });
+                     // Update OF
 
-                      const URL_CONTROLE = url + "/ofs";
-
-                      fetch(URL_CONTROLE, {
-                        method: "post",
-                        body: formDataOF,
-                      })
-                        .then(function (resp) {
-                          return resp.text();
-                        })
-                        .then(function (r) {
-                          
-                        })
-                        .catch(function (error) {
-                          showToast("FALHA NA CONEXÃO");
-                        });
-                        
-
-                     if (parseInt(item.qtde_prod) != 0){
-                      
-                        setTimeout(() => {
-                           apontamento(
-                             item.qtde_prod,
-                             item.cod_barra,
-                             item.qtde_pend,
-                             item.motivo
-                           );
-                        }, 1000);
-                        
-                    }
+                     if (parseInt(item.qtde_prod) != 0) {
+                       setTimeout(() => {
+                         apontamento(
+                           item.qtde_prod,
+                           item.cod_barra,
+                           item.qtde_pend,
+                           item.motivo
+                         );
+                       }, 1000);
+                     }
                    });
                      
            });
