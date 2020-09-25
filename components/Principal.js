@@ -37,6 +37,7 @@ export default (props) => {
     let [resumo_apontamento, setResumo_apontamento] = useState(" ");
     let [ids_ofs, setIds_ofs] = useState([]);
     let [cod_centro, setCod_centro] = useState("");
+    let [id_maquina, setId_maquina] = useState("");
 
      const showToast = (msg) => {
        ToastAndroid.show(msg, ToastAndroid.SHORT, ToastAndroid.CENTER);
@@ -77,6 +78,7 @@ export default (props) => {
     buscar_storage("@inicio", setInicio, "");
     buscar_storage("@ids_ofs", setIds_ofs, {});
     buscar_storage("@cod_centro", setCod_centro, "");
+    buscar_storage("@id_maquina", setId_maquina, "");
     consulta_storage();
   }, []);
 
@@ -377,7 +379,7 @@ export default (props) => {
       });
   };
 
-    const apontamento = (qtde, cod_barra, qtde_pend, id_maquina) => {
+    const apontamento = (qtde, cod_barra, qtde_pend, id_maquina_nao_uso_mais) => {
       let novaHora = new Date();
       let hora = novaHora.getHours();
       let minuto = novaHora.getMinutes();

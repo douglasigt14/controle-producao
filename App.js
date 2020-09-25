@@ -65,6 +65,7 @@ export default  function App() {
       storageSet("@id_posto", String(partes[0]));
 
       storageSet("@cod_centro", String(partes[1]));
+      storageSet("@id_maquina", String(partes[2]));
     }
   };
 

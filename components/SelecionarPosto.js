@@ -61,6 +61,7 @@ export default (props) => {
               <Picker
                 selectedValue={selectedPosto}
                 onValueChange={(itemValue, itemIndex) => {
+                    console.warn(itemValue);
                     setSelectedPosto(itemValue);
                   }
                 }
@@ -68,9 +69,21 @@ export default (props) => {
                 {postos.map((posto, i) => {
                   return (
                     <Picker.Item
-                      value={posto.id + "-" + posto.cod_centro}
+                      value={
+                        posto.id +
+                        "-" +
+                        posto.cod_centro +
+                        "-" +
+                        posto.id_maquina
+                      }
                       label={posto.nome}
-                      key={posto.id + "-" + posto.cod_centro}
+                      key={
+                        posto.id +
+                        "-" +
+                        posto.cod_centro +
+                        "-" +
+                        posto.id_maquina
+                      }
                     />
                   );
                 })}
