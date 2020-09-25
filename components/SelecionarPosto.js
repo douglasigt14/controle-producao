@@ -61,7 +61,6 @@ export default (props) => {
               <Picker
                 selectedValue={selectedPosto}
                 onValueChange={(itemValue, itemIndex) => {
-                    console.warn(itemValue);
                     setSelectedPosto(itemValue);
                   }
                 }
