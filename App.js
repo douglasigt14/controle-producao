@@ -17,7 +17,6 @@ export default  function App() {
     let [mostrar_alert, setMostrar_alert] = useState(false);
     let [descricao_alert_tit, setDescricao_alert_tit] = useState("");
     let [descricao_alert_sub, setDescricao_alert_sub] = useState("");
-    let [comp_rederizado, setComponent_renderizado] = useState(null);
     let url = "http://teste.controleproducao.tuboarte.com";
    
     const wait = (timeout) => {
@@ -70,7 +69,7 @@ export default  function App() {
     }
   };
 
-  
+  let comp_rederizado = null;
 
   const logar = (login,senha) => {
     if(login, senha) {
@@ -152,33 +151,27 @@ export default  function App() {
       setOperador_desc("");
   }
 
-   useEffect(() => {
-        if (!id_posto) {
-          setComponent_renderizado(
-            <SelecionarPosto
-              funcao_selecionar={selecionar_posto}
-              url={url}
-            ></SelecionarPosto>
-          );
-        } else if (logado == "0" || logado == null) {
-          setComponent_renderizado(
-            <Login id_posto={id_posto} funcao_logar={logar} url={url}></Login>
-          );
-        } else {
-          setComponent_renderizado(
-            <Principal
-              id_posto={id_posto}
-              operador_id={operador_id}
-              operador_desc={operador_desc}
-              funcao_deslogar={deslogar}
-              url={url}
-            ></Principal>
-          );
-        }
+  
 
-   }, [id_posto, logado]);
-
-
+  if (!id_posto) {
+    comp_rederizado = (
+      <SelecionarPosto funcao_selecionar={selecionar_posto} url={url}></SelecionarPosto>
+    );
+  } else if (logado == "0" || logado == null) {
+    comp_rederizado = (
+      <Login id_posto={id_posto} funcao_logar={logar} url={url}></Login>
+    );
+  } else {
+    comp_rederizado = (
+      <Principal
+        id_posto={id_posto}
+        operador_id={operador_id}
+        operador_desc={operador_desc}
+        funcao_deslogar={deslogar}
+        url={url}
+      ></Principal>
+    );
+  }
 
   return (
     <>
