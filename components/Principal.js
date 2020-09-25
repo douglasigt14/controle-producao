@@ -79,7 +79,7 @@ export default (props) => {
     buscar_storage("@ids_ofs", setIds_ofs, {});
     buscar_storage("@cod_centro", setCod_centro, "");
     buscar_storage("@id_maquina", setId_maquina, "");
-    consulta_storage();
+    //consulta_storage();
   }, []);
 
   useEffect(() => {  

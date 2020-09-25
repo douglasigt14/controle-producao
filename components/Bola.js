@@ -407,6 +407,7 @@ export default (props) => {
               keyboardType={"phone-pad"}
             />
             </View>
+            { cod_centro == '60' ? (
               <View>
             <Text>COD PLANO (COLOCAR TODOS OS ZEROS)</Text>
             <TextInput
@@ -419,6 +420,7 @@ export default (props) => {
               keyboardType={"phone-pad"}
             />
             </View>
+            ) : null }
             <TouchModal
               disabled={!editable_cod_item}
               style={{ ...Padrao.openButton, backgroundColor: "gray" }}
