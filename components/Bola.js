@@ -11,6 +11,7 @@ import {
   ScrollView,
   FlatList,
   TextInput,
+  ToastAndroid
 } from "react-native";
 import Padrao from "../style/Padrao";
 import { Button, Card } from "react-native-paper";
@@ -111,6 +112,11 @@ export default (props) => {
     color: ${props.cor_texto};
   `;
 
+      const showToast = (msg) => {
+        ToastAndroid.show(msg, ToastAndroid.SHORT, ToastAndroid.CENTER);
+      };
+
+
     const msg = (texto) => {
       Alert.alert(texto);
     } 
@@ -172,6 +178,8 @@ export default (props) => {
     cod_item = cod_item ? cod_item : 0; 
     cod_plano = cod_plano ? cod_plano : 0;
     let URL = url + "/itens/" + cod_item + "/" + cod_plano + "/" + cod_centro;
+    //showToast(URL);
+
     fetch(
       URL
     )
@@ -407,7 +415,7 @@ export default (props) => {
               keyboardType={"phone-pad"}
             />
             </View>
-            { cod_centro == '60' ? (
+            { true ? ( //cod_centro == '60'
               <View>
             <Text>COD PLANO (COLOCAR TODOS OS ZEROS)</Text>
             <TextInput
