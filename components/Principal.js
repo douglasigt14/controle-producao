@@ -379,7 +379,7 @@ export default (props) => {
       });
   };
 
-    const apontamento = (qtde, cod_barra, qtde_pend, motivo) => {
+    const apontamento = (qtde, cod_barra, qtde_pend, motivo,item) => {
       let novaHora = new Date();
       let hora = novaHora.getHours();
       let minuto = novaHora.getMinutes();
@@ -410,9 +410,39 @@ export default (props) => {
           return resp.json();
         })
         .then(function (r) {
-           let ok = r.Succeeded ? 'OK' : 'ERROR :' ;
-           let msg = cod_barra + " - " + ok + " " + r.ErrorMessage+"\n";
-           showToast(msg);
+          let result = r.Succeeded ? "OK" : "ERROR :";
+          let msg = result + " " + r.ErrorMessage + "\n";
+          showToast(msg);
+
+          // Update OF
+            const formDataOF = new FormData();
+            formDataOF.append("num_ordem", item.num_ordem);
+            formDataOF.append("data", item.dt_inicial);
+            formDataOF.append("item", item.cod_item + " - " + item.item);
+            formDataOF.append("mascara", item.mascara);
+            formDataOF.append("qtde_pend", item.qtde_pend);
+            formDataOF.append("qtde_prod", item.qtde_prod);
+            formDataOF.append("id", item.id_of);
+            formDataOF.append("em_andamento", false);
+            formDataOF.append("motivo_qtde_inferior", item.motivo);
+            formDataOF.append("msg_apontamento", msg);
+            formDataOF.append("_method", "put");
+
+            const URL_CONTROLE = url + "/ofs";
+
+            fetch(URL_CONTROLE, {
+              method: "post",
+              body: formDataOF,
+            })
+              .then(function (resp) {
+                return resp.text();
+              })
+              .then(function (r) {})
+              .catch(function (error) {
+                showToast("FALHA NA CONEXÃO");
+              });
+            // Update OF
+
         })
         .catch(function (error) {
           showToast("FALHA NA CONEXÃO");
@@ -461,7 +491,7 @@ export default (props) => {
                      formDataOF.append("id", item.id_of);
                      formDataOF.append("em_andamento", false);
                      formDataOF.append("motivo_qtde_inferior", item.motivo);
-                     formDataOF.append("_method", "put");
+                     formDataOF.append("_method", "patch");
 
                      const URL_CONTROLE = url + "/ofs";
 
@@ -484,7 +514,8 @@ export default (props) => {
                            item.qtde_prod,
                            item.cod_barra,
                            item.qtde_pend,
-                           item.motivo
+                           item.motivo,
+                           item
                          );
                        }, 1000);
                      }
