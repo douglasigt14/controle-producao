@@ -271,7 +271,6 @@ export default (props) => {
   return (
     <>
       <View>
-        
         <Div_Descricao>
           <Descricao>{props.descricao}</Descricao>
         </Div_Descricao>
@@ -321,7 +320,6 @@ export default (props) => {
                 Selecionar Parada
               </TextoModal>
             </TouchModal>
-            
           </ViewModalSelecionar>
         </View>
       </Modal>
@@ -333,7 +331,7 @@ export default (props) => {
         transparent={true}
         visible={modalParadasVisible}
         onRequestClose={() => {
-           setModalParadasVisible(!modalParadasVisible);
+          setModalParadasVisible(!modalParadasVisible);
         }}
       >
         <View style={Padrao.centeredView}>
@@ -403,32 +401,32 @@ export default (props) => {
                 <TextoModal style={Padrao.textStyle}>X</TextoModal>
               </TouchModal>
             </Div_Fechar>
-              <View>
-            <Text>COD PEÇA</Text>
-            <TextInput
-                  style={[Padrao.inputModal]}
-              value={cod_item}
-              editable={editable_cod_item}
-              onChangeText={(text) => {
-                setCod_item(text);
-              }}
-              keyboardType={"phone-pad"}
-            />
+            <View>
+              <Text>COD PEÇA</Text>
+              <TextInput
+                style={[Padrao.inputModal]}
+                value={cod_item}
+                editable={editable_cod_item}
+                onChangeText={(text) => {
+                  setCod_item(text);
+                }}
+                keyboardType={"phone-pad"}
+              />
             </View>
-            { true ? ( //cod_centro == '60'
+            {cod_centro == "60" ? ( 
               <View>
-            <Text>COD PLANO (COLOCAR TODOS OS ZEROS)</Text>
-            <TextInput
+                <Text>COD PLANO (COLOCAR TODOS OS ZEROS)</Text>
+                <TextInput
                   style={[Padrao.inputModal]}
-              value={cod_plano}
-              editable={editable_cod_plano}
-              onChangeText={(text) => {
-                setCod_plano(text);
-              }}
-              keyboardType={"phone-pad"}
-            />
-            </View>
-            ) : null }
+                  value={cod_plano}
+                  editable={editable_cod_plano}
+                  onChangeText={(text) => {
+                    setCod_plano(text);
+                  }}
+                  keyboardType={"phone-pad"}
+                />
+              </View>
+            ) : null}
             <TouchModal
               disabled={!editable_cod_item}
               style={{ ...Padrao.openButton, backgroundColor: "gray" }}
