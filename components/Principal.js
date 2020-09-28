@@ -411,7 +411,7 @@ export default (props) => {
         })
         .then(function (r) {
           let result = r.Succeeded ? "OK" : "ERROR :";
-          let msg = result + " " + r.ErrorMessage + "\n";
+          let msg = result + " " + r.ErrorMessage;
           showToast(msg);
 
           // Update OF
