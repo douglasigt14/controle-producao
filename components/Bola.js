@@ -149,6 +149,7 @@ export default (props) => {
   let ofs_selecionadas = props.ofs_selecionadas;
   let url = props.url;
   let cod_centro = props.cod_centro;
+  let id_maquina = props.id_maquina;
     
    let tabela = {
      tableHead: ["OF", "ITEM", "COR", "QTD"],
@@ -177,8 +178,8 @@ export default (props) => {
   const buscarOf = (cod_item,cod_plano) =>{
     cod_item = cod_item ? cod_item : 0; 
     cod_plano = cod_plano ? cod_plano : 0;
-    let URL = url + "/itens/" + cod_item + "/" + cod_plano + "/" + cod_centro;
-    //showToast(URL);
+    let URL = url + "/itens/" + cod_item + "/" + cod_plano + "/" + cod_centro + "/" + id_maquina;
+    showToast(URL);
 
     fetch(
       URL

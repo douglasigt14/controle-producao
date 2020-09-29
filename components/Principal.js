@@ -570,6 +570,7 @@ export default (props) => {
             funcao_parar={parar}
             id_posto={props.id_posto}
             cod_centro={cod_centro}
+            id_maquina={id_maquina}
             ofs_selecionadas={
               ofs_selecionadas
             }
