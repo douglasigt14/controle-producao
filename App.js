@@ -18,6 +18,7 @@ export default  function App() {
     let [mostrar_alert, setMostrar_alert] = useState(false);
     let [descricao_alert_tit, setDescricao_alert_tit] = useState("");
     let [descricao_alert_sub, setDescricao_alert_sub] = useState("");
+    let [modo_leitura, setModo_leitura] = useState(false);
     let url = "http://teste.controleproducao.tuboarte.com";
    
     const wait = (timeout) => {
@@ -156,12 +157,16 @@ export default  function App() {
 
   if (!id_posto) {
     comp_rederizado = (
-      <Leitor_Bar></Leitor_Bar>
-      // <SelecionarPosto funcao_selecionar={selecionar_posto} url={url}></SelecionarPosto>
+      <SelecionarPosto funcao_selecionar={selecionar_posto} url={url}></SelecionarPosto>
     );
   } else if (logado == "0" || logado == null) {
     comp_rederizado = (
       <Login id_posto={id_posto} funcao_logar={logar} url={url}></Login>
+    );
+  } 
+  else if (modo_leitura) {
+    comp_rederizado = (
+     <Leitor_Bar></Leitor_Bar>
     );
   } else {
     comp_rederizado = (
