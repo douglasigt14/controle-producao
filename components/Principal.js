@@ -11,7 +11,7 @@ import { storageSet, consulta_storage } from "../storage/localstorage";
 import AsyncStorage from "@react-native-community/async-storage";
 import Relogio from "./Relogio";
 import { Toast } from "native-base";
-import { Camera } from 'expo';
+import { Camera } from "./Camera.js";;
 
 export default (props) => {
 
@@ -549,7 +549,6 @@ export default (props) => {
               ofs_selecionadas
             }
           ></GrupoButoes>
-          {/* <Text>{token}</Text> */}
           <ParadasFrequentes
             finalizado={finalizado}
             funcao_finalizar={finalizar}
