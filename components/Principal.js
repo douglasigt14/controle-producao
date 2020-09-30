@@ -439,7 +439,7 @@ export default (props) => {
               })
               .then(function (r) {})
               .catch(function (error) {
-                showToast("FALHA NA CONEXÃO");
+                showToast("FALHA NA CONEXÃO FOCCO");
               });
             // Update OF
 
