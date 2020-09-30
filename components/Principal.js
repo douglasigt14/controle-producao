@@ -11,7 +11,8 @@ import { storageSet, consulta_storage } from "../storage/localstorage";
 import AsyncStorage from "@react-native-community/async-storage";
 import Relogio from "./Relogio";
 import { Toast } from "native-base";
-import { Camera } from "./Camera.js";;
+import { Cam } from "./Cam";
+import { Bar } from "./Bar";
 
 export default (props) => {
 

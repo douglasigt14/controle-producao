@@ -8,6 +8,7 @@ import SelecionarPosto from "./components/SelecionarPosto";
 import { storageSet, consulta_storage } from "./storage/localstorage";
 import AsyncStorage from "@react-native-community/async-storage";
 import AwesomeAlert from 'react-native-awesome-alerts';
+import { Cam } from "./components/Cam";;
 
 export default  function App() {
     let [id_posto, setId_posto] = useState(null);
