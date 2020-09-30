@@ -179,7 +179,7 @@ export default (props) => {
     cod_item = cod_item ? cod_item : 0; 
     cod_plano = cod_plano ? cod_plano : 0;
     let URL = url + "/itens/" + cod_item + "/" + cod_plano + "/" + cod_centro + "/" + id_maquina;
-    showToast(URL);
+   // showToast(URL);
 
     fetch(
       URL
