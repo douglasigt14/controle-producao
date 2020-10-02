@@ -54,16 +54,21 @@ export default (props) => {
         return index == arr.indexOf(el);
       });
     }
-  const marcar_desmarcar = (num_ordem) => {
+  const marcar_desmarcar = (cod_barra) => {
     let ofsTemp = ofs;
-    ofsTemp.forEach(item => {
-       if(item.num_ordem == num_ordem){
-         item.marcado = !item.marcado;
-         item.check = <CheckBox onPress={() => {
-           marcar_desmarcar(item.num_ordem);
-         }} checked={item.marcado} />;
-       }
-     });
+    ofsTemp.forEach((item) => {
+      if (item.cod_barra == cod_barra) {
+        item.marcado = !item.marcado;
+        item.check = (
+          <CheckBox
+            onPress={() => {
+              marcar_desmarcar(item.cod_barra);
+            }}
+            checked={item.marcado}
+          />
+        );
+      }
+    });
 
     // dt_lotes.forEach(item => {
     //   console.warn(dt_lotes);
@@ -81,7 +86,7 @@ export default (props) => {
       if (item.dt_inicial == dt) {
         item.marcado = marcado_p;
         item.check = <CheckBox onPress={() => {
-          marcar_desmarcar(item.num_ordem);
+          marcar_desmarcar(item.cod_barra);
         }} checked={marcado_p} />;
       }
     });
@@ -155,14 +160,15 @@ export default (props) => {
             cont_of++;
           }
           item.check = <CheckBox style={{ width: 40, height: 40 }} color='black' onPress={() => {
-            marcar_desmarcar(item.num_ordem);
+            marcar_desmarcar(item.cod_barra);
           }} checked={item.marcado} />;
           tabela_temp.push([
             item.num_ordem,
-            item.cod_item+' - '+item.item,
+            item.cod_item + " - " + item.item,
             item.mascara,
+            item.operacao,
             item.qtde_pend,
-            item.check
+            item.check,
           ]);
         }
       });
@@ -171,7 +177,7 @@ export default (props) => {
       let marcado_temp = cont == cont_of ? true : false;
 
       let tabelaFinal = {
-        tableHead: ["OF", "ITEM", "COR", "QTD", "CHECK"],
+        tableHead: ["OF", "ITEM", "COR", "OPERAÇÃO", "QTD", "CHECK"],
         tableData: tabela_temp,
       };
 
@@ -231,14 +237,6 @@ export default (props) => {
                     <ViewAccordeonHeader>
                       <TextoAccordeonHeader>{item.dt}</TextoAccordeonHeader>
                       {item.check}
-                      {/* <CheckBox
-                        disabled={false}
-                        value={item.marcado}
-                        tintColors={{ true: "black", false: "black" }}
-                        onValueChange={(newValue) => {
-                          marcar_desmarcar_geral(item.dt);
-                        }}
-                      /> */}
                     </ViewAccordeonHeader>
                   </Separator>
                 </CollapseHeader>
