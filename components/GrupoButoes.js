@@ -411,7 +411,11 @@ export default (props) => {
     of_temp.forEach((item) => {
       if (item.cod_barra == cod_barra) {
         item.qtde_prod =
-          text != "" && parseInt(text) <= parseInt(item.qtde_pend) ? text : 0;
+          text != "" &&
+          parseInt(text) <= parseInt(item.qtde_pend) &&
+          parseInt(text) > 0
+            ? text
+            : 0;
       }
 
       item.input = (
