@@ -356,7 +356,7 @@ export default (props) => {
             keyboardType={"phone-pad"}
             onChangeText={(text) => {
               mudar_qtde_prod(
-                item.num_ordem,
+                item.cod_barra,
                 text,
                 JSON.stringify(ofs_selecionadas_temp)
               );
@@ -370,7 +370,7 @@ export default (props) => {
             mode="contained"
             onPress={() => {
               mudar_qtde_prod(
-                item.num_ordem,
+                item.cod_barra,
                 item.qtde_pend,
                 JSON.stringify(ofs_selecionadas_temp)
               );
@@ -402,14 +402,14 @@ export default (props) => {
     }
   };
 
-  const mudar_qtde_prod = (num_ordem, text, ofs) => {
+  const mudar_qtde_prod = (cod_barra, text, ofs) => {
     let of_temp = JSON.parse(ofs);
 
     var tabelaTemp = [];
     let qtde = 0;
 
     of_temp.forEach((item) => {
-      if (item.num_ordem == num_ordem) {
+      if (item.cod_barra == cod_barra) {
         item.qtde_prod =
           text != "" && parseInt(text) <= parseInt(item.qtde_pend) ? text : 0;
       }
@@ -426,7 +426,7 @@ export default (props) => {
           value={item.qtde_prod}
           keyboardType={"phone-pad"}
           onChangeText={(text) => {
-            mudar_qtde_prod(item.num_ordem, text);
+            mudar_qtde_prod(item.cod_barra, text);
           }}
         />
       );
@@ -466,7 +466,6 @@ export default (props) => {
           parseInt(item.qtde_prod) != 0
         ) {
           verifica_qtde = true;
-          // console.warn(item.num_ordem);
           lista_compt_notificacao.push(
             <View style={Padrao.viewNotificacao}>
               <Text style={{ fontSize: 15, textAlign: "center", margin: 10 }}>
@@ -475,7 +474,7 @@ export default (props) => {
 
               <ButtonGroup
                 onPress={(value) => {
-                  alterarOf_enviar(value, item.num_ordem);
+                  alterarOf_enviar(value, item.cod_barra);
                 }}
                 selectedIndex={item.motivo}
                 buttons={["PAUSA NO TRABALHO", "PEÇAS DANIFICADAS"]}
@@ -521,18 +520,16 @@ export default (props) => {
     }
   }
 
-  const alterarOf_enviar = (value,num_ordem) => {
-      // console.warn(value+" - "+num_ordem);
-      let ofs_temp2 = ofs_enviar;
-       ofs_temp2.forEach((item) => {
-          if(item.num_ordem == num_ordem){
-            item.motivo = value;
-           
-          }  
-       });
-       setOfs_enviar(ofs_temp2);
-       atualizar_motivos();
-  }
+  const alterarOf_enviar = (value, cod_barra) => {
+    let ofs_temp2 = ofs_enviar;
+    ofs_temp2.forEach((item) => {
+      if (item.cod_barra == cod_barra) {
+        item.motivo = value;
+      }
+    });
+    setOfs_enviar(ofs_temp2);
+    atualizar_motivos();
+  };
   return (
     <>
       <Div_Card>
