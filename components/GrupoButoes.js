@@ -353,7 +353,7 @@ export default (props) => {
               padding: 10,
             }}
             value={item.qtde_prod}
-            keyboardType={"phone-pad"}
+            keyboardType={"numeric"}
             onChangeText={(text) => {
               mudar_qtde_prod(
                 item.cod_barra,
@@ -410,7 +410,6 @@ export default (props) => {
 
     of_temp.forEach((item) => {
       if (item.cod_barra == cod_barra) {
-        console.warn(parseInt(text));
         item.qtde_prod =
           text != "" &&
           parseInt(text) <= parseInt(item.qtde_pend) &&
@@ -429,7 +428,7 @@ export default (props) => {
             padding: 10,
           }}
           value={item.qtde_prod}
-          keyboardType={"phone-pad"}
+          keyboardType={"numeric"}
           onChangeText={(text) => {
             mudar_qtde_prod(item.cod_barra, text);
           }}
@@ -856,7 +855,7 @@ export default (props) => {
                     setFocus_qtde(true);
                     setFocus_retrabalho(false);
                   }}
-                  keyboardType={"phone-pad"}
+                  keyboardType={"numeric"}
                   autoFocus={focus_qtde}
                 />
               </View>
@@ -871,7 +870,7 @@ export default (props) => {
                     setFocus_qtde(false);
                     setFocus_retrabalho(true);
                   }}
-                  keyboardType={"phone-pad"}
+                  keyboardType={"numeric"}
                   autoFocus={focus_retrabalho}
                 />
               </View>
