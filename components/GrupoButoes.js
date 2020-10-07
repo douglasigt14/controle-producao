@@ -481,7 +481,7 @@ export default (props) => {
                   alterarOf_enviar(value, item.cod_barra);
                 }}
                 selectedIndex={item.motivo}
-                buttons={["PAUSA NO TRABALHO", "PEÇAS DANIFICADAS"]}
+                buttons={["APONTAMENTO PARCIAL", "PEÇAS DANIFICADAS"]}
                 containerStyle={{ height: 60 }}
               />
             </View>
