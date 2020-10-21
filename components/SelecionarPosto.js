@@ -40,6 +40,11 @@ export default (props) => {
    const [selectedCentro, setSelectedCentro] = useState(""); 
    const [isLoading, setLoading] = useState(true);
    const [postos, setPostos] = useState([]);
+   let links = [
+        {id: 1, descricao: "Teste"}
+       ,{id: 2, descricao: "Produção"}
+    ];
+   console.warn(links);
    let url = props.url;
 
    useEffect(() => {

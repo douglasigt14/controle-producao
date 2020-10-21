@@ -19,7 +19,7 @@ export default  function App() {
     let [descricao_alert_tit, setDescricao_alert_tit] = useState("");
     let [descricao_alert_sub, setDescricao_alert_sub] = useState("");
     let [modo_leitura, setModo_leitura] = useState(false);
-    let url = "http://teste.controleproducao.tuboarte.com";
+    let [url, setUrl] = useState("http://teste.controleproducao.tuboarte.com");
    
     const wait = (timeout) => {
       return new Promise((resolve) => {
