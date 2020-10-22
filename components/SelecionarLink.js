@@ -36,17 +36,13 @@ const Div_Button = styled.View`
 
 
 export default (props) => {
-   const [selectedPosto, setSelectedPosto] = useState(""); 
-   const [selectedCentro, setSelectedCentro] = useState(""); 
    const [selectedLink, setSelectedLink] = useState(""); 
 
    const [isLoading, setLoading] = useState(true);
-   const [postos, setPostos] = useState([]);
    let links = [
         {id: 1, descricao: "Teste"}
        ,{id: 2, descricao: "Produção"}
-    ];
-   let url = props.url;
+   ];
 
    useEffect(() => {
     //  fetch(url+"/postos")
@@ -88,7 +84,7 @@ export default (props) => {
           <Div_Button>
             <Button
               onPress={() => {
-                props.funcao_selecionar(selectedPosto,selectedLink);
+                props.funcao_selecionar(selectedLink);
               }}
               contentStyle={{ height: 60, width: 300 }}
               color="#007bff"
