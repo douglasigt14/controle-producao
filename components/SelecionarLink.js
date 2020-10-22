@@ -37,18 +37,23 @@ const Div_Button = styled.View`
 
 export default (props) => {
    const [selectedPosto, setSelectedPosto] = useState(""); 
-   const [selectedCentro, setSelectedCentro] = useState("");
+   const [selectedCentro, setSelectedCentro] = useState(""); 
+   const [selectedLink, setSelectedLink] = useState(""); 
 
    const [isLoading, setLoading] = useState(true);
    const [postos, setPostos] = useState([]);
+   let links = [
+        {id: 1, descricao: "Teste"}
+       ,{id: 2, descricao: "Produção"}
+    ];
    let url = props.url;
 
    useEffect(() => {
-     fetch(url+"/postos")
-       .then((response) => response.json())
-       .then((json) => setPostos(json))
-       .catch((error) => console.error(error))
-       .finally(() => setLoading(false));
+    //  fetch(url+"/postos")
+    //    .then((response) => response.json())
+    //    .then((json) => setPostos(json))
+    //    .catch((error) => console.error(error))
+    //    .finally(() => setLoading(false));
    }, []);
 
    
@@ -57,33 +62,23 @@ export default (props) => {
       <Div_Card>
         <Card>
           <Card.Content>
-            <Title>Selecionar Posto</Title>
+            <Title>Selecionar Modo</Title>
             <Div_input>
+            
+
               <Picker
-                selectedValue={selectedPosto}
+                selectedValue={selectedLink}
                 onValueChange={(itemValue, itemIndex) => {
-                    setSelectedPosto(itemValue);
+                    setSelectedLink(itemValue);
                   }
                 }
               >
-                {postos.map((posto, i) => {
+                {links.map((link, i) => {
                   return (
                     <Picker.Item
-                      value={
-                        posto.id +
-                        "-" +
-                        posto.cod_centro +
-                        "-" +
-                        posto.id_maquina
-                      }
-                      label={posto.nome}
-                      key={
-                        posto.id +
-                        "-" +
-                        posto.cod_centro +
-                        "-" +
-                        posto.id_maquina
-                      }
+                      value={link.id }
+                      label={link.descricao}
+                      key={link.id}
                     />
                   );
                 })}
@@ -93,7 +88,7 @@ export default (props) => {
           <Div_Button>
             <Button
               onPress={() => {
-                props.funcao_selecionar(selectedPosto);
+                props.funcao_selecionar(selectedPosto,selectedLink);
               }}
               contentStyle={{ height: 60, width: 300 }}
               color="#007bff"

@@ -5,6 +5,7 @@ import Padrao from './style/Padrao';
 import Principal from "./components/Principal";
 import Login from "./components/Login";
 import SelecionarPosto from "./components/SelecionarPosto";
+import SelecionarLink from "./components/SelecionarLink";
 import { storageSet, consulta_storage } from "./storage/localstorage";
 import AsyncStorage from "@react-native-community/async-storage";
 import AwesomeAlert from 'react-native-awesome-alerts';
@@ -19,7 +20,7 @@ export default  function App() {
     let [descricao_alert_tit, setDescricao_alert_tit] = useState("");
     let [descricao_alert_sub, setDescricao_alert_sub] = useState("");
     let [modo_leitura, setModo_leitura] = useState(false);
-    let [url, setUrl] = useState("http://teste.controleproducao.tuboarte.com");
+    let [url, setUrl] = useState(null);
    
     const wait = (timeout) => {
       return new Promise((resolve) => {
@@ -57,11 +58,26 @@ export default  function App() {
       buscar_storage("@logado", setLogado, "0");
       buscar_storage("@operador_id", setOperador_id, null);
       buscar_storage("@operador_desc", setOperador_desc, null);
-
+      buscar_storage("@url", setUrl, null);
     }, []);
+  
+   const selecionar_link = (value) => {
+    if(value){
+      let url_temp = value == 1 ? "http://teste.controleproducao.tuboarte.com" : "http://pro.controleproducao.tuboarte.com";
 
+      setUrl(url_temp);
+      storageSet("@url", url_temp);
+    }
+   }
   const selecionar_posto = (value) => {
     if(value){
+      // let url_temp = link == 1 ? "http://teste.controleproducao.tuboarte.com" : "http://pro.controleproducao.tuboarte.com";
+
+      // // console.warn(url_temp);
+
+      // setUrl(url_temp);
+      // storageSet("@url", url_temp);
+      
       let partes = value.split("-");
       setId_posto(partes[0]);
       storageSet("@id_posto", String(partes[0]));
@@ -153,20 +169,20 @@ export default  function App() {
       setOperador_desc("");
   }
 
-  
-
-  if (!id_posto) {
+  console.warn(url);
+  if (!url) {
+    console.warn("IF");
+    comp_rederizado = (
+      <SelecionarLink funcao_selecionar={selecionar_link}></SelecionarLink>
+    );
+  }
+  else if (!id_posto) {
     comp_rederizado = (
       <SelecionarPosto funcao_selecionar={selecionar_posto} url={url}></SelecionarPosto>
     );
   } else if (logado == "0" || logado == null) {
     comp_rederizado = (
       <Login id_posto={id_posto} funcao_logar={logar} url={url}></Login>
-    );
-  } 
-  else if (modo_leitura) {
-    comp_rederizado = (
-     <Leitor_Bar></Leitor_Bar>
     );
   } else {
     comp_rederizado = (
