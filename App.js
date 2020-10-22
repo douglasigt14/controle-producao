@@ -62,21 +62,13 @@ export default  function App() {
     }, []);
   
    const selecionar_link = (value) => {
-    if(value){
       let url_temp = value == 1 ? "http://teste.controleproducao.tuboarte.com" : "http://pro.controleproducao.tuboarte.com";
 
       setUrl(url_temp);
       storageSet("@url", url_temp);
-    }
    }
   const selecionar_posto = (value) => {
     if(value){
-      // let url_temp = link == 1 ? "http://teste.controleproducao.tuboarte.com" : "http://pro.controleproducao.tuboarte.com";
-
-      // // console.warn(url_temp);
-
-      // setUrl(url_temp);
-      // storageSet("@url", url_temp);
       
       let partes = value.split("-");
       setId_posto(partes[0]);
@@ -169,9 +161,7 @@ export default  function App() {
       setOperador_desc("");
   }
 
-  console.warn(url);
   if (!url) {
-    console.warn("IF");
     comp_rederizado = (
       <SelecionarLink funcao_selecionar={selecionar_link}></SelecionarLink>
     );

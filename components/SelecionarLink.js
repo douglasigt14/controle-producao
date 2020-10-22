@@ -36,20 +36,17 @@ const Div_Button = styled.View`
 
 
 export default (props) => {
-   const [selectedLink, setSelectedLink] = useState(""); 
+   let [selectedLink, setSelectedLink] = useState(""); 
 
-   const [isLoading, setLoading] = useState(true);
-   let links = [
-        {id: 1, descricao: "Teste"}
-       ,{id: 2, descricao: "Produção"}
-   ];
+   let [isLoading, setLoading] = useState(true);
+  
+   let [links, setLinks] = useState([]);
 
    useEffect(() => {
-    //  fetch(url+"/postos")
-    //    .then((response) => response.json())
-    //    .then((json) => setPostos(json))
-    //    .catch((error) => console.error(error))
-    //    .finally(() => setLoading(false));
+    setLinks([
+        {id: 1, descricao: "Teste"}
+       ,{id: 2, descricao: "Produção"}
+    ]);
    }, []);
 
    
@@ -87,7 +84,7 @@ export default (props) => {
                 props.funcao_selecionar(selectedLink);
               }}
               contentStyle={{ height: 60, width: 300 }}
-              color="#007bff"
+              color="#ffc107"
               title="Login"
               mode="contained"
             >
