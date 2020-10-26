@@ -123,6 +123,8 @@ export default (props) => {
     let [modalVisible, setModalVisible] = useState(false);
     let [modalParadasVisible, setModalParadasVisible] = useState(false);
     let [modalItemVisible, setModalItemVisible] = useState(false);
+    let [modalCoresVisible, setModalCoresVisible] = useState(false);
+
     let [isLoading, setLoading] = useState(true);
     let [paradas, setParadas] = useState([]);
     let [id_posto, setId_posto] = useState(props.id_posto);
@@ -138,7 +140,7 @@ export default (props) => {
      let [editable_cod_item, setEditable_cod_item] = useState(true);
 
     let [mostrarOf, setMostrarOf] = useState(false);
-  let [mostrarAlert, setMostrarAlert] = useState(false);
+    let [mostrarAlert, setMostrarAlert] = useState(false);
     let [acoordeon, setAcordeon] = useState(null);
     let [ofs, setOfs] = useState([]);
     
@@ -146,7 +148,8 @@ export default (props) => {
 
     let [componentVerde, setComponentVerde] = useState(null); 
 
-      let [cores, setCores] = useState("Todas as Cores"); 
+    let [cores, setCores] = useState("Todas as Cores"); 
+    let [lista_cores, setLista_cores] = useState([]); 
     
   let ofs_selecionadas = props.ofs_selecionadas;
   let url = props.url;
@@ -212,9 +215,13 @@ export default (props) => {
   }
 
   const selecionar_cores = (cod_item) =>{
-      setCores('ALAMO,AMENDOA');
+      setModalCoresVisible(true);
+      setLista_cores([
+        {id: 1, cor: 'ALAMO'},
+        {id: 2, cor: 'AMENDOA'},
+      ]);
   }
- 
+
   useEffect(() => {
     if (mostrarOf){
       setAcordeon(<View style={{ paddingTop: 10 }}>
@@ -461,6 +468,45 @@ export default (props) => {
         </View>
       </Modal>
       {/* Modal Item */}
+
+
+      {/* Modal Cores */}
+      <Modal
+        animationType="fade"
+        transparent={true}
+        visible={modalCoresVisible}
+        onRequestClose={() => {
+          setModalCoresVisible(false);
+        }}
+      >
+        <View style={Padrao.topView}>
+          <ViewModalItem style={Padrao.modalView}>
+            <Div_Fechar>
+              <TouchModal
+                style={{ ...Padrao.closeButton }}
+                onPress={() => {
+                  setModalCoresVisible(false);
+                }}
+              >
+                <TextoModal style={Padrao.textStyle}>X</TextoModal>
+              </TouchModal>
+            </Div_Fechar>
+            <ScrollView>
+              <FlatList
+                LisHeaderComponent={<></>}
+                style={Padrao.FlatList}
+                data={lista_cores}
+                keyExtractor={({ id }, index) => id}
+                renderItem={({ item }) => (
+                    <Texto>{item.cor}</Texto>
+                )}
+                ListFooterComponent={<></>}
+              />
+            </ScrollView>
+          </ViewModalItem>
+        </View>
+      </Modal>
+      {/* Modal Cores*/}
     </>
   );
 };
