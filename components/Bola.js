@@ -212,7 +212,7 @@ export default (props) => {
   }
 
   const selecionar_cores = (cod_item) =>{
-      console.warn(cod_item);
+      setCores('ALAMO,AMENDOA');
   }
  
   useEffect(() => {
@@ -417,7 +417,7 @@ export default (props) => {
                 onChangeText={(text) => {
                   setCod_item(text);
                 }}
-                keyboardType={"numeric"}
+                keyboardType={"phone-pad"}
               />
             </View>
             {cod_centro == "60" ? ( 
@@ -430,7 +430,7 @@ export default (props) => {
                   onChangeText={(text) => {
                     setCod_plano(text);
                   }}
-                  keyboardType={"numeric"}
+                  keyboardType={"phone-pad"}
                 />
               </View>
             ) : null}
