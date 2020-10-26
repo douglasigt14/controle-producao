@@ -145,6 +145,8 @@ export default (props) => {
     let [dt_lotes, setDt_lotes] = useState([]);
 
     let [componentVerde, setComponentVerde] = useState(null); 
+
+      let [cores, setCores] = useState("Todas as Cores"); 
     
   let ofs_selecionadas = props.ofs_selecionadas;
   let url = props.url;
@@ -207,6 +209,10 @@ export default (props) => {
       .catch((error) => console.error(error))
       .finally(() => setLoading(false));
    
+  }
+
+  const selecionar_cores = (cod_item) =>{
+      console.warn(cod_item);
   }
  
   useEffect(() => {
@@ -411,7 +417,7 @@ export default (props) => {
                 onChangeText={(text) => {
                   setCod_item(text);
                 }}
-                keyboardType={"phone-pad"}
+                keyboardType={"numeric"}
               />
             </View>
             {cod_centro == "60" ? ( 
@@ -424,8 +430,21 @@ export default (props) => {
                   onChangeText={(text) => {
                     setCod_plano(text);
                   }}
-                  keyboardType={"phone-pad"}
+                  keyboardType={"numeric"}
                 />
+              </View>
+            ) : null}
+            {cod_centro == "50" ? ( 
+              <View>
+                <TouchModal
+                  disabled={!editable_cod_item}
+                  style={{ ...Padrao.openButton, backgroundColor: "#007bff" }}
+                  onPress={() => {
+                    selecionar_cores(cod_item);
+                  }}
+                >
+                  <TextoModal style={Padrao.textStyle}>{cores}</TextoModal>
+                </TouchModal>
               </View>
             ) : null}
             <TouchModal
