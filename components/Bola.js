@@ -192,6 +192,8 @@ export default (props) => {
   const limparOf = () =>{
     setCod_plano("");
     setCod_item("");
+    setCores("TODAS AS CORES");
+    setLista_cores([]);
     setOfs([]);
     setEditable_cod_item(true);
     setEditable_cod_plano(true);
