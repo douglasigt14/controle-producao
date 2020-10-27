@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, forceUpdate } from "react";
 import styled from "styled-components";
 import {
   View,
@@ -92,6 +92,11 @@ const Div_Fechar = styled.View`
     margin-top: 0px;
   `;
 
+ const TextoCores = styled.Text`
+    font-size: 25px;
+    margin-left: 15px;
+  `;
+
 
 export default (props) => {
   
@@ -113,10 +118,7 @@ export default (props) => {
     color: ${props.cor_texto};
   `;
 
-   const TextoCores = styled.Text`
-    font-size: 30px;
-    margin-left: 15px;
-  `;
+  
 
       const showToast = (msg) => {
         ToastAndroid.show(msg, ToastAndroid.SHORT, ToastAndroid.CENTER);
@@ -156,6 +158,7 @@ export default (props) => {
 
     let [cores, setCores] = useState("Selecionar Cor"); 
     let [lista_cores, setLista_cores] = useState([]); 
+
     
   let ofs_selecionadas = props.ofs_selecionadas;
   let url = props.url;
@@ -222,40 +225,48 @@ export default (props) => {
 
   const selecionar_cores = (cod_item) =>{
       setModalCoresVisible(true);
-      let lista = [
-          {id: 1, cor: 'ALAMO', marcado: true},
-          {id: 2, cor: 'AMENDOA', marcado: true},
-          {id: 3, cor: 'BRANCO', marcado: true}
+      let lista_padrao = [
+          {id: "1", cor: 'ALAMO', marcado: true, check: null },
+          {id: "2", cor: 'AMENDOA', marcado: true, check: null },
+          {id: "3", cor: 'BRANCO', marcado: true, check: null },
+          {id: "4", cor: 'PRETO', marcado: true, check: null }
       ];
-     atulizar_lista_cores(lista);
+     iniciar_lista_cores(lista_padrao);
   }
-
-  const atulizar_lista_cores = (lista) => {
-    let lista_cores_temp = lista; 
-    lista_cores_temp.forEach(item => {
-        item.check = <CheckBox style={{ width: 50, height: 50}} color='black' onPress={() => {
-                         marcar_desmarcar(item.id);
-                      }} checked={item.marcado} />;
+   const iniciar_lista_cores = (lista) => {
+      let lista_cores_temp = lista; 
+       lista_cores_temp.forEach(item => {
+        item.check = (<CheckBox key={item.id} style={{ width: 50, height: 50}} color='black' onPress={() => {
+                         marcar_desmarcar(item.id, lista);
+                      }} checked={item.marcado} />);
       });
       setLista_cores(lista_cores_temp);
-  }
+   }
 
-  const marcar_desmarcar = (id) =>{
-      let lista_cores_temp2 = lista_cores;
-      lista_cores_temp2.forEach(item => {
+  // const atulizar_lista_cores = (lista) => {
+  //     setLista_cores(lista);
+  // }
+
+  const marcar_desmarcar = (id, lista) =>{
+      let lista_temp = lista;
+      lista_temp.forEach(item => {
         if(item.id == id){
-           
             item.marcado = !item.marcado;
-            item.check = (<CheckBox style={{ width: 50, height: 50}} color='black' onPress={() => {
-                         marcar_desmarcar(item.id);
-                      }} checked={item.marcado} />);
         }
       });
-      atulizar_lista_cores(lista_cores_temp2);
+
+
+      lista_temp.forEach(item => {
+            item.check = (<CheckBox key={item.id} style={{ width: 50, height: 50}} color='black' onPress={() => {
+                         marcar_desmarcar(item.id, lista_temp);
+                      }} checked={item.marcado} />);
+            console.warn(item);
+      });
+      setLista_cores(lista);
   }
 
   useEffect(() => {
-    //atulizar_lista_cores();
+      console.warn('Efeito');
    }, [lista_cores]);
 
   useEffect(() => {
@@ -527,8 +538,15 @@ export default (props) => {
                 <TextoModal style={Padrao.textStyle}>X</TextoModal>
               </TouchModal>
             </Div_Fechar>
-            <ScrollView>
-              <FlatList
+               {lista_cores.map((item, i) => {
+                  return (
+                    <View key={item.id} style={{flexDirection: 'row', margin: 10}}>
+                      {item.check}
+                      <TextoCores>{item.cor}</TextoCores>
+                    </View>
+                  );
+                })}
+              {/* <FlatList
                 LisHeaderComponent={<></>}
                 data={lista_cores}
                 keyExtractor={({ id }, index) => id}
@@ -540,8 +558,7 @@ export default (props) => {
                     </View>
                 )}
                 ListFooterComponent={<></>}
-              />
-            </ScrollView>
+              /> */}
           </ViewModalItem>
         </View>
       </Modal>
