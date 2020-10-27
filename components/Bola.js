@@ -11,7 +11,8 @@ import {
   ScrollView,
   FlatList,
   TextInput,
-  ToastAndroid
+  ToastAndroid,
+  Picker,
 } from "react-native";
 import { CheckBox  } from "native-base";
 import Padrao from "../style/Padrao";
@@ -48,6 +49,13 @@ const ViewModalItem = styled.View`
      width: 95%;
      min-height: 520px;
      display: flex;
+   `;
+
+const ViewModalCor = styled.View`
+     width: 95%;
+     min-height: 120px;
+     display: flex;
+     background-color: #d3d3d3;
    `;
 
 
@@ -156,8 +164,11 @@ export default (props) => {
 
     let [componentVerde, setComponentVerde] = useState(null); 
 
-    let [cores, setCores] = useState("Selecionar Cor"); 
+    let [cores, setCores] = useState("TODAS AS CORES"); 
     let [lista_cores, setLista_cores] = useState([]); 
+
+    let [selectedCor, setSelectedCor] = useState("");
+
 
     
   let ofs_selecionadas = props.ofs_selecionadas;
@@ -192,7 +203,7 @@ export default (props) => {
   const buscarOf = (cod_item,cod_plano) =>{
     cod_item = cod_item ? cod_item : 0; 
     cod_plano = cod_plano ? cod_plano : 0;
-    let URL = url + "/itens/" + cod_item + "/" + cod_plano + "/" + cod_centro + "/" + id_maquina;
+    let URL = url + "/itens/" + cod_item + "/" + cod_plano + "/" + cod_centro + "/" + id_maquina + "/" +cores;
    // showToast(URL);
 
     fetch(
@@ -225,18 +236,22 @@ export default (props) => {
 
   const selecionar_cores = (cod_item) =>{
       setModalCoresVisible(true);
-      let lista_padrao = [
-          {id: "1", cor: 'ALAMO', marcado: true, check: null },
-          {id: "2", cor: 'AMENDOA', marcado: true, check: null },
-          {id: "3", cor: 'BRANCO', marcado: true, check: null },
-          {id: "4", cor: 'PRETO', marcado: true, check: null }
-      ];
-     iniciar_lista_cores(lista_padrao);
+      
+      fetch(url + "/itens_cores/" + cod_item)
+      .then((response) => response.json())
+      .then((json) => {
+        iniciar_lista_cores(json);
+      })
+      .catch((error) => console.error(error))
+      .finally(() => setLoading(false));
+
+    
   }
    const iniciar_lista_cores = (lista) => {
       let lista_cores_temp = lista; 
        lista_cores_temp.forEach(item => {
-        item.check = (<CheckBox key={item.id} style={{ width: 50, height: 50}} color='black' onPress={() => {
+        item.marcado = JSON.parse(item.marcado);
+        item.check_box = (<CheckBox key={item.id} style={{ width: 50, height: 50}} color='black' onPress={() => {
                          marcar_desmarcar(item.id, lista);
                       }} checked={item.marcado} />);
       });
@@ -257,7 +272,7 @@ export default (props) => {
 
 
       lista_temp.forEach(item => {
-            item.check = (<CheckBox key={item.id} style={{ width: 50, height: 50}} color='black' onPress={() => {
+            item.check_box = (<CheckBox key={item.id} style={{ width: 50, height: 50}} color='black' onPress={() => {
                          marcar_desmarcar(item.id, lista_temp);
                       }} checked={item.marcado} />);
             console.warn(item);
@@ -266,7 +281,7 @@ export default (props) => {
   }
 
   useEffect(() => {
-      console.warn('Efeito');
+     // console.warn('Efeito');
    }, [lista_cores]);
 
   useEffect(() => {
@@ -470,6 +485,7 @@ export default (props) => {
                 editable={editable_cod_item}
                 onChangeText={(text) => {
                   setCod_item(text);
+                  setCores("TODAS AS CORES");
                 }}
                 keyboardType={"phone-pad"}
               />
@@ -526,8 +542,8 @@ export default (props) => {
           setModalCoresVisible(false);
         }}
       >
-        <View style={Padrao.topView}>
-          <ViewModalItem style={Padrao.modalView}>
+        <View style={Padrao.centeredView}>
+          <ViewModalCor style={Padrao.modalView}>
             <Div_Fechar>
               <TouchModal
                 style={{ ...Padrao.closeButton }}
@@ -538,14 +554,29 @@ export default (props) => {
                 <TextoModal style={Padrao.textStyle}>X</TextoModal>
               </TouchModal>
             </Div_Fechar>
-               {lista_cores.map((item, i) => {
+                <Picker
+                selectedValue={cores}
+                onValueChange={(itemValue, itemIndex) => {
+                    setCores(itemValue);
+                    setModalCoresVisible(false);
+                  }
+                }
+              >
+                <Picker.Item
+                      value='TODAS AS CORES'
+                      label='TODAS AS CORES'
+                      key={100}
+                />
+                {lista_cores.map((lista, i) => {
                   return (
-                    <View key={item.id} style={{flexDirection: 'row', margin: 10}}>
-                      {item.check}
-                      <TextoCores>{item.cor}</TextoCores>
-                    </View>
+                    <Picker.Item
+                      value={lista.cor }
+                      label={lista.cor}
+                      key={lista.id}
+                    />
                   );
                 })}
+              </Picker>
               {/* <FlatList
                 LisHeaderComponent={<></>}
                 data={lista_cores}
@@ -559,7 +590,7 @@ export default (props) => {
                 )}
                 ListFooterComponent={<></>}
               /> */}
-          </ViewModalItem>
+          </ViewModalCor>
         </View>
       </Modal>
       {/* Modal Cores*/}
