@@ -13,6 +13,7 @@ import {
   TextInput,
   ToastAndroid
 } from "react-native";
+import { CheckBox  } from "native-base";
 import Padrao from "../style/Padrao";
 import { Button, Card } from "react-native-paper";
 import Ofs from "./Ofs";
@@ -112,6 +113,11 @@ export default (props) => {
     color: ${props.cor_texto};
   `;
 
+   const TextoCores = styled.Text`
+    font-size: 30px;
+    margin-left: 15px;
+  `;
+
       const showToast = (msg) => {
         ToastAndroid.show(msg, ToastAndroid.SHORT, ToastAndroid.CENTER);
       };
@@ -148,7 +154,7 @@ export default (props) => {
 
     let [componentVerde, setComponentVerde] = useState(null); 
 
-    let [cores, setCores] = useState("Todas as Cores"); 
+    let [cores, setCores] = useState("Selecionar Cor"); 
     let [lista_cores, setLista_cores] = useState([]); 
     
   let ofs_selecionadas = props.ofs_selecionadas;
@@ -216,11 +222,41 @@ export default (props) => {
 
   const selecionar_cores = (cod_item) =>{
       setModalCoresVisible(true);
-      setLista_cores([
-        {id: 1, cor: 'ALAMO'},
-        {id: 2, cor: 'AMENDOA'},
-      ]);
+      let lista = [
+          {id: 1, cor: 'ALAMO', marcado: true},
+          {id: 2, cor: 'AMENDOA', marcado: true},
+          {id: 3, cor: 'BRANCO', marcado: true}
+      ];
+     atulizar_lista_cores(lista);
   }
+
+  const atulizar_lista_cores = (lista) => {
+    let lista_cores_temp = lista; 
+    lista_cores_temp.forEach(item => {
+        item.check = <CheckBox style={{ width: 50, height: 50}} color='black' onPress={() => {
+                         marcar_desmarcar(item.id);
+                      }} checked={item.marcado} />;
+      });
+      setLista_cores(lista_cores_temp);
+  }
+
+  const marcar_desmarcar = (id) =>{
+      let lista_cores_temp2 = lista_cores;
+      lista_cores_temp2.forEach(item => {
+        if(item.id == id){
+           
+            item.marcado = !item.marcado;
+            item.check = (<CheckBox style={{ width: 50, height: 50}} color='black' onPress={() => {
+                         marcar_desmarcar(item.id);
+                      }} checked={item.marcado} />);
+        }
+      });
+      atulizar_lista_cores(lista_cores_temp2);
+  }
+
+  useEffect(() => {
+    //atulizar_lista_cores();
+   }, [lista_cores]);
 
   useEffect(() => {
     if (mostrarOf){
@@ -444,7 +480,7 @@ export default (props) => {
             {cod_centro == "50" ? ( 
               <View>
                 <TouchModal
-                  disabled={!editable_cod_item}
+                  disabled={!editable_cod_item || !cod_item}
                   style={{ ...Padrao.openButton, backgroundColor: "#007bff" }}
                   onPress={() => {
                     selecionar_cores(cod_item);
@@ -494,11 +530,14 @@ export default (props) => {
             <ScrollView>
               <FlatList
                 LisHeaderComponent={<></>}
-                style={Padrao.FlatList}
                 data={lista_cores}
                 keyExtractor={({ id }, index) => id}
                 renderItem={({ item }) => (
-                    <Texto>{item.cor}</Texto>
+                    <View style={{flexDirection: 'row', margin: 10}}>
+                      {item.check}
+                      <TextoCores>{item.cor}</TextoCores>
+                      
+                    </View>
                 )}
                 ListFooterComponent={<></>}
               />
