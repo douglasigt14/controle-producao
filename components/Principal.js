@@ -381,6 +381,21 @@ export default (props) => {
       });
   };
 
+  const focco_logar = () => {
+    let urlFocco = url + "/focco/login";
+  let prom =   fetch(urlFocco, {
+      method: "get",
+    })
+      .then(function (resp) {
+        return resp.json();
+      })
+      .then(function (r) {
+         storageSet("@token", r.Token);
+      });
+
+      return prom;
+  }
+
     const apontamento = (qtde, cod_barra, qtde_pend, motivo,item) => {
       let novaHora = new Date();
       let hora = novaHora.getHours();
@@ -461,6 +476,10 @@ export default (props) => {
           formDataL.append("id", id_controle); 
           const URL_CONTROLE = url+"/controles-diarios";
           //--------INSERE OPERACAO---------
+         let prom_login_focco = focco_logar();
+
+         Promise.all([prom_login_focco]).then((valores) => {
+
          let prom_fechar_controle = fetch(URL_CONTROLE, {
             method: "post",
             body: formDataL
@@ -474,6 +493,7 @@ export default (props) => {
           }).catch(function (error) {
             showToast("FALHA NA CONEXÃO");
           });
+
 
            Promise.all([prom_fechar_controle]).then((valores) => {
                    let ofs_selecionadas_temp = ofs;
@@ -523,7 +543,10 @@ export default (props) => {
                      }
                    });
                      
-           });
+           }); //Prom Fechar
+
+           
+          });//Prom LOgin Focco
 
           
   }
