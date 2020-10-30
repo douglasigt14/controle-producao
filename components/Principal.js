@@ -539,7 +539,7 @@ export default (props) => {
                            item.motivo,
                            item
                          );
-                       }, 1000);
+                       }, 2000);
                      }
                    });
                      
