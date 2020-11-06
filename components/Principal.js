@@ -531,7 +531,6 @@ export default (props) => {
                      // Update OF
 
                      if (parseInt(item.qtde_prod) != 0) {
-                       setTimeout(() => {
                          apontamento(
                            item.qtde_prod,
                            item.cod_barra,
@@ -539,7 +538,6 @@ export default (props) => {
                            item.motivo,
                            item
                          );
-                       }, 1500);
                      }
                    });
                      
