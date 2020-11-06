@@ -171,7 +171,7 @@ export default (props) => {
 
 
       Promise.all([prom_update_parada, prom_update_operacao]).then(valores => {
-        setToch("none");
+        // setToch("none");
         let URL_PARADA = url+"/paradas-diarias";
         const formDataI = new FormData();
         formDataI.append("operador_id", operador_id);
@@ -184,7 +184,7 @@ export default (props) => {
           method: "post",
           body: formDataI
         }).then(function (response) {
-          setToch('auto');
+          // setToch('auto');
             cor = parada_id == 18 ? "#f6c23e" : "red";
           setCor(cor);
           setParada_id(JSON.stringify(parada_id));
@@ -218,7 +218,7 @@ export default (props) => {
       let prom_update_operacao = update_operacao();
 
       Promise.all([prom_update_parada, prom_update_operacao]).then(valores => {
-                setToch("none");
+                // setToch("none");
                 const URL_OPERACAO = url +"/operacoes-diarias";
                 const formDataI = new FormData();
                 formDataI.append("operador_id", operador_id);
@@ -231,7 +231,7 @@ export default (props) => {
                   method: "post",
                   body: formDataI
                 }).then(function (response) {
-                setToch('auto');
+                // setToch('auto');
 
                 setCor('green');
                 setStatus_texto('OPERANDO');
