@@ -19,6 +19,7 @@ import Padrao from "../style/Padrao";
 import { Button, Card } from "react-native-paper";
 import Ofs from "./Ofs";
 import { storageSet, consulta_storage } from "../storage/localstorage";
+import { ButtonGroup } from "react-native-elements";
 
 
 const ViewModalItemInputs = styled.View`
@@ -169,7 +170,7 @@ export default (props) => {
 
     let [selectedCor, setSelectedCor] = useState("");
 
-
+    let [lado, setLado] = useState(0);
     
   let ofs_selecionadas = props.ofs_selecionadas;
   let url = props.url;
@@ -205,8 +206,8 @@ export default (props) => {
   const buscarOf = (cod_item,cod_plano) =>{
     cod_item = cod_item ? cod_item : 0; 
     cod_plano = cod_plano ? cod_plano : 0;
-    let URL = url + "/itens/" + cod_item + "/" + cod_plano + "/" + cod_centro + "/" + id_maquina + "/" +cores;
-   // showToast(URL);
+    let URL = url + "/itens/" + cod_item + "/" + cod_plano + "/" + cod_centro + "/" + id_maquina + "/" +cores+"|"+lado;
+    // showToast(URL);
 
     fetch(
       URL
@@ -517,6 +518,18 @@ export default (props) => {
                 >
                   <TextoModal style={Padrao.textStyle}>{cores}</TextoModal>
                 </TouchModal>
+              </View>
+            ) : null}
+             {cod_centro == "50" ? ( 
+              <View>
+                <ButtonGroup
+                    onPress={(value) => {
+                      setLado(value);
+                    }}
+                    selectedIndex={lado}
+                    buttons={["COMPRIMENTO", "LARGURA"]}
+                    containerStyle={{ height: 60 }}
+                />
               </View>
             ) : null}
             <TouchModal
