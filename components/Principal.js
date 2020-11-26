@@ -551,7 +551,7 @@ export default (props) => {
    
     return (
       <>
-        <View pointerEvents={toch}>
+        <View>
           <Appbar.Header style={Padrao.barra}>
             <Appbar.Content 
               title="Controle de Produção"
