@@ -145,7 +145,7 @@ export default (props) => {
          }
 
 
-         if(finalizado){
+         if(cod_plano){
           setComponentPdf((<Appbar.Action
             icon="file-pdf"
             size={60}
@@ -159,7 +159,7 @@ export default (props) => {
           setComponentPdf(null);
         }
 
-     }, [finalizado, parada_id]);
+     }, [finalizado, parada_id,cod_plano]);
 
     
      
