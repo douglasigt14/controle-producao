@@ -15,6 +15,7 @@ import Pdf from "./components/Pdf";
 export default  function App() {
     let [id_posto, setId_posto] = useState(null);
     let [logado, setLogado] = useState("0");
+    let [pdf, setPdf] = useState("0");
     let [operador_id, setOperador_id] = useState(null);
     let [operador_desc, setOperador_desc] = useState(null);
     let [mostrar_alert, setMostrar_alert] = useState(false);
@@ -175,7 +176,10 @@ export default  function App() {
     comp_rederizado = (
       <Login id_posto={id_posto} funcao_logar={logar} url={url}></Login>
     );
-  } else {
+  } else if (pdf == '1') {
+    comp_rederizado = ( <Pdf></Pdf> ); 
+  }
+  else {
     comp_rederizado = (
       <Principal
         id_posto={id_posto}
@@ -193,8 +197,8 @@ export default  function App() {
         refreshControl={
                    <RefreshControl refreshing={refreshing} onRefresh={onRefresh} /> 
         }>
-        {comp_rederizado} 
-        {/* <Pdf></Pdf> */}
+        {comp_rederizado}
+        
         <StatusBar style="auto" />
       </View>
 
