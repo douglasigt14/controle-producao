@@ -15,7 +15,7 @@ import Pdf from "./components/Pdf";
 export default  function App() {
     let [id_posto, setId_posto] = useState(null);
     let [logado, setLogado] = useState("0");
-    let [pdf, setPdf] = useState("0");
+    let [pdf, setPdf] = useState("1");
     let [operador_id, setOperador_id] = useState(null);
     let [operador_desc, setOperador_desc] = useState(null);
     let [mostrar_alert, setMostrar_alert] = useState(false);
@@ -163,6 +163,11 @@ export default  function App() {
       setOperador_desc("");
   }
 
+
+  const mudar_pdf = () => {
+    console.warn("mudar_pdf");
+  }
+
   if (!url) {
     comp_rederizado = (
       <SelecionarLink funcao_selecionar={selecionar_link}></SelecionarLink>
@@ -176,11 +181,7 @@ export default  function App() {
     comp_rederizado = (
       <Login id_posto={id_posto} funcao_logar={logar} url={url}></Login>
     );
-  } else if (pdf == '1') {
-    comp_rederizado = ( <Pdf 
-        url={'https://drive.google.com/file/d/1KLrRfLWb5j8D7I4k8msmu9XKkTrNAzM_/view?usp=sharing'}>
-    </Pdf> ); 
-  }
+  } 
   else {
     comp_rederizado = (
       <Principal
@@ -188,6 +189,7 @@ export default  function App() {
         operador_id={operador_id}
         operador_desc={operador_desc}
         funcao_deslogar={deslogar}
+        funcao_pdf={mudar_pdf}
         url={url}
       ></Principal>
     );
@@ -200,7 +202,6 @@ export default  function App() {
                    <RefreshControl refreshing={refreshing} onRefresh={onRefresh} /> 
         }>
         {comp_rederizado}
-        
         <StatusBar style="auto" />
       </View>
 

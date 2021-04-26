@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { View, Text, Alert, ToastAndroid } from "react-native";
+import { View, Text, Alert, ToastAndroid,Modal } from "react-native";
 import Bola from "./Bola";
 import GrupoButoes from "./GrupoButoes";
 import ParadasFrequentes from "./ParadasFrequentes";
@@ -13,6 +13,30 @@ import Relogio from "./Relogio";
 import { Toast } from "native-base";
 import { Cam } from "./Cam";
 import { Bar } from "./Bar";
+import Pdf from "react-native-pdf";
+
+const ViewModalPdf = styled.View`
+     width: 95%;
+     min-height: 120px;
+     display: flex;
+     background-color: #d3d3d3;
+  `;
+
+  const Div_Fechar = styled.View`
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: flex-end;
+  margin-top: 0px;
+`;
+
+const TouchModal = styled.TouchableHighlight`
+    margin-top: 10px;
+  `;
+
+  const TextoModal = styled.Text`
+  font-size: 25px;
+`;
 
 export default (props) => {
 
@@ -41,6 +65,7 @@ export default (props) => {
     let [ids_ofs, setIds_ofs] = useState([]);
     let [cod_centro, setCod_centro] = useState("");
     let [id_maquina, setId_maquina] = useState("");
+    let [modalVisible, setModalVisible] = useState(false);
 
      const showToast = (msg) => {
        ToastAndroid.show(msg, ToastAndroid.SHORT, ToastAndroid.CENTER);
@@ -126,7 +151,7 @@ export default (props) => {
             size={60}
             style={{ width: 100 }}
             onPress={() => {
-              setShowAlert2(true);
+              setModalVisible(true);
             }}
           />)); 
         }
@@ -618,6 +643,7 @@ export default (props) => {
           ></Bola>
           <Relogio></Relogio>
         </View>
+        
 
         <AwesomeAlert
           show={mostrar_alert}
@@ -659,6 +685,36 @@ export default (props) => {
           cancelButtonStyle={{ width: 250 }}
           confirmButtonStyle={{ width: 250 }}
         />
+
+         {/* Modais*/}
+
+      {/* Modal Selecionar */}
+      <Modal
+        animationType="fade"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          setModalVisible(!modalVisible);
+        }}
+      >
+        <View style={Padrao.topView}>
+          <ViewModalPdf style={Padrao.modalView}>
+            <Div_Fechar>
+              <TouchModal
+                style={{ ...Padrao.closeButton }}
+                onPress={() => {
+                  setModalVisible(!modalVisible);
+                }}
+              >
+                <TextoModal style={Padrao.textStyle}>X</TextoModal>
+              </TouchModal>
+            </Div_Fechar>
+            
+          </ViewModalPdf>
+        </View>
+      </Modal>
+      {/* Modal Selecionar */}
+
       </>
     );
 };
