@@ -10,6 +10,7 @@ import { storageSet, consulta_storage } from "./storage/localstorage";
 import AsyncStorage from "@react-native-community/async-storage";
 import AwesomeAlert from 'react-native-awesome-alerts';
 import Leitor_Bar from "./components/Bar";
+import Pdf from "./components/Pdf";
 
 export default  function App() {
     let [id_posto, setId_posto] = useState(null);
@@ -192,7 +193,8 @@ export default  function App() {
         refreshControl={
                    <RefreshControl refreshing={refreshing} onRefresh={onRefresh} /> 
         }>
-        {comp_rederizado}
+        {comp_rederizado} 
+        {/* <Pdf></Pdf> */}
         <StatusBar style="auto" />
       </View>
 
