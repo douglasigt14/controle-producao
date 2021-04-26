@@ -1,8 +1,13 @@
 import * as React from 'react';
 import { WebView } from 'react-native-webview';
+// import {
+//     View
+//   } from "react-native";
+// import { Appbar } from "react-native-paper";
+//  import Padrao from '../style/Padrao';
 
-export default class App extends React.Component {
-  render() {
-    return <WebView source={{ uri: 'https://drive.google.com/file/d/1KLrRfLWb5j8D7I4k8msmu9XKkTrNAzM_/view?usp=sharing' }} style={{ marginTop: 20 }} />;
-  }
+export default (props) => {
+    return (<>
+                <WebView source={{ uri: props.url }} style={{ marginTop: 20 }} />
+            </>);
 }

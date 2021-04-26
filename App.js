@@ -177,7 +177,9 @@ export default  function App() {
       <Login id_posto={id_posto} funcao_logar={logar} url={url}></Login>
     );
   } else if (pdf == '1') {
-    comp_rederizado = ( <Pdf></Pdf> ); 
+    comp_rederizado = ( <Pdf 
+        url={'https://drive.google.com/file/d/1KLrRfLWb5j8D7I4k8msmu9XKkTrNAzM_/view?usp=sharing'}>
+    </Pdf> ); 
   }
   else {
     comp_rederizado = (
