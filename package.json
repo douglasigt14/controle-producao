@@ -37,7 +37,7 @@
     "react-native-table-component": "^1.2.1",
     "react-native-view-pdf": "^0.11.0",
     "react-native-web": "^0.16.1",
-    "react-native-webview": "^11.4.2",
+    "react-native-webview": "9.4.0",
     "rn-fetch-blob": "github:joltup/rn-fetch-blob#pull/701/head",
     "styled-components": "^5.1.1"
   },

@@ -33,6 +33,7 @@ export default (props) => {
     let operador_id = props.operador_id;
     let [showAlert2, setShowAlert2] = useState(false);
     let [componentSair, setComponentSair] = useState(null);
+    let [componentPdf, setComponentPdf] = useState(null);
     let url = props.url;
     let [token, setToken] = useState("");
     let [inicio, setInicio] = useState("");
@@ -117,6 +118,21 @@ export default (props) => {
          else{
            setComponentSair(null);
          }
+
+
+         if(finalizado){
+          setComponentPdf((<Appbar.Action
+            icon="file-pdf"
+            size={60}
+            style={{ width: 100 }}
+            onPress={() => {
+              setShowAlert2(true);
+            }}
+          />)); 
+        }
+        else{
+          setComponentPdf(null);
+        }
 
      }, [finalizado, parada_id]);
 
@@ -557,6 +573,7 @@ export default (props) => {
               title="Controle de Produção"
               titleStyle={{fontSize: 25}} 
             />
+            {componentPdf}
             {componentSair}
           </Appbar.Header>
           <GrupoButoes
