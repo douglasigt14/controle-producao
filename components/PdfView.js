@@ -7,6 +7,7 @@ export default (props) => {
     return (
       <PDFReader
       withPinchZoom={true}
+      style={{marginTop: 50}}
     //   customStyle={{
     //     readerContainer: {padding: 0,margin: 0},
     //     readerContainerDocument: {margin: 10,padding: 0},
