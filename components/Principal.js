@@ -14,6 +14,7 @@ import { Toast } from "native-base";
 import { Cam } from "./Cam";
 import { Bar } from "./Bar";
 import Pdf from "./Pdf";
+import PdfView from "./PdfView";
 
 const ViewModalPdf = styled.View`
      display: flex;
@@ -727,7 +728,8 @@ export default (props) => {
             </Div_Fechar>
             <TextoModal>PLANO DE FURAÇÃO: {cod_plano}</TextoModal>
                
-                <Pdf url={link_pdf}></Pdf>
+                {/* <Pdf url={link_pdf}></Pdf> */}
+                <PdfView url={link_pdf}></PdfView>
             
           </ViewModalPdf>
         </View>
