@@ -133,6 +133,19 @@ export default (props) => {
          .catch((error) => console.error(error))
          .finally(() => setLoading(false));
 
+         if(cod_plano){
+          fetch(
+            url+"/pdfs/" +
+              cod_plano
+             )
+            .then((response) => response.json())
+            .then((json) => {
+               setLink_pdf(json.link_pdf);
+            })
+            .catch((error) => console.error(error))
+            .finally(() => setLoading(false));
+         }  
+
          if(finalizado){
            setComponentSair((<Appbar.Action
              icon="arrow-right-box"
