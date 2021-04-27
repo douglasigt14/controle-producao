@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { View, Text, Alert, ToastAndroid,Modal } from "react-native";
+import { View, Text, Alert, ToastAndroid,Modal ,ScrollView} from "react-native";
 import Bola from "./Bola";
 import GrupoButoes from "./GrupoButoes";
 import ParadasFrequentes from "./ParadasFrequentes";
@@ -13,12 +13,13 @@ import Relogio from "./Relogio";
 import { Toast } from "native-base";
 import { Cam } from "./Cam";
 import { Bar } from "./Bar";
-import Pdf from "react-native-pdf";
+import Pdf from "./Pdf";
 
 const ViewModalPdf = styled.View`
-     width: 95%;
-     min-height: 120px;
      display: flex;
+     flex: 1;
+     width: 95%;
+     align-items: center;
      background-color: #d3d3d3;
   `;
 
@@ -66,6 +67,8 @@ export default (props) => {
     let [cod_centro, setCod_centro] = useState("");
     let [id_maquina, setId_maquina] = useState("");
     let [modalVisible, setModalVisible] = useState(false);
+
+    let [link_pdf, setLink_pdf] = useState(null);
 
      const showToast = (msg) => {
        ToastAndroid.show(msg, ToastAndroid.SHORT, ToastAndroid.CENTER);
@@ -145,7 +148,7 @@ export default (props) => {
          }
 
 
-         if(cod_plano){
+         if(cod_plano && link_pdf){
           setComponentPdf((<Appbar.Action
             icon="file-pdf"
             size={60}
@@ -159,7 +162,7 @@ export default (props) => {
           setComponentPdf(null);
         }
 
-     }, [finalizado, parada_id,cod_plano]);
+     }, [finalizado, parada_id,cod_plano,link_pdf]);
 
     
      
@@ -709,6 +712,9 @@ export default (props) => {
                 <TextoModal style={Padrao.textStyle}>X</TextoModal>
               </TouchModal>
             </Div_Fechar>
+            <TextoModal>PLANO DE FURAÇÃO: {cod_plano}</TextoModal>
+               
+                <Pdf url={link_pdf}></Pdf>
             
           </ViewModalPdf>
         </View>

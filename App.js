@@ -201,7 +201,8 @@ export default  function App() {
         refreshControl={
                    <RefreshControl refreshing={refreshing} onRefresh={onRefresh} /> 
         }>
-        {comp_rederizado}
+         {comp_rederizado} 
+        {/* <Pdf url={'https://drive.google.com/file/d/1KLrRfLWb5j8D7I4k8msmu9XKkTrNAzM_/view?usp=sharing'}></Pdf> */}
         <StatusBar style="auto" />
       </View>
 
