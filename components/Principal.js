@@ -68,9 +68,9 @@ export default (props) => {
     let [cod_centro, setCod_centro] = useState("");
     let [id_maquina, setId_maquina] = useState("");
     let [modalVisible, setModalVisible] = useState(false);
-    let [dadosPdf, setDadospdf] = useState(null);
 
     let [link_pdf, setLink_pdf] = useState(null);
+    let [descricao_pdf, setDescricao_pdf] = useState(null);
 
      const showToast = (msg) => {
        ToastAndroid.show(msg, ToastAndroid.SHORT, ToastAndroid.CENTER);
@@ -150,9 +150,11 @@ export default (props) => {
                   <Appbar.Action
                     icon="file-pdf"
                     size={50}
+                    key={item.id}
                     style={{ width: 100 }}
                     onPress={() => {
-                      //funcao para abri o modal com o set Visible Dentro
+                      setLink_pdf(item.link_pdf);
+                      setDescricao_pdf("PLANO DE FURAÇÃO: "+item.cod_plano);
                       setModalVisible(true);
                     }}
                   />
@@ -169,14 +171,12 @@ export default (props) => {
                 //   />);  
                 //    // Link que está no Modal
                 // });//fim array JSON
-                setLink_pdf(json[0].link_pdf);
-                setDadospdf(json);
+                
               }
               else{
                 comp = null;
                 setLink_pdf(null);
                 setComponentPdf(null);
-                setDadospdf(null);
               }
 
               setComponentPdf(comp); 
@@ -757,7 +757,7 @@ export default (props) => {
                 <TextoModal style={Padrao.textStyle}>X</TextoModal>
               </TouchModal>
             </Div_Fechar>
-            <TextoModal>PLANO DE FURAÇÃO: {cod_plano}</TextoModal>
+            <TextoModal>{descricao_pdf}</TextoModal>
                
                 {/* <Pdf url={link_pdf}></Pdf> */}
                 <PdfView url={link_pdf}></PdfView>
