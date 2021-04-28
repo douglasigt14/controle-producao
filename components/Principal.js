@@ -159,18 +159,6 @@ export default (props) => {
                     }}
                   />
                 ));
-
-                // json.forEach((dados) => {
-                //   comp = (<Appbar.Action
-                //     icon="file-pdf"
-                //     size={50}
-                //     style={{ width: 100 }}
-                //     onPress={() => {
-                //       setModalVisible(true);
-                //     }}
-                //   />);  
-                //    // Link que está no Modal
-                // });//fim array JSON
                 
               }
               else{
