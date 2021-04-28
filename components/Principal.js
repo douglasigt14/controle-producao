@@ -68,6 +68,7 @@ export default (props) => {
     let [cod_centro, setCod_centro] = useState("");
     let [id_maquina, setId_maquina] = useState("");
     let [modalVisible, setModalVisible] = useState(false);
+    let [dadosPdf, setDadospdf] = useState(null);
 
     let [link_pdf, setLink_pdf] = useState(null);
 
@@ -141,11 +142,39 @@ export default (props) => {
              )
             .then((response) => response.json())
             .then((json) => {
-               setLink_pdf(json.link_pdf);
-            })
+
+              //console.warn(json);
+              let comp;
+              if(json){
+                json.forEach((dados) => {
+                  comp = (<Appbar.Action
+                    icon="file-pdf"
+                    size={50}
+                    style={{ width: 100 }}
+                    onPress={() => {
+                      setModalVisible(true);
+                    }}
+                  />);  
+                  setLink_pdf(dados.link_pdf);
+                });//fim array JSON
+              }
+              else{
+                comp = null;
+                setLink_pdf(null);
+                setComponentPdf(null);
+              }
+
+              setComponentPdf(comp); 
+            
+            
+             })
             .catch((error) => console.error(error))
             .finally(() => setLoading(false));
          }  
+         else{
+          setComponentPdf(null);
+          setLink_pdf(null);
+         }
 
          if(finalizado){
            setComponentSair((<Appbar.Action
@@ -160,21 +189,6 @@ export default (props) => {
          else{
            setComponentSair(null);
          }
-
-
-         if(cod_plano && link_pdf){
-          setComponentPdf((<Appbar.Action
-            icon="file-pdf"
-            size={60}
-            style={{ width: 100 }}
-            onPress={() => {
-              setModalVisible(true);
-            }}
-          />)); 
-        }
-        else{
-          setComponentPdf(null);
-        }
 
      }, [finalizado, parada_id,cod_plano,link_pdf]);
 
