@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { View, Text, Alert, ToastAndroid,Modal ,ScrollView} from "react-native";
+import { View, Text, Alert, ToastAndroid,Modal ,ScrollView,FlatList} from "react-native";
 import Bola from "./Bola";
 import GrupoButoes from "./GrupoButoes";
 import ParadasFrequentes from "./ParadasFrequentes";
@@ -146,22 +146,37 @@ export default (props) => {
               //console.warn(json);
               let comp;
               if(json){
-                json.forEach((dados) => {
-                  comp = (<Appbar.Action
+                comp = json.map(item => (
+                  <Appbar.Action
                     icon="file-pdf"
                     size={50}
                     style={{ width: 100 }}
                     onPress={() => {
+                      //funcao para abri o modal com o set Visible Dentro
                       setModalVisible(true);
                     }}
-                  />);  
-                  setLink_pdf(dados.link_pdf);
-                });//fim array JSON
+                  />
+                ));
+
+                // json.forEach((dados) => {
+                //   comp = (<Appbar.Action
+                //     icon="file-pdf"
+                //     size={50}
+                //     style={{ width: 100 }}
+                //     onPress={() => {
+                //       setModalVisible(true);
+                //     }}
+                //   />);  
+                //    // Link que está no Modal
+                // });//fim array JSON
+                setLink_pdf(json[0].link_pdf);
+                setDadospdf(json);
               }
               else{
                 comp = null;
                 setLink_pdf(null);
                 setComponentPdf(null);
+                setDadospdf(null);
               }
 
               setComponentPdf(comp); 
@@ -620,6 +635,8 @@ export default (props) => {
 
           
   }
+
+  
    
     return (
       <>
